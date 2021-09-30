@@ -1,0 +1,117 @@
+.jurnal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--unit-l);
+}
+
+.jurnal__day-title {
+    font-size: var(--font-l);
+    padding: var(--unit-m) 0px;
+    font-weight: lighter;
+}
+
+.jurnal__day-records {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--unit-m)
+}
+
+.record {
+    box-sizing: border-box;
+    --border-radius: 8px;
+    position: relative;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--unit-m);
+    transition: border ease 140ms;
+    cursor: pointer;
+    width: 100%;
+}
+
+@media (min-width: 440px) {
+    .record {
+        width: calc(50% - var(--unit-m) / 2);
+    }
+}
+
+@media (min-width: 740px) {
+    .record {
+        width: calc(33.33% - 2 * var(--unit-m) / 3);
+    }
+}
+
+.record:hover {
+    border-color: var(--color-primary-darker);
+}
+
+.record:active {
+    border-color: var(--color-primary);
+    transition-duration: 0ms;
+}
+
+.record__label {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    background-color: var(--color-border);
+    color: var(--color-bg);
+    border-top-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--unit-l);
+    height: var(--unit-l);
+    font-weight: bolder;
+    font-family: monospace;
+    transition: background-color ease 140ms;
+}
+
+.record:hover .record__label {
+    background-color: var(--color-primary-darker);
+}
+
+.record:active .record__label {
+    background-color: var(--color-primary);
+    transition-duration: 0ms;
+}
+
+.record__title {
+    padding: 0px var(--unit-l);
+    padding-bottom: var(--unit-m);
+    font-size: var(--font-l);
+    text-align: center;
+}
+
+.record__subtitle {
+    color: var(--color-fg-secondary);
+    font-weight: lighter;
+    padding-bottom: var(--unit-m);
+    font-size: var(--font-s);
+    text-align: center;
+}
+
+.record__rating {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.record__rating-value {
+    font-size: 1.6rem;
+}
+
+.record__rating-maximum {
+    font-weight: lighter;
+}
+
+.record__profile {
+    height: 56px;
+    display: flex;
+    gap: var(--unit-s);
+    justify-content: center;
+    align-items: end;
+    padding-bottom: var(--unit-m);
+}

@@ -1,0 +1,63 @@
+:root {
+    --unit-s: 8px;
+    --unit-m: 16px;
+    --unit-l: 32px;
+
+    --color-primary-darker: #846021;
+    --color-primary: #F0AD2B;
+    --color-primary-lighter: #F4C360;
+    --color-border: #484848;
+    --color-bg: #171117;
+    --color-fg: #F1F1F1;
+    --color-fg-secondary: #7A7A7A;
+
+    --color-hate: #C51919;
+    --color-dislike: #A15C5C;
+    --color-ok: #D6D5D5;
+    --color-like: #6D8668;
+    --color-love: #35D115;
+
+    --font-l: 1.35rem;
+    --font-s: 0.85rem;
+}
+
+body, html {
+    height: 100%
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: sans-serif;
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    margin: 0px;
+    padding: var(--unit-m) 0px;
+}
+
+.view {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-width: 960px;
+    min-height: 100%;
+    margin: auto;
+    padding: 0px var(--unit-m) var(--unit-m) var(--unit-m);
+}
+
+::selection {
+    background-color: var(--color-primary-darker);
+    color: var(--color-fg);
+}
+
+::-moz-selection {
+    background-color: var(--color-primary-darker);
+    color: var(--color-fg);
+}

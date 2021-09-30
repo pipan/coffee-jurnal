@@ -1,0 +1,23 @@
+.bar {
+    border-radius: 4px;
+}
+
+.bar.bar--y { width: var(--unit-s); }
+.bar--y.bar--intensity-1 { height: 4%; }
+.bar--y.bar--intensity-2 { height: 25%; }
+.bar--y.bar--intensity-3 { height: 50%; }
+.bar--y.bar--intensity-4 { height: 75%; }
+.bar--y.bar--intensity-5 { height: 100%; }
+
+.bar.bar--x { height: var(--unit-s); }
+.bar--x.bar--intensity-1 { width: 4%; }
+.bar--x.bar--intensity-2 { width: 25%; }
+.bar--x.bar--intensity-3 { width: 50%; }
+.bar--x.bar--intensity-4 { width: 75%; }
+.bar--x.bar--intensity-5 { width: 100%;}
+
+.bar--quality-1 { background-color: var(--color-hate); }
+.bar--quality-2 { background-color: var(--color-dislike); }
+.bar--quality-3 { background-color: var(--color-ok); }
+.bar--quality-4 { background-color: var(--color-like); }
+.bar--quality-5 { background-color: var(--color-love); }

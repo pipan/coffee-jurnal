@@ -10,6 +10,7 @@
 
 @import "./assets/styles/jurnal.css";
 @import "./assets/styles/bar.css";
+@import "./assets/styles/context.css";
 
 @import "./assets/styles/app.css";
 </style>

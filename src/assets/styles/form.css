@@ -23,11 +23,25 @@
 }
 
 .input__button {
-    color: var(--color-border);
-    padding: var(--unit-m);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: var(--color-fg);
     border-radius: var(--unit-s);
     background-color: transparent;
     border: none;
+    width: 44px;
+    height: 44px;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: emoji;
+    transition: background-color ease 180ms;
+}
+
+.input__button:active {
+    background-color: rgba(255, 255, 255, 0.08);
+    transition-duration: 0ms;
 }
 
 .input input {

@@ -52,13 +52,14 @@
 .row--center {
     justify-content: center;
 }
-
 .row--right {
     justify-content: end;
 }
-
 .row--between {
     justify-content: space-between;
+}
+.row--middle {
+    align-items: center;
 }
 
 .gap-s { gap: var(--unit-s); }
@@ -67,4 +68,8 @@
 
 .flex-grow {
     flex-grow: 1;
+}
+
+.pos-r {
+    position: relative;
 }

@@ -1,0 +1,51 @@
+.context-menu {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top: 0px;
+    border-radius: var(--unit-s);
+    background-color: var(--color-bg-secondary);
+    min-width: 140px;
+}
+
+.context-menu--left {
+    left: 0px;
+}
+
+.context-menu--right {
+    right: 0px;
+}
+
+.context-menu--opened {
+    display: block;
+}
+
+.context-menu__header {
+    display: flex;
+}
+
+.context-menu--right .context-menu__header {
+    justify-content: right;
+}
+
+.context-menu--left .context-menu__header {
+    justify-content: left;
+}
+
+.context-menu__item {
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: var(--unit-m);
+    transition: background-color ease 180ms;
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    color: var(--color-fg);
+    font-size: 1rem;
+    text-align: left;
+}
+
+.context-menu__item:active {
+    background-color: rgba(255, 255, 255, 0.08);
+    transition-delay: 0ms;
+}

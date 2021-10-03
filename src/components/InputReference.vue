@@ -6,9 +6,15 @@
                 <input :id="inputId" type="text" @change="change($event)" />
             </div>
             <div class="pos-r">
-                <button type="button" class="input__button" @click="openContext()">&Colon;</button>
+                <button type="button"
+                    class="input__button"
+                    @click.stop
+                    @click="openContext()">&Colon;</button>
                 <ContextMenu :options="['One','Two']" ref="contextMenu">
-                    <button type="button" class="input__button" @click="closeContext()">&Colon;</button>
+                    <button type="button"
+                        class="input__button"
+                        @click.stop
+                        @click="closeContext()">&Colon;</button>
                 </ContextMenu>
             </div>
         </div>

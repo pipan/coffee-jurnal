@@ -3,7 +3,7 @@
         <div class="row row--middle gap-m">
             <div class="flex-grow">
                 <div class="input__label">{{ label }}</div>
-                <input :id="inputId" type="text" @change="change($event)" />
+                <input :id="inputId" type="text" @input="change($event.target.value)" />
             </div>
             <div class="pos-r">
                 <button type="button"
@@ -41,6 +41,7 @@ export default {
           this.$emit('change', value)
       },
       change: function (value) {
+          console.log("change", value)
           if (value === this.value) {
               return
           }

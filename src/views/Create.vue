@@ -1,25 +1,30 @@
 <template>
   <div>
     <h1>New Cup</h1>
-      <div class="form flex-grow">
-        <ToggleSwitch :options="coffeeTypes" :value="coffeeType" @change="setCoffeeType($event)"></ToggleSwitch>
-        <InputReference inputId="coffee-place"
-          label="Coffee place"
-          :options="[]"
-          value=""></InputReference>
-        <InputReference inputId="coffee-origin"
-          label="Coffee origin"
-          :options="[]"
-          value=""></InputReference>
-        <InputReference inputId="coffee-roster"
-          label="Coffee roster"
-          :options="[]"
-          value=""></InputReference>
-      </div>
-      <div class="pt-m row row--center gap-m">
-        <router-link :to="{ name: 'Home' }" class="btn btn--secondary">Cancel</router-link>
-        <button type="submit" class="btn btn--primary">Save</button>
-      </div>
+      <form @submit.prevent="submit()">
+        <div class="form flex-grow">
+          <ToggleSwitch :options="coffeeTypes" :value="coffeeType" @change="setCoffeeType($event)"></ToggleSwitch>
+          <InputReference inputId="coffee-place"
+            label="Coffee place"
+            :options="[]"
+            :value="coffeePlace"
+            @change="coffeePlace = $event"></InputReference>
+          <InputReference inputId="coffee-origin"
+            label="Coffee origin"
+            :options="[]"
+            :value="coffeeOrigin"
+            @change="coffeeOrigin = $event"></InputReference>
+          <InputReference inputId="coffee-roster"
+            label="Coffee roster"
+            :options="[]"
+            :value="coffeeRoster"
+            @change="coffeeRoster = $event"></InputReference>
+        </div>
+        <div class="pt-m row row--center gap-m">
+          <router-link :to="{ name: 'Home' }" class="btn btn--secondary">Cancel</router-link>
+          <button type="submit" class="btn btn--primary">Save</button>
+        </div>
+      </form>
   </div>
 </template>
 
@@ -34,15 +39,18 @@ export default {
     return {
       coffeeTypes: [
         {
-          id: 1,
+          id: 'filter',
           name: 'Filter'
         },
         {
-          id: 2,
+          id: 'espresso',
           name: 'Espresso'
         }
       ],
-      coffeeType: {}
+      coffeeType: {},
+      coffeePlace: '',
+      coffeeOrigin: '',
+      coffeeRoster: ''
     }
   },
   created: function () {
@@ -51,6 +59,14 @@ export default {
   methods: {
     setCoffeeType: function (type) {
       this.coffeeType = type
+    },
+    submit: function () {
+      this.$store.dispatch('createNewCup', {
+        coffeePlace: this.coffeePlace,
+        coffeeOrigin: this.coffeeOrigin,
+        coffeeRoster: this.coffeeRoster,
+        coffeeType: this.coffeeType.id
+      })
     }
   }
 }

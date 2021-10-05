@@ -62,6 +62,11 @@
     align-items: center;
 }
 
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
 .gap-s { gap: var(--unit-s); }
 .gap-m { gap: var(--unit-m); }
 .gap-l { gap: var(--unit-l); }

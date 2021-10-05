@@ -19,26 +19,26 @@
 
 <script>
 export default {
-  name: 'JurnalRecord',
-  components: {},
-  props: {
-      item: [Object],
-  },
-  computed: {
-      subtitle: function() {
-          const parts = []
-          if (this.item.coffeeOrigin) {
-              parts.push(this.item.coffeeOrigin)
-          }
-          if (this.item.coffeeRoster) {
-              parts.push(this.item.coffeeRoster) 
-          }
-          return parts.join(', ')
-      },
-      label: function() {
-          return this.item.coffeeType == 'espresso' ? 'E' : 'F'
-      }
-  },
-  methods: {}
+    name: 'JurnalRecord',
+    components: {},
+    props: {
+        item: [Object],
+    },
+    computed: {
+        subtitle: function() {
+            const parts = []
+            if (this.item.coffeeOrigin) {
+                parts.push(this.item.coffeeOrigin)
+            }
+            if (this.item.coffeeRoster) {
+                parts.push(this.item.coffeeRoster) 
+            }
+            return parts.join(', ')
+        },
+        label: function() {
+            return this.item.coffeeType == 'espresso' ? 'E' : 'F'
+        }
+    },
+    methods: {}
 }
 </script>

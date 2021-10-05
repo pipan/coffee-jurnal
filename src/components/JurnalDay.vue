@@ -1,0 +1,65 @@
+<template>
+    <div class="jurnal__day">
+        <div class="jurnal__day-title">{{ title }}</div>
+        <div class="jurnal__day-records">
+            <JurnalRecord v-for="item of agenda.items"
+                :key="item.id"
+                :item="item"></JurnalRecord>
+        </div>
+    </div>
+</template>
+
+<script>
+import JurnalRecord from './JurnalRecord.vue'
+
+export default {
+    name: 'JurnalDay',
+    components: { JurnalRecord },
+    props: {
+        agenda: [Object],
+    },
+    data: function () {
+        return {
+            millisecondsPerDay: 24 * 60 * 60 * 1000,
+            dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        }
+    },
+    computed: {
+        dayDate: function() {
+            return new Date(this.agenda.day)
+        },
+        millisecondsDiff: function () {
+            const now = new Date()
+            now.setHours(0)
+            now.setMinutes(0)
+            now.setSeconds(0)
+            now.setMilliseconds(0)
+            return this.dayDate.getTime() - now.getTime()
+        },
+        title: function() {
+            if (this.isToday()) {
+                return "Today"
+            }
+            if (this.isYesterday()) {
+                return "Yesterday"
+            }
+            if (this.isMaxWeekAgo()) {
+                const dayIndex = this.dayDate.getDay()
+                return this.dayNames[dayIndex]
+            }
+            return this.dayDate.toLocaleDateString()
+        },
+    },
+    methods: {
+        isToday: function () {
+            return this.millisecondsDiff < this.millisecondsPerDay
+        },
+        isYesterday: function () {
+            return !this.isToday() && this.millisecondsDiff < 2 * this.millisecondsPerDay
+        },
+        isMaxWeekAgo: function () {
+            return this.millisecondsDiff < 7 * this.millisecondsPerDay
+        }
+    }
+}
+</script>

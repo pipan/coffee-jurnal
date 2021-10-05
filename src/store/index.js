@@ -7,7 +7,17 @@ export default new Vuex.Store({
   state: {
     itemIds: [],
     repository: {},
-    lastId: 0
+    lastId: 0,
+    coffeeTypes: [
+      {
+        id: 'filter',
+        name: 'Filter'
+      },
+      {
+        id: 'espresso',
+        name: 'Espresso'
+      }
+    ]
   },
   getters: {
     items: function (state) {
@@ -16,6 +26,40 @@ export default new Vuex.Store({
         items.push(state.repository[id])
       }
       return items
+    },
+    sampleItems: function (_, getters) {
+      return getters.items.splice(0, 29)
+    },
+    coffeePlaceOptions: function(_, getters) {
+      const options = []
+      
+      for (const item of getters.sampleItems) {
+        if (!item.coffeePlace || options.indexOf(item.coffeePlace) > -1) {
+          continue
+        }
+        options.push(item.coffeePlace)
+      }
+      return options
+    },
+    coffeeOriginOptions: function(_, getters) {
+      const options = []
+      for (const item of getters.sampleItems) {
+        if (!item.coffeeOrigin || options.indexOf(item.coffeeOrigin) > -1) {
+          continue
+        }
+        options.push(item.coffeeOrigin)
+      }
+      return options
+    },
+    coffeeRosterOptions: function(_, getters) {
+      const options = []
+      for (const item of getters.sampleItems) {
+        if (!item.coffeeRoster || options.indexOf(item.coffeeRoster) > -1) {
+          continue
+        }
+        options.push(item.coffeeRoster)
+      }
+      return options
     }
   },
   mutations: {

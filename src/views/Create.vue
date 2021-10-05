@@ -1,22 +1,22 @@
 <template>
   <div>
     <h1>New Cup</h1>
-      <form @submit.prevent="submit()">
+      <form class="column flex-grow" @submit.prevent="submit()">
         <div class="form flex-grow">
           <ToggleSwitch :options="coffeeTypes" :value="coffeeType" @change="setCoffeeType($event)"></ToggleSwitch>
           <InputReference inputId="coffee-place"
             label="Coffee place"
-            :options="[]"
+            :options="coffeePlaceOptions"
             :value="coffeePlace"
             @change="coffeePlace = $event"></InputReference>
           <InputReference inputId="coffee-origin"
             label="Coffee origin"
-            :options="[]"
+            :options="coffeeOriginOptions"
             :value="coffeeOrigin"
             @change="coffeeOrigin = $event"></InputReference>
           <InputReference inputId="coffee-roster"
             label="Coffee roster"
-            :options="[]"
+            :options="coffeeRosterOptions"
             :value="coffeeRoster"
             @change="coffeeRoster = $event"></InputReference>
         </div>
@@ -37,20 +37,24 @@ export default {
   components: { ToggleSwitch, InputReference },
   data: function () {
     return {
-      coffeeTypes: [
-        {
-          id: 'filter',
-          name: 'Filter'
-        },
-        {
-          id: 'espresso',
-          name: 'Espresso'
-        }
-      ],
       coffeeType: {},
       coffeePlace: '',
       coffeeOrigin: '',
       coffeeRoster: ''
+    }
+  },
+  computed: {
+    coffeeTypes: function() {
+      return this.$store.state.coffeeTypes
+    },
+    coffeePlaceOptions: function() {
+      return this.$store.getters.coffeePlaceOptions
+    },
+    coffeeOriginOptions: function() {
+      return this.$store.getters.coffeeOriginOptions
+    },
+    coffeeRosterOptions: function() {
+      return this.$store.getters.coffeeRosterOptions
     }
   },
   created: function () {
@@ -66,6 +70,9 @@ export default {
         coffeeOrigin: this.coffeeOrigin,
         coffeeRoster: this.coffeeRoster,
         coffeeType: this.coffeeType.id
+      })
+      this.$router.push({
+        name: 'Home'
       })
     }
   }

@@ -11,18 +11,18 @@
 
 <script>
 export default {
-  name: 'ToggleSwitch',
-  props: {
-      options: [Array],
-      value: [Object]
-  },
-  methods: {
-      select: function (item) {
-          if (item.id === this.value.id) {
-              return
-          }
-          this.$emit('change', item)
-      }
-  }
+    name: 'ToggleSwitch',
+    props: {
+        options: [Array],
+        value: [Object]
+    },
+    methods: {
+        select: function (item) {
+            if (item.id === this.value.id) {
+                return
+            }
+            this.$emit('change', item)
+        }
+    }
 }
 </script>

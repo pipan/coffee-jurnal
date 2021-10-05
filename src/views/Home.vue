@@ -2,27 +2,20 @@
   <div>
     <h1>Coffee Jurnal</h1>
     <div class="jurnal">
-        <div class="jurnal__day"
-            v-for="agenda of timeline"
-            :key="agenda.day">
-            <div class="jurnal__day-title">{{ agenda.day }}</div>
-            <div class="jurnal__day-records">
-                <JurnalRecord v-for="item of agenda.items"
-                    :key="item.id"
-                    :item="item"></JurnalRecord>
-            </div>
-        </div>
+        <JurnalDay v-for="agenda of timeline"
+            :key="agenda.day"
+            :agenda="agenda"></JurnalDay>
     </div>
     <router-link :to="{ name: 'Create' }" class="btn-fab">&plus;</router-link>
   </div>
 </template>
 
 <script>
-import JurnalRecord from '../components/JurnalRecord.vue'
+import JurnalDay from '../components/JurnalDay.vue'
 
 export default {
   name: 'Home',
-  components: { JurnalRecord },
+  components: { JurnalDay },
   computed: {
     items: function () {
         return this.$store.getters.items

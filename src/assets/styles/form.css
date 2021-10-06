@@ -22,7 +22,7 @@
     font-weight: lighter;
 }
 
-.input__button {
+.input__button, .rating {
     box-sizing: border-box;
     cursor: pointer;
     color: var(--color-fg);
@@ -39,9 +39,18 @@
     transition: background-color ease 180ms;
 }
 
-.input__button:active {
+.input__button.input__button--split {
+    font-size: 0.8rem;
+    height: 24px;
+}
+
+.input__button:active, .rating:active {
     background-color: rgba(255, 255, 255, 0.08);
     transition-duration: 0ms;
+}
+
+.rating--active {
+    color: var(--color-primary);
 }
 
 .input input {

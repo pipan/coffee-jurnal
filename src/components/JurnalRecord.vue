@@ -1,30 +1,42 @@
 <template>
-    <div class="record">
+    <div @click="taste(item.id)" class="record">
         <div class="record__label">{{ label }}</div>
         <div class="record__title">{{ item.coffeePlace }}</div>
         <div class="record__subtitle">{{ subtitle }}</div>
         <div class="record__profile">
-            <div class="bar bar--y bar--intensity-1 bar--quality-1"></div>
-            <div class="bar bar--y bar--intensity-2 bar--quality-2"></div>
-            <div class="bar bar--y bar--intensity-3 bar--quality-3"></div>
-            <div class="bar bar--y bar--intensity-4 bar--quality-4"></div>
-            <div class="bar bar--y bar--intensity-5 bar--quality-5"></div>
+            <Bar v-for="(bar, index) of bars"
+                :key="index"
+                :intensity="bar.intensity"
+                :quality="bar.quality"></Bar>
         </div>
         <div class="record__rating">
-            <span class="record__rating-value">4</span>
+            <span class="record__rating-value">{{ item.rating || '-' }}</span>
             <span class="record__rating-maximum">&nbsp;/&nbsp;5</span>
         </div>
     </div>
 </template>
 
 <script>
+import Bar from './Bar.vue'
+
 export default {
     name: 'JurnalRecord',
-    components: {},
+    components: { Bar },
     props: {
         item: [Object],
     },
     computed: {
+        bars: function () {
+            if (!this.item.propertyRatings) {
+                return []
+            }
+            const properties = ['aroma', 'acidity', 'sweetness', 'body', 'finish']
+            const result = []
+            for (const key of properties) {
+                result.push(this.item.propertyRatings[key])
+            }
+            return result
+        },
         subtitle: function() {
             const parts = []
             if (this.item.coffeeOrigin) {
@@ -39,6 +51,13 @@ export default {
             return this.item.coffeeType == 'espresso' ? 'E' : 'F'
         }
     },
-    methods: {}
+    methods: {
+        taste: function (id) {
+            this.$router.push({
+                name: 'Taste',
+                params: { id }
+            })
+        }
+    }
 }
 </script>

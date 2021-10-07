@@ -3,26 +3,26 @@
         <h1>Tasting</h1>
         <form class="column flex-grow" @submit.prevent="submit()">
             <div class="form flex-grow">
-                <RatingInput :value="rating" @change="rating = $event"></RatingInput>
+                <RatingInput :value="rating" @change="ratingValue = $event"></RatingInput>
                 <PropertyRatingInput label="Aroma"
                     :value="aroma"
-                    @change="aroma = $event"></PropertyRatingInput>
+                    @change="aromaValue = $event"></PropertyRatingInput>
                 <PropertyRatingInput label="Acidity"
                     :value="acidity"
-                    @change="acidity = $event"></PropertyRatingInput>
+                    @change="acidityValue = $event"></PropertyRatingInput>
                 <PropertyRatingInput label="Sweetness"
                     :value="sweetness"
-                    @change="sweetness = $event"></PropertyRatingInput>
+                    @change="sweetnessValue = $event"></PropertyRatingInput>
                 <PropertyRatingInput label="Body"
                     :value="body"
-                    @change="body = $event"></PropertyRatingInput>
+                    @change="bodyValue = $event"></PropertyRatingInput>
                 <PropertyRatingInput label="Finish"
                     :value="finish"
-                    @change="finish = $event"></PropertyRatingInput>
+                    @change="finishValue = $event"></PropertyRatingInput>
             </div>
             <div class="pt-m row row--center gap-m">
-            <router-link :to="{ name: 'Home' }" class="btn btn--secondary">Cancel</router-link>
-            <button type="submit" class="btn btn--primary">Save</button>
+                <router-link :to="{ name: 'Home' }" class="btn btn--secondary">Cancel</router-link>
+                <button type="submit" class="btn btn--primary">Save</button>
             </div>
         </form>
     </div>
@@ -37,56 +37,53 @@ export default {
     components: { PropertyRatingInput, RatingInput },
     data: function () {
         return {
-            aroma: {
-                quality: 0.5,
-                intensity: 0.5
-            },
-            acidity: {
-                quality: 0.5,
-                intensity: 0.5
-            },
-            sweetness: {
-                quality: 0.5,
-                intensity: 0.5
-            },
-            body: {
-                quality: 0.5,
-                intensity: 0.5
-            },
-            finish: {
-                quality: 0.5,
-                intensity: 0.5
-            },
-            rating: 1
+            aromaValue: {},
+            acidityValue: {},
+            sweetnessValue: {},
+            bodyValue: {},
+            finishValue: {},
+            ratingValue: -1
         }
     },
     computed: {
-        coffeeTypes: function() {
-        return this.$store.state.coffeeTypes
+        item: function () {
+            return this.$store.getters.item(this.$route.params.id)
         },
-        coffeePlaceOptions: function() {
-        return this.$store.getters.coffeePlaceOptions
+        aroma: function () {
+            return Object.assign({}, this.item.propertyRatings.aroma, this.aromaValue)
         },
-        coffeeOriginOptions: function() {
-        return this.$store.getters.coffeeOriginOptions
+        acidity: function () {
+            return Object.assign({}, this.item.propertyRatings.acidity, this.acidityValue)
         },
-        coffeeRosterOptions: function() {
-        return this.$store.getters.coffeeRosterOptions
+        sweetness: function () {
+            return Object.assign({}, this.item.propertyRatings.sweetness, this.sweetnessValue)
+        },
+        body: function () {
+            return Object.assign({}, this.item.propertyRatings.body, this.bodyValue)
+        },
+        finish: function () {
+            return Object.assign({}, this.item.propertyRatings.finish, this.finishValue)
+        },
+        rating: function () {
+            if (this.ratingValue > -1) {
+                return this.ratingValue
+            }
+            return this.item.rating
         }
     },
-    created: function () {
-        this.setCoffeeType(this.coffeeTypes[0])
-    },
     methods: {
-        setCoffeeType: function (type) {
-            this.coffeeType = type
-        },
         submit: function () {
-            this.$store.dispatch('createNewCup', {
-                coffeePlace: this.coffeePlace,
-                coffeeOrigin: this.coffeeOrigin,
-                coffeeRoster: this.coffeeRoster,
-                coffeeType: this.coffeeType.id
+            console.log("submit")
+            this.$store.dispatch('cupTasting', {
+                id: this.item.id,
+                propertyRatings: {
+                    aroma: this.aroma,
+                    acidity: this.acidity,
+                    sweetness: this.sweetness,
+                    body: this.body,
+                    finish: this.finish
+                },
+                rating: this.rating
             })
             this.$router.push({
                 name: 'Home'

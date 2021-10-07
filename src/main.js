@@ -5,6 +5,8 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+store.commit('refresh')
+
 new Vue({
   router,
   store,

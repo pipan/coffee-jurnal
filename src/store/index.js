@@ -5,7 +5,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    itemIds: [],
     repository: {},
     lastId: 0,
     coffeeTypes: [
@@ -20,15 +19,26 @@ export default new Vuex.Store({
     ]
   },
   getters: {
-    items: function (state) {
+    chronologicalItems: function (state) {
       const items = []
-      for (const id of state.itemIds) {
+      for (const id in state.repository) {
         items.push(state.repository[id])
       }
-      return items
+      return items.sort((a, b) => {
+        if (a.created_at < b.created_at) {
+          return -1
+        }
+        else if (a.created_at > b.created_at) {
+          return 1
+        }
+        return 0
+      })
     },
     sampleItems: function (_, getters) {
-      return getters.items.splice(0, 29)
+      return getters.chronologicalItems.slice(0, 29)
+    },
+    item: (state) => (id) => {
+      return state.repository[id]
     },
     coffeePlaceOptions: function(_, getters) {
       const options = []
@@ -63,29 +73,45 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    saveItem: function(state, item) {
-      if (!item.id) {
-        item.id = state.lastId
-        state.lastId = state.lastId + 1
+    refresh: function (state) {
+      const repository = JSON.parse(localStorage.getItem('repository') || "{}")
+      for (let id in repository) {
+        repository[id].created_at = new Date(repository[id].created_at)
+      }
+      state.repository = repository
+      state.lastId = localStorage.getItem('lastId') || 0
+    },
+    updateItem: function(state, item) {
+      if (!item.id || !state.repository[item.id]) {
+        return
       }
 
-      if (!state.repository[item.id]) {
-        state.itemIds = [item.id, ...state.itemIds]
-      }
+      const repositoryItem = state.repository[item.id]
+      const newRepository = Object.assign({}, state.repository)
+      newRepository[item.id] = Object.assign({}, repositoryItem, item)
+      state.repository = newRepository
+      localStorage.setItem('repository', JSON.stringify(state.repository))
+    },
+    insertItem: function(state, item) {
+      state.lastId = state.lastId + 1
+      item.id = state.lastId
+      localStorage.setItem('lastId', state.lastId)
 
-      const repositoryItem = state.repository[item.id] || {}
       state.repository = Object.assign({}, state.repository)
-      state.repository[item.id] = Object.assign({}, repositoryItem, item)
+      state.repository[item.id] = Object.assign({}, item)
+      localStorage.setItem('repository', JSON.stringify(state.repository))
     }
   },
   actions: {
     createNewCup: function (context, data) {
       data.created_at = new Date()
-      context.commit("saveItem", data)
+      data.propertyRatings = {}
+      data.rating = -1
+      context.commit("insertItem", data)
     },
     cupTasting: function (context, data) {
-      context.commit("saveItem", data)
-    }
+      context.commit("updateItem", data)
+    },
   },
   modules: {
   }

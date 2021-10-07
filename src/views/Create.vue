@@ -33,48 +33,48 @@ import ToggleSwitch from "../components/ToggleSwitch.vue"
 import InputReference from "../components/InputReference.vue"
 
 export default {
-  name: 'Create',
-  components: { ToggleSwitch, InputReference },
-  data: function () {
-    return {
-      coffeeType: {},
-      coffeePlace: '',
-      coffeeOrigin: '',
-      coffeeRoster: ''
+    name: 'Create',
+    components: { ToggleSwitch, InputReference },
+    data: function () {
+        return {
+            coffeeType: {},
+            coffeePlace: '',
+            coffeeOrigin: '',
+            coffeeRoster: ''
+        }
+    },
+    computed: {
+        coffeeTypes: function() {
+            return this.$store.state.coffeeTypes
+        },
+        coffeePlaceOptions: function() {
+            return this.$store.getters.coffeePlaceOptions
+        },
+        coffeeOriginOptions: function() {
+            return this.$store.getters.coffeeOriginOptions
+        },
+        coffeeRosterOptions: function() {
+            return this.$store.getters.coffeeRosterOptions
+        }
+    },
+    created: function () {
+        this.setCoffeeType(this.coffeeTypes[0])
+    },
+    methods: {
+        setCoffeeType: function (type) {
+            this.coffeeType = type
+        },
+        submit: function () {
+            this.$store.dispatch('createNewCup', {
+                coffeePlace: this.coffeePlace,
+                coffeeOrigin: this.coffeeOrigin,
+                coffeeRoster: this.coffeeRoster,
+                coffeeType: this.coffeeType.id
+            })
+            this.$router.push({
+                name: 'Home'
+            })
+        }
     }
-  },
-  computed: {
-    coffeeTypes: function() {
-      return this.$store.state.coffeeTypes
-    },
-    coffeePlaceOptions: function() {
-      return this.$store.getters.coffeePlaceOptions
-    },
-    coffeeOriginOptions: function() {
-      return this.$store.getters.coffeeOriginOptions
-    },
-    coffeeRosterOptions: function() {
-      return this.$store.getters.coffeeRosterOptions
-    }
-  },
-  created: function () {
-    this.setCoffeeType(this.coffeeTypes[0])
-  },
-  methods: {
-    setCoffeeType: function (type) {
-      this.coffeeType = type
-    },
-    submit: function () {
-      this.$store.dispatch('createNewCup', {
-        coffeePlace: this.coffeePlace,
-        coffeeOrigin: this.coffeeOrigin,
-        coffeeRoster: this.coffeeRoster,
-        coffeeType: this.coffeeType.id
-      })
-      this.$router.push({
-        name: 'Home'
-      })
-    }
-  }
 }
 </script>

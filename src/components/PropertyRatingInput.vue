@@ -36,14 +36,6 @@ export default {
     components: {  },
     props: {
         value: [Object],
-        limit: {
-            type: Number,
-            default: 1
-        },
-        step: {
-            type: Number,
-            default: 0.25
-        },
         label: [String],
     },
     data: function() {

@@ -57,14 +57,20 @@ export default {
         }
     },
     computed: {
+        intensity: function () {
+            return this.value.intensity || 0.5
+        },
+        quality: function () {
+            return this.value.quality || 0.5
+        },
         barQuality: function () {
-            return this.qualityClasses[this.value.quality]
+            return this.qualityClasses[this.quality]
         },
         barIntensity: function () {
-            if (!this.intensityClasses[this.value.intensity]) {
+            if (!this.intensityClasses[this.intensity]) {
                 return false
             }
-            return this.intensityClasses[this.value.intensity]
+            return this.intensityClasses[this.intensity]
         },
         barClasses: function () {
             const classes = [this.barQuality]
@@ -78,48 +84,49 @@ export default {
                 return {}
             }
             return {
-                width: this.value.intensity * 100 + "%"
+                width: this.intensity * 100 + "%"
             }
         },
 
     },
     methods: {
         changeQuality: function (value) {
-            if (value === this.value.quality) {
+            if (value === this.quality) {
                 return
             }
             this.$emit('change', {
                 quality: value,
-                intensity: this.value.intensity
+                intensity: this.intensity
             })
         },
         increaseQuality: function () {
-            const newQuality = Math.min(1.0, this.value.quality + 0.25)
+            const newQuality = Math.min(1.0, this.quality + 0.25)
             this.changeQuality(newQuality)
         },
         decreaseQuality: function () {
-            const newQuality = Math.max(0.0, this.value.quality - 0.25)
+            const newQuality = Math.max(0.0, this.quality - 0.25)
             this.changeQuality(newQuality)
         },
         changeIntensity: function (value) {
-            if (value === this.value.intensity) {
+            if (value === this.intensity) {
                 return
             }
             this.$emit('change', {
-                quality: this.value.quality,
+                quality: this.quality,
                 intensity: value
             })
         },
         increaseIntensity: function () {
-            const newIntensity = Math.min(1.0, this.value.intensity + 0.25)
+            const newIntensity = Math.min(1.0, this.intensity + 0.25)
             this.changeIntensity(newIntensity)
         },
         decreaseIntensity: function () {
-            const newIntensity = Math.max(0.0, this.value.intensity - 0.25)
+            const newIntensity = Math.max(0.0, this.intensity - 0.25)
             this.changeIntensity(newIntensity)
         },
         snapIntensity: function () {
-            this.value.intensity = Math.round(this.value.intensity / 0.25) * 0.25
+            const snapedValue = Math.round(this.intensity / 0.25) * 0.25
+            this.changeIntensity(snapedValue)
         },
         updateIntesity: function (distance) {
             const position = this.$refs.touchPane.offsetWidth - (distance.touches[0].clientX - this.$refs.touchPane.offsetLeft)

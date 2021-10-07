@@ -10,7 +10,7 @@
                 :quality="bar.quality"></Bar>
         </div>
         <div class="record__rating">
-            <span class="record__rating-value">{{ item.rating || '-' }}</span>
+            <span class="record__rating-value">{{ ratingText }}</span>
             <span class="record__rating-maximum">&nbsp;/&nbsp;5</span>
         </div>
     </div>
@@ -33,9 +33,18 @@ export default {
             const properties = ['aroma', 'acidity', 'sweetness', 'body', 'finish']
             const result = []
             for (const key of properties) {
+                if (!this.item.propertyRatings[key]) {
+                    continue
+                }
                 result.push(this.item.propertyRatings[key])
             }
             return result
+        },
+        ratingText: function () {
+            if (this.item.rating === -1) {
+                return '-'
+            }
+            return this.item.rating
         },
         subtitle: function() {
             const parts = []

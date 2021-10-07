@@ -79,7 +79,7 @@ export default new Vuex.Store({
         repository[id].created_at = new Date(repository[id].created_at)
       }
       state.repository = repository
-      state.lastId = localStorage.getItem('lastId') || 0
+      state.lastId = parseInt(localStorage.getItem('lastId') || '0')
     },
     updateItem: function(state, item) {
       if (!item.id || !state.repository[item.id]) {
@@ -91,23 +91,28 @@ export default new Vuex.Store({
       newRepository[item.id] = Object.assign({}, repositoryItem, item)
       state.repository = newRepository
       localStorage.setItem('repository', JSON.stringify(state.repository))
+      return state.repository[item.id]
     },
     insertItem: function(state, item) {
-      state.lastId = state.lastId + 1
-      item.id = state.lastId
-      localStorage.setItem('lastId', state.lastId)
+      state.lastId += 1
+      localStorage.setItem('lastId', item.id)
 
       state.repository = Object.assign({}, state.repository)
       state.repository[item.id] = Object.assign({}, item)
       localStorage.setItem('repository', JSON.stringify(state.repository))
+      return state.repository[item.id]
     }
   },
   actions: {
     createNewCup: function (context, data) {
-      data.created_at = new Date()
-      data.propertyRatings = {}
-      data.rating = -1
+      data = Object.assign(data, {
+        created_at: new Date(),
+        propertyRatings: {},
+        rating: -1,
+        id: context.state.lastId + 1
+      })
       context.commit("insertItem", data)
+      return Promise.resolve(data)
     },
     cupTasting: function (context, data) {
       context.commit("updateItem", data)

@@ -73,7 +73,6 @@ export default {
     },
     methods: {
         submit: function () {
-            console.log("submit")
             this.$store.dispatch('cupTasting', {
                 id: this.item.id,
                 propertyRatings: {

@@ -70,9 +70,13 @@ export default {
                 coffeeOrigin: this.coffeeOrigin,
                 coffeeRoster: this.coffeeRoster,
                 coffeeType: this.coffeeType.id
-            })
-            this.$router.push({
-                name: 'Home'
+            }).then((item) => {
+                this.$router.push({
+                    name: 'Taste',
+                    params: {
+                        id: item.id
+                    }  
+                })
             })
         }
     }

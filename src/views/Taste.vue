@@ -1,6 +1,9 @@
 <template>
     <div>
-        <h1>Tasting</h1>
+        <header>
+            <h1>Tasting</h1>
+            <router-link :to="{ name: 'Edit', params: { id: item.id } }" class="action">DETAIL</router-link>
+        </header>
         <form class="column flex-grow" @submit.prevent="submit()">
             <div class="form flex-grow">
                 <RatingInput :value="rating" @change="ratingValue = $event"></RatingInput>

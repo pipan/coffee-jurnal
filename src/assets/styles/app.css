@@ -43,6 +43,11 @@ h1 {
     padding: var(--unit-m) 0px;
 }
 
+a {
+    text-decoration: none;
+    color: var(--color-primary)
+}
+
 .view {
     display: flex;
     flex-direction: column;
@@ -51,6 +56,26 @@ h1 {
     min-height: 100%;
     margin: auto;
     padding: 0px var(--unit-m) var(--unit-m) var(--unit-m);
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+header .action {
+    position: absolute;
+    right: var(--unit-m);
+    padding: var(--unit-s) var(--unit-m);
+    border-radius: var(--unit-s);
+    transition: background-color ease 180ms;
+}
+
+header .action:active {
+    transition-duration: 0ms;
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
 ::selection {

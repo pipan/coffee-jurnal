@@ -117,6 +117,9 @@ export default new Vuex.Store({
     cupTasting: function (context, data) {
       context.commit("updateItem", data)
     },
+    updateCup: function (context, data) {
+      context.commit("updateItem", data)
+    }
   },
   modules: {
   }

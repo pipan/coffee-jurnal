@@ -112,6 +112,6 @@
     display: flex;
     gap: var(--unit-s);
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
     padding-bottom: var(--unit-m);
 }

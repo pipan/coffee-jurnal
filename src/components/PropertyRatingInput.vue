@@ -58,10 +58,10 @@ export default {
     },
     computed: {
         intensity: function () {
-            return this.value.intensity || 0.5
+            return this.value.intensity !== undefined ? this.value.intensity : 0.5
         },
         quality: function () {
-            return this.value.quality || 0.5
+            return this.value.quality !== undefined ? this.value.quality : 0.5
         },
         barQuality: function () {
             return this.qualityClasses[this.quality]

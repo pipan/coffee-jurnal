@@ -30,11 +30,11 @@ export default {
         },
         millisecondsDiff: function () {
             const now = new Date()
-            now.setHours(0)
-            now.setMinutes(0)
-            now.setSeconds(0)
+            now.setHours(23)
+            now.setMinutes(59)
+            now.setSeconds(59)
             now.setMilliseconds(0)
-            return this.dayDate.getTime() - now.getTime()
+            return now.getTime() - this.dayDate.getTime()
         },
         title: function() {
             if (this.isToday()) {

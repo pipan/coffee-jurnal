@@ -2,7 +2,7 @@
     cursor: pointer;
     background-color: transparent;
     border-radius: var(--unit-s);
-    padding: var(--unit-m) var(--unit-l);
+    padding: var(--unit-s) var(--unit-l);
     font-size: 1rem;
     transition: background-color 180ms ease;
     border: none;

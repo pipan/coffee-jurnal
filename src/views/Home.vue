@@ -26,10 +26,10 @@ export default {
             let dayItems = []
             for (const item of this.items) {
                 const day = [item.created_at.getFullYear(), item.created_at.getMonth() + 1, item.created_at.getDate()]
-                const dayIndex = day.join('-')
+                let dayIndex = day.join('-')
                 if (dayIndex != previousDayIndex && dayItems.length > 0) {
                     result.push({
-                        day: dayIndex,
+                        day: previousDayIndex,
                         items: dayItems
                     })
                     dayItems = []

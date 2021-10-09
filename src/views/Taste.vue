@@ -4,6 +4,10 @@
         <form class="column flex-grow" @submit.prevent="submit()">
             <div class="form flex-grow">
                 <RatingInput :value="rating" @change="ratingValue = $event"></RatingInput>
+                <label class="input">
+                    <div class="input__label">Note</div>
+                    <textarea></textarea>
+                </label>
                 <PropertyRatingInput label="Aroma"
                     :value="aroma"
                     @change="aromaValue = $event"></PropertyRatingInput>

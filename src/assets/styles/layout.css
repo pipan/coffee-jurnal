@@ -53,7 +53,7 @@
     justify-content: center;
 }
 .row--right {
-    justify-content: end;
+    justify-content: flex-end;
 }
 .row--between {
     justify-content: space-between;

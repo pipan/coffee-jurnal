@@ -13,6 +13,11 @@ import CoffeeDetailForm from "../components/CoffeeDetailForm.vue"
 export default {
     name: 'Create',
     components: { CoffeeDetailForm },
+    metaInfo: function () {
+        return {
+            title: "New Cup | CJ"
+        }
+    },
     methods: {
         submit: function (data) {
             this.$store.dispatch('createNewCup', data)

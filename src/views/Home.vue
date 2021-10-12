@@ -18,6 +18,11 @@ import JurnalDay from '../components/JurnalDay.vue'
 export default {
     name: 'Home',
     components: { JurnalDay },
+    metaInfo: function () {
+        return {
+            title: "Coffee Jurnal"
+        }
+    },
     computed: {
         items: function () {
             return this.$store.getters.chronologicalItems

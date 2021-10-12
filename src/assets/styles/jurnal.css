@@ -78,7 +78,7 @@
 }
 
 .record__title {
-    padding: 0px var(--unit-l);
+    padding: 0px var(--unit-m);
     padding-bottom: var(--unit-m);
     font-size: var(--font-l);
     text-align: center;

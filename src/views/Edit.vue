@@ -13,6 +13,11 @@ import CoffeeDetailForm from "../components/CoffeeDetailForm.vue"
 export default {
     name: 'Edit',
     components: { CoffeeDetailForm },
+    metaInfo: function () {
+        return {
+            title: "Update Coffee Cup | CJ"
+        }
+    },
     computed: {
         item: function() {
             return this.$store.getters.item(this.$route.params.id)
@@ -26,6 +31,6 @@ export default {
                     this.$router.push({ name: 'Home' })
             })
         }
-    }
+    },
 }
 </script>

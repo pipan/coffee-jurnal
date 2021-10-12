@@ -52,6 +52,11 @@ export default {
             ratingValue: -1
         }
     },
+    metaInfo: function () {
+        return {
+            title: "Tasting | CJ"
+        }
+    },
     computed: {
         item: function () {
             return this.$store.getters.item(this.$route.params.id)

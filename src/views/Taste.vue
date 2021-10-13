@@ -1,44 +1,48 @@
 <template>
     <div>
-        <header>
-            <h1>Tasting</h1>
-            <router-link :to="{ name: 'Edit', params: { id: item.id } }" class="action">DETAIL</router-link>
-        </header>
-        <form class="column flex-grow" @submit.prevent="submit()">
-            <div class="form flex-grow">
-                <RatingInput :value="rating" @change="ratingValue = $event"></RatingInput>
-                <PropertyRatingInput label="Aroma"
-                    :value="aroma"
-                    @change="aromaValue = $event"></PropertyRatingInput>
-                <PropertyRatingInput label="Acidity"
-                    :value="acidity"
-                    @change="acidityValue = $event"></PropertyRatingInput>
-                <PropertyRatingInput label="Sweetness"
-                    :value="sweetness"
-                    @change="sweetnessValue = $event"></PropertyRatingInput>
-                <PropertyRatingInput label="Body"
-                    :value="body"
-                    @change="bodyValue = $event"></PropertyRatingInput>
-                <PropertyRatingInput label="Finish"
-                    :value="finish"
-                    @change="finishValue = $event"></PropertyRatingInput>
-            </div>
-            <div class="text-secondary text-light py-m">This rating is base on <a href="https://www.scribd.com/document/421556406/Prufrock-Coffee-Tasting-Guide" target="_blank">prufrock coffee tasting guide</a></div>
-            <div class="pt-m row row--center gap-m">
-                <router-link :to="{ name: 'Home' }" class="btn btn--secondary">Cancel</router-link>
-                <button type="submit" class="btn btn--primary">Save</button>
-            </div>
-        </form>
+        <NotFound v-if="!item"></NotFound>
+        <div class="column flex-grow" v-if="item">
+            <header>
+                <h1>Tasting</h1>
+                <router-link :to="{ name: 'Edit', params: { id: item.id } }" class="action">DETAIL</router-link>
+            </header>
+            <form class="column flex-grow" @submit.prevent="submit()">
+                <div class="form flex-grow">
+                    <RatingInput :value="rating" @change="ratingValue = $event"></RatingInput>
+                    <PropertyRatingInput label="Aroma"
+                        :value="aroma"
+                        @change="aromaValue = $event"></PropertyRatingInput>
+                    <PropertyRatingInput label="Acidity"
+                        :value="acidity"
+                        @change="acidityValue = $event"></PropertyRatingInput>
+                    <PropertyRatingInput label="Sweetness"
+                        :value="sweetness"
+                        @change="sweetnessValue = $event"></PropertyRatingInput>
+                    <PropertyRatingInput label="Body"
+                        :value="body"
+                        @change="bodyValue = $event"></PropertyRatingInput>
+                    <PropertyRatingInput label="Finish"
+                        :value="finish"
+                        @change="finishValue = $event"></PropertyRatingInput>
+                </div>
+                <div class="text-secondary text-light py-m">This rating is base on <a href="https://www.scribd.com/document/421556406/Prufrock-Coffee-Tasting-Guide" target="_blank">prufrock coffee tasting guide</a></div>
+                <div class="pt-m row row--center gap-m">
+                    <router-link :to="{ name: 'Home' }" class="btn btn--secondary">Cancel</router-link>
+                    <button type="submit" class="btn btn--primary">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
 
 <script>
 import PropertyRatingInput from '../components/PropertyRatingInput.vue'
 import RatingInput from '../components/RatingInput.vue'
+import NotFound from './NotFound.vue'
 
 export default {
     name: 'Taste',
-    components: { PropertyRatingInput, RatingInput },
+    components: { PropertyRatingInput, RatingInput, NotFound },
     data: function () {
         return {
             aromaValue: {},

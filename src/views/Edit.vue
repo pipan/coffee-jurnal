@@ -1,18 +1,22 @@
 <template>
     <div>
-        <header>
-            <h1>Update Coffee Cup</h1>
-        </header>
-        <CoffeeDetailForm :item="item" @submit="submit($event)"></CoffeeDetailForm>
+        <NotFound v-if="!item"></NotFound>
+        <div class="column flex-grow" v-if="item">
+            <header>
+                <h1>Update Coffee Cup</h1>
+            </header>
+            <CoffeeDetailForm :item="item" @submit="submit($event)"></CoffeeDetailForm>
+        </div>
     </div>
 </template>
 
 <script>
 import CoffeeDetailForm from "../components/CoffeeDetailForm.vue"
+import NotFound from './NotFound.vue'
 
 export default {
     name: 'Edit',
-    components: { CoffeeDetailForm },
+    components: { CoffeeDetailForm, NotFound },
     metaInfo: function () {
         return {
             title: "Update Coffee Cup | CJ"

@@ -49,7 +49,7 @@
     flex-direction: row;
 }
 
-.row--center {
+.row--center, .column--middle {
     justify-content: center;
 }
 .row--right {
@@ -58,7 +58,7 @@
 .row--between {
     justify-content: space-between;
 }
-.row--middle {
+.row--middle, .column--center {
     align-items: center;
 }
 

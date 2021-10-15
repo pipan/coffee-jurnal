@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueMeta from 'vue-meta'
+import './registerServiceWorker'
 
 Vue.config.productionTip = false
 Vue.use(VueMeta)

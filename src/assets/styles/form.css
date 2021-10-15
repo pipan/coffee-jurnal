@@ -1,7 +1,7 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: var(--unit-m);
+    gap: var(--unit-s);
 }
 
 .input {

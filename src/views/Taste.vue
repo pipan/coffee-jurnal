@@ -8,7 +8,6 @@
             </header>
             <form class="column flex-grow" @submit.prevent="submit()">
                 <div class="form flex-grow">
-                    <RatingInput :value="rating" @change="ratingValue = $event"></RatingInput>
                     <PropertyRatingInput label="Aroma"
                         :value="aroma"
                         @change="aromaValue = $event"></PropertyRatingInput>
@@ -24,8 +23,9 @@
                     <PropertyRatingInput label="Finish"
                         :value="finish"
                         @change="finishValue = $event"></PropertyRatingInput>
+                    <RatingInput :value="rating" @change="ratingValue = $event"></RatingInput>
                 </div>
-                <div class="text-secondary text-light py-m">This rating is base on <a href="https://www.scribd.com/document/421556406/Prufrock-Coffee-Tasting-Guide" target="_blank">prufrock coffee tasting guide</a></div>
+                <div class="text-secondary text-light py-m text-center">This rating is base on <a href="https://www.scribd.com/document/421556406/Prufrock-Coffee-Tasting-Guide" target="_blank">prufrock coffee tasting guide</a></div>
                 <div class="pt-m row row--center gap-m">
                     <router-link :to="{ name: 'Home' }" class="btn btn--secondary">Cancel</router-link>
                     <button type="submit" class="btn btn--primary">Save</button>

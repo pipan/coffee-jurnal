@@ -55,7 +55,7 @@ a {
     max-width: 960px;
     min-height: 100%;
     margin: auto;
-    padding: 0px var(--unit-m) var(--unit-m) var(--unit-m);
+    padding: 0px var(--unit-s) var(--unit-m) var(--unit-s);
 }
 
 header {

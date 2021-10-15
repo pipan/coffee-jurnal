@@ -1,4 +1,6 @@
 .jurnal {
+    --grid-gap: var(--unit-s);
+
     display: flex;
     flex-direction: column;
     gap: var(--unit-l);
@@ -14,7 +16,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--unit-m)
+    gap: var(--grid-gap)
 }
 
 .record {
@@ -29,15 +31,15 @@
     width: 100%;
 }
 
-@media (min-width: 440px) {
+@media (min-width: 410px) {
     .record {
-        width: calc(50% - var(--unit-m) / 2);
+        width: calc(50% - var(--grid-gap) / 2);
     }
 }
 
-@media (min-width: 740px) {
+@media (min-width: 680px) {
     .record {
-        width: calc(33.33% - 2 * var(--unit-m) / 3);
+        width: calc(33.33% - 2 * var(--grid-gap) / 3);
     }
 }
 

@@ -1,5 +1,6 @@
 .bar {
     border-radius: 4px;
+    background-color: var(--color-border);
 }
 
 .bar.bar--y { width: var(--unit-s); }
@@ -21,3 +22,4 @@
 .bar--quality-3 { background-color: var(--color-ok); }
 .bar--quality-4 { background-color: var(--color-like); }
 .bar--quality-5 { background-color: var(--color-love); }
+.bar--active { background-color: var(--color-primary); }

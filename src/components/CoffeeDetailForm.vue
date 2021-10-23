@@ -3,24 +3,24 @@
         <div class="form flex-grow">
             <ToggleSwitch :options="coffeeTypes" :value="coffeeType" @change="coffeeTypeValue = $event"></ToggleSwitch>
             <InputReference inputId="coffee-place"
-            label="Coffee place"
-            :options="coffeePlaceOptions"
-            :value="coffeePlace"
-            @change="coffeePlaceValue = $event"></InputReference>
+                label="Coffee place"
+                :options="coffeePlaceOptions"
+                :value="coffeePlace"
+                @change="coffeePlaceValue = $event"></InputReference>
             <InputReference inputId="coffee-origin"
-            label="Coffee origin"
-            :options="coffeeOriginOptions"
-            :value="coffeeOrigin"
-            @change="coffeeOriginValue = $event"></InputReference>
+                label="Coffee origin"
+                :options="coffeeOriginOptions"
+                :value="coffeeOrigin"
+                @change="coffeeOriginValue = $event"></InputReference>
             <InputReference inputId="coffee-roster"
-            label="Coffee roster"
-            :options="coffeeRosterOptions"
-            :value="coffeeRoster"
-            @change="coffeeRosterValue = $event"></InputReference>
+                label="Coffee roster"
+                :options="coffeeRosterOptions"
+                :value="coffeeRoster"
+                @change="coffeeRosterValue = $event"></InputReference>
         </div>
         <div class="pt-m row row--center gap-m">
-            <router-link :to="{ name: 'Home' }" class="btn btn--secondary">Cancel</router-link>
-            <button type="submit" class="btn btn--primary">Save</button>
+            <router-link :to="{ name: 'Home' }" class="btn btn--secondary">CANCEL</router-link>
+            <button type="submit" class="btn btn--primary">SAVE</button>
         </div>
     </form>
 </template>

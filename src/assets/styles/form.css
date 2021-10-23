@@ -72,10 +72,11 @@ textarea {
 
 select {
     background-color: transparent;
-    border: 1px solid var(--color-border);
-    padding: var(--unit-m);
-    color: var(--color-fg);
+    border: none;
+    padding: var(--unit-s);
+    color: var(--color-border);
     border-radius: var(--unit-s);
+    font-size: 1rem;
 }
 
 .toggle {
@@ -109,4 +110,16 @@ select {
 .toggle-btn--active {
     color: var(--color-primary);
     border-color: var(--color-primary) !important;
+}
+
+.selector-mark {
+    box-sizing: border-box;
+    width: var(--unit-m);
+    height: var(--unit-m);
+    border: 2px solid var(--color-border);
+    border-radius: 100%;
+}
+
+.selector-mark.selector-mark--active {
+    border-color: var(--color-primary);
 }

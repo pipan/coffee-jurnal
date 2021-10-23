@@ -1,0 +1,13 @@
+.tag {
+    cursor: pointer;
+    border-radius: 20px;
+    border: solid 1px var(--color-border);
+    color: var(--color-fg);
+    padding: var(--unit-s) var(--unit-m);
+    background-color: transparent;
+}
+
+.tag.tag--active {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}

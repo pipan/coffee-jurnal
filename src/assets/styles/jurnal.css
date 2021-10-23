@@ -6,12 +6,6 @@
     gap: var(--unit-l);
 }
 
-.jurnal__day-title {
-    font-size: var(--font-l);
-    padding: var(--unit-m) 0px;
-    font-weight: lighter;
-}
-
 .jurnal__day-records {
     display: flex;
     flex-direction: row;

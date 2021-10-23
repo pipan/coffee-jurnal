@@ -1,0 +1,210 @@
+<template>
+    <div>
+        <header>
+            <h1>Stats</h1>
+        </header>
+        <div class="row gap-s pb-m scroll-x">
+            <button type="button" class="tag tag--active"
+                v-for="(filter, index) of filtersList"
+                :key="index"
+                @click="removeFilter(filter.type, filter.name)">{{ filter.name }}</button>
+        </div>
+        <div class="column gap-m">
+            <div class="row gap-s row--around">
+                <IntensityComposition :dataset="dataset"></IntensityComposition>
+                <QualityComposition :dataset="dataset"></QualityComposition>
+                <RatingComposition :dataset="dataset"></RatingComposition>
+            </div>
+            <RatingTimeline :dataset="dataset"></RatingTimeline>
+            <RankList :dataset="dataset"></RankList>
+            <VisitList :dataset="dataset"></VisitList>
+        </div>
+        <router-link :to="{ name: 'Filter', query: $route.query }" class="btn-fab">FILTERS</router-link>
+        <router-view />
+    </div>
+</template>
+
+<script>
+import RankList from '../components/RankList.vue'
+import VisitList from '../components/VisitList.vue'
+import RatingComposition from '../components/RatingComposition.vue'
+import IntensityComposition from '../components/IntensityComposition.vue'
+import QualityComposition from '../components/QualityComposition.vue'
+import RatingTimeline from '../components/RatingTimeline.vue'
+
+export default {
+    name: 'Stats',
+    components: { QualityComposition, IntensityComposition, RatingComposition, RatingTimeline, RankList, VisitList },
+    metaInfo: function () {
+        return {
+            title: "Stats | CJ"
+        }
+    },
+    data: function () {
+        return {
+            dataset: [
+                {
+                    coffeePlace: 'Soren',
+                    coffeeOrigin: 'Kenya',
+                    rating: 4,
+                    propertyRatings: {
+                        aroma: {
+                            intensity: 3,
+                            quality: 1
+                        },
+                        acidity: {
+                            intensity: 4,
+                            quality: 5
+                        },
+                        sweetness: {
+                            intensity: 5,
+                            quality: 5
+                        },
+                        body: {
+                            intensity: 2,
+                            quality: 1
+                        },
+                        finish: {
+                            intensity: 4,
+                            quality: 3
+                        }
+                    }
+                }, {
+                    coffeePlace: 'MONO',
+                    coffeeOrigin: 'Columbia',
+                    rating: 4,
+                    propertyRatings: {
+                        aroma: {
+                            intensity: 3,
+                            quality: 3
+                        },
+                        acidity: {
+                            intensity: 3,
+                            quality: 3
+                        },
+                        sweetness: {
+                            intensity: 3,
+                            quality: 3
+                        },
+                        body: {
+                            intensity: 3,
+                            quality: 3
+                        },
+                        finish: {
+                            intensity: 3,
+                            quality: 3
+                        }
+                    }
+                }, {
+                    coffeePlace: 'MONO',
+                    coffeeOrigin: 'El Salvador',
+                    rating: 4,
+                    propertyRatings: {
+                        aroma: {
+                            intensity: 4,
+                            quality: 3
+                        },
+                        acidity: {
+                            intensity: 1,
+                            quality: 3
+                        },
+                        sweetness: {
+                            intensity: 4,
+                            quality: 5
+                        },
+                        body: {
+                            intensity: 3,
+                            quality: 3
+                        },
+                        finish: {
+                            intensity: 3,
+                            quality: 3
+                        }
+                    }
+                },
+                {
+                    coffeePlace: 'Soren',
+                    coffeeOrigin: 'Ethiopia',
+                    rating: 4,
+                    propertyRatings: {
+                        aroma: {
+                            intensity: 4,
+                            quality: 3
+                        },
+                        acidity: {
+                            intensity: 1,
+                            quality: 3
+                        },
+                        sweetness: {
+                            intensity: 3,
+                            quality: 3
+                        },
+                        body: {
+                            intensity: 3,
+                            quality: 3
+                        },
+                        finish: {
+                            intensity: 3,
+                            quality: 3
+                        }
+                    }
+                },
+                {
+                    coffeePlace: 'Soren',
+                    coffeeOrigin: 'Ethiopia',
+                    rating: 1,
+                    propertyRatings: {}
+                }
+            ]
+        }
+    },
+    computed: {
+        filters: function () {
+            return {
+                filterType: this.normQueryFilter(this.$route.query.filterType),
+                filterPlace: this.normQueryFilter(this.$route.query.filterPlace),
+                filterOrigin: this.normQueryFilter(this.$route.query.filterOrigin),
+                filterRoster: this.normQueryFilter(this.$route.query.filterRoster)
+            }
+        },
+        filtersList: function () {
+            const keys = ['filterType', 'filterPlace', 'filterOrigin', 'filterRoster']
+            const result = []
+            for (const key of keys) {
+                for (const filter of this.filters[key])
+                result.push({
+                    name: filter,
+                    type: key
+                })
+            }
+            return result
+        },
+    },
+    methods: {
+        normQueryFilter: function (queryValue) {
+            if (queryValue === undefined) {
+                return []
+            }
+            if (typeof queryValue == 'string') {
+                return [queryValue]
+            }
+            return queryValue
+        },
+        removeFilter: function (filterType, value) {
+            const index = this.filters[filterType].indexOf(value)
+            if (index === -1) {
+                return
+            }
+            const cloneFilter = [...this.filters[filterType]]
+            cloneFilter.splice(index, 1)
+            let filterQuery = {}
+            filterQuery[filterType] = cloneFilter
+            const query = Object.assign({}, this.$route.query, filterQuery)
+            this.$router.replace({
+                name: 'Stats',
+                query: query
+            })
+        }
+    }
+}
+</script>

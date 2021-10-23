@@ -10,23 +10,23 @@
                     class="input__button"
                     @click.stop
                     @click="openContext()">&Colon;</button>
-                <ContextMenu :options="options" ref="contextMenu" @select="change($event)">
+                <ListContextMenu :options="options" ref="contextMenu" @select="change($event)">
                     <button type="button"
                         class="input__button"
                         @click.stop
                         @click="closeContext()">&Colon;</button>
-                </ContextMenu>
+                </ListContextMenu>
             </div>
         </div>
     </label>
 </template>
 
 <script>
-import ContextMenu from "./ContextMenu.vue";
+import ListContextMenu from "./ListContextMenu.vue";
 
 export default {
     name: 'InputReference',
-    components: { ContextMenu },
+    components: { ListContextMenu },
     props: {
         options: [Array],
         value: [String],
@@ -34,12 +34,6 @@ export default {
         label: [String]
     },
     methods: {
-        select: function (value) {
-            if (value === this.value) {
-                return
-            }
-            this.$emit('change', value)
-        },
         change: function (value) {
             if (value === this.value) {
                 return

@@ -2,7 +2,7 @@
     cursor: pointer;
     background-color: transparent;
     border-radius: var(--unit-s);
-    padding: var(--unit-s) var(--unit-l);
+    padding: var(--unit-s) var(--unit-m);
     font-size: 1rem;
     transition: background-color 180ms ease;
     border: none;
@@ -14,12 +14,11 @@
 }
 
 .btn--primary {
-    color: var(--color-bg);
-    background-color: var(--color-primary);
+    color: var(--color-primary);
 }
 
-.btn--primary:active {
-    background-color: var(--color-primary-lighter);
+.btn--primary:active, .btn--secondary:active {
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
 .btn--secondary {
@@ -27,29 +26,26 @@
     background-color: transparent;
 }
 
-.btn--secondary:active {
-    background-color: rgba(255, 255, 255, 0.08);
-}
-
 .btn-fab {
     cursor: pointer;
     position: fixed;
-    bottom: var(--unit-m);
-    right: var(--unit-m);
+    bottom: var(--navigation-height);
+    left: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-bg);
     background-color: var(--color-primary);
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    font-size: 2rem;
-    font-weight: lighter;
-    font-family: monospace;
+    padding: 0px 20px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 1rem;
     border: none;
     transition: background-color ease 320ms;
     text-decoration: none;
+    transform: translateX(-50%) translateY(50%);
+    z-index: 2;
+    font-weight: bold;
 }
 
 .btn-fab:active {

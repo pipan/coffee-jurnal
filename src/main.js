@@ -8,6 +8,12 @@ import './registerServiceWorker'
 Vue.config.productionTip = false
 Vue.use(VueMeta)
 
+Vue.filter('round', function (value, precision) {
+  precision = precision || 0
+  const power = Math.pow(10, precision)
+  return Math.round(value * power) / power
+})
+
 store.commit('refresh')
 
 new Vue({

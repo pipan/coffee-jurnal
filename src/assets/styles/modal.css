@@ -1,0 +1,23 @@
+.modal-view {
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    background-color: rgba(35, 35, 35, 0.9);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--unit-m);
+}
+
+.modal {
+    box-sizing: border-box;
+    background-color: var(--color-bg);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    padding: var(--unit-m)
+}

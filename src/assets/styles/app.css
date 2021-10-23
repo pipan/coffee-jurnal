@@ -14,12 +14,14 @@
 
     --color-hate: #C51919;
     --color-dislike: #A15C5C;
-    --color-ok: #707070;
+    --color-ok: #A19844;
     --color-like: #64975a;
     --color-love: #35D115;
 
     --font-l: 1.35rem;
     --font-s: 0.85rem;
+
+    --navigation-height: 60px;
 }
 
 body, html {
@@ -41,6 +43,12 @@ h1 {
     text-align: center;
     margin: 0px;
     padding: var(--unit-m) 0px;
+}
+
+h2 {
+    font-size: var(--font-l);
+    font-weight: lighter;
+    margin: 0px;
 }
 
 a {
@@ -86,4 +94,32 @@ header .action:active {
 ::-moz-selection {
     background-color: var(--color-primary-darker);
     color: var(--color-fg);
+}
+
+nav {
+    box-sizing: border-box;
+    border-top: solid 1px var(--color-border);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: var(--navigation-height);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--color-bg);
+}
+
+.navigation-view {
+    padding-bottom: var(--navigation-height);
+}
+
+.navigation-item {
+    color: var(--color-fg);
+    font-size: var(--font-s);
+    padding: 12px var(--unit-l);
+    border-radius: 20px;
+}
+.navigation-item.router-link-exact-active {
+    background-color: rgba(255, 255, 255, 0.08);
 }

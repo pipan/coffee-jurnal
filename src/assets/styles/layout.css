@@ -58,6 +58,13 @@
 .row--between {
     justify-content: space-between;
 }
+.row--around {
+    justify-content: space-around;
+}
+
+.row--evenly, .column--evenly {
+    justify-content: space-evenly;
+}
 .row--middle, .column--center {
     align-items: center;
 }
@@ -78,3 +85,5 @@
 .pos-r {
     position: relative;
 }
+
+.scroll-x { overflow-x: auto; }

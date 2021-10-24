@@ -5,6 +5,7 @@
     color: var(--color-fg);
     padding: var(--unit-s) var(--unit-m);
     background-color: transparent;
+    white-space: nowrap;
 }
 
 .tag.tag--active {

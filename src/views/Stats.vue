@@ -10,7 +10,7 @@
                 @click="removeFilter(filter.type, filter.name)">{{ filter.name }}</button>
         </div>
         <div class="column gap-m">
-            <div class="row gap-s row--around">
+            <div class="row gap-s row--around row--wrap">
                 <IntensityComposition :dataset="dataset"></IntensityComposition>
                 <QualityComposition :dataset="dataset"></QualityComposition>
                 <RatingComposition :dataset="dataset"></RatingComposition>
@@ -38,124 +38,6 @@ export default {
     metaInfo: function () {
         return {
             title: "Stats | CJ"
-        }
-    },
-    data: function () {
-        return {
-            // dataset: [
-            //     {
-            //         coffeePlace: 'Soren',
-            //         coffeeOrigin: 'Kenya',
-            //         rating: 4,
-            //         propertyRatings: {
-            //             aroma: {
-            //                 intensity: 3,
-            //                 quality: 1
-            //             },
-            //             acidity: {
-            //                 intensity: 4,
-            //                 quality: 5
-            //             },
-            //             sweetness: {
-            //                 intensity: 5,
-            //                 quality: 5
-            //             },
-            //             body: {
-            //                 intensity: 2,
-            //                 quality: 1
-            //             },
-            //             finish: {
-            //                 intensity: 4,
-            //                 quality: 3
-            //             }
-            //         }
-            //     }, {
-            //         coffeePlace: 'MONO',
-            //         coffeeOrigin: 'Columbia',
-            //         rating: 4,
-            //         propertyRatings: {
-            //             aroma: {
-            //                 intensity: 3,
-            //                 quality: 3
-            //             },
-            //             acidity: {
-            //                 intensity: 3,
-            //                 quality: 3
-            //             },
-            //             sweetness: {
-            //                 intensity: 3,
-            //                 quality: 3
-            //             },
-            //             body: {
-            //                 intensity: 3,
-            //                 quality: 3
-            //             },
-            //             finish: {
-            //                 intensity: 3,
-            //                 quality: 3
-            //             }
-            //         }
-            //     }, {
-            //         coffeePlace: 'MONO',
-            //         coffeeOrigin: 'El Salvador',
-            //         rating: 4,
-            //         propertyRatings: {
-            //             aroma: {
-            //                 intensity: 4,
-            //                 quality: 3
-            //             },
-            //             acidity: {
-            //                 intensity: 1,
-            //                 quality: 3
-            //             },
-            //             sweetness: {
-            //                 intensity: 4,
-            //                 quality: 5
-            //             },
-            //             body: {
-            //                 intensity: 3,
-            //                 quality: 3
-            //             },
-            //             finish: {
-            //                 intensity: 3,
-            //                 quality: 3
-            //             }
-            //         }
-            //     },
-            //     {
-            //         coffeePlace: 'Soren',
-            //         coffeeOrigin: 'Ethiopia',
-            //         rating: 4,
-            //         propertyRatings: {
-            //             aroma: {
-            //                 intensity: 4,
-            //                 quality: 3
-            //             },
-            //             acidity: {
-            //                 intensity: 1,
-            //                 quality: 3
-            //             },
-            //             sweetness: {
-            //                 intensity: 3,
-            //                 quality: 3
-            //             },
-            //             body: {
-            //                 intensity: 3,
-            //                 quality: 3
-            //             },
-            //             finish: {
-            //                 intensity: 3,
-            //                 quality: 3
-            //             }
-            //         }
-            //     },
-            //     {
-            //         coffeePlace: 'Soren',
-            //         coffeeOrigin: 'Ethiopia',
-            //         rating: 1,
-            //         propertyRatings: {}
-            //     }
-            // ]
         }
     },
     computed: {

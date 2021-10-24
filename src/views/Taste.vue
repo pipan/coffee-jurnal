@@ -27,8 +27,8 @@
                 </div>
                 <div class="text-secondary text-light py-m text-center">This rating is base on <a href="https://www.scribd.com/document/421556406/Prufrock-Coffee-Tasting-Guide" target="_blank">prufrock coffee tasting guide</a></div>
                 <div class="pt-m row row--center gap-m">
-                    <router-link :to="{ name: 'Home' }" class="btn btn--secondary">Cancel</router-link>
-                    <button type="submit" class="btn btn--primary">Save</button>
+                    <router-link :to="{ name: 'Home' }" class="btn btn--secondary">CANCEL</router-link>
+                    <button type="submit" class="btn btn--primary">SAVE</button>
                 </div>
             </form>
         </div>

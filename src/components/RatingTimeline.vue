@@ -7,7 +7,7 @@
             <div v-html="'&#x2606;'"></div>
             <div v-html="'&#x2606;'"></div>
         </div>
-        <div class="rating-timeline">
+        <div class="rating-timeline scroll-x">
             <div v-for="(item, index) of items"
                 :key="index"
                 class="rating-timeline__item"
@@ -29,9 +29,19 @@ export default {
         }
     },
     computed: {
-        items: function () {
+        datasetWithRatings: function () {
             const result = []
             for (const item of this.dataset) {
+                if (item.rating <= 0) {
+                    continue
+                }
+                result.push(item)
+            }
+            return result
+        },
+        items: function () {
+            const result = []
+            for (const item of this.datasetWithRatings) {
                 result.push({
                     classes: ['rating-timeline__item--' + item.rating]
                 })

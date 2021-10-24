@@ -30,7 +30,7 @@ export default {
                     if (item.propertyRatings[property] === undefined || item.propertyRatings[property].intensity === undefined) {
                         continue
                     }
-                    const ratingIndex = item.propertyRatings[property].intensity - 1
+                    const ratingIndex = item.propertyRatings[property].intensity / 0.25
                     result[i][ratingIndex]++
                 }
             }

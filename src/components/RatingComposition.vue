@@ -26,18 +26,31 @@ export default {
         }
     },
     computed: {
+        datasetWithRatings: function () {
+            const result = []
+            for (const item of this.dataset) {
+                if (item.rating <= 0) {
+                    continue
+                }
+                result.push(item)
+            }
+            return result
+        },
         composition: function () {
             const result = [0, 0, 0, 0, 0]
-            for (const item of this.dataset) {
+            for (const item of this.datasetWithRatings) {
                 const index = item.rating - 1
                 result[index]++
             }
             return result
         },
+        ratingCount: function () {
+            return this.datasetWithRatings.length
+        },
         items: function () {
             const result = []
             for (const numberOfOccurances of this.composition) {
-                const ratio = numberOfOccurances / this.dataset.length
+                const ratio = numberOfOccurances / this.ratingCount
                 result.push({
                     absolute: numberOfOccurances,
                     ratio: ratio,
@@ -56,14 +69,14 @@ export default {
             return result
         },
         mostFrequentRatio: function () {
-            return this.mostFrequentValue / this.dataset.length
+            return this.mostFrequentValue / this.ratingCount
         },
         average: function () {
             let sum = 0
-            for (const item of this.dataset) {
+            for (const item of this.datasetWithRatings) {
                 sum += item.rating
             }
-            return sum / this.dataset.length
+            return sum / this.ratingCount
         }
     }
 }

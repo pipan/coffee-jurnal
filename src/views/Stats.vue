@@ -42,123 +42,135 @@ export default {
     },
     data: function () {
         return {
-            dataset: [
-                {
-                    coffeePlace: 'Soren',
-                    coffeeOrigin: 'Kenya',
-                    rating: 4,
-                    propertyRatings: {
-                        aroma: {
-                            intensity: 3,
-                            quality: 1
-                        },
-                        acidity: {
-                            intensity: 4,
-                            quality: 5
-                        },
-                        sweetness: {
-                            intensity: 5,
-                            quality: 5
-                        },
-                        body: {
-                            intensity: 2,
-                            quality: 1
-                        },
-                        finish: {
-                            intensity: 4,
-                            quality: 3
-                        }
-                    }
-                }, {
-                    coffeePlace: 'MONO',
-                    coffeeOrigin: 'Columbia',
-                    rating: 4,
-                    propertyRatings: {
-                        aroma: {
-                            intensity: 3,
-                            quality: 3
-                        },
-                        acidity: {
-                            intensity: 3,
-                            quality: 3
-                        },
-                        sweetness: {
-                            intensity: 3,
-                            quality: 3
-                        },
-                        body: {
-                            intensity: 3,
-                            quality: 3
-                        },
-                        finish: {
-                            intensity: 3,
-                            quality: 3
-                        }
-                    }
-                }, {
-                    coffeePlace: 'MONO',
-                    coffeeOrigin: 'El Salvador',
-                    rating: 4,
-                    propertyRatings: {
-                        aroma: {
-                            intensity: 4,
-                            quality: 3
-                        },
-                        acidity: {
-                            intensity: 1,
-                            quality: 3
-                        },
-                        sweetness: {
-                            intensity: 4,
-                            quality: 5
-                        },
-                        body: {
-                            intensity: 3,
-                            quality: 3
-                        },
-                        finish: {
-                            intensity: 3,
-                            quality: 3
-                        }
-                    }
-                },
-                {
-                    coffeePlace: 'Soren',
-                    coffeeOrigin: 'Ethiopia',
-                    rating: 4,
-                    propertyRatings: {
-                        aroma: {
-                            intensity: 4,
-                            quality: 3
-                        },
-                        acidity: {
-                            intensity: 1,
-                            quality: 3
-                        },
-                        sweetness: {
-                            intensity: 3,
-                            quality: 3
-                        },
-                        body: {
-                            intensity: 3,
-                            quality: 3
-                        },
-                        finish: {
-                            intensity: 3,
-                            quality: 3
-                        }
-                    }
-                },
-                {
-                    coffeePlace: 'Soren',
-                    coffeeOrigin: 'Ethiopia',
-                    rating: 1,
-                    propertyRatings: {}
-                }
-            ]
+            // dataset: [
+            //     {
+            //         coffeePlace: 'Soren',
+            //         coffeeOrigin: 'Kenya',
+            //         rating: 4,
+            //         propertyRatings: {
+            //             aroma: {
+            //                 intensity: 3,
+            //                 quality: 1
+            //             },
+            //             acidity: {
+            //                 intensity: 4,
+            //                 quality: 5
+            //             },
+            //             sweetness: {
+            //                 intensity: 5,
+            //                 quality: 5
+            //             },
+            //             body: {
+            //                 intensity: 2,
+            //                 quality: 1
+            //             },
+            //             finish: {
+            //                 intensity: 4,
+            //                 quality: 3
+            //             }
+            //         }
+            //     }, {
+            //         coffeePlace: 'MONO',
+            //         coffeeOrigin: 'Columbia',
+            //         rating: 4,
+            //         propertyRatings: {
+            //             aroma: {
+            //                 intensity: 3,
+            //                 quality: 3
+            //             },
+            //             acidity: {
+            //                 intensity: 3,
+            //                 quality: 3
+            //             },
+            //             sweetness: {
+            //                 intensity: 3,
+            //                 quality: 3
+            //             },
+            //             body: {
+            //                 intensity: 3,
+            //                 quality: 3
+            //             },
+            //             finish: {
+            //                 intensity: 3,
+            //                 quality: 3
+            //             }
+            //         }
+            //     }, {
+            //         coffeePlace: 'MONO',
+            //         coffeeOrigin: 'El Salvador',
+            //         rating: 4,
+            //         propertyRatings: {
+            //             aroma: {
+            //                 intensity: 4,
+            //                 quality: 3
+            //             },
+            //             acidity: {
+            //                 intensity: 1,
+            //                 quality: 3
+            //             },
+            //             sweetness: {
+            //                 intensity: 4,
+            //                 quality: 5
+            //             },
+            //             body: {
+            //                 intensity: 3,
+            //                 quality: 3
+            //             },
+            //             finish: {
+            //                 intensity: 3,
+            //                 quality: 3
+            //             }
+            //         }
+            //     },
+            //     {
+            //         coffeePlace: 'Soren',
+            //         coffeeOrigin: 'Ethiopia',
+            //         rating: 4,
+            //         propertyRatings: {
+            //             aroma: {
+            //                 intensity: 4,
+            //                 quality: 3
+            //             },
+            //             acidity: {
+            //                 intensity: 1,
+            //                 quality: 3
+            //             },
+            //             sweetness: {
+            //                 intensity: 3,
+            //                 quality: 3
+            //             },
+            //             body: {
+            //                 intensity: 3,
+            //                 quality: 3
+            //             },
+            //             finish: {
+            //                 intensity: 3,
+            //                 quality: 3
+            //             }
+            //         }
+            //     },
+            //     {
+            //         coffeePlace: 'Soren',
+            //         coffeeOrigin: 'Ethiopia',
+            //         rating: 1,
+            //         propertyRatings: {}
+            //     }
+            // ]
         }
     },
     computed: {
+        items: function () {
+            return this.$store.getters.chronologicalItems
+        },
+        dataset: function () {
+            const result = []
+            for (const item of this.items) {
+                if (this.passesFilters(item)) {
+                    result.push(item)
+                }
+            }
+            return result
+        },
         filters: function () {
             return {
                 filterType: this.normQueryFilter(this.$route.query.filterType),
@@ -204,6 +216,21 @@ export default {
                 name: 'Stats',
                 query: query
             })
+        },
+        passesFilters: function (item) {
+            if (this.filters.filterType.length > 0 && this.filters.filterType.indexOf(item.coffeeType) === -1) {
+                return false
+            }
+            if (this.filters.filterPlace.length > 0 && this.filters.filterPlace.indexOf(item.coffeePlace) === -1) {
+                return false
+            }
+            if (this.filters.filterOrigin.length > 0 && this.filters.filterOrigin.indexOf(item.coffeeOrigin) === -1) {
+                return false
+            }
+            if (this.filters.filterRoster.length > 0 && this.filters.filterRoster.indexOf(item.coffeeRoster) === -1) {
+                return false
+            }
+            return true
         }
     }
 }

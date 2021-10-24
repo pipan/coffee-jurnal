@@ -130,6 +130,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .rating-timeline__item.rating-timeline__item--1 { top: 80% }

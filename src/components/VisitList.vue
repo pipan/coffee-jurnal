@@ -35,6 +35,9 @@ export default {
             const group = {}
             for (const item of this.dataset) {
                 const groupIndex = item[this.orderBy]
+                if (!groupIndex) {
+                    continue
+                }
                 if (!group[groupIndex]) {
                     group[groupIndex] = 0
                 }

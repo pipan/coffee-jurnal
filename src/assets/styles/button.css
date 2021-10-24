@@ -38,7 +38,7 @@
     background-color: var(--color-primary);
     padding: 0px 20px;
     height: 40px;
-    border-radius: 20px;
+    border-radius: var(--unit-s);
     font-size: 1rem;
     border: none;
     transition: background-color ease 320ms;

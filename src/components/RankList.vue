@@ -28,10 +28,23 @@ export default {
         }
     },
     computed: {
+        datasetWithRatings: function () {
+            const result = []
+            for (const item of this.dataset) {
+                if (item.rating <= 0) {
+                    continue
+                }
+                result.push(item)
+            }
+            return result
+        },
         items: function () {
             const group = {}
-            for (const item of this.dataset) {
+            for (const item of this.datasetWithRatings) {
                 const groupIndex = item[this.orderBy]
+                if (!groupIndex) {
+                    continue
+                }
                 if (!group[groupIndex]) {
                     group[groupIndex] = []
                 }

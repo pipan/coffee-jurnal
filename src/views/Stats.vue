@@ -44,6 +44,9 @@ export default {
         items: function () {
             return this.$store.getters.chronologicalItems
         },
+        hasData: function() {
+            return this.dataset.length > 0
+        },
         dataset: function () {
             const result = []
             for (const item of this.items) {

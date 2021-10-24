@@ -1,6 +1,6 @@
 <template>
     <div class="jurnal__day">
-        <h2 class="jurnal__day-title py-m">{{ title }}</h2>
+        <h2 class="jurnal__day-title pb-m">{{ title }}</h2>
         <div class="jurnal__day-records">
             <JurnalRecord v-for="item of agenda.items"
                 :key="item.id"

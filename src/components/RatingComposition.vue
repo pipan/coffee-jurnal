@@ -2,13 +2,15 @@
     <div class="column gap-m">
         <div class="row row--center text-s">Rating</div>
         <div class="row row--middle row--center">
-            <span class="text-primary text-l text-bold">{{ average | round(1) }}</span><span class="text-secondary">&nbsp;/ 5</span>
+            <span class="text-primary text-l text-bold" v-if="average">{{ average | round(1) }}</span>
+            <span class="text-primary text-l text-bold" v-if="!average">-</span>
+            <span class="text-secondary">&nbsp;/ 5</span>
         </div>
         <div class="row row--evenly rating-composition__graph">
             <RatingCompositionItem v-for="(item, index) of items"
                 :key="index"
                 :size="item.ratio * 100 + '%'"
-                :active="item.absolute === mostFrequentValue"></RatingCompositionItem>
+                :active="mostFrequentValue > 0 && item.absolute === mostFrequentValue"></RatingCompositionItem>
         </div>
     </div>
 </template>
@@ -72,6 +74,9 @@ export default {
             return this.mostFrequentValue / this.ratingCount
         },
         average: function () {
+            if (this.ratingCount === 0) {
+                return 0
+            }
             let sum = 0
             for (const item of this.datasetWithRatings) {
                 sum += item.rating

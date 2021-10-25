@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="view">
         <NotFound v-if="!item"></NotFound>
         <div class="column flex-grow" v-if="item">
             <header>

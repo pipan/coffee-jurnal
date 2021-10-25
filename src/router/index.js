@@ -19,16 +19,19 @@ const routes = [
         path: '',
         name: 'Home',
         component: Home,
+        meta: { transitionOrder: 1 }
       },
       {
         path: 'stats',
         name: 'Stats',
         component: Stats,
+        meta: { transitionOrder: 2 },
         children: [
           {
             path: 'filter',
             name: 'Filter',
-            component: FilterModal
+            component: FilterModal,
+            meta: { transitionIn: 'animation--slide-in', transitionOut: 'animation--slide-out' }
           }
         ]
       }
@@ -37,17 +40,20 @@ const routes = [
   {
     path: '/create',
     name: 'Create',
-    component: Create
+    component: Create,
+    meta: { transitionIn: 'animation--slide-in', transitionOut: 'animation--slide-out' }
   },
   {
     path: '/edit/:id',
     name: 'Edit',
-    component: Edit
+    component: Edit,
+    meta: { transitionIn: 'animation--slide-in', transitionOut: 'animation--slide-out' }
   },
   {
     path: '/taste/:id',
     name: 'Taste',
-    component: Taste
+    component: Taste,
+    meta: { transitionIn: 'animation--slide-in', transitionOut: 'animation--slide-out' }
   },
 ]
 

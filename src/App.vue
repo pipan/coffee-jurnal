@@ -1,6 +1,32 @@
 <template>
-  <router-view class="view" />
+    <transition :name="transitionName">
+        <router-view />
+    </transition>
 </template>
+
+<script>
+export default {
+    name: 'App',
+    data: function () {
+        return {
+            transitionName: 'animation--slide-in'
+        }
+    },
+    watch: {
+        '$route' (to, from) {
+            if (to.meta.transitionIn) {
+                this.transitionName = to.meta.transitionIn
+                return
+            }
+            if (from.meta.transitionOut) {
+                this.transitionName = from.meta.transitionOut
+                return
+            }
+            this.transitionName = ''
+        }
+    }
+}
+</script>
 
 <style>
 @import "./assets/styles/layout.css";
@@ -15,5 +41,6 @@
 @import "./assets/styles/context.css";
 @import "./assets/styles/stats.css";
 
+@import "./assets/styles/animation.css";
 @import "./assets/styles/app.css";
 </style>

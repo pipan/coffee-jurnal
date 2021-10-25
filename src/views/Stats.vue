@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="view">
         <header>
             <h1>Stats</h1>
         </header>
@@ -20,7 +20,9 @@
             <VisitList :dataset="dataset"></VisitList>
         </div>
         <router-link :to="{ name: 'Filter', query: $route.query }" class="btn-fab">FILTERS</router-link>
-        <router-view />
+        <transition name="animation--fade">
+            <router-view />
+        </transition>
     </div>
 </template>
 

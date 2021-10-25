@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="view">
         <header>
             <h1>New Cup</h1>
         </header>

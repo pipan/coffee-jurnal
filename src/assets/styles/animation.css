@@ -1,0 +1,108 @@
+.animation--fade-leave-active, .animation--fade-enter-active {
+    transition-property: opacity;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+}
+.animation--fade-enter, .animation--fade-leave-to {
+    opacity: 0;
+}
+.animation--fade-leave, .animation--fade-enter-to {
+    opacity: 1;
+}
+
+.animation--slide-in-leave-active {
+    transition-property: opacity;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-out;
+    opacity: 0;
+}
+.animation--slide-in-leave {
+    opacity: 1;
+}
+
+.animation--slide-in-enter-active {
+    transition-property: top, opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    position: absolute;
+    top: 0;
+    opacity: 1;
+    width: 100%;
+}
+.animation--slide-in-enter {
+    position: absolute;
+    opacity: 0;
+    top: 6%;
+}
+
+.animation--slide-out-leave-active {
+    transition-property: top, opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    position: absolute;
+    top: 6%;
+    opacity: 0;
+    width: 100%;
+    
+}
+.animation--slide-out-leave {
+    position: absolute;
+    opacity: 1;
+    top: 0%;
+}
+
+.animation--slide-out-enter-active {
+    transition-property: opacity;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-out;
+    opacity: 1;
+}
+.animation--slide-out-enter {
+    opacity: 0;
+}
+
+.animation--slide-left-enter-active, .animation--slide-left-leave-active, .animation--slide-right-leave-active, .animation--slide-right-enter-active {
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.animation--slide-left-leave-active {
+    transition-property: right;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    right: 100%;
+}
+.animation--slide-left-leave {
+    right: 0%;
+}
+
+.animation--slide-left-enter-active {
+    transition-property: left;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    left: 0%;
+}
+.animation--slide-left-enter {
+    left: 100%;
+}
+
+.animation--slide-right-leave-active {
+    transition-property: left;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    left: 100%;
+}
+.animation--slide-right-leave {
+    left: 0%;
+}
+
+.animation--slide-right-enter-active {
+    transition-property: right;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    right: 0%;
+}
+.animation--slide-right-enter {
+    right: 100%;
+}

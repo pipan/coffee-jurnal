@@ -19,7 +19,7 @@
                 @change="coffeeRosterValue = $event"></InputReference>
         </div>
         <div class="pt-m row row--center gap-m">
-            <router-link :to="{ name: 'Home' }" class="btn btn--secondary">CANCEL</router-link>
+            <button type="button" class="btn btn--secondary" @click="back()">CANCEL</button>
             <button type="submit" class="btn btn--primary">SAVE</button>
         </div>
     </form>
@@ -95,6 +95,9 @@ export default {
                 coffeeRoster: this.coffeeRoster,
                 coffeeType: this.coffeeType
             })
+        },
+        back: function () {
+            this.$router.go(-1)
         }
     }
 }

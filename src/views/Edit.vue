@@ -1,11 +1,13 @@
 <template>
     <div class="view">
-        <NotFound v-if="!item"></NotFound>
-        <div class="column flex-grow" v-if="item">
-            <header>
-                <h1>Update Coffee Cup</h1>
-            </header>
-            <CoffeeDetailForm :item="item" @submit="submit($event)"></CoffeeDetailForm>
+        <div class="view-content">
+            <NotFound v-if="!item"></NotFound>
+            <div class="column flex-grow" v-if="item">
+                <header>
+                    <h1>Update Coffee Cup</h1>
+                </header>
+                <CoffeeDetailForm :item="item" @submit="submit($event)"></CoffeeDetailForm>
+            </div>
         </div>
     </div>
 </template>

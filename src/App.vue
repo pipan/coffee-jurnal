@@ -14,12 +14,12 @@ export default {
     },
     watch: {
         '$route' (to, from) {
-            if (to.meta.transitionIn) {
-                this.transitionName = to.meta.transitionIn
+            if (from.meta.transitionDepth < to.meta.transitionDepth) {
+                this.transitionName = 'animation--slide-in'
                 return
             }
-            if (from.meta.transitionOut) {
-                this.transitionName = from.meta.transitionOut
+            if (from.meta.transitionDepth > to.meta.transitionDepth) {
+                this.transitionName = 'animation--slide-out'
                 return
             }
             this.transitionName = ''

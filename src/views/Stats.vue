@@ -1,28 +1,30 @@
 <template>
     <div class="view">
-        <header>
-            <h1>Stats</h1>
-        </header>
-        <div class="row gap-s pb-m scroll-x">
-            <button type="button" class="tag tag--active"
-                v-for="(filter, index) of filtersList"
-                :key="index"
-                @click="removeFilter(filter.type, filter.name)">{{ filter.name }}</button>
-        </div>
-        <div class="column gap-m">
-            <div class="row gap-s row--around row--wrap">
-                <IntensityComposition :dataset="dataset"></IntensityComposition>
-                <QualityComposition :dataset="dataset"></QualityComposition>
-                <RatingComposition :dataset="dataset"></RatingComposition>
+        <div class="view-content">
+            <header>
+                <h1>Stats</h1>
+            </header>
+            <div class="row gap-s pb-m scroll-x">
+                <button type="button" class="tag tag--active"
+                    v-for="(filter, index) of filtersList"
+                    :key="index"
+                    @click="removeFilter(filter.type, filter.name)">{{ filter.name }}</button>
             </div>
-            <RatingTimeline :dataset="dataset"></RatingTimeline>
-            <RankList :dataset="dataset"></RankList>
-            <VisitList :dataset="dataset"></VisitList>
+            <div class="column gap-m">
+                <div class="row gap-s row--around row--wrap">
+                    <IntensityComposition :dataset="dataset"></IntensityComposition>
+                    <QualityComposition :dataset="dataset"></QualityComposition>
+                    <RatingComposition :dataset="dataset"></RatingComposition>
+                </div>
+                <RatingTimeline :dataset="dataset"></RatingTimeline>
+                <RankList :dataset="dataset"></RankList>
+                <VisitList :dataset="dataset"></VisitList>
+            </div>
+            <router-link :to="{ name: 'Filter', query: $route.query }" class="btn-fab">FILTERS</router-link>
+            <transition name="animation--fade">
+                <router-view />
+            </transition>
         </div>
-        <router-link :to="{ name: 'Filter', query: $route.query }" class="btn-fab">FILTERS</router-link>
-        <transition name="animation--fade">
-            <router-view />
-        </transition>
     </div>
 </template>
 

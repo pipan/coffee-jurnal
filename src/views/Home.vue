@@ -1,14 +1,16 @@
 <template>
     <div class="view">
-        <header>
-            <h1>Journal</h1>
-        </header>
-        <div class="jurnal">
-            <JurnalDay v-for="agenda of timeline"
-                :key="agenda.day"
-                :agenda="agenda"></JurnalDay>
+        <div class="view-content">
+            <header>
+                <h1>Journal</h1>
+            </header>
+            <div class="jurnal">
+                <JurnalDay v-for="agenda of timeline"
+                    :key="agenda.day"
+                    :agenda="agenda"></JurnalDay>
+            </div>
+            <router-link :to="{ name: 'Create' }" class="btn-fab">NEW</router-link>
         </div>
-        <router-link :to="{ name: 'Create' }" class="btn-fab">NEW</router-link>
     </div>
 </template>
 

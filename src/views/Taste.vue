@@ -1,36 +1,38 @@
 <template>
     <div class="view">
-        <NotFound v-if="!item"></NotFound>
-        <div class="column flex-grow" v-if="item">
-            <header>
-                <h1>Tasting</h1>
-                <router-link :to="{ name: 'Edit', params: { id: item.id } }" class="action">DETAIL</router-link>
-            </header>
-            <form class="column flex-grow" @submit.prevent="submit()">
-                <div class="form flex-grow">
-                    <PropertyRatingInput label="Aroma"
-                        :value="aroma"
-                        @change="aromaValue = $event"></PropertyRatingInput>
-                    <PropertyRatingInput label="Acidity"
-                        :value="acidity"
-                        @change="acidityValue = $event"></PropertyRatingInput>
-                    <PropertyRatingInput label="Sweetness"
-                        :value="sweetness"
-                        @change="sweetnessValue = $event"></PropertyRatingInput>
-                    <PropertyRatingInput label="Body"
-                        :value="body"
-                        @change="bodyValue = $event"></PropertyRatingInput>
-                    <PropertyRatingInput label="Finish"
-                        :value="finish"
-                        @change="finishValue = $event"></PropertyRatingInput>
-                    <RatingInput :value="rating" @change="ratingValue = $event"></RatingInput>
-                </div>
-                <div class="text-secondary text-light py-m text-center">This rating is base on <a href="https://www.scribd.com/document/421556406/Prufrock-Coffee-Tasting-Guide" target="_blank">prufrock coffee tasting guide</a></div>
-                <div class="pt-m row row--center gap-m">
-                    <router-link :to="{ name: 'Home' }" class="btn btn--secondary">CANCEL</router-link>
-                    <button type="submit" class="btn btn--primary">SAVE</button>
-                </div>
-            </form>
+        <div class="view-content">
+            <NotFound v-if="!item"></NotFound>
+            <div class="column flex-grow" v-if="item">
+                <header>
+                    <h1>Tasting</h1>
+                    <router-link :to="{ name: 'Edit', params: { id: item.id } }" class="action">DETAIL</router-link>
+                </header>
+                <form class="column flex-grow" @submit.prevent="submit()">
+                    <div class="form flex-grow">
+                        <PropertyRatingInput label="Aroma"
+                            :value="aroma"
+                            @change="aromaValue = $event"></PropertyRatingInput>
+                        <PropertyRatingInput label="Acidity"
+                            :value="acidity"
+                            @change="acidityValue = $event"></PropertyRatingInput>
+                        <PropertyRatingInput label="Sweetness"
+                            :value="sweetness"
+                            @change="sweetnessValue = $event"></PropertyRatingInput>
+                        <PropertyRatingInput label="Body"
+                            :value="body"
+                            @change="bodyValue = $event"></PropertyRatingInput>
+                        <PropertyRatingInput label="Finish"
+                            :value="finish"
+                            @change="finishValue = $event"></PropertyRatingInput>
+                        <RatingInput :value="rating" @change="ratingValue = $event"></RatingInput>
+                    </div>
+                    <div class="text-secondary text-light py-m text-center">This rating is base on <a href="https://www.scribd.com/document/421556406/Prufrock-Coffee-Tasting-Guide" target="_blank">prufrock coffee tasting guide</a></div>
+                    <div class="pt-m row row--center gap-m">
+                        <button type="button" class="btn btn--secondary" @click="back()">CANCEL</button>
+                        <button type="submit" class="btn btn--primary">SAVE</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </template>
@@ -100,6 +102,9 @@ export default {
             this.$router.push({
                 name: 'Home'
             })
+        },
+        back: function () {
+            this.$router.go(-1)
         }
     }
 }

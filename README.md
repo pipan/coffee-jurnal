@@ -1,4 +1,4 @@
-# coffee-jurnal
+# coffee-journal
 
 ## Project setup
 ```

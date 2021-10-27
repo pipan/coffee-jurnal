@@ -101,6 +101,14 @@ export default new Vuex.Store({
       state.repository[item.id] = Object.assign({}, item)
       localStorage.setItem('repository', JSON.stringify(state.repository))
       return state.repository[item.id]
+    },
+    deleteIds: function(state, ids) {
+      let newRepo = Object.assign({}, state.repository)
+      for (const id of ids) {
+        delete newRepo[id]
+      }
+      state.repository = newRepo
+      localStorage.setItem('repository', JSON.stringify(state.repository))
     }
   },
   actions: {
@@ -119,6 +127,9 @@ export default new Vuex.Store({
     },
     updateCup: function (context, data) {
       context.commit("updateItem", data)
+    },
+    deleteByIds: function(context, data) {
+      context.commit("deleteIds", data)
     }
   },
   modules: {

@@ -7,9 +7,16 @@
             <div class="jurnal">
                 <JurnalDay v-for="agenda of timeline"
                     :key="agenda.day"
-                    :agenda="agenda"></JurnalDay>
+                    :agenda="agenda"
+                    :checked="checked"
+                    @select="select($event)"
+                    @checkChange="checkChange($event)"></JurnalDay>
             </div>
-            <router-link :to="{ name: 'Create' }" class="btn-fab">NEW</router-link>
+            <div class="fab-container">
+                <router-link :to="{ name: 'Create' }" class="btn-fab" v-if="isRouteMode">NEW</router-link>
+                <button type="button" class="btn-fab btn-fab--entity" v-if="isCheckMode" @click="uncheckAll()">&Cross;</button>
+                <button type="button" class="btn-fab btn-fab--danger" v-if="isCheckMode" @click="deleteSelected()">DELETE</button>
+            </div>
         </div>
     </div>
 </template>
@@ -22,7 +29,12 @@ export default {
     components: { JurnalDay },
     metaInfo: function () {
         return {
-            title: "Coffee Jurnal"
+            title: "Coffee Journal"
+        }
+    },
+    data: function () {
+        return {
+            checked: []
         }
     },
     computed: {
@@ -53,6 +65,54 @@ export default {
                 })
             }
             return result
+        },
+        mode: function () {
+            if (this.checked.length > 0) {
+                return 'check'
+            }
+            return 'route'
+        },
+        isCheckMode: function() {
+            return this.mode === 'check'
+        },
+        isRouteMode: function() {
+            return this.mode === 'route'
+        }
+    },
+    methods: {
+        checkChange: function (event) {
+            let newValue = [...this.checked]
+            if (event.value) {
+                newValue.push(event.id)
+            } else {
+                const index = newValue.indexOf(event.id)
+                if (index < 0) {
+                    return
+                }
+                newValue.splice(index, 1)
+            }
+            this.checked = newValue
+        },
+        uncheckAll: function () {
+            this.checked = []
+        },
+        select: function (id) {
+            if (this.isCheckMode) {
+                const value = this.checked.indexOf(id) === -1
+                this.checkChange({ id, value })
+                return
+            }
+            if (this.isRouteMode) {
+                this.$router.push({
+                    name: 'Taste',
+                    params: { id }
+                })
+                return
+            }
+        },
+        deleteSelected: function() {
+            this.$store.dispatch('deleteByIds', this.checked)
+            this.checked = []
         }
     }
 }

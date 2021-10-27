@@ -1,5 +1,4 @@
 .btn {
-    cursor: pointer;
     background-color: transparent;
     border-radius: var(--unit-s);
     padding: var(--unit-s) var(--unit-m);
@@ -18,6 +17,10 @@
     color: var(--color-primary);
 }
 
+.btn--primary:hover, .btn--secondary:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
 .btn--primary:active, .btn--secondary:active {
     background-color: rgba(255, 255, 255, 0.08);
 }
@@ -28,10 +31,6 @@
 }
 
 .btn-fab {
-    cursor: pointer;
-    position: fixed;
-    bottom: var(--navigation-height);
-    left: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,12 +43,19 @@
     border: none;
     transition: background-color ease 320ms;
     text-decoration: none;
-    transform: translateX(-50%) translateY(50%);
-    z-index: 2;
     font-weight: bold;
 }
 
 .btn-fab:active {
     background-color: var(--color-primary-lighter);
     transition-duration: 0ms;
+}
+
+.btn-fab.btn-fab--entity {
+    font-size: 1.6rem;
+    font-family: monospace;
+}
+
+.btn-fab.btn-fab--danger {
+    background-color: var(--color-danger);
 }

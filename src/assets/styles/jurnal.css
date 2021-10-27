@@ -20,9 +20,19 @@
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
     padding: var(--unit-m);
-    transition: border ease 140ms;
-    cursor: pointer;
+    transition: border ease-out 140ms, background 140ms ease-out;
     width: 100%;
+}
+
+.record__checkbox {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    transform: scale(1.4);
+    display: none;
+}
+.record__checkbox input {
+    border: none;
 }
 
 @media (min-width: 410px) {
@@ -37,13 +47,23 @@
     }
 }
 
+@media (pointer: fine) {
+    .record:hover .record__checkbox, .record--checked .record__checkbox {
+        display: initial;
+    }
+}
+
 .record:hover {
-    border-color: var(--color-primary-darker);
+    background-color: rgba(255, 255, 255, 0.01);
 }
 
 .record:active {
-    border-color: var(--color-primary);
+    background-color: rgba(255, 255, 255, 0.03);
     transition-duration: 0ms;
+}
+
+.record--checked {
+    border-color: var(--color-primary);
 }
 
 .record__label {
@@ -64,13 +84,8 @@
     transition: background-color ease 140ms;
 }
 
-.record:hover .record__label {
-    background-color: var(--color-primary-darker);
-}
-
-.record:active .record__label {
+.record--checked .record__label {
     background-color: var(--color-primary);
-    transition-duration: 0ms;
 }
 
 .record__title {

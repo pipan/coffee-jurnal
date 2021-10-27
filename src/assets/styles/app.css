@@ -24,6 +24,10 @@
     --font-s: 0.85rem;
 
     --navigation-height: 60px;
+
+    --animation-duration-l: 0.3s;
+    --animation-duration-m: 0.2s;
+    --animation-function: cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 body, html {
@@ -114,7 +118,7 @@ nav {
     border-top: solid 1px var(--color-border);
     position: fixed;
     left: 0;
-    bottom: 0;
+    top: calc(100vh - var(--navigation-height));
     height: var(--navigation-height);
     width: 100%;
     display: flex;

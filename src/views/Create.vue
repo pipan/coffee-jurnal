@@ -24,7 +24,7 @@ export default {
         submit: function (data) {
             this.$store.dispatch('createNewCup', data)
                 .then((item) => {
-                    this.$router.push({
+                    this.$router.replace({
                         name: 'Taste',
                         params: {
                             id: item.id

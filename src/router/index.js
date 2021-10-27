@@ -46,13 +46,13 @@ const routes = [
     path: '/edit/:id',
     name: 'Edit',
     component: Edit,
-    meta: { transitionDepth: 2 }
+    meta: { transitionDepth: 3 }
   },
   {
     path: '/taste/:id',
     name: 'Taste',
     component: Taste,
-    meta: { transitionDepth: 1 }
+    meta: { transitionDepth: 2 }
   },
 ]
 

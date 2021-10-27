@@ -99,7 +99,7 @@ export default {
                 },
                 rating: this.rating
             })
-            this.$router.push({
+            this.$router.replace({
                 name: 'Home'
             })
         },

@@ -42,7 +42,7 @@
     transition-duration: 0.3s;
     transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
     top: 10%;
-    opacity: 0.3;
+    opacity: 0;
     
 }
 .animation--slide-out-leave {

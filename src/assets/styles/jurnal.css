@@ -47,7 +47,7 @@
     }
 }
 
-@media (pointer: fine) {
+@media (any-pointer: fine) {
     .record:hover .record__checkbox, .record--checked .record__checkbox {
         display: initial;
     }

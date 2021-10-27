@@ -16,7 +16,7 @@
     transition-duration: 0.3s;
     transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
     opacity: 0;
-    top: -2%;
+    top: -3%;
 }
 .animation--slide-in-leave {
     opacity: 1;
@@ -61,7 +61,7 @@
 }
 .animation--slide-out-enter {
     opacity: 0;
-    top: -2%;
+    top: -3%;
 }
 
 .animation--slide-left-enter-active, .animation--slide-left-leave-active, .animation--slide-right-leave-active, .animation--slide-right-enter-active, .animation--slide-out-leave-active, .animation--slide-in-enter-active {

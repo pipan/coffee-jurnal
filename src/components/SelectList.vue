@@ -8,29 +8,26 @@
                     <span v-if="!stringValue">&nbsp;</span> 
                 </div>
             </div>
-            <div class="pos-r" v-if="options.length > 0">
-                <button type="button"
-                    class="input__button"
-                    @click.stop
-                    @click="toggleContext()">&Colon;</button>
-                <ContextMenu :options="options" ref="contextMenu" @select="select($event)" :keepOpen="true">
-                    <template v-slot:toggleButton>
-                        <button type="button"
-                            class="input__button"
-                            @click.stop
-                            @click="toggleContext()">&Colon;</button>
-                    </template>
-                    <div>
-                        <button type="button" class="context-menu__item row gap-m"
-                            v-for="option of contextOptions"
-                            :key="option.name"
-                            @click="select(option.name)">
-                            <div class="selector-mark" :class="{ 'selector-mark--active': option.active }"></div>
-                            <div>{{ option.name }}</div>
-                        </button>
-                    </div>
-                </ContextMenu>
-            </div>
+            <ContextMenu v-if="options.length > 0"
+                :options="options"
+                ref="contextMenu"
+                @select="select($event)"
+                :keepOpen="true">
+                <template v-slot:toggleButton>
+                    <button type="button"
+                        class="input__button"
+                        @click="toggleContext()">&Colon;</button>
+                </template>
+                <div>
+                    <button type="button" class="context-menu__item row gap-m"
+                        v-for="option of contextOptions"
+                        :key="option.name"
+                        @click="select(option.name)">
+                        <div class="selector-mark" :class="{ 'selector-mark--active': option.active }"></div>
+                        <div>{{ option.name }}</div>
+                    </button>
+                </div>
+            </ContextMenu>
         </div>
     </label>
 </template>

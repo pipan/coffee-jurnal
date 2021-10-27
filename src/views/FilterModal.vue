@@ -1,6 +1,6 @@
 <template>
-    <div class="modal-view" @click="close()">
-        <div class="modal" @click.stop>
+    <div class="modal-view" @click="close($event)">
+        <div class="modal" @click.prevent>
             <h2 class="pb-m">Filters</h2>
             <div class="column gap-s">
                 <SelectToggle :options="coffeeTypeOptions"
@@ -23,7 +23,7 @@
                     @change="coffeeRosterValue = $event"></SelectList>
             </div>
             <div class="row gap-m row--right pt-m">
-                <button type="button" class="btn btn--secondary" @click="close()">CANCEL</button>
+                <button type="button" class="btn btn--secondary" @click="close($event)">CANCEL</button>
                 <button type="button" class="btn btn--primary" @click="apply()">APPLY</button>
             </div>
         </div>
@@ -96,7 +96,10 @@ export default {
         }
     },
     methods: {
-        close: function() {
+        close: function(event) {
+            if (event.defaultPrevented) {
+                return
+            }
             this.$router.replace({
                 name: 'Stats',
                 query: this.$route.query

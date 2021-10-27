@@ -1,9 +1,12 @@
 <template>
-    <div class="context-menu context-menu--right" :class="{'context-menu--opened': visible}">
-        <div class="context-menu__header">
-            <slot name="toggleButton"></slot>
+    <div class="pos-r" @click="preventClosing()">
+        <slot name="toggleButton"></slot>
+        <div class="context-menu context-menu--right" :class="{'context-menu--opened': visible}">
+            <div class="context-menu__header">
+                <slot name="toggleButton"></slot>
+            </div>
+            <slot></slot>
         </div>
-        <slot></slot>
     </div>
 </template>
 
@@ -11,24 +14,21 @@
 export default {
     name: 'ContextMenu',
     props: {
-        options: [Array],
-        keepOpen: {
-            type: Boolean,
-            default: false
-        }
+        options: [Array]
     },
     data: function () {
         return {
-            visible: false
+            visible: false,
+            preventClosingValue: false
         }
     },
+    created() {
+        window.addEventListener("click", this.onWindowClick);
+    },
+    destroyed() {
+        window.removeEventListener("click", this.onWindowClick);
+    },
     methods: {
-        select: function (value) {
-            this.$emit('select', value)
-            if (!this.keepOpen) {
-                this.close()
-            }
-        },
         setVisibility: function(value) {
             this.visible = value
         },
@@ -40,6 +40,16 @@ export default {
         },
         toggle: function() {
             this.setVisibility(!this.visible)
+        },
+        preventClosing:function () {
+            this.preventClosingValue = true
+        },
+        onWindowClick: function () {
+            if (this.preventClosingValue) {
+                this.preventClosingValue = false
+                return
+            }
+            this.close()
         }
     }
 }

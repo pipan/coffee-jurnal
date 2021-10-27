@@ -5,18 +5,14 @@
                 <div class="input__label">{{ label }}</div>
                 <input :id="inputId" type="text" @input="change($event.target.value)" :value="value"  />
             </div>
-            <div class="pos-r" v-if="options.length > 0">
+            <ListContextMenu v-if="options.length > 0"
+                :options="options"
+                ref="contextMenu"
+                @select="change($event)">
                 <button type="button"
                     class="input__button"
-                    @click.stop
-                    @click="openContext()">&Colon;</button>
-                <ListContextMenu :options="options" ref="contextMenu" @select="change($event)">
-                    <button type="button"
-                        class="input__button"
-                        @click.stop
-                        @click="closeContext()">&Colon;</button>
-                </ListContextMenu>
-            </div>
+                    @click="toggleContext()">&Colon;</button>
+            </ListContextMenu>
         </div>
     </label>
 </template>
@@ -40,11 +36,8 @@ export default {
             }
             this.$emit('change', value)
         },
-        openContext: function () {
-            this.$refs.contextMenu.open()
-        },
-        closeContext: function () {
-            this.$refs.contextMenu.close()
+        toggleContext: function () {
+            this.$refs.contextMenu.toggle()
         }
     }
 }

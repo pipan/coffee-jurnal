@@ -1,29 +1,27 @@
 <template>
-    <div class="context-menu context-menu--right" :class="{'context-menu--opened': visible}">
-        <div class="context-menu__header">
+    <ContextMenu :options="options" ref="context">
+        <template v-slot:toggleButton>
             <slot></slot>
-        </div>
+        </template>
         <button class="context-menu__item"
             type="button"
             v-for="item of options"
             :key="item"
             @click="select(item)">{{ item }}</button>
-    </div>
+    </ContextMenu>
 </template>
 
 <script>
+import ContextMenu from './ContextMenu.vue'
+
 export default {
     name: 'ListContextMenu',
+    components: { ContextMenu },
     props: {
         options: [Array],
         keepOpen: {
             type: Boolean,
             default: false
-        }
-    },
-    data: function () {
-        return {
-            visible: false
         }
     },
     methods: {
@@ -33,17 +31,14 @@ export default {
                 this.close()
             }
         },
-        setVisibility: function(value) {
-            this.visible = value
-        },
         open: function() {
-            this.setVisibility(true)
+            this.$refs.context.open()
         },
         close: function() {
-            this.setVisibility(false)
+            this.$refs.context.close()
         },
         toggle: function() {
-            this.setVisibility(!this.visible)
+            this.$refs.context.toggle()
         }
     }
 }

@@ -95,11 +95,11 @@
 .fab-container {
     position: fixed;
     left: 50%;
-    top: calc(100vh - var(--navigation-height));
+    bottom: var(--navigation-height);
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(50%);
     z-index: 2;
     gap: var(--unit-m);
 }

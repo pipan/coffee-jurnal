@@ -118,7 +118,7 @@ nav {
     border-top: solid 1px var(--color-border);
     position: fixed;
     left: 0;
-    top: calc(100vh - var(--navigation-height));
+    bottom: 0;
     height: var(--navigation-height);
     width: 100%;
     display: flex;

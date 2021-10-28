@@ -1,6 +1,6 @@
 <template>
     <div>
-        <transition :name="transitionName">
+        <transition :name="transitionName" :duration="300">
             <router-view class="navigation-view" />
         </transition>
         <nav>

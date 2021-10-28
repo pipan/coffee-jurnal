@@ -1,22 +1,24 @@
 <template>
-    <div class="view">
-        <div class="view-content">
-            <header>
-                <h1>Journal</h1>
-            </header>
-            <div class="jurnal">
-                <JurnalDay v-for="agenda of timeline"
-                    :key="agenda.day"
-                    :agenda="agenda"
-                    :checked="checked"
-                    @select="select($event)"
-                    @checkChange="checkChange($event)"></JurnalDay>
+    <div>
+        <div class="view">
+            <div class="view-content">
+                <header>
+                    <h1>Journal</h1>
+                </header>
+                <div class="jurnal">
+                    <JurnalDay v-for="agenda of timeline"
+                        :key="agenda.day"
+                        :agenda="agenda"
+                        :checked="checked"
+                        @select="select($event)"
+                        @checkChange="checkChange($event)"></JurnalDay>
+                </div>
             </div>
-            <div class="fab-container">
-                <router-link :to="{ name: 'Create' }" class="btn-fab" v-if="isRouteMode">NEW</router-link>
-                <button type="button" class="btn-fab btn-fab--entity" v-if="isCheckMode" @click="uncheckAll()">&Cross;</button>
-                <button type="button" class="btn-fab btn-fab--danger" v-if="isCheckMode" @click="deleteSelected()">DELETE</button>
-            </div>
+        </div>
+        <div class="fab-container">
+            <router-link :to="{ name: 'Create' }" class="btn-fab" v-if="isRouteMode">NEW</router-link>
+            <button type="button" class="btn-fab btn-fab--entity" v-if="isCheckMode" @click="uncheckAll()">&Cross;</button>
+            <button type="button" class="btn-fab btn-fab--danger" v-if="isCheckMode" @click="deleteSelected()">DELETE</button>
         </div>
     </div>
 </template>

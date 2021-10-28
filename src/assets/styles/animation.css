@@ -12,17 +12,42 @@
     opacity: 1;
 }
 
-.animation--slide-in-leave-active {
-    position: relative;
-    transition-property: transform, opacity;
-    transition-duration: var(--animation-duration-l);;
-    transition-timing-function: var(--animation-function);
-    opacity: 0;
-    transform: translateY(-3%);
+.animation--slide-out-leave-active, .animation--slide-in-enter-active {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
 }
-.animation--slide-in-leave {
-    opacity: 1;
-    top: 0%;
+
+.animation--slide-in-leave-active, .animation--slide-out-enter-active {
+    transition-property: opacity;
+    transition-duration: var(--animation-duration-l);
+    transition-timing-function: var(--animation-function);
+}
+.animation--slide-in-leave-active { opacity: 0; }
+.animation--slide-in-leave { opacity: 1; }
+.animation--slide-out-enter-active { opacity: 1; }
+.animation--slide-out-enter { opacity: 0; }
+
+
+.animation--slide-in-leave-active .view, .animation--slide-out-enter-active .view {
+    transition-property: transform;
+    transition-duration: var(--animation-duration-l);
+    transition-timing-function: var(--animation-function);
+}
+.animation--slide-in-leave-active .view {
+    /* position: relative; */
+    transform: translateY(-40px);
+}
+.animation--slide-in-leave .view {
+    transform: translateY(0px);
+}
+.animation--slide-out-enter-active .view {
+    /* position: relative; */
+    transform: translateY(0px);
+}
+.animation--slide-out-enter .view {    
+    transform: translateY(-40px);
 }
 
 .animation--slide-in-enter-active {
@@ -30,88 +55,56 @@
     transition-property: transform, opacity;
     transition-duration: var(--animation-duration-l);;
     transition-timing-function: var(--animation-function);
-    transform: translateY(0%);
+    transform: translateY(0px);
     opacity: 1;
 }
 .animation--slide-in-enter {
-    position: fixed;
     opacity: 0.3;
-    transform: translateY(10%);
+    transform: translateY(120px);
 }
 
 .animation--slide-out-leave-active {
     transition-property: transform, opacity;
     transition-duration: var(--animation-duration-l);;
     transition-timing-function: var(--animation-function);
-    transform: translateY(10%);
+    transform: translateY(120px);
     opacity: 0;
     
 }
 .animation--slide-out-leave {
-    position: fixed;
     opacity: 1;
-    transform: translateY(0%);
+    transform: translateY(0px);
 }
 
-.animation--slide-out-enter-active {
-    position: relative;
-    transition-property: transform, opacity;
-    transition-duration: var(--animation-duration-l);;
+.animation--slide-left-enter-active .view, .animation--slide-left-leave-active .view, .animation--slide-right-leave-active .view, .animation--slide-right-enter-active .view {
+    transition-property: transform;
+    transition-duration: var(--animation-duration-l);
     transition-timing-function: var(--animation-function);
-    opacity: 1;
-    transform: translateY(0%);
-}
-.animation--slide-out-enter {
-    opacity: 0;
-    transform: translateY(-3%);
-}
-
-.animation--slide-left-enter-active, .animation--slide-left-leave-active, .animation--slide-right-leave-active, .animation--slide-right-enter-active, .animation--slide-out-leave-active, .animation--slide-in-enter-active {
     position: fixed;
+    top: 0;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     box-sizing: border-box;
 }
-.animation--slide-left-leave-active .btn-fab, .animation--slide-right-leave-active .btn-fab, .animation--slide-left-enter-active .btn-fab, .animation--slide-right-enter-active .btn-fab {
-    display: none;
+
+.animation--slide-left-leave-active .fab-container, .animation--slide-right-leave-active .fab-container, .animation--slide-left-enter-active .fab-container, .animation--slide-right-enter-active .fab-container {
+    transition-property: left;
+    transition-duration: var(--animation-duration-l);
+    transition-timing-function: var(--animation-function);
 }
 
-.animation--slide-left-leave-active {
-    transition-property: transform;
-    transition-duration: var(--animation-duration-l);;
-    transition-timing-function: var(--animation-function);
-    transform: translateX(-100%);
-}
-.animation--slide-left-leave {
-    transform: translateX(0%);
-}
+.animation--slide-left-leave-active .fab-container { left: -50%; }
+.animation--slide-right-leave-active .fab-container { left: 150%; }
+.animation--slide-left-enter-active .fab-container { left: 50%; }
+.animation--slide-left-enter .fab-container { left: 150%; }
+.animation--slide-right-enter-active .fab-container { left: 50%; }
+.animation--slide-right-enter .fab-container { left: -50%; }
 
-.animation--slide-left-enter-active {
-    transition-property: transform;
-    transition-duration: var(--animation-duration-l);;
-    transition-timing-function: var(--animation-function);
-    transform: translateX(0%);
-}
-.animation--slide-left-enter {
-    transform: translateX(100%);
-}
-
-.animation--slide-right-leave-active {
-    transition-property: transform;
-    transition-duration: var(--animation-duration-l);;
-    transition-timing-function: var(--animation-function);
-    transform: translateX(100%);
-}
-.animation--slide-right-leave {
-    transform: translateX(0%);
-}
-
-.animation--slide-right-enter-active {
-    transition-property: transform;
-    transition-duration: var(--animation-duration-l);;
-    transition-timing-function: var(--animation-function);
-    transform: translateX(0%);
-}
-.animation--slide-right-enter {
-    transform: translateX(-100%);
-}
+.animation--slide-left-leave-active .view { transform: translateX(-100%); }
+.animation--slide-left-leave .view { transform: translateX(0%); }
+.animation--slide-left-enter-active .view { transform: translateX(0%); }
+.animation--slide-left-enter .view { transform: translateX(100%); }
+.animation--slide-right-leave-active .view { transform: translateX(100%); }
+.animation--slide-right-leave .view { transform: translateX(0%); }
+.animation--slide-right-enter-active .view { transform: translateX(0%); }
+.animation--slide-right-enter .view { transform: translateX(-100%); }

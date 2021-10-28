@@ -1,10 +1,12 @@
 <template>
-    <div class="view">
-        <div class="view-content">
-            <header>
-                <h1>New Cup</h1>
-            </header>
-            <CoffeeDetailForm @submit="submit($event)"></CoffeeDetailForm>
+    <div class="column flex-grow">
+        <div class="view">
+            <div class="view-content">
+                <header>
+                    <h1>New Cup</h1>
+                </header>
+                <CoffeeDetailForm @submit="submit($event)"></CoffeeDetailForm>
+            </div>
         </div>
     </div>
 </template>

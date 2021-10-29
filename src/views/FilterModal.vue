@@ -2,21 +2,24 @@
     <div class="modal-view" @click="outsideClick()">
         <div class="modal" @click="preventClosing = true">
             <h2 class="pb-m">Filters</h2>
-            <div class="column gap-s">
+            <div class="column gap-m">
                 <SelectToggle :options="coffeeTypeOptions"
                     :value="coffeeType"
                     @change="coffeeTypeValue = $event"></SelectToggle>
                 <SelectList inputId="coffee-place"
+                    v-if="coffeePlaceOptions.length > 0"
                     label="Coffee Place"
                     :options="coffeePlaceOptions"
                     :value="coffeePlace"
                     @change="coffeePlaceValue = $event"></SelectList>
                 <SelectList inputId="coffee-origin"
+                    v-if="coffeeOriginOptions.length > 0"
                     label="Coffee Origin"
                     :options="coffeeOriginOptions"
                     :value="coffeeOrigin"
                     @change="coffeeOriginValue = $event"></SelectList>
                 <SelectList inputId="coffee-roster"
+                    v-if="coffeeRosterOptions.length > 0"
                     label="Coffee Roster"
                     :options="coffeeRosterOptions"
                     :value="coffeeRoster"

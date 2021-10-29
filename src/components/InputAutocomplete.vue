@@ -1,5 +1,5 @@
 <template>
-    <div class="autocomplete" :class="{'autocomplete--visible': visible}">
+    <div class="autocomplete" :class="{'autocomplete--visible': visible}" v-if="options.length > 0">
         <button type="button"
             v-for="option of options"
             :key="option"

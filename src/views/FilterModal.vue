@@ -7,17 +7,17 @@
                     :value="coffeeType"
                     @change="coffeeTypeValue = $event"></SelectToggle>
                 <SelectList inputId="coffee-place"
-                    label="Coffee place"
+                    label="Coffee Place"
                     :options="coffeePlaceOptions"
                     :value="coffeePlace"
                     @change="coffeePlaceValue = $event"></SelectList>
-                <SelectList inputId="coffee-place"
-                    label="Coffee place"
+                <SelectList inputId="coffee-origin"
+                    label="Coffee Origin"
                     :options="coffeeOriginOptions"
                     :value="coffeeOrigin"
                     @change="coffeeOriginValue = $event"></SelectList>
-                <SelectList inputId="coffee-place"
-                    label="Coffee place"
+                <SelectList inputId="coffee-roster"
+                    label="Coffee Roster"
                     :options="coffeeRosterOptions"
                     :value="coffeeRoster"
                     @change="coffeeRosterValue = $event"></SelectList>

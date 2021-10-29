@@ -13,6 +13,12 @@ Vue.filter('round', function (value, precision) {
   const power = Math.pow(10, precision)
   return Math.round(value * power) / power
 })
+Vue.filter('ellipsis', function (value, limit) {
+  if (value.length > limit) {
+    return value.substr(0, limit) + "..."
+  }
+  return value
+})
 
 store.commit('refresh')
 

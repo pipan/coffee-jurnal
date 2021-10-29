@@ -5,6 +5,7 @@
 }
 
 .input {
+    position: relative;
     display: block;
     box-sizing: border-box;
     padding: var(--unit-s);
@@ -110,4 +111,33 @@ select {
 
 .selector-mark.selector-mark--active {
     border-color: var(--color-primary);
+}
+
+.autocomplete {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    box-sizing: border-box;
+    top: 100%;
+    right: 0;
+    max-width: 75%;
+    flex-direction: row;
+    gap: var(--unit-s);
+    overflow-x: auto;
+    background-color: var(--color-primary-darker);
+    padding: var(--unit-s);
+    border-radius: var(--unit-s);
+}
+
+.autocomplete.autocomplete--visible {
+    display: flex;
+}
+
+.autocomplete__item {
+    box-sizing: border-box;
+    color: var(--color-fg);
+    padding: var(--unit-s) var(--unit-m);
+    background-color: transparent;
+    white-space: nowrap;
+    border: none;
 }

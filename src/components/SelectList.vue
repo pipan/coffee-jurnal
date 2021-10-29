@@ -1,55 +1,25 @@
 <template>
-    <label class="input">
-        <div class="row row--middle gap-m">
-            <div class="flex-grow column">
-                <div class="input__label">{{ label }}</div>
-                <div class="flex-grow pt-s">
-                    <span v-if="stringValue">{{ stringValue }}</span>
-                    <span v-if="!stringValue">&nbsp;</span> 
-                </div>
-            </div>
-            <ContextMenu v-if="options.length > 0"
-                :options="options"
-                ref="contextMenu"
-                @select="select($event)"
-                :keepOpen="true">
-                <template v-slot:toggleButton>
-                    <button type="button"
-                        class="input__button"
-                        @click="toggleContext()">&Colon;</button>
-                </template>
-                <div>
-                    <button type="button" class="context-menu__item row gap-m"
-                        v-for="option of contextOptions"
-                        :key="option.name"
-                        @click="select(option.name)">
-                        <div class="selector-mark" :class="{ 'selector-mark--active': option.active }"></div>
-                        <div>{{ option.name }}</div>
-                    </button>
-                </div>
-            </ContextMenu>
+    <div>
+        <div class="input__label">{{ label }}</div>
+        <div class="row gap-s py-s scroll-x">
+            <button type="button" class="tag" :class="{'tag--active': option.active}"
+                v-for="(option, index) of contextOptions"
+                :key="index"
+                @click="select(option.name)">{{ option.name }}</button>
         </div>
-    </label>
+    </div>
 </template>
 
 <script>
-import ContextMenu from "./ContextMenu.vue";
-
 export default {
     name: 'SelectList',
-    components: { ContextMenu },
+    components: {  },
     props: {
         options: [Array],
         value: [Array],
         label: [String]
     },
     computed: {
-        stringValue: function () {
-            if (this.value.length === 0) {
-                return ''
-            }
-            return this.value.join(', ')
-        },
         contextOptions: function () {
             const result = []
             for (const option of this.options) {

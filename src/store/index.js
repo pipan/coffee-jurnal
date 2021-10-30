@@ -5,6 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    app: {
+      updating: false
+    },
     repository: {},
     lastId: 0,
     coffeeTypes: [
@@ -109,6 +112,9 @@ export default new Vuex.Store({
       }
       state.repository = newRepo
       localStorage.setItem('repository', JSON.stringify(state.repository))
+    },
+    setAppSetting: function(state, value) {
+      state.app = Object.assign({}, state.app, value)
     }
   },
   actions: {
@@ -130,6 +136,11 @@ export default new Vuex.Store({
     },
     deleteByIds: function(context, data) {
       context.commit("deleteIds", data)
+    },
+    updateStart: function(context) {
+      context.commit('setAppSetting', {
+        updating: true
+      })
     }
   },
   modules: {

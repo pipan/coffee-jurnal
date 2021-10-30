@@ -13,7 +13,17 @@
                 ref="touchPane">
                 <div class="input__label">{{ label }}</div>
                 <div class="pt-s">
-                    <div class="bar bar--x" :class="barClasses" :style="barStyle"></div>
+                    <div class="pos-r">
+                        <div class="scale">
+                            <div class="scale__tick"></div>
+                            <div class="scale__tick"></div>
+                            <div class="scale__tick"></div>
+                            <div class="scale__tick"></div>
+                            <div class="scale__tick"></div>
+                        </div>
+                        <div class="bar bar--x pos-r" :class="barClasses" :style="barStyle"></div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="pos-r row">

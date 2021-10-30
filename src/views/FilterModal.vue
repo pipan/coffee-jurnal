@@ -9,19 +9,19 @@
                 <SelectList inputId="coffee-place"
                     v-if="coffeePlaceOptions.length > 0"
                     label="Coffee Place"
-                    :options="coffeePlaceOptions"
+                    :options="coffeePlaceOptions | orderAlphabetical('asc')"
                     :value="coffeePlace"
                     @change="coffeePlaceValue = $event"></SelectList>
                 <SelectList inputId="coffee-origin"
                     v-if="coffeeOriginOptions.length > 0"
                     label="Coffee Origin"
-                    :options="coffeeOriginOptions"
+                    :options="coffeeOriginOptions | orderAlphabetical('asc')"
                     :value="coffeeOrigin"
                     @change="coffeeOriginValue = $event"></SelectList>
                 <SelectList inputId="coffee-roster"
                     v-if="coffeeRosterOptions.length > 0"
                     label="Coffee Roster"
-                    :options="coffeeRosterOptions"
+                    :options="coffeeRosterOptions | orderAlphabetical('asc')"
                     :value="coffeeRoster"
                     @change="coffeeRosterValue = $event"></SelectList>
             </div>

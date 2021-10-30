@@ -23,3 +23,22 @@
 .bar--quality-4 { background-color: var(--color-like); }
 .bar--quality-5 { background-color: var(--color-love); }
 .bar--active { background-color: var(--color-primary); }
+
+.scale {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-border);
+}
+
+.scale__tick {
+    width: 1px;
+    transform: translateY(-50%);
+    height: var(--unit-m);
+    background-color: var(--color-border);
+}

@@ -10,7 +10,8 @@
                     @focus="openAutocomplete()"
                     @blur="closeAutocomplete()"/>
             </div>
-            <InputAutocomplete :options="options" @select="change($event)" ref="autocomplete"></InputAutocomplete>
+            <button type="button" class="input__button" v-if="this.value" @click="change('')">&Cross;</button>
+            <InputAutocomplete :options="optionsFiltered | orderAlphabetical('asc')" @select="change($event)" ref="autocomplete"></InputAutocomplete>
         </div>
     </label>
 </template>
@@ -23,9 +24,26 @@ export default {
     components: { InputAutocomplete },
     props: {
         options: [Array],
-        value: [String],
+        value: {
+            type: String,
+            default: ''
+        },
         inputId: [String],
         label: [String]
+    },
+    computed: {
+        optionsFiltered: function () {
+            if (this.value === '') {
+                return this.options
+            }
+            const result = []
+            for (const item of this.options) {
+                if (item.toLowerCase().indexOf(this.value.toLowerCase()) > -1) {
+                    result.push(item)
+                }
+            }
+            return result
+        }
     },
     methods: {
         change: function (value) {

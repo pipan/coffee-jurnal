@@ -20,6 +20,9 @@
     --color-like: #64975a;
     --color-love: #35D115;
 
+    --color-hover: rgba(255, 255, 255, 0.03);
+    --color-active: rgba(255, 255, 255, 0.08);
+
     --font-l: 1.35rem;
     --font-s: 0.85rem;
 
@@ -100,7 +103,7 @@ header .action {
 
 header .action:active {
     transition-duration: 0ms;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: var(--color-active);
 }
 
 ::selection {
@@ -137,6 +140,9 @@ nav {
     padding: 12px var(--unit-l);
     border-radius: 20px;
 }
+.navigation-item:hover {
+    background-color: var(--color-hover);
+}
 .navigation-item.router-link-exact-active {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: var(--color-active);
 }

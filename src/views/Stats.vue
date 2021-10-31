@@ -18,8 +18,8 @@
                         <RatingComposition :dataset="dataset"></RatingComposition>
                     </div>
                     <RatingTimeline :dataset="dataset"></RatingTimeline>
-                    <RankList :dataset="dataset"></RankList>
-                    <VisitList :dataset="dataset"></VisitList>
+                    <RankList :dataset="dataset" @select="addFilter(mapToFilterType($event.type), $event.name)"></RankList>
+                    <VisitList :dataset="dataset" @select="addFilter(mapToFilterType($event.type), $event.name)"></VisitList>
                 </div>
             </div>
         </div>
@@ -110,6 +110,21 @@ export default {
                 query: query
             })
         },
+        addFilter: function (filterType, value) {
+            const index = this.filters[filterType].indexOf(value)
+            if (index > -1) {
+                return
+            }
+            const cloneFilter = [...this.filters[filterType]]
+            cloneFilter.push(value)
+            let filterQuery = {}
+            filterQuery[filterType] = cloneFilter
+            const query = Object.assign({}, this.$route.query, filterQuery)
+            this.$router.replace({
+                name: 'Stats',
+                query: query
+            })
+        },
         passesFilters: function (item) {
             if (this.filters.filterType.length > 0 && this.filters.filterType.indexOf(item.coffeeType) === -1) {
                 return false
@@ -124,6 +139,15 @@ export default {
                 return false
             }
             return true
+        },
+        mapToFilterType: function (type) {
+            const map = {
+                coffeeType: 'filterType',
+                coffeePlace: 'filterPlace',
+                coffeeOrigin: 'filterOrigin',
+                coffeeRoster: 'filterRoster'
+            }
+            return map[type]
         }
     }
 }

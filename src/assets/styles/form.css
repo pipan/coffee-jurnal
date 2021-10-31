@@ -46,7 +46,7 @@
 }
 
 .input__button:active, .rating:active {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: var(--color-active);
     transition-duration: 0ms;
 }
 

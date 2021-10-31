@@ -4,7 +4,15 @@
     align-items: center;
     color: var(--color-border);
     padding: var(--unit-s) var(--unit-m);
+    cursor: default;
 }
+.rank-item:hover {
+    background-color: var(--color-hover);
+}
+.rank-item:active {
+    background-color: var(--color-active);
+}
+
 .rank-item .bar {
     background-color: var(--color-border);
 }

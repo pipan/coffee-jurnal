@@ -6,7 +6,8 @@
         </div>
         <div class="ranks">
             <div class="rank-item" v-for="(item, index) of items"
-                :key="index">
+                :key="index"
+                @click="select(item.name)">
                 <div class="rank-item__rank">#{{ index + 1}}</div>
                 <div class="rank-item__name">{{ item.name }}</div>
                 <div class="rank-item__value">{{ item.value | round(1) }}</div>
@@ -83,6 +84,12 @@ export default {
             }
             this.$router.push({
                 query: Object.assign({}, this.$route.query, { ratedOrder: value })
+            })
+        },
+        select: function (value) {
+            this.$emit('select', {
+                type: this.orderBy,
+                name: value
             })
         }
     }

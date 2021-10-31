@@ -18,11 +18,11 @@
 }
 
 .btn--primary:hover, .btn--secondary:hover {
-    background-color: rgba(255, 255, 255, 0.03);
+    background-color: var(--color-hover);
 }
 
 .btn--primary:active, .btn--secondary:active {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: var(--color-active);
 }
 
 .btn--secondary {

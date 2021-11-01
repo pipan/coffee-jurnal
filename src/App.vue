@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="column flex-grow">
         <transition :name="transitionName">
             <router-view />
         </transition>

@@ -6,6 +6,7 @@
                 :key="item.id"
                 :item="item"
                 :checked="checkedMap[item.id]"
+                :withCheckbox="withCheckbox"
                 @select="select($event)"
                 @checkChange="checkChange(item.id, $event)"></JurnalRecord>
         </div>
@@ -23,6 +24,10 @@ export default {
         checked: {
             type: Array,
             default: () => []
+        },
+        withCheckbox: {
+            type: Boolean,
+            default: true
         }
     },
     data: function () {

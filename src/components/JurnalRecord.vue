@@ -1,7 +1,7 @@
 <template>
     <div @click="select(item.id)" class="record" :class="{'record--checked': checked}" @contextmenu.prevent="setChecked(true)">
         <div class="record__label">{{ label }}</div>
-        <div class="record__checkbox" @click.stop><input type="checkbox" :checked="checked" @change="setChecked($event.target.checked)" /></div>
+        <div class="record__checkbox" @click.stop><input type="checkbox" :checked="checked" @change="setChecked($event.target.checked)" v-if="withCheckbox" /></div>
         <div class="record__title">{{ item.coffeePlace }}</div>
         <div class="record__subtitle">{{ subtitle }}</div>
         <div class="record__profile">
@@ -28,6 +28,10 @@ export default {
         checked: {
             type: Boolean,
             default: false
+        },
+        withCheckbox: {
+            type: Boolean,
+            default: true
         }
     },
     computed: {

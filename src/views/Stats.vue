@@ -20,6 +20,9 @@
                     <RatingTimeline :dataset="dataset"></RatingTimeline>
                     <RankList :dataset="dataset" @select="addFilter(mapToFilterType($event.type), $event.name)"></RankList>
                     <VisitList :dataset="dataset" @select="addFilter(mapToFilterType($event.type), $event.name)"></VisitList>
+                    <Journal :items="dataset"
+                        :withCheckbox="false"
+                        @select="selectRecord($event)"></Journal>
                 </div>
             </div>
         </div>
@@ -39,10 +42,11 @@ import RatingComposition from '../components/RatingComposition.vue'
 import IntensityComposition from '../components/IntensityComposition.vue'
 import QualityComposition from '../components/QualityComposition.vue'
 import RatingTimeline from '../components/RatingTimeline.vue'
+import Journal from '../components/Journal.vue'
 
 export default {
     name: 'Stats',
-    components: { QualityComposition, IntensityComposition, RatingComposition, RatingTimeline, RankList, VisitList },
+    components: { QualityComposition, IntensityComposition, RatingComposition, RatingTimeline, RankList, VisitList, Journal },
     metaInfo: function () {
         return {
             title: "Stats | CJ"
@@ -148,7 +152,13 @@ export default {
                 coffeeRoster: 'filterRoster'
             }
             return map[type]
-        }
+        },
+        selectRecord: function (id) {
+            this.$router.push({
+                name: 'Taste',
+                params: { id }
+            })
+        },
     }
 }
 </script>

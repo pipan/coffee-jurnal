@@ -5,14 +5,10 @@
                 <header>
                     <h1>Journal</h1>
                 </header>
-                <div class="jurnal">
-                    <JurnalDay v-for="agenda of timeline"
-                        :key="agenda.day"
-                        :agenda="agenda"
-                        :checked="checked"
-                        @select="select($event)"
-                        @checkChange="checkChange($event)"></JurnalDay>
-                </div>
+                <Journal :items="items"
+                    :checked="checked"
+                    @select="select($event)"
+                    @checkChange="checkChange($event)"></Journal>
             </div>
         </div>
         <div class="fab-container">
@@ -24,11 +20,11 @@
 </template>
 
 <script>
-import JurnalDay from '../components/JurnalDay.vue'
+import Journal from '../components/Journal.vue'
 
 export default {
     name: 'Home',
-    components: { JurnalDay },
+    components: { Journal },
     metaInfo: function () {
         return {
             title: "Coffee Journal"
@@ -42,31 +38,6 @@ export default {
     computed: {
         items: function () {
             return this.$store.getters.chronologicalItems
-        },
-        timeline: function () {
-            const result = []
-            let previousDayIndex = ''
-            let dayItems = []
-            for (const item of this.items) {
-                const day = [item.created_at.getFullYear(), item.created_at.getMonth() + 1, item.created_at.getDate()]
-                let dayIndex = day.join('-')
-                if (dayIndex != previousDayIndex && dayItems.length > 0) {
-                    result.push({
-                        day: previousDayIndex,
-                        items: dayItems
-                    })
-                    dayItems = []
-                }
-                dayItems.push(item)
-                previousDayIndex = dayIndex
-            }
-            if (dayItems.length > 0) {
-                result.push({
-                    day: previousDayIndex,
-                    items: dayItems
-                })
-            }
-            return result
         },
         mode: function () {
             if (this.checked.length > 0) {

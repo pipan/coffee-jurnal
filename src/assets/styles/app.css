@@ -127,7 +127,7 @@ nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: var(--color-bg);
+    background-color: #0a050a;
 }
 
 .navigation-view {

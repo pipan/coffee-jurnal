@@ -37,13 +37,15 @@ export default {
             }
             registration.waiting.postMessage({ type: 'SKIP_WAITING' })
         }, { once: true })
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-            if (this.refreshing) {
-                return
-            }
-            this.refreshing = true
-            window.location.reload()
-        })
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (this.refreshing) {
+                    return
+                }
+                this.refreshing = true
+                window.location.reload()
+            })
+        }
     },
     computed: {
         isUpdating: function () {

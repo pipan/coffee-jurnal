@@ -119,12 +119,12 @@ export default new Vuex.Store({
   },
   actions: {
     createNewCup: function (context, data) {
-      data = Object.assign(data, {
+      data = Object.assign({
         created_at: new Date(),
         propertyRatings: {},
-        rating: -1,
-        id: context.state.lastId + 1
-      })
+        rating: -1
+      }, data)
+      data.id = context.state.lastId + 1
       context.commit("insertItem", data)
       return Promise.resolve(data)
     },

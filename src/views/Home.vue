@@ -5,10 +5,11 @@
                 <header>
                     <h1>Journal</h1>
                 </header>
-                <Journal :items="items"
+                <Journal :items="itemsLimited"
                     :checked="checked"
                     @select="select($event)"
                     @checkChange="checkChange($event)"></Journal>
+                <div class="py-s text-secondary" v-if="items.length > itemsLimited.length">Showing last {{ itemsLimited.length }} items out of {{ items.length }}</div>
             </div>
         </div>
         <div class="fab-container">
@@ -38,6 +39,9 @@ export default {
     computed: {
         items: function () {
             return this.$store.getters.chronologicalItems
+        },
+        itemsLimited: function () {
+            return this.items.slice(0, 30)
         },
         mode: function () {
             if (this.checked.length > 0) {

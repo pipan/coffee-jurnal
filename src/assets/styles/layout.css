@@ -91,6 +91,7 @@
 }
 
 .scroll-x { overflow-x: auto; }
+.hidden-y { overflow-y: hidden; }
 
 .fab-container {
     position: fixed;

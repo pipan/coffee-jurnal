@@ -7,7 +7,7 @@
             <div v-html="'&#x2606;'"></div>
             <div v-html="'&#x2606;'"></div>
         </div>
-        <div class="rating-timeline scroll-x">
+        <div class="rating-timeline scroll-x hidden-y">
             <div v-for="(item, index) of items"
                 :key="index"
                 class="rating-timeline__item"

@@ -20,9 +20,11 @@
                     <RatingTimeline :dataset="dataset"></RatingTimeline>
                     <RankList :dataset="dataset" @select="addFilter(mapToFilterType($event.type), $event.name)"></RankList>
                     <VisitList :dataset="dataset" @select="addFilter(mapToFilterType($event.type), $event.name)"></VisitList>
-                    <Journal :items="dataset"
+                    
+                    <Journal :items="journalItems"
                         :withCheckbox="false"
                         @select="selectRecord($event)"></Journal>
+                    <div class="py-s text-secondary" v-if="dataset.length > journalItems.length">Showing last {{ journalItems.length }} items out of {{ dataset.length }}</div>
                 </div>
             </div>
         </div>
@@ -67,6 +69,9 @@ export default {
                 }
             }
             return result
+        },
+        journalItems: function () {
+            return this.dataset.slice(0, 30)
         },
         filters: function () {
             return {

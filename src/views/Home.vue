@@ -5,11 +5,16 @@
                 <header>
                     <h1>Journal</h1>
                 </header>
-                <Journal :items="itemsLimited"
+                <div class="row row--center py-m" v-if="hasPreviousPage">
+                    <button type="button" class="btn btn--secondary" @click="previousPage()">NEWER</button>
+                </div>
+                <Journal :items="itemsPaginated"
                     :checked="checked"
                     @select="select($event)"
                     @checkChange="checkChange($event)"></Journal>
-                <div class="py-s text-secondary" v-if="items.length > itemsLimited.length">Showing last {{ itemsLimited.length }} items out of {{ items.length }}</div>
+                    <div class="row row--center py-m" v-if="hasNextPage">
+                        <button type="button" class="btn btn--secondary" @click="nextPage()">OLDER</button>
+                    </div>
             </div>
         </div>
         <div class="fab-container">
@@ -33,15 +38,18 @@ export default {
     },
     data: function () {
         return {
-            checked: []
+            checked: [],
+            perPageLimit: 30
         }
     },
     computed: {
         items: function () {
             return this.$store.getters.chronologicalItems
         },
-        itemsLimited: function () {
-            return this.items.slice(0, 30)
+        itemsPaginated: function () {
+            const start = this.perPageLimit * (this.currentPage - 1)
+            const end = start + this.perPageLimit
+            return this.items.slice(start, end)
         },
         mode: function () {
             if (this.checked.length > 0) {
@@ -54,6 +62,15 @@ export default {
         },
         isRouteMode: function() {
             return this.mode === 'route'
+        },
+        currentPage: function () {
+            return this.$route.query.page || 1
+        },
+        hasNextPage: function () {
+            return this.items.length > this.perPageLimit * this.currentPage
+        },
+        hasPreviousPage: function () {
+            return this.currentPage > 1
         }
     },
     methods: {
@@ -90,6 +107,20 @@ export default {
         deleteSelected: function() {
             this.$store.dispatch('deleteByIds', this.checked)
             this.checked = []
+        },
+        goToPage: function (page) {
+            this.$router.push({
+                name: 'Home',
+                query: {
+                    page: page
+                }
+            })
+        },
+        nextPage: function () {
+            this.goToPage(this.currentPage + 1)
+        },
+        previousPage: function () {
+            this.goToPage(this.currentPage - 1)
         }
     }
 }

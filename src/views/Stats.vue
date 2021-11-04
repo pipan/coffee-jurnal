@@ -24,7 +24,7 @@
                     <Journal :items="journalItems"
                         :withCheckbox="false"
                         @select="selectRecord($event)"></Journal>
-                    <div class="py-s text-secondary" v-if="dataset.length > journalItems.length">Showing last {{ journalItems.length }} items out of {{ dataset.length }}</div>
+                    <div class="py-s text-secondary text-center" v-if="dataset.length > journalItems.length">Showing last {{ journalItems.length }} items out of {{ dataset.length }}</div>
                 </div>
             </div>
         </div>

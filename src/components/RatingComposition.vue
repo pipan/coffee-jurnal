@@ -9,7 +9,7 @@
         <div class="row row--evenly rating-composition__graph">
             <RatingCompositionItem v-for="(item, index) of items"
                 :key="index"
-                :size="item.ratio * 100 + '%'"
+                :size="item.ratioNorm * 100 + '%'"
                 :active="mostFrequentValue > 0 && item.absolute === mostFrequentValue"></RatingCompositionItem>
         </div>
     </div>

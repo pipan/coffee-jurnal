@@ -13,11 +13,11 @@ export default new Vuex.Store({
     coffeeTypes: [
       {
         id: 'filter',
-        name: 'Filter'
+        name: 'filter'
       },
       {
         id: 'espresso',
-        name: 'Espresso'
+        name: 'espresso'
       }
     ]
   },

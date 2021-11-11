@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    color: var(--color-border);
+    color: var(--color-fg-secondary);
     padding: var(--unit-s) var(--unit-m);
     cursor: default;
+    font-weight: lighter;
 }
 .rank-item:hover {
     background-color: var(--color-hover);
@@ -19,6 +20,7 @@
 
 .rank-item:first-of-type {
     color: var(--color-primary);
+    font-weight: normal;
 }
 .rank-item:first-of-type .bar {
     background-color: var(--color-primary);

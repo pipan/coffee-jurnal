@@ -66,7 +66,7 @@ export default {
             return parts.join(', ')
         },
         label: function() {
-            return this.item.coffeeType == 'espresso' ? 'E' : 'F'
+            return this.item.coffeeType == 'espresso' ? 'e' : 'f'
         }
     },
     methods: {

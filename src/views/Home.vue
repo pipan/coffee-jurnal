@@ -92,15 +92,15 @@ export default {
         },
         listIconPath: function () {
             if (this.isDisplayModeList) {
-                return 'list-active_icon.svg'
+                return '/img/assets/list-active_icon.svg'
             }
-            return 'list_icon.svg'
+            return '/img/assets/list_icon.svg'
         },
         gridIconPath: function () {
             if (this.isDisplayModeGrid) {
-                return 'grid-active_icon.svg'
+                return '/img/assets/grid-active_icon.svg'
             }
-            return 'grid_icon.svg'
+            return '/img/assets/grid_icon.svg'
         }
     },
     methods: {

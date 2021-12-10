@@ -76,6 +76,7 @@ export default {
 @import "./assets/styles/tag.css";
 @import "./assets/styles/modal.css";
 @import "./assets/styles/progress.css";
+@import "./assets/styles/icon.css";
 
 @import "./assets/styles/jurnal.css";
 @import "./assets/styles/bar.css";

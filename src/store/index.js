@@ -19,7 +19,8 @@ export default new Vuex.Store({
         id: 'espresso',
         name: 'espresso'
       }
-    ]
+    ],
+    displayMode: 'grid'
   },
   getters: {
     chronologicalItems: function (state) {
@@ -76,13 +77,16 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    refresh: function (state) {
+    loadApp: function (state) {
       const repository = JSON.parse(localStorage.getItem('repository') || "{}")
       for (let id in repository) {
         repository[id].created_at = new Date(repository[id].created_at)
       }
       state.repository = repository
       state.lastId = parseInt(localStorage.getItem('lastId') || '0')
+
+      const displayMode = localStorage.getItem('displayMode') || "grid"
+      state.displayMode = displayMode
     },
     updateItem: function(state, item) {
       if (!item.id || !state.repository[item.id]) {
@@ -115,6 +119,10 @@ export default new Vuex.Store({
     },
     setAppSetting: function(state, value) {
       state.app = Object.assign({}, state.app, value)
+    },
+    setDisplayMode: function(state, value) {
+      state.displayMode = value
+      localStorage.setItem('displayMode', value)
     }
   },
   actions: {

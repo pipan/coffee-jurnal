@@ -59,3 +59,15 @@
 .btn-fab.btn-fab--danger {
     background-color: var(--color-danger);
 }
+
+.btn.btn--icon {
+    width: 34px;
+}
+.btn.btn--icon img {
+    width: 100%;
+    display: block;
+}
+
+.btn.btn--square {
+    padding: var(--unit-s);
+}

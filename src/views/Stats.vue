@@ -23,6 +23,7 @@
                     
                     <Journal :items="journalItems"
                         :withCheckbox="false"
+                        :display="displayMode"
                         @select="selectRecord($event)"></Journal>
                     <div class="py-s text-secondary text-center text-light" v-if="dataset.length > journalItems.length">Showing last {{ journalItems.length }} items out of {{ dataset.length }}</div>
                 </div>
@@ -93,6 +94,9 @@ export default {
             }
             return result
         },
+        displayMode: function () {
+            return this.$store.state.displayMode
+        }
     },
     methods: {
         normQueryFilter: function (queryValue) {

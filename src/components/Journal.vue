@@ -1,5 +1,5 @@
 <template>
-    <div class="jurnal">
+    <div class="jurnal" :class="displayClass">
         <JurnalDay v-for="agenda of timeline"
             :key="agenda.day"
             :agenda="agenda"
@@ -28,6 +28,10 @@ export default {
         withCheckbox: {
             type: Boolean,
             default: true
+        },
+        display: {
+            type: String,
+            default: 'list'
         }
     },
     computed: {
@@ -55,6 +59,12 @@ export default {
                 })
             }
             return result
+        },
+        displayClass: function () {
+            if (this.display === 'list') {
+                return 'journal--list'
+            }
+            return 'journal--grid'
         }
     },
     methods: {

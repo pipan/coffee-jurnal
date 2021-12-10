@@ -4,12 +4,21 @@
             <div class="view-content">
                 <header>
                     <h1>Journal</h1>
+                    <div class="action toggle toggle--square toggle--merge toggle--no-border">
+                        <button type="button" class="toggle-btn" @click="setDisplayMode('list')">
+                            <img class="icon icon--m" :src="listIconPath" />
+                        </button>
+                        <button type="button" class="toggle-btn" @click="setDisplayMode('grid')">
+                            <img class="icon icon--m" :src="gridIconPath" />
+                        </button>
+                    </div>
                 </header>
                 <div class="row row--center py-m" v-if="hasPreviousPage">
                     <button type="button" class="btn btn--secondary" @click="previousPage()">NEWER</button>
                 </div>
                 <Journal :items="itemsPaginated"
                     :checked="checked"
+                    :display="displayMode"
                     @select="select($event)"
                     @checkChange="checkChange($event)"></Journal>
                     <div class="row row--center py-m" v-if="hasNextPage">
@@ -71,6 +80,27 @@ export default {
         },
         hasPreviousPage: function () {
             return this.currentPage > 1
+        },
+        displayMode: function () {
+            return this.$store.state.displayMode || 'grid'
+        },
+        isDisplayModeList: function () {
+            return this.displayMode == 'list'
+        },
+        isDisplayModeGrid: function () {
+            return this.displayMode == 'grid'
+        },
+        listIconPath: function () {
+            if (this.isDisplayModeList) {
+                return 'list-active_icon.svg'
+            }
+            return 'list_icon.svg'
+        },
+        gridIconPath: function () {
+            if (this.isDisplayModeGrid) {
+                return 'grid-active_icon.svg'
+            }
+            return 'grid_icon.svg'
         }
     },
     methods: {
@@ -121,6 +151,9 @@ export default {
         },
         previousPage: function () {
             this.goToPage(this.currentPage - 1)
+        },
+        setDisplayMode: function (value) {
+            this.$store.commit('setDisplayMode', value)
         }
     }
 }

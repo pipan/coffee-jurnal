@@ -39,7 +39,7 @@ Vue.filter('orderAlphabetical', function (value, direction) {
   return ordered
 })
 
-store.commit('refresh')
+store.commit('loadApp')
 
 new Vue({
   router,

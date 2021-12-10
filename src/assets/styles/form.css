@@ -84,6 +84,9 @@ select {
     display: flex;
     gap: var(--unit-m);
 }
+.toggle.toggle--merge {
+    gap: 0;
+}
 
 .toggle-btn {
     cursor: pointer;
@@ -95,6 +98,13 @@ select {
     color: var(--color-fg);
     font-size: 1rem;
 }
+.toggle.toggle--square .toggle-btn {
+    padding: var(--unit-s);
+}
+.toggle.toggle--no-border .toggle-btn {
+    border: none
+}
+
 
 .toggle-btn--active {
     color: var(--color-primary);

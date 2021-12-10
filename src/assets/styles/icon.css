@@ -1,0 +1,8 @@
+.icon {
+    width: 24px;
+    display: block;
+}
+
+.icon--s { width: 12px; }
+.icon--m { width: 18px; }
+.icon--l { width: 24px; }

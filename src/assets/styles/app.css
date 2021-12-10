@@ -102,14 +102,6 @@ header {
 header .action {
     position: absolute;
     right: var(--unit-m);
-    padding: var(--unit-s) var(--unit-m);
-    border-radius: var(--unit-s);
-    transition: background-color ease 180ms;
-}
-
-header .action:active {
-    transition-duration: 0ms;
-    background-color: var(--color-active);
 }
 
 ::selection {

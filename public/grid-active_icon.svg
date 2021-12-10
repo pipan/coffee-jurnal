@@ -1,0 +1,10 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_2" height="120" width="120" y="50" x="50" stroke="#000" fill="#f0ad2b"/>
+  <rect id="svg_5" height="120" width="120" y="50" x="230" stroke="#000" fill="#f0ad2b"/>
+  <rect id="svg_6" height="120" width="120" y="231" x="226" stroke="#000" fill="#f0ad2b"/>
+  <rect id="svg_7" height="120" width="120" y="230" x="50" stroke="#000" fill="#f0ad2b"/>
+ </g>
+
+</svg>

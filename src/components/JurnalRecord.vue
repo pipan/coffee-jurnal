@@ -2,17 +2,21 @@
     <div @click="select(item.id)" class="record" :class="{'record--checked': checked}" @contextmenu.prevent="setChecked(true)">
         <div class="record__label">{{ label }}</div>
         <div class="record__checkbox" @click.stop><input type="checkbox" :checked="checked" @change="setChecked($event.target.checked)" v-if="withCheckbox" /></div>
-        <div class="record__title">{{ item.coffeePlace }}</div>
-        <div class="record__subtitle">{{ subtitle }}</div>
-        <div class="record__profile">
-            <Bar v-for="(bar, index) of bars"
-                :key="index"
-                :intensity="bar.intensity"
-                :quality="bar.quality"></Bar>
+        <div class="record__detail">
+            <div class="record__title">{{ item.coffeePlace }}</div>
+            <div class="record__subtitle">{{ subtitle }}</div>
         </div>
-        <div class="record__rating">
-            <span class="record__rating-value">{{ ratingText }}</span>
-            <span class="record__rating-maximum">&nbsp;/&nbsp;5</span>
+        <div class="record__tasting">
+            <div class="record__profile">
+                <Bar v-for="(bar, index) of bars"
+                    :key="index"
+                    :intensity="bar.intensity"
+                    :quality="bar.quality"></Bar>
+            </div>
+            <div class="record__rating">
+                <span class="record__rating-value">{{ ratingText }}</span>
+                <span class="record__rating-maximum">&nbsp;/&nbsp;5</span>
+            </div>
         </div>
     </div>
 </template>

@@ -97,6 +97,9 @@ export default {
             })
         },
         back: function () {
+            if (window.history.length === 0) {
+                return this.$router.push({ name: 'Home' })
+            }
             this.$router.go(-1)
         }
     }

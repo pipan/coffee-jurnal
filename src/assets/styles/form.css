@@ -151,3 +151,10 @@ select {
     white-space: nowrap;
     border: none;
 }
+
+input[type="file"] {
+    border: dashed 3px var(--color-border);
+    border-radius: var(10px);
+    text-align: center;
+    padding: var(--unit-l);
+}

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Create from '../views/Create.vue'
+import Import from '../views/Import.vue'
 import Edit from '../views/Edit.vue'
 import Taste from '../views/Taste.vue'
 import Stats from '../views/Stats.vue'
@@ -41,6 +42,12 @@ const routes = [
     name: 'Create',
     component: Create,
     meta: { transitionDepth: 1 }
+  },
+  {
+    path: '/import',
+    name: 'Import',
+    component: Import,
+    meta: { transitionDepth: 2 }
   },
   {
     path: '/edit/:id',

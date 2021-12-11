@@ -149,6 +149,13 @@ export default new Vuex.Store({
       context.commit('setAppSetting', {
         updating: true
       })
+    },
+    importCups: function(context, data) {
+      for (let item of data) {
+        item.id = context.state.lastId + 1
+        item.created_at = new Date(item.created_at)
+        context.commit("insertItem", item)
+      }
     }
   },
   modules: {

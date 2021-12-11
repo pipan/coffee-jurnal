@@ -4,6 +4,7 @@
             <div class="view-content">
                 <header>
                     <h1>Stats</h1>
+                    <a :href="exportUrlData" download="coffeejournal_export.json" class="action btn btn--primary">EXPORT</a>
                 </header>
                 <div class="row gap-s pb-m scroll-x">
                     <button type="button" class="tag tag--active"
@@ -96,6 +97,11 @@ export default {
         },
         displayMode: function () {
             return this.$store.state.displayMode
+        },
+        exportUrlData: function () {
+            return URL.createObjectURL(new Blob([JSON.stringify(this.dataset)], {
+                type: 'text/plain'
+            }))
         }
     },
     methods: {

@@ -4,6 +4,7 @@
             <div class="view-content">
                 <header>
                     <h1>New Cup</h1>
+                    <router-link :to="{ name: 'Import' }" class="action btn btn--primary">IMPORT</router-link>
                 </header>
                 <CoffeeDetailForm @submit="submit($event)"></CoffeeDetailForm>
             </div>

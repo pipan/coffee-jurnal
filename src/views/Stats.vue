@@ -100,7 +100,7 @@ export default {
         },
         exportUrlData: function () {
             return URL.createObjectURL(new Blob([JSON.stringify(this.dataset)], {
-                type: 'text/plain'
+                type: 'application/json'
             }))
         }
     },

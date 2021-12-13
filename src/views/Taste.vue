@@ -54,7 +54,11 @@ export default {
             sweetnessValue: {},
             bodyValue: {},
             finishValue: {},
-            ratingValue: -1
+            ratingValue: -1,
+            initialValue: {
+                quality: 0.5,
+                intensity: 0.5
+            }
         }
     },
     metaInfo: function () {
@@ -67,19 +71,19 @@ export default {
             return this.$store.getters.item(this.$route.params.id)
         },
         aroma: function () {
-            return Object.assign({}, this.item.propertyRatings.aroma, this.aromaValue)
+            return Object.assign({}, this.initialValue, this.item.propertyRatings.aroma, this.aromaValue)
         },
         acidity: function () {
-            return Object.assign({}, this.item.propertyRatings.acidity, this.acidityValue)
+            return Object.assign({}, this.initialValue, this.item.propertyRatings.acidity, this.acidityValue)
         },
         sweetness: function () {
-            return Object.assign({}, this.item.propertyRatings.sweetness, this.sweetnessValue)
+            return Object.assign({}, this.initialValue, this.item.propertyRatings.sweetness, this.sweetnessValue)
         },
         body: function () {
-            return Object.assign({}, this.item.propertyRatings.body, this.bodyValue)
+            return Object.assign({}, this.initialValue, this.item.propertyRatings.body, this.bodyValue)
         },
         finish: function () {
-            return Object.assign({}, this.item.propertyRatings.finish, this.finishValue)
+            return Object.assign({}, this.initialValue, this.item.propertyRatings.finish, this.finishValue)
         },
         rating: function () {
             if (this.ratingValue > -1) {

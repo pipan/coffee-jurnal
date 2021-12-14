@@ -103,6 +103,7 @@ header {
 header .action {
     position: absolute;
     right: var(--unit-m);
+    z-index: 1;
 }
 
 ::selection {

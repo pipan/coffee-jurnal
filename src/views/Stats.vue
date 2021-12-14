@@ -6,7 +6,7 @@
                     <h1>Stats</h1>
                     <a :href="exportUrlData" download="coffeejournal_export.json" class="action btn btn--primary">EXPORT</a>
                 </header>
-                <div class="row gap-s pb-m scroll-x">
+                <div class="row gap-s pb-m scroll-x" v-if="filtersList.length > 0">
                     <button type="button" class="tag tag--active"
                         v-for="(filter, index) of filtersList"
                         :key="index"

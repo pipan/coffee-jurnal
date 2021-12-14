@@ -42,7 +42,7 @@ import SelectList from '../components/SelectList.vue'
 import SelectToggle from '../components/SelectToggle.vue'
 
 export default {
-    name: 'Filter',
+    name: 'FilterView',
     components: { SelectList, SelectToggle },
     metaInfo: function () {
         return {

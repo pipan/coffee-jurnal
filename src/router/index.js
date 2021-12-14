@@ -6,7 +6,7 @@ import Import from '../views/Import.vue'
 import Edit from '../views/Edit.vue'
 import Taste from '../views/Taste.vue'
 import Stats from '../views/Stats.vue'
-import Filter from '../views/Filter.vue'
+import FilterView from '../views/FilterView.vue'
 import NavigationLayout from '../views/NavigationLayout.vue'
 
 Vue.use(VueRouter)
@@ -57,7 +57,7 @@ const routes = [
   {
     path: '/filter',
     name: 'Filter',
-    component: Filter,
+    component: FilterView,
     meta: { transitionDepth: 1 }
   }
 ]

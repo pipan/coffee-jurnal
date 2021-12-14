@@ -33,9 +33,6 @@
         <div class="fab-container">
             <router-link :to="{ name: 'Filter', query: $route.query }" class="btn-fab">FILTERS</router-link>
         </div>
-        <transition name="animation--fade">
-            <router-view />
-        </transition>
     </div>
 </template>
 

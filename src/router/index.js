@@ -6,7 +6,7 @@ import Import from '../views/Import.vue'
 import Edit from '../views/Edit.vue'
 import Taste from '../views/Taste.vue'
 import Stats from '../views/Stats.vue'
-import FilterModal from '../views/FilterModal.vue'
+import Filter from '../views/Filter.vue'
 import NavigationLayout from '../views/NavigationLayout.vue'
 
 Vue.use(VueRouter)
@@ -26,14 +26,7 @@ const routes = [
         path: 'stats',
         name: 'Stats',
         component: Stats,
-        meta: { transitionOrder: 2, transitionDepth: 0 },
-        children: [
-          {
-            path: 'filter',
-            name: 'Filter',
-            component: FilterModal
-          }
-        ]
+        meta: { transitionOrder: 2, transitionDepth: 0 }
       }
     ]
   },
@@ -61,6 +54,12 @@ const routes = [
     component: Taste,
     meta: { transitionDepth: 2 }
   },
+  {
+    path: '/filter',
+    name: 'Filter',
+    component: Filter,
+    meta: { transitionDepth: 1 }
+  }
 ]
 
 const router = new VueRouter({

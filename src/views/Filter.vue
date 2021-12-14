@@ -1,33 +1,37 @@
 <template>
-    <div class="modal-view" @click="outsideClick()">
-        <div class="modal" @click="preventClosing = true">
-            <h2 class="pb-m">Filters</h2>
-            <div class="column gap-m">
-                <SelectToggle :options="coffeeTypeOptions"
-                    :value="coffeeType"
-                    @change="coffeeTypeValue = $event"></SelectToggle>
-                <SelectList inputId="coffee-place"
-                    v-if="coffeePlaceOptions.length > 0"
-                    label="Coffee Place"
-                    :options="coffeePlaceOptions | orderAlphabetical('asc')"
-                    :value="coffeePlace"
-                    @change="coffeePlaceValue = $event"></SelectList>
-                <SelectList inputId="coffee-origin"
-                    v-if="coffeeOriginOptions.length > 0"
-                    label="Coffee Origin"
-                    :options="coffeeOriginOptions | orderAlphabetical('asc')"
-                    :value="coffeeOrigin"
-                    @change="coffeeOriginValue = $event"></SelectList>
-                <SelectList inputId="coffee-roster"
-                    v-if="coffeeRosterOptions.length > 0"
-                    label="Coffee Roster"
-                    :options="coffeeRosterOptions | orderAlphabetical('asc')"
-                    :value="coffeeRoster"
-                    @change="coffeeRosterValue = $event"></SelectList>
-            </div>
-            <div class="row gap-m row--right pt-m">
-                <button type="button" class="btn btn--secondary" @click="close()">CANCEL</button>
-                <button type="button" class="btn btn--primary" @click="apply()">APPLY</button>
+    <div class="column flex-grow">
+        <div class="view">
+            <div class="view-content">
+                <header>
+                    <h1>Filters</h1>
+                </header>
+                <div class="column gap-m flex-grow">
+                    <SelectToggle :options="coffeeTypeOptions"
+                        :value="coffeeType"
+                        @change="coffeeTypeValue = $event"></SelectToggle>
+                    <SelectList inputId="coffee-place"
+                        v-if="coffeePlaceOptions.length > 0"
+                        label="Coffee Place"
+                        :options="coffeePlaceOptions | orderAlphabetical('asc')"
+                        :value="coffeePlace"
+                        @change="coffeePlaceValue = $event"></SelectList>
+                    <SelectList inputId="coffee-origin"
+                        v-if="coffeeOriginOptions.length > 0"
+                        label="Coffee Origin"
+                        :options="coffeeOriginOptions | orderAlphabetical('asc')"
+                        :value="coffeeOrigin"
+                        @change="coffeeOriginValue = $event"></SelectList>
+                    <SelectList inputId="coffee-roster"
+                        v-if="coffeeRosterOptions.length > 0"
+                        label="Coffee Roster"
+                        :options="coffeeRosterOptions | orderAlphabetical('asc')"
+                        :value="coffeeRoster"
+                        @change="coffeeRosterValue = $event"></SelectList>
+                </div>
+                <div class="pt-m row row--center gap-m">
+                    <button type="button" class="btn btn--secondary" @click="close()">CANCEL</button>
+                    <button type="button" class="btn btn--primary" @click="apply()">APPLY</button>
+                </div>
             </div>
         </div>
     </div>
@@ -38,7 +42,7 @@ import SelectList from '../components/SelectList.vue'
 import SelectToggle from '../components/SelectToggle.vue'
 
 export default {
-    name: 'FilterModal',
+    name: 'Filter',
     components: { SelectList, SelectToggle },
     metaInfo: function () {
         return {

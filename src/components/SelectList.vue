@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="input__label">{{ label }}</div>
-        <div class="row gap-s py-s scroll-x">
+        <div class="row gap-s py-s row--wrap">
             <button type="button" class="tag" :class="{'tag--active': option.active}"
                 v-for="(option, index) of contextOptions"
                 :key="index"

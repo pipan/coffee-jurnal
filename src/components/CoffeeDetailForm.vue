@@ -17,6 +17,7 @@
                 :options="coffeeRosterOptions"
                 :value="coffeeRoster"
                 @change="coffeeRosterValue = $event"></InputReference>
+            <ToggleSwitch :options="coffeeRoastIntensities" :value="coffeeRoastIntensity" @change="coffeeRoastIntensityValue = $event"></ToggleSwitch>
         </div>
         <div class="pt-m row row--center gap-m">
             <button type="button" class="btn btn--secondary" @click="back()">CANCEL</button>
@@ -43,7 +44,8 @@ export default {
             coffeeTypeValue: undefined,
             coffeePlaceValue: undefined,
             coffeeOriginValue: undefined,
-            coffeeRosterValue: undefined
+            coffeeRosterValue: undefined,
+            coffeeRoastIntensityValue: undefined
         }
     },
     computed: {
@@ -71,6 +73,18 @@ export default {
             }
             return this.item.coffeeRoster || ''
         },
+        coffeeRoastIntensity: function () {
+            if (this.coffeeRoastIntensityValue !== undefined) {
+                return this.coffeeRoastIntensityValue
+            }
+            if (this.item.id) {
+                return this.item.coffeeRoastIntensity || ''
+            }
+            return this.coffeeRoastIntensities[0].id
+        },
+        coffeeRoastIntensities: function() {
+            return this.$store.state.coffeeRoastIntensities
+        },
         coffeeTypes: function() {
             return this.$store.state.coffeeTypes
         },
@@ -93,7 +107,8 @@ export default {
                 coffeePlace: this.coffeePlace,
                 coffeeOrigin: this.coffeeOrigin,
                 coffeeRoster: this.coffeeRoster,
-                coffeeType: this.coffeeType
+                coffeeType: this.coffeeType,
+                coffeeRoastIntensity: this.coffeeRoastIntensity
             })
         },
         back: function () {

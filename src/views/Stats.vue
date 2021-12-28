@@ -77,11 +77,12 @@ export default {
                 filterType: this.normQueryFilter(this.$route.query.filterType),
                 filterPlace: this.normQueryFilter(this.$route.query.filterPlace),
                 filterOrigin: this.normQueryFilter(this.$route.query.filterOrigin),
-                filterRoster: this.normQueryFilter(this.$route.query.filterRoster)
+                filterRoster: this.normQueryFilter(this.$route.query.filterRoster),
+                filterRoastIntensity: this.normQueryFilter(this.$route.query.filterRoastIntensity),
             }
         },
         filtersList: function () {
-            const keys = ['filterType', 'filterPlace', 'filterOrigin', 'filterRoster']
+            const keys = ['filterType', 'filterPlace', 'filterOrigin', 'filterRoster', 'filterRoastIntensity']
             const result = []
             for (const key of keys) {
                 for (const filter of this.filters[key])
@@ -154,6 +155,9 @@ export default {
             if (this.filters.filterRoster.length > 0 && this.filters.filterRoster.indexOf(item.coffeeRoster) === -1) {
                 return false
             }
+            if (this.filters.filterRoastIntensity.length > 0 && this.filters.filterRoastIntensity.indexOf(item.coffeeRoastIntensity) === -1) {
+                return false
+            }
             return true
         },
         mapToFilterType: function (type) {
@@ -161,7 +165,8 @@ export default {
                 coffeeType: 'filterType',
                 coffeePlace: 'filterPlace',
                 coffeeOrigin: 'filterOrigin',
-                coffeeRoster: 'filterRoster'
+                coffeeRoster: 'filterRoster',
+                coffeeRoastIntensity: 'filterRoastIntensity'
             }
             return map[type]
         },

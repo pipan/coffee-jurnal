@@ -9,6 +9,9 @@
                     <SelectToggle :options="coffeeTypeOptions"
                         :value="coffeeType"
                         @change="coffeeTypeValue = $event"></SelectToggle>
+                    <SelectToggle :options="coffeeRoastIntensityOptions"
+                        :value="coffeeRoastIntensity"
+                        @change="coffeeRoastIntensityValue = $event"></SelectToggle>
                     <SelectList inputId="coffee-place"
                         v-if="coffeePlaceOptions.length > 0"
                         label="Coffee Place"
@@ -23,7 +26,7 @@
                         @change="coffeeOriginValue = $event"></SelectList>
                     <SelectList inputId="coffee-roster"
                         v-if="coffeeRosterOptions.length > 0"
-                        label="Coffee Roster"
+                        label="Coffee Roaster"
                         :options="coffeeRosterOptions | orderAlphabetical('asc')"
                         :value="coffeeRoster"
                         @change="coffeeRosterValue = $event"></SelectList>
@@ -55,6 +58,7 @@ export default {
             coffeePlaceValue: undefined,
             coffeeOriginValue: undefined,
             coffeeRosterValue: undefined,
+            coffeeRoastIntensityValue: undefined,
             preventClosing: false
         }
     },
@@ -83,8 +87,17 @@ export default {
             }
             return this.normQueryparam(this.$route.query.filterRoster)
         },
+        coffeeRoastIntensity: function () {
+            if (this.coffeeRoastIntensityValue !== undefined) {
+                return this.coffeeRoastIntensityValue
+            }
+            return this.normQueryparam(this.$route.query.filterRoastIntensity)
+        },
         coffeeTypes: function() {
             return this.$store.state.coffeeTypes
+        },
+        coffeeRoastIntensities: function() {
+            return this.$store.state.coffeeRoastIntensities
         },
         coffeeTypeOptions: function () {
             const options = []
@@ -101,6 +114,13 @@ export default {
         },
         coffeeRosterOptions: function() {
             return this.$store.getters.coffeeRosterOptions
+        },
+        coffeeRoastIntensityOptions: function() {
+            const options = []
+            for (let item of this.coffeeRoastIntensities) {
+                options.push(item.id)
+            }
+            return options
         }
     },
     methods: {
@@ -122,7 +142,8 @@ export default {
                     filterType: this.coffeeType,
                     filterPlace: this.coffeePlace,
                     filterOrigin: this.coffeeOrigin,
-                    filterRoster: this.coffeeRoster
+                    filterRoster: this.coffeeRoster,
+                    filterRoastIntensity: this.coffeeRoastIntensity
                 })
             this.$router.replace({
                 name: 'Stats',

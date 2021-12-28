@@ -20,6 +20,24 @@ export default new Vuex.Store({
         name: 'espresso'
       }
     ],
+    coffeeRoastIntensities: [
+      {
+        id: 'light',
+        name: 'light'
+      },
+      {
+        id: 'medium',
+        name: 'medium'
+      },
+      {
+        id: 'dark',
+        name: 'dark'
+      },
+      {
+        id: 'mix',
+        name: 'mix'
+      }
+    ],
     displayMode: 'grid'
   },
   getters: {

@@ -56,16 +56,13 @@ export default new Vuex.Store({
         return 0
       })
     },
-    sampleItems: function (_, getters) {
-      return getters.chronologicalItems.slice(0, 29)
-    },
     item: (state) => (id) => {
       return state.repository[id]
     },
     coffeePlaceOptions: function(_, getters) {
       const options = []
       
-      for (const item of getters.sampleItems) {
+      for (const item of getters.chronologicalItems) {
         if (!item.coffeePlace || options.indexOf(item.coffeePlace) > -1) {
           continue
         }
@@ -75,7 +72,7 @@ export default new Vuex.Store({
     },
     coffeeOriginOptions: function(_, getters) {
       const options = []
-      for (const item of getters.sampleItems) {
+      for (const item of getters.chronologicalItems) {
         if (!item.coffeeOrigin || options.indexOf(item.coffeeOrigin) > -1) {
           continue
         }
@@ -85,7 +82,7 @@ export default new Vuex.Store({
     },
     coffeeRosterOptions: function(_, getters) {
       const options = []
-      for (const item of getters.sampleItems) {
+      for (const item of getters.chronologicalItems) {
         if (!item.coffeeRoster || options.indexOf(item.coffeeRoster) > -1) {
           continue
         }

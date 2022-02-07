@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="column gap-s">
         <div class="input__label">{{ label }}</div>
-        <div class="row gap-s py-s row--wrap">
+        <div class="row gap-s row--wrap">
             <button type="button" class="tag" :class="{'tag--active': option.active}"
                 v-for="(option, index) of contextOptions"
                 :key="index"
@@ -16,7 +16,10 @@ export default {
     components: {  },
     props: {
         options: [Array],
-        value: [Array],
+        value: {
+            type:Array,
+            default: () => []
+        },
         label: [String]
     },
     computed: {

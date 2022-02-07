@@ -23,8 +23,8 @@ export default {
                     value: 'coffeeOrigin',
                     label: 'By Origin'
                 }, {
-                    value: 'coffeeRoster',
-                    label: 'By Roster'
+                    value: 'coffeeRoaster',
+                    label: 'By Roaster'
                 }
             ]
         }

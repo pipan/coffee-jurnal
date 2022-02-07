@@ -6,30 +6,39 @@
                     <h1>Filters</h1>
                 </header>
                 <div class="column gap-m flex-grow">
+                    <div class="column gap-s">
+                        <div class="input__label">Date interval</div>
+                        <div class="row gap-s">
+                            <input type="date" placeholder="since" :value="filters.dateSince" @change="setValue('dateSince', $event.target.value)" class="input-option" />
+                            <input type="date" :value="filters.dateUntil" @change="setValue('dateUntil', $event.target.value)" class="input-option" />
+                        </div>
+                    </div>
                     <SelectToggle :options="coffeeTypeOptions"
-                        :value="coffeeType"
-                        @change="coffeeTypeValue = $event"></SelectToggle>
+                        label="Brew method"
+                        :value="filters.coffeeType"
+                        @change="setValue('coffeeType', $event)"></SelectToggle>
                     <SelectToggle :options="coffeeRoastIntensityOptions"
-                        :value="coffeeRoastIntensity"
-                        @change="coffeeRoastIntensityValue = $event"></SelectToggle>
+                        label="Roast intensity"
+                        :value="filters.coffeeRoastIntensity"
+                        @change="setValue('coffeeRoastIntensity', $event)"></SelectToggle>
                     <SelectList inputId="coffee-place"
                         v-if="coffeePlaceOptions.length > 0"
                         label="Coffee Place"
                         :options="coffeePlaceOptions | orderAlphabetical('asc')"
-                        :value="coffeePlace"
-                        @change="coffeePlaceValue = $event"></SelectList>
+                        :value="filters.coffeePlace"
+                        @change="setValue('coffeePlace', $event)"></SelectList>
                     <SelectList inputId="coffee-origin"
                         v-if="coffeeOriginOptions.length > 0"
                         label="Coffee Origin"
                         :options="coffeeOriginOptions | orderAlphabetical('asc')"
-                        :value="coffeeOrigin"
-                        @change="coffeeOriginValue = $event"></SelectList>
-                    <SelectList inputId="coffee-roster"
-                        v-if="coffeeRosterOptions.length > 0"
+                        :value="filters.coffeeOrigin"
+                        @change="setValue('coffeeOrigin', $event)"></SelectList>
+                    <SelectList inputId="coffee-roaster"
+                        v-if="coffeeRoasterOptions.length > 0"
                         label="Coffee Roaster"
-                        :options="coffeeRosterOptions | orderAlphabetical('asc')"
-                        :value="coffeeRoster"
-                        @change="coffeeRosterValue = $event"></SelectList>
+                        :options="coffeeRoasterOptions | orderAlphabetical('asc')"
+                        :value="filters.coffeeRoaster"
+                        @change="setValue('coffeeRoaster', $event)"></SelectList>
                 </div>
                 <div class="pt-m row row--center gap-m">
                     <button type="button" class="btn btn--secondary" @click="close()">CANCEL</button>
@@ -54,44 +63,21 @@ export default {
     },
     data: function () {
         return {
-            coffeeTypeValue: undefined,
-            coffeePlaceValue: undefined,
-            coffeeOriginValue: undefined,
-            coffeeRosterValue: undefined,
-            coffeeRoastIntensityValue: undefined,
-            preventClosing: false
+            filterValues: {}
         }
     },
     computed: {
-        coffeeType: function () {
-            if (this.coffeeTypeValue !== undefined) {
-                return this.coffeeTypeValue
+        queryNorm: function () {
+            let norm = this.$route.query
+            for (const key in norm) {
+                if (norm[key] && !Array.isArray(norm[key])) {
+                    norm[key] = [norm[key]]
+                }
             }
-            return this.normQueryparam(this.$route.query.filterType)
+            return norm
         },
-        coffeePlace: function () {
-            if (this.coffeePlaceValue !== undefined) {
-                return this.coffeePlaceValue
-            }
-            return this.normQueryparam(this.$route.query.filterPlace)
-        },
-        coffeeOrigin: function () {
-            if (this.coffeeOriginValue !== undefined) {
-                return this.coffeeOriginValue
-            }
-            return this.normQueryparam(this.$route.query.filterOrigin)
-        },
-        coffeeRoster: function () {
-            if (this.coffeeRosterValue !== undefined) {
-                return this.coffeeRosterValue
-            }
-            return this.normQueryparam(this.$route.query.filterRoster)
-        },
-        coffeeRoastIntensity: function () {
-            if (this.coffeeRoastIntensityValue !== undefined) {
-                return this.coffeeRoastIntensityValue
-            }
-            return this.normQueryparam(this.$route.query.filterRoastIntensity)
+        filters: function () {
+            return Object.assign({}, this.queryNorm, this.filterValues)
         },
         coffeeTypes: function() {
             return this.$store.state.coffeeTypes
@@ -112,8 +98,8 @@ export default {
         coffeeOriginOptions: function() {
             return this.$store.getters.coffeeOriginOptions
         },
-        coffeeRosterOptions: function() {
-            return this.$store.getters.coffeeRosterOptions
+        coffeeRoasterOptions: function() {
+            return this.$store.getters.coffeeRoasterOptions
         },
         coffeeRoastIntensityOptions: function() {
             const options = []
@@ -124,12 +110,10 @@ export default {
         }
     },
     methods: {
-        outsideClick: function () {
-            if (this.preventClosing) {
-                this.preventClosing = false
-                return
-            }
-            this.close()
+        setValue: function (property, value) {
+            let newObject = Object.assign({}, this.filterValues)
+            newObject[property] = value
+            this.filterValues = newObject
         },
         close: function() {
             this.$router.replace({
@@ -138,13 +122,7 @@ export default {
             })
         },
         apply: function() {
-            const query = Object.assign({}, this.$route.query, {
-                    filterType: this.coffeeType,
-                    filterPlace: this.coffeePlace,
-                    filterOrigin: this.coffeeOrigin,
-                    filterRoster: this.coffeeRoster,
-                    filterRoastIntensity: this.coffeeRoastIntensity
-                })
+            const query = Object.assign({}, this.$route.query, this.filters)
             this.$router.replace({
                 name: 'Stats',
                 query: query

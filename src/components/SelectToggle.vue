@@ -1,10 +1,13 @@
 <template>
-    <div class="row gap-s">
-        <button type="button" class="tag"
-            :class="{'tag--active': activated[option] }"
-            v-for="option of options"
-            :key="option"
-            @click="toggle(option)">{{ option }}</button>
+    <div class="column gap-s">
+        <div v-if="label" class="input__label">{{ label }}</div>
+        <div class="row gap-s">
+            <button type="button" class="tag"
+                :class="{'tag--active': activated[option] }"
+                v-for="option of options"
+                :key="option"
+                @click="toggle(option)">{{ option }}</button>
+        </div>
     </div>
 </template>
 
@@ -14,7 +17,11 @@ export default {
     components: {  },
     props: {
         options: [Array],
-        value: [Array],
+        value: {
+            type: Array,
+            default: () => []
+        },
+        label: [String]
     },
     computed: {
         activated: function () {

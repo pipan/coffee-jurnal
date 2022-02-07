@@ -158,3 +158,12 @@ input[type="file"] {
     text-align: center;
     padding: var(--unit-l);
 }
+
+.input-option {
+    border-radius: 20px;
+    border: solid 1px var(--color-border);
+    color: var(--color-fg);
+    padding: var(--unit-s) var(--unit-m);
+    background-color: transparent;
+    white-space: nowrap;
+}

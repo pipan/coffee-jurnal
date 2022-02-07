@@ -64,8 +64,8 @@ export default {
             if (this.item.coffeeOrigin) {
                 parts.push(this.item.coffeeOrigin)
             }
-            if (this.item.coffeeRoster) {
-                parts.push(this.item.coffeeRoster) 
+            if (this.item.coffeeRoaster) {
+                parts.push(this.item.coffeeRoaster) 
             }
             return parts.join(', ')
         },

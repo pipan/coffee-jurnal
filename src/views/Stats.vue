@@ -10,7 +10,7 @@
                     <button type="button" class="tag tag--active"
                         v-for="(filter, index) of filtersList"
                         :key="index"
-                        @click="removeFilter(filter.type, filter.name)">{{ filter.name }}</button>
+                        @click="removeFilter(index)">{{ filter.value }}</button>
                 </div>
                 <div class="column gap-m">
                     <div class="row gap-s row--around row--wrap">
@@ -19,8 +19,8 @@
                         <RatingComposition :dataset="dataset"></RatingComposition>
                     </div>
                     <RatingTimeline :dataset="dataset"></RatingTimeline>
-                    <RankList :dataset="dataset" @select="addFilter(mapToFilterType($event.type), $event.name)"></RankList>
-                    <VisitList :dataset="dataset" @select="addFilter(mapToFilterType($event.type), $event.name)"></VisitList>
+                    <RankList :dataset="dataset" @select="addFilter($event.type, $event.name)"></RankList>
+                    <VisitList :dataset="dataset" @select="addFilter($event.type, $event.name)"></VisitList>
                     
                     <Journal :items="journalItems"
                         :withCheckbox="false"
@@ -44,6 +44,7 @@ import IntensityComposition from '../components/IntensityComposition.vue'
 import QualityComposition from '../components/QualityComposition.vue'
 import RatingTimeline from '../components/RatingTimeline.vue'
 import Journal from '../components/Journal.vue'
+import { CoffeeFilter } from '../filters/CoffeeFilter.js'
 
 export default {
     name: 'Stats',
@@ -61,37 +62,19 @@ export default {
             return this.dataset.length > 0
         },
         dataset: function () {
-            const result = []
-            for (const item of this.items) {
-                if (this.passesFilters(item)) {
-                    result.push(item)
-                }
-            }
-            return result
+            return this.filter.filter(this.items)
         },
         journalItems: function () {
             return this.dataset.slice(0, 30)
         },
-        filters: function () {
-            return {
-                filterType: this.normQueryFilter(this.$route.query.filterType),
-                filterPlace: this.normQueryFilter(this.$route.query.filterPlace),
-                filterOrigin: this.normQueryFilter(this.$route.query.filterOrigin),
-                filterRoster: this.normQueryFilter(this.$route.query.filterRoster),
-                filterRoastIntensity: this.normQueryFilter(this.$route.query.filterRoastIntensity),
-            }
+        filter: function () {
+            return CoffeeFilter.fromQuery(this.$route.query)
+        },
+        filterParamsAdapter: function () {
+            return CoffeeFilter.adapter()
         },
         filtersList: function () {
-            const keys = ['filterType', 'filterPlace', 'filterOrigin', 'filterRoster', 'filterRoastIntensity']
-            const result = []
-            for (const key of keys) {
-                for (const filter of this.filters[key])
-                result.push({
-                    name: filter,
-                    type: key
-                })
-            }
-            return result
+            return this.filterParamsAdapter.toList(this.$route.query)
         },
         displayMode: function () {
             return this.$store.state.displayMode
@@ -103,72 +86,33 @@ export default {
         }
     },
     methods: {
-        normQueryFilter: function (queryValue) {
-            if (queryValue === undefined) {
-                return []
-            }
-            if (typeof queryValue == 'string') {
-                return [queryValue]
-            }
-            return queryValue
-        },
-        removeFilter: function (filterType, value) {
-            const index = this.filters[filterType].indexOf(value)
-            if (index === -1) {
-                return
-            }
-            const cloneFilter = [...this.filters[filterType]]
-            cloneFilter.splice(index, 1)
-            let filterQuery = {}
-            filterQuery[filterType] = cloneFilter
-            const query = Object.assign({}, this.$route.query, filterQuery)
+        removeFilter: function (index) {
+            let newFilterList = [...this.filtersList]
+            newFilterList.splice(index, 1)
+            const newQuery = this.filterParamsAdapter.toObject(newFilterList)
+            const query = Object.assign({}, this.$route.query, newQuery)
             this.$router.replace({
                 name: 'Stats',
                 query: query
             })
         },
-        addFilter: function (filterType, value) {
-            const index = this.filters[filterType].indexOf(value)
-            if (index > -1) {
-                return
+        addFilter: function (type, value) {
+            for (const item of this.filtersList) {
+                if (item.type == type && item.value == value) {
+                    return
+                }
             }
-            const cloneFilter = [...this.filters[filterType]]
-            cloneFilter.push(value)
-            let filterQuery = {}
-            filterQuery[filterType] = cloneFilter
-            const query = Object.assign({}, this.$route.query, filterQuery)
+            let newFilterList = [...this.filtersList]
+            newFilterList.push({
+                type: type,
+                value: value
+            })
+            const newQuery = this.filterParamsAdapter.toObject(newFilterList)
+            const query = Object.assign({}, this.$route.query, newQuery)
             this.$router.replace({
                 name: 'Stats',
                 query: query
             })
-        },
-        passesFilters: function (item) {
-            if (this.filters.filterType.length > 0 && this.filters.filterType.indexOf(item.coffeeType) === -1) {
-                return false
-            }
-            if (this.filters.filterPlace.length > 0 && this.filters.filterPlace.indexOf(item.coffeePlace) === -1) {
-                return false
-            }
-            if (this.filters.filterOrigin.length > 0 && this.filters.filterOrigin.indexOf(item.coffeeOrigin) === -1) {
-                return false
-            }
-            if (this.filters.filterRoster.length > 0 && this.filters.filterRoster.indexOf(item.coffeeRoster) === -1) {
-                return false
-            }
-            if (this.filters.filterRoastIntensity.length > 0 && this.filters.filterRoastIntensity.indexOf(item.coffeeRoastIntensity) === -1) {
-                return false
-            }
-            return true
-        },
-        mapToFilterType: function (type) {
-            const map = {
-                coffeeType: 'filterType',
-                coffeePlace: 'filterPlace',
-                coffeeOrigin: 'filterOrigin',
-                coffeeRoster: 'filterRoster',
-                coffeeRoastIntensity: 'filterRoastIntensity'
-            }
-            return map[type]
         },
         selectRecord: function (id) {
             this.$router.push({

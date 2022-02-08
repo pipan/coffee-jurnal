@@ -12,11 +12,11 @@
                 :options="coffeeOriginOptions"
                 :value="coffeeOrigin"
                 @change="coffeeOriginValue = $event"></InputReference>
-            <InputReference inputId="coffee-roster"
-                label="Coffee roster"
-                :options="coffeeRosterOptions"
-                :value="coffeeRoster"
-                @change="coffeeRosterValue = $event"></InputReference>
+            <InputReference inputId="coffee-roaster"
+                label="Coffee roaster"
+                :options="coffeeRoasterOptions"
+                :value="coffeeRoaster"
+                @change="coffeeRoasterValue = $event"></InputReference>
             <ToggleSwitch :options="coffeeRoastIntensities" :value="coffeeRoastIntensity" @change="coffeeRoastIntensityValue = $event"></ToggleSwitch>
         </div>
         <div class="pt-m row row--center gap-m">
@@ -44,7 +44,7 @@ export default {
             coffeeTypeValue: undefined,
             coffeePlaceValue: undefined,
             coffeeOriginValue: undefined,
-            coffeeRosterValue: undefined,
+            coffeeRoasterValue: undefined,
             coffeeRoastIntensityValue: undefined
         }
     },
@@ -67,11 +67,11 @@ export default {
             }
             return this.item.coffeeOrigin || ''
         },
-        coffeeRoster: function () {
-            if (this.coffeeRosterValue !== undefined) {
-                return this.coffeeRosterValue
+        coffeeRoaster: function () {
+            if (this.coffeeRoasterValue !== undefined) {
+                return this.coffeeRoasterValue
             }
-            return this.item.coffeeRoster || ''
+            return this.item.coffeeRoaster || ''
         },
         coffeeRoastIntensity: function () {
             if (this.coffeeRoastIntensityValue !== undefined) {
@@ -94,8 +94,8 @@ export default {
         coffeeOriginOptions: function() {
             return this.$store.getters.coffeeOriginOptions
         },
-        coffeeRosterOptions: function() {
-            return this.$store.getters.coffeeRosterOptions
+        coffeeRoasterOptions: function() {
+            return this.$store.getters.coffeeRoasterOptions
         }
     },
     methods: {
@@ -106,7 +106,7 @@ export default {
             this.$emit('submit', {
                 coffeePlace: this.coffeePlace,
                 coffeeOrigin: this.coffeeOrigin,
-                coffeeRoster: this.coffeeRoster,
+                coffeeRoaster: this.coffeeRoaster,
                 coffeeType: this.coffeeType,
                 coffeeRoastIntensity: this.coffeeRoastIntensity
             })

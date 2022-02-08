@@ -9,8 +9,16 @@
                     <div class="column gap-s">
                         <div class="input__label">Date interval</div>
                         <div class="row gap-s">
-                            <input type="date" placeholder="since" :value="filters.dateSince" @change="setValue('dateSince', $event.target.value)" class="input-option" />
-                            <input type="date" :value="filters.dateUntil" @change="setValue('dateUntil', $event.target.value)" class="input-option" />
+                            <input type="date"
+                                :value="filters.dateSince"
+                                @change="setValue('dateSince', $event.target.value)"
+                                class="input-option"
+                                :class="{'input-option--active': filters.dateSince}" />
+                            <input type="date"
+                                :value="filters.dateUntil"
+                                @change="setValue('dateUntil', $event.target.value)"
+                                class="input-option"
+                                :class="{'input-option--active': filters.dateUntil}" />
                         </div>
                     </div>
                     <SelectToggle :options="coffeeTypeOptions"
@@ -37,8 +45,8 @@
                         v-if="coffeeRoasterOptions.length > 0"
                         label="Coffee Roaster"
                         :options="coffeeRoasterOptions | orderAlphabetical('asc')"
-                        :value="filters.coffeeRoaster"
-                        @change="setValue('coffeeRoaster', $event)"></SelectList>
+                        :value="filters.coffeeRoster"
+                        @change="setValue('coffeeRoster', $event)"></SelectList>
                 </div>
                 <div class="pt-m row row--center gap-m">
                     <button type="button" class="btn btn--secondary" @click="close()">CANCEL</button>
@@ -68,8 +76,9 @@ export default {
     },
     computed: {
         queryNorm: function () {
+            const normKeys = ['coffeeType', 'coffeeRoastIntensity', 'coffeePlace', 'coffeeOrigin', 'coffeeRost']
             let norm = this.$route.query
-            for (const key in norm) {
+            for (const key of normKeys) {
                 if (norm[key] && !Array.isArray(norm[key])) {
                     norm[key] = [norm[key]]
                 }

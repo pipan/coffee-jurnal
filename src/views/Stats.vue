@@ -90,27 +90,29 @@ export default {
             let newFilterList = [...this.filtersList]
             newFilterList.splice(index, 1)
             const newQuery = this.filterParamsAdapter.toObject(newFilterList)
-            const query = Object.assign({}, newQuery)
+            const query = Object.assign({}, this.$route.query, newQuery)
             this.$router.replace({
                 name: 'Stats',
                 query: query
             })
         },
-        addFilter: function (filterType, value) {
-            console.log(filterType, value)
-            // const index = this.filters[filterType].indexOf(value)
-            // if (index > -1) {
-            //     return
-            // }
-            // const cloneFilter = [...this.filters[filterType]]
-            // cloneFilter.push(value)
-            // let filterQuery = {}
-            // filterQuery[filterType] = cloneFilter
-            // const query = Object.assign({}, this.$route.query, filterQuery)
-            // this.$router.replace({
-            //     name: 'Stats',
-            //     query: query
-            // })
+        addFilter: function (type, value) {
+            for (const item of this.filtersList) {
+                if (item.type == type && item.value == value) {
+                    return
+                }
+            }
+            let newFilterList = [...this.filtersList]
+            newFilterList.push({
+                type: type,
+                value: value
+            })
+            const newQuery = this.filterParamsAdapter.toObject(newFilterList)
+            const query = Object.assign({}, this.$route.query, newQuery)
+            this.$router.replace({
+                name: 'Stats',
+                query: query
+            })
         },
         selectRecord: function (id) {
             this.$router.push({

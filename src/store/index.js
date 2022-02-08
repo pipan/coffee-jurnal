@@ -83,10 +83,10 @@ export default new Vuex.Store({
     coffeeRoasterOptions: function(_, getters) {
       const options = []
       for (const item of getters.chronologicalItems) {
-        if (!item.coffeeRoaster || options.indexOf(item.coffeeRoaster) > -1) {
+        if (!item.coffeeRoster || options.indexOf(item.coffeeRoster) > -1) {
           continue
         }
-        options.push(item.coffeeRoaster)
+        options.push(item.coffeeRoster)
       }
       return options
     }

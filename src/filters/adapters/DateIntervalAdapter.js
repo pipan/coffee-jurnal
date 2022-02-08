@@ -35,16 +35,14 @@ export class DateIntervalAdapter {
 
     toObject(list) {
         let object = {}
+        object[this.propertySince] = null
+        object[this.propertyUntil] = null
         for (const item of list) {
-            if (item.id !== this.id) {
+            if (item.id != this.id) {
                 continue
             }
-            if (item.since) {
-                object[this.propertySince] = item.since
-            }
-            if (item.until) {
-                object[this.propertyUntil] = item.until
-            }
+            object[this.propertySince] = item.since
+            object[this.propertyUntil] = item.until
             return object
         }
         return object

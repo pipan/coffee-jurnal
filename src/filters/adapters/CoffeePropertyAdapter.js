@@ -26,12 +26,10 @@ export class CoffeePropertyAdapter {
 
     toObject(list) {
         let object = {}
+        object[this.property] = []
         for (const item of list) {
             if (item.type !== this.property) {
                 continue
-            }
-            if (!object[this.property]) {
-                object[this.property] = []
             }
             object[this.property].push(item.value)
         }

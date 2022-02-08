@@ -167,3 +167,8 @@ input[type="file"] {
     background-color: transparent;
     white-space: nowrap;
 }
+
+.input-option.input-option--active {
+    color: var(--color-primary);
+    border-color: var(--color-primary) !important;
+}

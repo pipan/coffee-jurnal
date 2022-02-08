@@ -35,8 +35,8 @@ export class DateIntervalAdapter {
 
     toObject(list) {
         let object = {}
-        object[this.propertySince] = null
-        object[this.propertyUntil] = null
+        object[this.propertySince] = undefined
+        object[this.propertyUntil] = undefined
         for (const item of list) {
             if (item.id != this.id) {
                 continue

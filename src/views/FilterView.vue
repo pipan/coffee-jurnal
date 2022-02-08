@@ -6,8 +6,8 @@
                     <h1>Filters</h1>
                 </header>
                 <div class="column gap-m flex-grow">
-                    <div class="column gap-s">
-                        <div class="input__label">Date interval</div>
+                    <div class="row row--middle gap-s">
+                        <div class="input__label input__label--inline">Date</div>
                         <div class="row gap-s">
                             <input type="date"
                                 :value="filters.dateSince"
@@ -22,28 +22,28 @@
                         </div>
                     </div>
                     <SelectToggle :options="coffeeTypeOptions"
-                        label="Brew method"
+                        label="Method"
                         :value="filters.coffeeType"
                         @change="setValue('coffeeType', $event)"></SelectToggle>
                     <SelectToggle :options="coffeeRoastIntensityOptions"
-                        label="Roast intensity"
+                        label="Intensity"
                         :value="filters.coffeeRoastIntensity"
                         @change="setValue('coffeeRoastIntensity', $event)"></SelectToggle>
                     <SelectList inputId="coffee-place"
                         v-if="coffeePlaceOptions.length > 0"
-                        label="Coffee Place"
+                        label="Place"
                         :options="coffeePlaceOptions | orderAlphabetical('asc')"
                         :value="filters.coffeePlace"
                         @change="setValue('coffeePlace', $event)"></SelectList>
                     <SelectList inputId="coffee-origin"
                         v-if="coffeeOriginOptions.length > 0"
-                        label="Coffee Origin"
+                        label="Origin"
                         :options="coffeeOriginOptions | orderAlphabetical('asc')"
                         :value="filters.coffeeOrigin"
                         @change="setValue('coffeeOrigin', $event)"></SelectList>
                     <SelectList inputId="coffee-roaster"
                         v-if="coffeeRoasterOptions.length > 0"
-                        label="Coffee Roaster"
+                        label="Roaster"
                         :options="coffeeRoasterOptions | orderAlphabetical('asc')"
                         :value="filters.coffeeRoster"
                         @change="setValue('coffeeRoster', $event)"></SelectList>

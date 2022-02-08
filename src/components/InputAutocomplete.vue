@@ -13,23 +13,16 @@
 export default {
     name: 'InputAutocomplete',
     props: {
-        options: [Array]
-    },
-    data: function () {
-        return {
-            visible: false
+        options: [Array],
+        visible: {
+            type: Boolean,
+            value: false
         }
     },
     methods: {
         select: function (value) {
             this.$emit('select', value)
-        },
-        open: function () {
-            this.visible = true
-        },
-        close: function () {
-            this.visible = false
-        },
+        }
     }
 }
 </script>

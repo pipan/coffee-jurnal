@@ -18,9 +18,23 @@
     border-color: var(--color-primary-darker);
 }
 
+.input-simple {
+    background-color: var(--color-border);
+    border-radius: 8px;
+    padding: var(--unit-s);
+    width: 100%;
+    flex-grow: 1;
+    border: none;
+    color: var(--color-fg);
+}
+
 .input__label {
     font-size: var(--font-s);
     font-weight: lighter;
+}
+
+.input__label--inline {
+    flex-basis: 20%;
 }
 
 .input__button, .rating {
@@ -130,7 +144,7 @@ select {
     box-sizing: border-box;
     top: 100%;
     right: 0;
-    max-width: 75%;
+    max-width: 100%;
     flex-direction: row;
     gap: var(--unit-s);
     overflow-x: auto;

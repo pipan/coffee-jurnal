@@ -1,6 +1,6 @@
 <template>
-    <div class="column gap-s">
-        <div v-if="label" class="input__label">{{ label }}</div>
+    <div class="row row--middle gap-s">
+        <div v-if="label" class="input__label input__label--inline">{{ label }}</div>
         <div class="row gap-s">
             <button type="button" class="tag"
                 :class="{'tag--active': activated[option] }"

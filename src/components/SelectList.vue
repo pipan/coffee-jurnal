@@ -1,19 +1,28 @@
 <template>
     <div class="column gap-s">
-        <div class="input__label">{{ label }}</div>
-        <div class="row gap-s row--wrap">
-            <button type="button" class="tag" :class="{'tag--active': option.active}"
-                v-for="(option, index) of contextOptions"
+        <div class="row row--middle gap-s">
+            <div class="input__label input__label--inline">{{ label }}</div>
+            <div class="pos-r row flex-grow">
+                <input type="text" class="input-simple" :value="inputValue" @input="inputValue = $event.target.value" @focus="focusValue = true" @blur="focusValue = false" />
+                <InputAutocomplete :options="optionsFiltered" @select="select($event)" :visible="visible"></InputAutocomplete>
+            </div>
+            
+        </div>
+        <div class="row gap-s">
+            <button type="button" class="tag tag--active"
+                v-for="(option, index) of value"
                 :key="index"
-                @click="select(option.name)">{{ option.name }}</button>
+                @click="toggle(option)">{{ option }}</button>
         </div>
     </div>
 </template>
 
 <script>
+import InputAutocomplete from './InputAutocomplete.vue'
+
 export default {
     name: 'SelectList',
-    components: {  },
+    components: { InputAutocomplete },
     props: {
         options: [Array],
         value: {
@@ -22,20 +31,48 @@ export default {
         },
         label: [String]
     },
+    data: function () {
+        return {
+            inputValue: '',
+            focusValue: false
+        }
+    },
     computed: {
-        contextOptions: function () {
-            const result = []
+        visible: function () {
+            return this.inputValue !== '' && this.focusValue
+        },
+        availableOptions: function () {
+            let result = []
             for (const option of this.options) {
-                result.push({
-                    name: option,
-                    active: this.value.indexOf(option) > -1
-                })
+                if (this.value.indexOf(option) > -1) {
+                    continue
+                }
+                result.push(option)
+            }
+            return result
+        },
+        optionsFiltered: function () {
+            if (this.inputValue === '') {
+                return this.availableOptions
+            }
+            const result = []
+            for (const item of this.availableOptions) {
+                if (item.toLowerCase().indexOf(this.inputValue.toLowerCase()) > -1) {
+                    result.push(item)
+                }
             }
             return result
         }
     },
     methods: {
         select: function (option) {
+            this.inputValue = ''
+            this.toggle(option)
+        },
+        deselect: function (option) {
+            this.toggle(option)
+        },
+        toggle: function (option) {
             const index = this.value.indexOf(option)
             const newValue = [...this.value]
             if (index > -1) {

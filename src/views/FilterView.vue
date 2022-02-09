@@ -48,8 +48,8 @@
                         label="Roaster"
                         placeholder="search"
                         :options="coffeeRoasterOptions | orderAlphabetical('asc')"
-                        :value="filters.coffeeRoster"
-                        @change="setValue('coffeeRoster', $event)"></SelectList>
+                        :value="filters.coffeeRoaster"
+                        @change="setValue('coffeeRoaster', $event)"></SelectList>
                 </div>
                 <div class="pt-m row row--center gap-m">
                     <button type="button" class="btn btn--secondary" @click="close()">CANCEL</button>

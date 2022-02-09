@@ -49,9 +49,8 @@
     flex-direction: row;
 }
 
-.row--wrap {
-    flex-wrap: wrap;
-}
+.row--wrap { flex-wrap: wrap; }
+.row.row--reverse { flex-direction: row-reverse; }
 
 .row--center, .column--middle {
     justify-content: center;

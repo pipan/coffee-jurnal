@@ -2,13 +2,15 @@
     <div class="column gap-s">
         <div class="row row--middle gap-s">
             <div class="input__label input__label--inline">{{ label }}</div>
-            <div class="pos-r row flex-grow">
-                <input type="text" class="input-simple" :value="inputValue" @input="inputValue = $event.target.value" @focus="focusValue = true" @blur="focusValue = false" />
-                <InputAutocomplete :options="optionsFiltered" @select="select($event)" :visible="visible"></InputAutocomplete>
+            <div class="column gap-s flex-grow">
+                <div class="pos-r row">
+                    <input type="text" :placeholder="placeholder" class="input-simple" :value="inputValue" @input="inputValue = $event.target.value" @focus="focusValue = true" @blur="focusValue = false" />
+                    <InputAutocomplete :options="optionsFiltered" @select="select($event)" :visible="focusValue"></InputAutocomplete>
+                </div>
+                
             </div>
-            
         </div>
-        <div class="row gap-s">
+        <div class="row row--reverse gap-s flex-grow scroll-x">
             <button type="button" class="tag tag--active"
                 v-for="(option, index) of value"
                 :key="index"
@@ -29,7 +31,11 @@ export default {
             type:Array,
             default: () => []
         },
-        label: [String]
+        label: [String],
+        placeholder: {
+            type: String,
+            default: ''
+        }
     },
     data: function () {
         return {
@@ -38,9 +44,6 @@ export default {
         }
     },
     computed: {
-        visible: function () {
-            return this.inputValue !== '' && this.focusValue
-        },
         availableOptions: function () {
             let result = []
             for (const option of this.options) {

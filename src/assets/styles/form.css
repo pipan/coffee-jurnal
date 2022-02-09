@@ -24,8 +24,12 @@
     padding: var(--unit-s);
     width: 100%;
     flex-grow: 1;
-    border: none;
+    border: 1px solid transparent;
     color: var(--color-fg);
+}
+
+.input-simple:focus {
+    border-color: var(--color-primary-darker);
 }
 
 .input__label {
@@ -35,6 +39,7 @@
 
 .input__label--inline {
     flex-basis: 20%;
+    flex-shrink: 0;
 }
 
 .input__button, .rating {

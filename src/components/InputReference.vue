@@ -11,7 +11,7 @@
                     @blur="closeAutocomplete()"/>
             </div>
             <button type="button" class="input__button" v-if="this.value" @click="change('')">&Cross;</button>
-            <InputAutocomplete :options="optionsFiltered | orderAlphabetical('asc')" @select="change($event)" ref="autocomplete"></InputAutocomplete>
+            <InputAutocomplete :options="optionsFiltered | orderAlphabetical('asc')" @select="change($event)" :visible="autocompleteVisible"></InputAutocomplete>
         </div>
     </label>
 </template>
@@ -30,6 +30,11 @@ export default {
         },
         inputId: [String],
         label: [String]
+    },
+    data: function () {
+        return {
+            autocompleteVisible: false
+        }
     },
     computed: {
         optionsFiltered: function () {
@@ -53,10 +58,10 @@ export default {
             this.$emit('change', value)
         },
         openAutocomplete: function () {
-            this.$refs.autocomplete.open()
+            this.autocompleteVisible = true
         },
         closeAutocomplete: function () {
-            this.$refs.autocomplete.close()
+            this.autocompleteVisible = false
         },
         toggleContext: function () {
             this.$refs.contextMenu.toggle()

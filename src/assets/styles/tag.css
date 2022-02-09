@@ -1,5 +1,5 @@
 .tag {
-    border-radius: 20px;
+    border-radius: 100px;
     border: solid 1px var(--color-border);
     color: var(--color-fg);
     padding: var(--unit-s) var(--unit-m);

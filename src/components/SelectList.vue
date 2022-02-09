@@ -1,30 +1,28 @@
 <template>
     <div class="column gap-s">
-        <div class="row row--middle gap-s">
-            <div class="input__label input__label--inline">{{ label }}</div>
+        <InlineInput :label="label">
             <div class="column gap-s flex-grow">
                 <div class="pos-r row">
                     <input type="text" :placeholder="placeholder" class="input-simple" :value="inputValue" @input="inputValue = $event.target.value" @focus="focusValue = true" @blur="focusValue = false" />
                     <InputAutocomplete :options="optionsFiltered" @select="select($event)" :visible="focusValue"></InputAutocomplete>
                 </div>
-                
             </div>
-        </div>
-        <div class="row row--reverse gap-s flex-grow scroll-x">
-            <button type="button" class="tag tag--active"
-                v-for="(option, index) of value"
-                :key="index"
-                @click="toggle(option)">{{ option }}</button>
-        </div>
+        </InlineInput>
+        <MultiToggleSwitch class="row--reverse" :nullable="true"
+            :options="value"
+            :value="value"
+            @change="setValue($event)"></MultiToggleSwitch>
     </div>
 </template>
 
 <script>
 import InputAutocomplete from './InputAutocomplete.vue'
+import InlineInput from './InlineInput.vue'
+import MultiToggleSwitch from './MultiToggleSwitch.vue'
 
 export default {
     name: 'SelectList',
-    components: { InputAutocomplete },
+    components: { InputAutocomplete, InlineInput, MultiToggleSwitch },
     props: {
         options: [Array],
         value: {
@@ -85,8 +83,8 @@ export default {
             }
             return this.$emit('change', newValue)
         },
-        toggleContext: function () {
-            this.$refs.contextMenu.toggle()
+        setValue: function (value) {
+            return this.$emit('change', value)
         }
     }
 }

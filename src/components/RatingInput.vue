@@ -1,19 +1,22 @@
 <template>
-    <div class="row row--center gap-m">
-        <RatingButton v-for="rating of ratings"
-            :key="rating.value"
-            :value="rating.value"
-            :active="rating.active"
-            @select="change($event)"></RatingButton>
-    </div>
+    <InlineInput label="Rating">
+        <div class="row flex-grow row--center gap-m">
+            <RatingButton v-for="rating of ratings"
+                :key="rating.value"
+                :value="rating.value"
+                :active="rating.active"
+                @select="change($event)"></RatingButton>
+        </div>
+    </InlineInput>
 </template>
 
 <script>
 import RatingButton from './RatingButton.vue'
+import InlineInput from './InlineInput.vue'
 
 export default {
     name: 'RatingInput',
-    components: { RatingButton },
+    components: { RatingButton, InlineInput },
     props: {
         value: [Number],
         limit: {

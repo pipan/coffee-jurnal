@@ -6,8 +6,7 @@
                     <h1>Filters</h1>
                 </header>
                 <div class="column gap-m flex-grow">
-                    <div class="row row--middle gap-s">
-                        <div class="input__label input__label--inline">Date</div>
+                    <InlineInput label="Date">
                         <div class="row row--wrap gap-s">
                             <input type="date"
                                 :value="filters.dateSince"
@@ -20,15 +19,19 @@
                                 class="input-option"
                                 :class="{'input-option--active': filters.dateUntil}" />
                         </div>
-                    </div>
-                    <SelectToggle :options="coffeeTypeOptions"
-                        label="Method"
-                        :value="filters.coffeeType"
-                        @change="setValue('coffeeType', $event)"></SelectToggle>
-                    <SelectToggle :options="coffeeRoastIntensityOptions"
-                        label="Intensity"
-                        :value="filters.coffeeRoastIntensity"
-                        @change="setValue('coffeeRoastIntensity', $event)"></SelectToggle>
+                    </InlineInput>
+                    <InlineInput label="Method">
+                        <MultiToggleSwitch :nullable="true"
+                            :options="coffeeTypeOptions"
+                            :value="filters.coffeeType || []"
+                            @change="setValue('coffeeType', $event)"></MultiToggleSwitch>
+                    </InlineInput>
+                    <InlineInput label="Intensity">
+                        <MultiToggleSwitch :nullable="true"
+                            :options="coffeeRoastIntensityOptions"
+                            :value="filters.coffeeRoastIntensity || []"
+                            @change="setValue('coffeeRoastIntensity', $event)"></MultiToggleSwitch>
+                    </InlineInput>
                     <SelectList inputId="coffee-place"
                         v-if="coffeePlaceOptions.length > 0"
                         label="Place"
@@ -62,11 +65,12 @@
 
 <script>
 import SelectList from '../components/SelectList.vue'
-import SelectToggle from '../components/SelectToggle.vue'
+import InlineInput from '../components/InlineInput.vue'
+import MultiToggleSwitch from '../components/MultiToggleSwitch.vue'
 
 export default {
     name: 'FilterView',
-    components: { SelectList, SelectToggle },
+    components: { SelectList, InlineInput, MultiToggleSwitch },
     metaInfo: function () {
         return {
             title: "Stats Filters | CJ"

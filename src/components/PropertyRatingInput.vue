@@ -1,18 +1,17 @@
 <template>
-    <div class="input">
-        <div class="row row--middle gap-m">
-            <div tabindex="0" class="flex-grow"
-                @keydown.down="decreaseQuality()"
-                @keydown.up="increaseQuality()"
-                @keydown.left="decreaseIntensity()"
-                @keydown.right="increaseIntensity()"
-                @touchstart="updateIntesity($event)"
-                @touchmove="updateIntesity($event)"
-                @touchend="snapIntensity()"
-                @touchcancel="snapIntensity()"
-                ref="touchPane">
-                <div class="input__label">{{ label }}</div>
-                <div class="pt-s">
+    <InlineInput :label="label">
+        <div class="row flex-grow gap-s">
+            <div tabindex="0" class="flex-grow input-simple"
+                    @keydown.down="decreaseQuality()"
+                    @keydown.up="increaseQuality()"
+                    @keydown.left="decreaseIntensity()"
+                    @keydown.right="increaseIntensity()"
+                    @touchstart="updateIntesity($event)"
+                    @touchmove="updateIntesity($event)"
+                    @touchend="snapIntensity()"
+                    @touchcancel="snapIntensity()"
+                    ref="touchPane">
+                <div class="py-s">
                     <div class="pos-r">
                         <div class="scale">
                             <div class="scale__tick"></div>
@@ -23,27 +22,24 @@
                         </div>
                         <div class="bar bar--x pos-r" :class="barClasses" :style="barStyle"></div>
                     </div>
-                    
                 </div>
             </div>
-            <div class="pos-r row">
-                <div class="column">
-                    <button type="button"
-                        class="input__button input__button--split"
-                        @click.stop="increaseQuality()">&#x25B2;</button>
-                    <button type="button"
-                        class="input__button input__button--split"
-                        @click.stop="decreaseQuality()">&#x25BC;</button>
-                </div>
+            <div class="row">
+                <button type="button" class="btn btn--secondary btn--square"
+                    @click.stop="decreaseQuality()">&#x25BC;</button>
+                <button type="button" class="btn btn--secondary btn--square"
+                    @click.stop="increaseQuality()">&#x25B2;</button>
             </div>
         </div>
-    </div>
+    </InlineInput>
 </template>
 
 <script>
+import InlineInput from './InlineInput.vue'
+
 export default {
     name: 'PropertyRatingInput',
-    components: {  },
+    components: { InlineInput },
     props: {
         value: [Object],
         label: [String],

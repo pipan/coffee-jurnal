@@ -4,12 +4,12 @@
             <div class="view-content">
                 <header>
                     <h1>Journal</h1>
-                    <div class="action toggle toggle--square toggle--merge toggle--no-border">
-                        <button type="button" class="toggle-btn" @click="setDisplayMode('list')">
-                            <img class="icon icon--m" :src="listIconPath" />
+                    <div class="action action--no-padding">
+                        <button type="button" class="btn btn--square" v-if="isDisplayModeGrid" @click="setDisplayMode('list')">
+                            <img class="icon icon--m" src="/img/assets/list_icon.svg" />
                         </button>
-                        <button type="button" class="toggle-btn" @click="setDisplayMode('grid')">
-                            <img class="icon icon--m" :src="gridIconPath" />
+                        <button type="button" class="btn btn--square" v-if="isDisplayModeList" @click="setDisplayMode('grid')">
+                            <img class="icon icon--m" src="/img/assets/grid_icon.svg" />
                         </button>
                     </div>
                 </header>
@@ -89,18 +89,6 @@ export default {
         },
         isDisplayModeGrid: function () {
             return this.displayMode == 'grid'
-        },
-        listIconPath: function () {
-            if (this.isDisplayModeList) {
-                return '/img/assets/list-active_icon.svg'
-            }
-            return '/img/assets/list_icon.svg'
-        },
-        gridIconPath: function () {
-            if (this.isDisplayModeGrid) {
-                return '/img/assets/grid-active_icon.svg'
-            }
-            return '/img/assets/grid_icon.svg'
         }
     },
     methods: {

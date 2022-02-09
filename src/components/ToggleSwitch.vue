@@ -1,27 +1,27 @@
 <template>
-    <div class="toggle row--center">
-        <button v-for="item of options"
-            :key="item.id"
-            class="toggle-btn"
-            :class="{ 'toggle-btn--active': item.id === value }"
-            type="button"
-            @click="select(item)">{{ item.name }}</button>
-    </div>
+    <MultiToggleSwitch :nullable="nullable" :options="options" :value="[value]" @change="change($event)"></MultiToggleSwitch>
 </template>
 
 <script>
+import MultiToggleSwitch from './MultiToggleSwitch.vue'
+
 export default {
     name: 'ToggleSwitch',
+    components: { MultiToggleSwitch },
     props: {
-        options: [Array],
+        nullable: {
+            type: Boolean,
+            default: false
+        },
+        options: {
+            type: Array
+        },
         value: [String]
     },
     methods: {
-        select: function (item) {
-            if (item.id === this.value.id) {
-                return
-            }
-            this.$emit('change', item.id)
+        change: function (values) {
+            const value = values.length > 0 ? values[values.length - 1] : ''
+            this.$emit('change', value)
         }
     }
 }

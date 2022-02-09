@@ -1,27 +1,26 @@
 <template>
-    <label class="input" :for="inputId">
-        <div class="row row--middle gap-m">
-            <div class="flex-grow">
-                <div class="input__label">{{ label }}</div>
-                <input :id="inputId" type="text"
-                    autocomplete="off"
-                    :value="value"
-                    @input="change($event.target.value)"
-                    @focus="openAutocomplete()"
-                    @blur="closeAutocomplete()"/>
-            </div>
+    <InlineInput :label="label">
+        <div class="pos-r flex-grow row gap-m">
+            <input class="input-simple" :class="{'input-simple--active': this.value}" type="text"
+                autocomplete="off"
+                :value="value"
+                :placeholder="placeholder"
+                @input="change($event.target.value)"
+                @focus="openAutocomplete()"
+                @blur="closeAutocomplete()"/>
             <button type="button" class="input__button" v-if="this.value" @click="change('')">&Cross;</button>
             <InputAutocomplete :options="optionsFiltered | orderAlphabetical('asc')" @select="change($event)" :visible="autocompleteVisible"></InputAutocomplete>
         </div>
-    </label>
+    </InlineInput>
 </template>
 
 <script>
 import InputAutocomplete from "./InputAutocomplete.vue";
+import InlineInput from "./InlineInput.vue";
 
 export default {
     name: 'InputReference',
-    components: { InputAutocomplete },
+    components: { InputAutocomplete, InlineInput },
     props: {
         options: [Array],
         value: {
@@ -29,7 +28,11 @@ export default {
             default: ''
         },
         inputId: [String],
-        label: [String]
+        label: [String],
+        placeholder: {
+            type: String,
+            default: ''
+        }
     },
     data: function () {
         return {

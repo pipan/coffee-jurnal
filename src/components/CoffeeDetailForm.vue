@@ -1,23 +1,32 @@
 <template>
     <form class="column flex-grow" @submit.prevent="submit()">
         <div class="form flex-grow">
-            <ToggleSwitch :options="coffeeTypes" :value="coffeeType" @change="coffeeTypeValue = $event"></ToggleSwitch>
+            <InlineInput label="Method">
+                <ToggleSwitch :options="coffeeTypes" :value="coffeeType" @change="coffeeTypeValue = $event"></ToggleSwitch>
+            </InlineInput>
+            <InlineInput label="Intensity">
+                <ToggleSwitch :options="coffeeRoastIntensities" :value="coffeeRoastIntensity" @change="coffeeRoastIntensityValue = $event"></ToggleSwitch>
+            </InlineInput>
+            
             <InputReference inputId="coffee-place"
-                label="Coffee place"
+                label="Place"
+                placeholder="place"
                 :options="coffeePlaceOptions"
                 :value="coffeePlace"
                 @change="coffeePlaceValue = $event"></InputReference>
             <InputReference inputId="coffee-origin"
-                label="Coffee origin"
+                label="Origin"
+                placeholder="origin"
                 :options="coffeeOriginOptions"
                 :value="coffeeOrigin"
                 @change="coffeeOriginValue = $event"></InputReference>
             <InputReference inputId="coffee-roaster"
-                label="Coffee roaster"
+                label="Roaster"
+                placeholder="roaster"
                 :options="coffeeRoasterOptions"
                 :value="coffeeRoaster"
                 @change="coffeeRoasterValue = $event"></InputReference>
-            <ToggleSwitch :options="coffeeRoastIntensities" :value="coffeeRoastIntensity" @change="coffeeRoastIntensityValue = $event"></ToggleSwitch>
+            
         </div>
         <div class="pt-m row row--center gap-m">
             <button type="button" class="btn btn--secondary" @click="back()">CANCEL</button>
@@ -29,10 +38,11 @@
 <script>
 import ToggleSwitch from "../components/ToggleSwitch.vue"
 import InputReference from "../components/InputReference.vue"
+import InlineInput from "../components/InlineInput.vue"
 
 export default {
     name: 'CoffeeDetailForm',
-    components: { ToggleSwitch, InputReference },
+    components: { ToggleSwitch, InputReference, InlineInput },
     props: {
         item: {
             type: Object,

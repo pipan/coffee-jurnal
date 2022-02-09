@@ -69,5 +69,11 @@
 }
 
 .btn.btn--square {
-    padding: var(--unit-s);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 0px;
+    flex-shrink: 0;
 }

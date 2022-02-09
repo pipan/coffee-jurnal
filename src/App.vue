@@ -71,6 +71,7 @@ export default {
 <style>
 @import "./assets/styles/layout.css";
 @import "./assets/styles/form.css";
+@import "./assets/styles/toggle.css";
 @import "./assets/styles/button.css";
 @import "./assets/styles/text.css";
 @import "./assets/styles/tag.css";

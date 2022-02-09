@@ -1,7 +1,7 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: var(--unit-s);
+    gap: var(--unit-m);
 }
 
 .input {
@@ -19,17 +19,18 @@
 }
 
 .input-simple {
-    background-color: var(--color-border);
-    border-radius: 8px;
-    padding: var(--unit-s);
+    background-color: transparent;
+    border-radius: 100px;
+    padding: var(--unit-s) var(--unit-m);
     width: 100%;
     flex-grow: 1;
-    border: 1px solid transparent;
+    border: 1px solid var(--color-border);
     color: var(--color-fg);
+    font-size: 1rem;
 }
 
-.input-simple:focus {
-    border-color: var(--color-primary-darker);
+.input-simple.input-simple--active {
+    border-color: var(--color-primary);
 }
 
 .input__label {
@@ -42,7 +43,26 @@
     flex-shrink: 0;
 }
 
-.input__button, .rating {
+.input__button {
+    position: absolute;
+    right: var(--unit-s);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: var(--color-fg);
+    border-radius: 100%;
+    background-color: transparent;
+    border: none;
+    width: 37px;
+    height: 37px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: emoji;
+    transition: background-color ease 180ms;
+}
+
+.rating {
     box-sizing: border-box;
     cursor: pointer;
     color: var(--color-fg);
@@ -99,37 +119,6 @@ select {
     font-size: 1rem;
 }
 
-.toggle {
-    display: flex;
-    gap: var(--unit-m);
-}
-.toggle.toggle--merge {
-    gap: 0;
-}
-
-.toggle-btn {
-    cursor: pointer;
-    display: block;
-    border: 1px solid var(--color-border);
-    border-radius: var(--unit-s);
-    padding: var(--unit-s) var(--unit-m);
-    background-color: transparent;
-    color: var(--color-fg);
-    font-size: 1rem;
-}
-.toggle.toggle--square .toggle-btn {
-    padding: var(--unit-s);
-}
-.toggle.toggle--no-border .toggle-btn {
-    border: none
-}
-
-
-.toggle-btn--active {
-    color: var(--color-primary);
-    border-color: var(--color-primary) !important;
-}
-
 .selector-mark {
     box-sizing: border-box;
     width: var(--unit-m);
@@ -154,8 +143,7 @@ select {
     gap: var(--unit-s);
     overflow-x: auto;
     background-color: var(--color-primary-darker);
-    padding: var(--unit-s);
-    border-radius: var(--unit-s);
+    border-radius: 100px;
 }
 
 .autocomplete.autocomplete--visible {
@@ -165,7 +153,7 @@ select {
 .autocomplete__item {
     box-sizing: border-box;
     color: var(--color-fg);
-    padding: var(--unit-s) var(--unit-m);
+    padding: var(--unit-m);
     background-color: transparent;
     white-space: nowrap;
     border: none;

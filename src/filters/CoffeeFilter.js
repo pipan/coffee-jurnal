@@ -11,7 +11,7 @@ export class CoffeeFilter {
             new CoffeePropertyFilter('coffeeType', params.coffeeType),
             new CoffeePropertyFilter('coffeePlace', params.coffeePlace),
             new CoffeePropertyFilter('coffeeOrigin', params.coffeeOrigin),
-            new CoffeePropertyFilter('coffeeRoster', params.coffeeRoster),
+            new CoffeePropertyFilter('coffeeRoaster', params.coffeeRoaster),
             new CoffeePropertyFilter('coffeeRoastIntensity', params.coffeeRoastIntensity),
             DateIntervalFilter.fromDate(params.dateSince, params.dateUntil)
         ])
@@ -23,7 +23,7 @@ export class CoffeeFilter {
             new CoffeePropertyAdapter('coffeeType'),
             new CoffeePropertyAdapter('coffeePlace'),
             new CoffeePropertyAdapter('coffeeOrigin'),
-            new CoffeePropertyAdapter('coffeeRoster'),
+            new CoffeePropertyAdapter('coffeeRoaster'),
             new CoffeePropertyAdapter('coffeeRoastIntensity')
         ])
     }

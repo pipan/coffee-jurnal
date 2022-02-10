@@ -34,7 +34,7 @@
     transition-property: transform;
     transition-duration: var(--animation-duration-l);
     transition-timing-function: var(--animation-function);
-    transform-origin: calc(100vw / 2) calc(100vh / 2);
+    transform-origin: 50vw 50vh;
 }
 .animation--slide-in-leave-active .view { transform: perspective(40cm) translateZ(-100px); }
 .animation--slide-in-leave .view { transform: perspective(40cm) translateZ(0px); }
@@ -52,10 +52,10 @@
 }
 .animation--slide-in-enter {
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateY(30vh);
 }
 .animation--slide-out-leave-active {
-    transform: translateY(100px);
+    transform: translateY(30vh);
     opacity: 0;
     
 }

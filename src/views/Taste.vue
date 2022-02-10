@@ -3,7 +3,7 @@
         <div class="view">
             <div class="view-content">
                 <NotFound v-if="!item"></NotFound>
-                <div class="column flex-grow" v-if="item">
+                <div class="column flex-grow gap-m" v-if="item">
                     <header>
                         <h1>Tasting</h1>
                         <router-link :to="{ name: 'Edit', params: { id: item.id } }" class="action btn btn--primary">DETAIL</router-link>

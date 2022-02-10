@@ -34,11 +34,12 @@
     transition-property: transform;
     transition-duration: var(--animation-duration-l);
     transition-timing-function: var(--animation-function);
+    transform-origin: calc(100vw / 2) calc(100vh / 2);
 }
-.animation--slide-in-leave-active .view { transform: translateY(-40px); }
-.animation--slide-in-leave .view { transform: translateY(0px); }
-.animation--slide-out-enter-active .view { transform: translateY(0px); }
-.animation--slide-out-enter .view { transform: translateY(-40px); }
+.animation--slide-in-leave-active .view { transform: perspective(40cm) translateZ(-100px); }
+.animation--slide-in-leave .view { transform: perspective(40cm) translateZ(0px); }
+.animation--slide-out-enter-active .view { transform: perspective(40cm) translateZ(0px); }
+.animation--slide-out-enter .view { transform: perspective(40cm) translateZ(-100px); }
 
 .animation--slide-in-enter-active, .animation--slide-out-leave-active {
     transition-property: transform, opacity;

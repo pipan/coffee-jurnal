@@ -6,12 +6,11 @@
                     <h1>Stats</h1>
                     <a :href="exportUrlData" download="coffeejournal_export.json" class="action btn btn--primary">EXPORT</a>
                 </header>
-                <div class="row gap-s scroll-x" v-if="filtersList.length > 0">
-                    <button type="button" class="tag tag--active"
-                        v-for="(filter, index) of filtersList"
-                        :key="index"
-                        @click="removeFilter(index)">{{ filter.value }}</button>
-                </div>
+                <MultiToggleSwitch v-if="filtersValueList.length > 0"
+                    :nullable="true"
+                    :options="filtersList"
+                    :value="filtersValueList"
+                    @change="setFilters($event)"></MultiToggleSwitch>
                 <div class="column gap-m">
                     <div class="row gap-s row--around row--wrap">
                         <IntensityComposition :dataset="dataset"></IntensityComposition>
@@ -44,14 +43,20 @@ import IntensityComposition from '../components/IntensityComposition.vue'
 import QualityComposition from '../components/QualityComposition.vue'
 import RatingTimeline from '../components/RatingTimeline.vue'
 import Journal from '../components/Journal.vue'
+import MultiToggleSwitch from '../components/MultiToggleSwitch.vue'
 import { CoffeeFilter } from '../filters/CoffeeFilter.js'
 
 export default {
     name: 'Stats',
-    components: { QualityComposition, IntensityComposition, RatingComposition, RatingTimeline, RankList, VisitList, Journal },
+    components: { QualityComposition, IntensityComposition, RatingComposition, RatingTimeline, RankList, VisitList, Journal, MultiToggleSwitch },
     metaInfo: function () {
         return {
             title: "Stats | CJ"
+        }
+    },
+    data: function () {
+        return {
+            filterParamsAdapter: CoffeeFilter.adapter()
         }
     },
     computed: {
@@ -70,11 +75,19 @@ export default {
         filter: function () {
             return CoffeeFilter.fromQuery(this.$route.query)
         },
-        filterParamsAdapter: function () {
-            return CoffeeFilter.adapter()
-        },
         filtersList: function () {
-            return this.filterParamsAdapter.toList(this.$route.query)
+            const list = this.filterParamsAdapter.toList(this.$route.query)
+            for (const item of list) {
+                item.name = item.value
+            }
+            return list
+        },
+        filtersValueList: function () {
+            let values = []
+            for (const filter of this.filtersList) {
+                values.push(filter.id)
+            }
+            return values
         },
         displayMode: function () {
             return this.$store.state.displayMode
@@ -86,15 +99,15 @@ export default {
         }
     },
     methods: {
-        removeFilter: function (index) {
-            let newFilterList = [...this.filtersList]
-            newFilterList.splice(index, 1)
-            const newQuery = this.filterParamsAdapter.toObject(newFilterList)
-            const query = Object.assign({}, this.$route.query, newQuery)
-            this.$router.replace({
-                name: 'Stats',
-                query: query
-            })
+        setFilters: function (ids) {
+            let newFilterList = []
+            for (const filter of this.filtersList) {
+                if (ids.indexOf(filter.id) === -1) {
+                    continue
+                }
+                newFilterList.push(filter)
+            }
+            this.updateFiltersQuery(newFilterList)
         },
         addFilter: function (type, value) {
             for (const item of this.filtersList) {
@@ -107,6 +120,9 @@ export default {
                 type: type,
                 value: value
             })
+            this.updateFiltersQuery(newFilterList)
+        },
+        updateFiltersQuery: function (newFilterList) {
             const newQuery = this.filterParamsAdapter.toObject(newFilterList)
             const query = Object.assign({}, this.$route.query, newQuery)
             this.$router.replace({

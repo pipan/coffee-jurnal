@@ -22,11 +22,16 @@ export default {
     components: { Modal },
     data: function () {
         return {
+            swRegistration: null,
             transitionName: 'animation--slide-in',
             refreshing: false
         }
     },
     created: function () {
+        this.startUpdatePoll()
+        document.addEventListener('swRegistration', (event) => {
+            this.swRegistration = event.detail
+        })
         document.addEventListener('swUpdateFound', () => {
             this.$store.dispatch('updateStart')
         }, { once: true })
@@ -50,6 +55,19 @@ export default {
     computed: {
         isUpdating: function () {
             return this.$store.state.app.updating
+        }
+    },
+    methods: {
+        startUpdatePoll: function () {
+            setInterval(() => {
+                this.checkForUpdate()
+            }, 5 * 60 * 1000)
+        },
+        checkForUpdate: function () {
+            if (!this.swRegistration) {
+                return
+            }
+            this.swRegistration.update();
         }
     },
     watch: {

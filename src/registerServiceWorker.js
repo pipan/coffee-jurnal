@@ -10,15 +10,17 @@ if (process.env.NODE_ENV === 'production') {
         'For more details, visit https://goo.gl/AFskqB'
       )
     },
-    registered () {
+    registered (registration) {
       console.log('Service worker has been registered.')
+      document.dispatchEvent(
+        new CustomEvent('swRegistration', { detail: registration })
+      )
     },
     cached () {
       console.log('Content has been cached for offline use.')
     },
     updatefound (registration) {
       console.log('New content is downloading.')
-      console.log("swUpdateFound", registration)
       document.dispatchEvent(
         new CustomEvent('swUpdateFound', { detail: registration })
       )

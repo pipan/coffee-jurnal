@@ -27,9 +27,15 @@
             </div>
         </div>
         <div class="fab-container">
-            <router-link :to="{ name: 'Create' }" class="btn-fab" v-if="isRouteMode">NEW</router-link>
-            <button type="button" class="btn-fab btn-fab--entity" v-if="isCheckMode" @click="uncheckAll()">&Cross;</button>
-            <button type="button" class="btn-fab btn-fab--danger" v-if="isCheckMode" @click="deleteSelected()">DELETE</button>
+            <router-link :to="{ name: 'Create' }" class="btn-fab" v-if="isRouteMode">
+                <img class="icon icon--l" src="/img/assets/add_icon.svg" />
+            </router-link>
+            <button type="button" class="btn-fab btn-fab--entity" v-if="isCheckMode" @click="uncheckAll()">
+                <img class="icon icon--l" src="/img/assets/close_icon.svg" />
+            </button>
+            <button type="button" class="btn-fab btn-fab--danger" v-if="isCheckMode" @click="deleteSelected()">
+                <img class="icon icon--l" src="/img/assets/delete_icon.svg" />
+            </button>
         </div>
     </div>
 </template>

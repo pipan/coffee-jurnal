@@ -30,7 +30,9 @@
             </div>
         </div>
         <div class="fab-container">
-            <router-link :to="{ name: 'Filter', query: $route.query }" class="btn-fab">FILTERS</router-link>
+            <router-link :to="{ name: 'Filter', query: $route.query }" class="btn-fab">
+                <img class="icon icon--l" src="/img/assets/filter_icon.svg" />
+            </router-link>
         </div>
     </div>
 </template>

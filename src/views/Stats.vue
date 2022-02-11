@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="view">
+        <div class="view" v-screen-transform-origin="'50vw calc(50vh + {SCROLL_Y}px)'">
             <div class="view-content">
                 <header>
                     <h1>Stats</h1>

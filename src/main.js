@@ -5,6 +5,8 @@ import store from './store'
 import VueMeta from 'vue-meta'
 import './registerServiceWorker'
 
+import ScreenTransformOrigin from './directives/ScreenTransformOrigin.js'
+
 Vue.config.productionTip = false
 Vue.use(VueMeta)
 
@@ -38,6 +40,8 @@ Vue.filter('orderAlphabetical', function (value, direction) {
   })
   return ordered
 })
+
+Vue.directive('screen-transform-origin', ScreenTransformOrigin)
 
 store.commit('loadApp')
 

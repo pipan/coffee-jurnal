@@ -3,7 +3,7 @@
         <div class="view">
             <div class="view-content">
                 <header>
-                    <h1>Import cups</h1>
+                    <h1>Import Cups</h1>
                 </header>
                 <form class="column flex-grow" @submit.prevent="submit()">
                     <div class="form flex-grow">

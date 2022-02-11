@@ -41,6 +41,7 @@
 .input__label--inline {
     flex-basis: 20%;
     flex-shrink: 0;
+    font-size: var(--font-m);
 }
 
 .input__button {

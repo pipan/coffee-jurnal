@@ -76,17 +76,21 @@
 }
 
 .animation--slide-left-leave-active .fab-container, .animation--slide-right-leave-active .fab-container, .animation--slide-left-enter-active .fab-container, .animation--slide-right-enter-active .fab-container {
-    transition-property: left;
-    transition-duration: var(--animation-duration-l);
-    transition-timing-function: var(--animation-function);
+    transition: transform calc(var(--animation-duration-l) * 2 / 3) var(--animation-function), opacity calc(var(--animation-duration-l) * 2 / 3) var(--animation-function);
 }
 
-.animation--slide-left-leave-active .fab-container { left: -50%; }
-.animation--slide-right-leave-active .fab-container { left: 150%; }
-.animation--slide-left-enter-active .fab-container { left: 50%; }
-.animation--slide-left-enter .fab-container { left: 150%; }
-.animation--slide-right-enter-active .fab-container { left: 50%; }
-.animation--slide-right-enter .fab-container { left: -50%; }
+.animation--slide-left-enter-active .fab-container, .animation--slide-right-enter-active .fab-container {
+    transition-delay: calc(var(--animation-duration-l) / 3);
+}
+
+.animation--slide-left-leave-active .fab-container { transform: translateX(-50%) translateY(100%); opacity: 0; }
+.animation--slide-left-leave .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
+.animation--slide-right-leave-active .fab-container { transform: translateX(-50%) translateY(100%); opacity: 0; }
+.animation--slide-right-leave .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
+.animation--slide-left-enter-active .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
+.animation--slide-left-enter .fab-container { transform: translateX(-50%) translateY(50%) scale(0.7); opacity: 0; }
+.animation--slide-right-enter-active .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
+.animation--slide-right-enter .fab-container { transform: translateX(-50%) translateY(50%) scale(0.7); opacity: 0; }
 
 .animation--slide-left-leave-active .view { transform: translateX(-100%); }
 .animation--slide-left-leave .view { transform: translateX(0%); }
@@ -99,7 +103,7 @@
 
 
 .animation-display-mode .svg-1, .animation-display-mode .svg-2, .animation-display-mode .svg-3, .animation-display-mode .svg-4 {
-    transition: transform 0.3s ease;
+    transition: transform var(--animation-duration-l) var(--animation-function);
 }
 
 .animation-display-mode.animation-display-mode--grid .svg-1 {

@@ -5,11 +5,15 @@
                 <header>
                     <h1>Journal</h1>
                     <div class="action action--no-padding">
-                        <button type="button" class="btn btn--square" v-if="isDisplayModeGrid" @click="setDisplayMode('list')">
-                            <img class="icon icon--m" src="/img/assets/list_icon.svg" />
-                        </button>
-                        <button type="button" class="btn btn--square" v-if="isDisplayModeList" @click="setDisplayMode('grid')">
-                            <img class="icon icon--m" src="/img/assets/grid_icon.svg" />
+                        <button type="button" class="btn btn--square animation-display-mode" :class="gridIconClass" @click="toggleDisplayMode()">
+                            <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                                <g>
+                                    <rect fill="#fff" x="0" y="0" width="30%" height="30%" class="svg-1" />
+                                    <rect fill="#fff" x="0" y="0" width="30%" height="30%" class="svg-2" />
+                                    <rect fill="#fff" x="0" y="0" width="30%" height="30%" class="svg-3" />
+                                    <rect fill="#fff" x="0" y="0" width="30%" height="30%" class="svg-4" />
+                                </g>
+                            </svg>
                         </button>
                     </div>
                 </header>
@@ -95,6 +99,9 @@ export default {
         },
         isDisplayModeGrid: function () {
             return this.displayMode == 'grid'
+        },
+        gridIconClass: function () {
+            return this.isDisplayModeList ? 'animation-display-mode--grid' : 'animation-display-mode--list'
         }
     },
     methods: {
@@ -148,6 +155,9 @@ export default {
         },
         setDisplayMode: function (value) {
             this.$store.commit('setDisplayMode', value)
+        },
+        toggleDisplayMode: function () {
+            this.setDisplayMode(this.isDisplayModeList ? 'grid' : 'list')
         }
     }
 }

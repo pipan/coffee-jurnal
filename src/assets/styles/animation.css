@@ -96,3 +96,34 @@
 .animation--slide-right-leave .view { transform: translateX(0%); }
 .animation--slide-right-enter-active .view { transform: translateX(0%); }
 .animation--slide-right-enter .view { transform: translateX(-100%); }
+
+
+.animation-display-mode .svg-1, .animation-display-mode .svg-2, .animation-display-mode .svg-3, .animation-display-mode .svg-4 {
+    transition: transform 0.3s ease;
+}
+
+.animation-display-mode.animation-display-mode--grid .svg-1 {
+    transform: translateX(12.5%) translateY(12.5%);
+}
+.animation-display-mode.animation-display-mode--grid .svg-2 {
+    transform: translateX(57.5%) translateY(12.5%);
+}
+.animation-display-mode.animation-display-mode--grid .svg-3 {
+    transform: translateX(12.5%) translateY(57.5%);
+}
+.animation-display-mode.animation-display-mode--grid .svg-4 {
+    transform: translateX(57.5%) translateY(57.5%);
+}
+
+.animation-display-mode.animation-display-mode--list .svg-1 {
+    transform: translateX(12.5%) translateY(12.5%) scale(2.5, 0.5);
+}
+.animation-display-mode.animation-display-mode--list .svg-2 {
+    transform: translateX(12.5%) translateY(42.5%) scale(2.5, 0.5);
+}
+.animation-display-mode.animation-display-mode--list .svg-3 {
+    transform: translateX(12.5%) translateY(72.5%) scale(2.5, 0.5);
+}
+.animation-display-mode.animation-display-mode--list .svg-4 {
+    transform: translateX(12.5%) translateY(102.5%) scale(2.5, 0.5);
+}

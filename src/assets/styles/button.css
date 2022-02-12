@@ -51,29 +51,17 @@
     transition-duration: 0ms;
 }
 
-.btn-fab.btn-fab--entity {
-    font-size: 1.6rem;
-    font-family: monospace;
-}
-
 .btn-fab.btn-fab--danger {
     background-color: var(--color-danger);
 }
 
-.btn.btn--icon {
-    width: 34px;
-}
-.btn.btn--icon img {
-    width: 100%;
-    display: block;
-}
-
-.btn.btn--square {
+.btn.btn--circle {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
     padding: 0px;
     flex-shrink: 0;
+    border-radius: 100%;
 }

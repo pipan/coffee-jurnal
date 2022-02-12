@@ -81,13 +81,9 @@
 .gap-m { gap: var(--unit-m); }
 .gap-l { gap: var(--unit-l); }
 
-.flex-grow {
-    flex-grow: 1;
-}
+.flex-grow { flex-grow: 1; }
 
-.pos-r {
-    position: relative;
-}
+.pos-r { position: relative; }
 
 .scroll-x { overflow-x: auto; }
 .hidden-y { overflow-y: hidden; }

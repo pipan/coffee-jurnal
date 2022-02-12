@@ -5,8 +5,8 @@
                 <header>
                     <h1>Journal</h1>
                     <div class="action action--no-padding">
-                        <button type="button" class="btn btn--square animation-display-mode" :class="gridIconClass" @click="toggleDisplayMode()">
-                            <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                        <button type="button" class="btn btn--sircle animation-display-mode" :class="gridIconClass" @click="toggleDisplayMode()">
+                            <svg class="icon icon--m" xmlns="http://www.w3.org/2000/svg">
                                 <g>
                                     <rect fill="#fff" x="0" y="0" width="30%" height="30%" class="svg-1" />
                                     <rect fill="#fff" x="0" y="0" width="30%" height="30%" class="svg-2" />
@@ -34,7 +34,7 @@
             <router-link :to="{ name: 'Create' }" class="btn-fab" v-if="isRouteMode">
                 <img class="icon icon--l" src="/img/assets/add_icon.svg" />
             </router-link>
-            <button type="button" class="btn-fab btn-fab--entity" v-if="isCheckMode" @click="uncheckAll()">
+            <button type="button" class="btn-fab" v-if="isCheckMode" @click="uncheckAll()">
                 <img class="icon icon--l" src="/img/assets/close_icon.svg" />
             </button>
             <button type="button" class="btn-fab btn-fab--danger" v-if="isCheckMode" @click="deleteSelected()">

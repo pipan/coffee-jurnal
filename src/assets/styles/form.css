@@ -4,20 +4,6 @@
     gap: var(--unit-m);
 }
 
-.input {
-    position: relative;
-    display: block;
-    box-sizing: border-box;
-    padding: var(--unit-s);
-    width: 100%;
-    border: 1px solid var(--color-border);
-    border-radius: var(--unit-s);
-}
-
-.input:focus-within {
-    border-color: var(--color-primary-darker);
-}
-
 .input-simple {
     background-color: transparent;
     border-radius: 100px;
@@ -44,25 +30,6 @@
     font-size: var(--font-m);
 }
 
-.input__button {
-    position: absolute;
-    right: var(--unit-s);
-    box-sizing: border-box;
-    cursor: pointer;
-    color: var(--color-fg);
-    border-radius: 100%;
-    background-color: transparent;
-    border: none;
-    width: 37px;
-    height: 37px;
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: emoji;
-    transition: background-color ease 180ms;
-}
-
 .rating {
     box-sizing: border-box;
     cursor: pointer;
@@ -80,12 +47,7 @@
     transition: background-color ease 180ms;
 }
 
-.input__button.input__button--split {
-    font-size: 0.8rem;
-    height: 24px;
-}
-
-.input__button:active, .rating:active {
+.rating:active {
     background-color: var(--color-active);
     transition-duration: 0ms;
 }
@@ -98,19 +60,6 @@ textarea {
     resize: none;
 }
 
-.input input, .input textarea {
-    width: 100%;
-    background-color: transparent;
-    border: none;
-    color: var(--color-fg);
-    font-size: 16px;
-    padding: var(--unit-s) 0px;
-}
-
-.input input:focus {
-    outline: none
-}
-
 select {
     background-color: transparent;
     border: none;
@@ -118,18 +67,6 @@ select {
     color: var(--color-border);
     border-radius: var(--unit-s);
     font-size: 1rem;
-}
-
-.selector-mark {
-    box-sizing: border-box;
-    width: var(--unit-m);
-    height: var(--unit-m);
-    border: 2px solid var(--color-border);
-    border-radius: 100%;
-}
-
-.selector-mark.selector-mark--active {
-    border-color: var(--color-primary);
 }
 
 .autocomplete {

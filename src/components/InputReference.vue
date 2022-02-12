@@ -1,6 +1,6 @@
 <template>
     <InlineInput :label="label">
-        <div class="pos-r flex-grow row gap-m">
+        <div class="flex-grow row row--middle gap-s">
             <input class="input-simple" :class="{'input-simple--active': this.value}" type="text"
                 autocomplete="off"
                 :value="value"
@@ -8,7 +8,9 @@
                 @input="change($event.target.value)"
                 @focus="openAutocomplete()"
                 @blur="closeAutocomplete()"/>
-            <button type="button" class="input__button" v-if="this.value" @click="change('')">&Cross;</button>
+            <button type="button" class="btn btn--secondary btn--circle" v-if="this.value" @click="change('')">
+                <img class="icon icon--m" src="/img/assets/close_icon_fg.svg" />
+            </button>
             <InputAutocomplete :options="optionsFiltered | orderAlphabetical('asc')" @select="change($event)" :visible="autocompleteVisible"></InputAutocomplete>
         </div>
     </InlineInput>

@@ -11,6 +11,4 @@
 .text-m { font-size: var(--font-m); }
 .text-l { font-size: var(--font-l); }
 
-.mono {
-    font-family: monospace;
-}
+.mono { font-family: monospace; }

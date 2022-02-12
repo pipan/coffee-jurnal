@@ -25,9 +25,9 @@
                 </div>
             </div>
             <div class="row">
-                <button type="button" class="btn btn--secondary btn--square"
+                <button type="button" class="btn btn--secondary btn--circle"
                     @click.stop="decreaseQuality()">&#x25BC;</button>
-                <button type="button" class="btn btn--secondary btn--square"
+                <button type="button" class="btn btn--secondary btn--circle"
                     @click.stop="increaseQuality()">&#x25B2;</button>
             </div>
         </div>

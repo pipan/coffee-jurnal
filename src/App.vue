@@ -92,7 +92,6 @@ export default {
 @import "./assets/styles/toggle.css";
 @import "./assets/styles/button.css";
 @import "./assets/styles/text.css";
-@import "./assets/styles/tag.css";
 @import "./assets/styles/modal.css";
 @import "./assets/styles/progress.css";
 @import "./assets/styles/icon.css";

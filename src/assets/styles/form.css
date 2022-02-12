@@ -30,6 +30,11 @@
     font-size: var(--font-m);
 }
 
+.input__button {
+    position: absolute;
+    right: var(--unit-s);
+}
+
 .rating {
     box-sizing: border-box;
     cursor: pointer;

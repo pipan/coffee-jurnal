@@ -1,5 +1,5 @@
 <template>
-    <transition-group tag="div" class="row gap-s scroll-x" name="list">
+    <transition-group tag="div" class="row gap-s scroll-x" name="list" @before-leave="onBeforeLeave($event)">
         <button v-for="item of normOptions"
             :key="item.id"
             class="toggle"
@@ -56,6 +56,9 @@ export default {
         },
         isActive: function (id) {
             return this.value.indexOf(id) > -1
+        },
+        onBeforeLeave: function (element) {
+            element.style.left = element.offsetLeft + "px"
         }
     }
 }

@@ -1,6 +1,5 @@
 .toggle {
     cursor: pointer;
-    display: block;
     border: 1px solid var(--color-border);
     border-radius: 20px;
     padding: var(--unit-s) var(--unit-m);

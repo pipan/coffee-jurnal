@@ -53,6 +53,7 @@
                         :options="coffeeRoasterOptions | orderAlphabetical('asc')"
                         :value="filters.coffeeRoaster"
                         @change="setValue('coffeeRoaster', $event)"></SelectList>
+                    <RatingRange :value="filters.rating || []" @change="setValue('rating', $event)"></RatingRange>    
                 </div>
                 <div class="pt-m row row--center gap-m">
                     <button type="button" class="btn btn--secondary" @click="close()">CANCEL</button>
@@ -67,10 +68,11 @@
 import SelectList from '../components/SelectList.vue'
 import InlineInput from '../components/InlineInput.vue'
 import MultiToggleSwitch from '../components/MultiToggleSwitch.vue'
+import RatingRange from '../components/RatingRange.vue'
 
 export default {
     name: 'FilterView',
-    components: { SelectList, InlineInput, MultiToggleSwitch },
+    components: { SelectList, InlineInput, MultiToggleSwitch, RatingRange },
     metaInfo: function () {
         return {
             title: "Stats Filters | CJ"
@@ -83,13 +85,14 @@ export default {
     },
     computed: {
         queryNorm: function () {
-            const normKeys = ['coffeeType', 'coffeeRoastIntensity', 'coffeePlace', 'coffeeOrigin', 'coffeeRost']
+            const normKeys = ['coffeeType', 'coffeeRoastIntensity', 'coffeePlace', 'coffeeOrigin', 'coffeeRost', 'rating']
             let norm = this.$route.query
             for (const key of normKeys) {
                 if (norm[key] && !Array.isArray(norm[key])) {
                     norm[key] = [norm[key]]
                 }
             }
+            norm.rating = this.toIntList(norm.rating)
             return norm
         },
         filters: function () {
@@ -144,14 +147,12 @@ export default {
                 query: query
             })
         },
-        normQueryparam: function (queryValue) {
-            if (queryValue === undefined) {
-                return []
+        toIntList: function (stringList) {
+            let list = []
+            for (const item of stringList) {
+                list.push(parseInt(item))
             }
-            if (typeof queryValue == "string") {
-                return [queryValue]
-            }
-            return queryValue
+            return list
         }
     }
 }

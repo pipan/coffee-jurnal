@@ -142,9 +142,9 @@
     transition: all var(--animation-duration-m) var(--animation-function);
 }
 
-.list-enter, .list-leave-active {
+.list-enter, .list-leave-active{
     opacity: 0;
-    transform: scale(0);
+    transform: scale(0.01);
 }
 
 .list-leave-active {

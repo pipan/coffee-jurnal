@@ -39,7 +39,7 @@
     box-sizing: border-box;
     cursor: pointer;
     color: var(--color-fg);
-    border-radius: var(--unit-s);
+    border-radius: 100px;
     background-color: transparent;
     border: none;
     width: 44px;

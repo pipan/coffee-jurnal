@@ -33,7 +33,6 @@
 }
 
 .context-menu__item {
-    cursor: pointer;
     box-sizing: border-box;
     padding: var(--unit-m);
     transition: background-color ease 180ms;

@@ -37,7 +37,6 @@
 
 .rating {
     box-sizing: border-box;
-    cursor: pointer;
     color: var(--color-fg);
     border-radius: 100px;
     background-color: transparent;

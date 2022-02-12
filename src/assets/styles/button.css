@@ -44,6 +44,7 @@
     transition: background-color ease 320ms;
     text-decoration: none;
     font-weight: bold;
+    cursor: default;
 }
 
 .btn-fab:active {

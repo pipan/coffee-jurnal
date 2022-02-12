@@ -145,6 +145,7 @@ nav {
     font-size: var(--font-s);
     padding: 12px var(--unit-l);
     border-radius: 20px;
+    cursor: default;
 }
 .navigation-item:hover {
     background-color: var(--color-hover);

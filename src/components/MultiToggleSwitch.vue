@@ -1,12 +1,12 @@
 <template>
-    <div class="row gap-s scroll-x">
+    <transition-group tag="div" class="row gap-s scroll-x" name="list">
         <button v-for="item of normOptions"
             :key="item.id"
             class="toggle"
             :class="{ 'toggle--active': item.active }"
             type="button"
             @click="select(item.id)">{{ item.name }}</button>
-    </div>
+    </transition-group>
 </template>
 
 <script>

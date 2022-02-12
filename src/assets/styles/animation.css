@@ -1,9 +1,7 @@
 
 
 .animation--fade-leave-active, .animation--fade-enter-active {
-    transition-property: opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: var(--animation-function);
+    transition: opacity var(--animation-duration-m) var(--animation-function);
 }
 .animation--fade-enter, .animation--fade-leave-to {
     opacity: 0;
@@ -95,14 +93,14 @@
     transition-delay: calc(var(--animation-duration-l) / 3);
 }
 
-.animation--slide-left-leave-active .fab-container { transform: translateX(-50%) translateY(100%); opacity: 0; }
+.animation--slide-left-leave-active .fab-container { transform: translateX(-50%) translateY(150%); opacity: 0; }
 .animation--slide-left-leave .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
-.animation--slide-right-leave-active .fab-container { transform: translateX(-50%) translateY(100%); opacity: 0; }
+.animation--slide-right-leave-active .fab-container { transform: translateX(-50%) translateY(150%); opacity: 0; }
 .animation--slide-right-leave .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
 .animation--slide-left-enter-active .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
-.animation--slide-left-enter .fab-container { transform: translateX(-50%) translateY(50%) scale(0.7); opacity: 0; }
+.animation--slide-left-enter .fab-container { transform: translateX(-50%) translateY(50%); opacity: 0; }
 .animation--slide-right-enter-active .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
-.animation--slide-right-enter .fab-container { transform: translateX(-50%) translateY(50%) scale(0.7); opacity: 0; }
+.animation--slide-right-enter .fab-container { transform: translateX(-50%) translateY(50%); opacity: 0; }
 
 .animation--slide-left-leave-active .view { transform: translateX(-100%); }
 .animation--slide-left-leave .view { transform: translateX(0%); }
@@ -142,4 +140,17 @@
 }
 .animation-display-mode.animation-display-mode--list .svg-4 {
     transform: translateX(12.5%) translateY(102.5%) scale(2.5, 0.5);
+}
+
+.list-move, .list-enter-active, .list-leave-active {
+    transition: all var(--animation-duration-m) var(--animation-function);
+}
+
+.list-enter, .list-leave-active {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.list-leave-active {
+    position: absolute;
 }

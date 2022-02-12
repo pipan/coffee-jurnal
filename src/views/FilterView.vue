@@ -92,7 +92,7 @@ export default {
                     norm[key] = [norm[key]]
                 }
             }
-            norm.rating = this.toIntList(norm.rating)
+            norm.rating = this.toIntList(norm.rating || [])
             return norm
         },
         filters: function () {

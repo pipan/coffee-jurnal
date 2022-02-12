@@ -8,7 +8,7 @@ import { ListFilter } from "./ListFilter"
 export class CoffeeFilter {
     static fromQuery(params) {
         let ratingsInt = []
-        for (const rating of params.rating) {
+        for (const rating of params.rating || []) {
             ratingsInt.push(parseInt(rating))
         }
         return new ListFilter([

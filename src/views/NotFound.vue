@@ -1,5 +1,5 @@
 <template>
-    <div class="column flex-grow view">
+    <div class="column flex-grow">
         <header>
             <h1>Na-ah</h1>
         </header>

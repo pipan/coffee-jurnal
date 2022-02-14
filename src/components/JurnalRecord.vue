@@ -1,9 +1,11 @@
 <template>
     <div @click="select(item.id)" class="record" :class="{'record--checked': checked}" @contextmenu.prevent="setChecked(true)">
-        <div class="record__label">{{ label }}</div>
         <div class="record__checkbox" @click.stop><input type="checkbox" :checked="checked" @change="setChecked($event.target.checked)" v-if="withCheckbox" /></div>
         <div class="record__detail">
-            <div class="record__title">{{ item.coffeePlace }}</div>
+            <div class="record__title">
+                <img class="icon icon--m" :src="coffeeTypeIcon" />
+                <div class="ellipsis">{{ item.coffeePlace }}</div>
+            </div>
             <div class="record__subtitle">{{ subtitle }}</div>
         </div>
         <div class="record__tasting">
@@ -69,8 +71,11 @@ export default {
             }
             return parts.join(', ')
         },
-        label: function() {
-            return this.item.coffeeType == 'espresso' ? 'e' : 'f'
+        coffeeTypeIcon: function () {
+            if (this.item.coffeeType == 'filter') {
+                return '/img/assets/coffee_type_filter_icon.svg'
+            }
+            return '/img/assets/coffee_type_espreso_icon.svg'
         }
     },
     methods: {

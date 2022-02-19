@@ -28,6 +28,8 @@
     flex-basis: 20%;
     flex-shrink: 0;
     font-size: var(--font-m);
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .input__button {

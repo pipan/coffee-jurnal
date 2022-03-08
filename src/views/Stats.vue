@@ -47,6 +47,7 @@ import RatingTimeline from '../components/RatingTimeline.vue'
 import Journal from '../components/Journal.vue'
 import MultiToggleSwitch from '../components/MultiToggleSwitch.vue'
 import { CoffeeFilter } from '../filters/CoffeeFilter.js'
+import { BatchJob } from '../services/BatchJob'
 
 export default {
     name: 'Stats',
@@ -58,7 +59,8 @@ export default {
     },
     data: function () {
         return {
-            filterParamsAdapter: CoffeeFilter.adapter()
+            filterParamsAdapter: CoffeeFilter.adapter(),
+            dataset: []
         }
     },
     computed: {
@@ -67,9 +69,6 @@ export default {
         },
         hasData: function() {
             return this.dataset.length > 0
-        },
-        dataset: function () {
-            return this.filter.filter(this.items)
         },
         journalItems: function () {
             return this.dataset.slice(0, 30)
@@ -138,6 +137,19 @@ export default {
                 params: { id }
             })
         },
+    },
+    watch: {
+        items: {
+            immediate: true,
+            handler: function (val) {
+                this.dataset = []
+                const job = new BatchJob(val, { busyLimit: 30, sleepTime: 20 })
+                job.forEach((items) => {
+                    const filtered = this.filter.filter(items)
+                    this.dataset = [...this.dataset, ...filtered]
+                })
+            }
+        }
     }
 }
 </script>

@@ -106,6 +106,7 @@
     height: 0px;
     border-radius: 50%;
     background-color: var(--color-border);
+    transition: width ease 120ms, height ease 120ms, background-color ease 120ms;
 }
 
 .property-graph__dot.property-graph__dot--active {

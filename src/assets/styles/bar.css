@@ -3,6 +3,10 @@
     background-color: var(--color-border);
 }
 
+.bar.bar--transition {
+    transition: width ease 120ms, height ease 120ms, background-color ease 120ms;
+}
+
 .bar.bar--y { width: var(--unit-s); }
 .bar--y.bar--intensity-1 { height: 4%; }
 .bar--y.bar--intensity-2 { height: 25%; }

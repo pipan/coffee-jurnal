@@ -46,6 +46,7 @@
 
 <script>
 import Journal from '../components/Journal.vue'
+import { StaticBatchJob } from '../services/StaticBatckJob'
 
 export default {
     name: 'Home',
@@ -58,17 +59,13 @@ export default {
     data: function () {
         return {
             checked: [],
-            perPageLimit: 30
+            perPageLimit: 30,
+            itemsPaginated: []
         }
     },
     computed: {
         items: function () {
             return this.$store.getters.chronologicalItems
-        },
-        itemsPaginated: function () {
-            const start = this.perPageLimit * (this.currentPage - 1)
-            const end = start + this.perPageLimit
-            return this.items.slice(start, end)
         },
         mode: function () {
             if (this.checked.length > 0) {
@@ -104,7 +101,27 @@ export default {
             return this.isDisplayModeList ? 'animation-display-mode--grid' : 'animation-display-mode--list'
         }
     },
+    watch: {
+        currentPage: function () {
+            this.load()
+        },
+        items: {
+            immediate: true,
+            handler: function () {
+                this.load()
+            }
+        }
+    },
     methods: {
+        load: function () {
+            const start = this.perPageLimit * (this.currentPage - 1)
+            const end = start + this.perPageLimit
+            this.itemsPaginated = []
+            const job = new StaticBatchJob(this.items.slice(start, end), { size: 3 })
+            job.forEach((batch) => {
+                this.itemsPaginated = [...this.itemsPaginated, ...batch]
+            })
+        },
         checkChange: function (event) {
             let newValue = [...this.checked]
             if (event.value) {

@@ -1,7 +1,7 @@
 <template>
     <div class="rating-composition" :class="classes">
         <div class="rating-composition__bar">
-            <div class="bar bar--y" :style="{ height: size }"></div>
+            <div class="bar bar--y bar--transition" :style="{ height: size }"></div>
         </div>
         <div v-html="'&#x2606;'"></div>
     </div>

@@ -10,6 +10,7 @@ export class BatchJob {
         this.batchStartIndex = 0
         this.batchSize = 1
         this.items = items
+        this.enabled = true
     }
 
     onComplete(fn) {
@@ -23,6 +24,9 @@ export class BatchJob {
     }
 
     run() {
+        if (!this.enabled) {
+            return
+        }
         const startTime = new Date().getTime()
         new Promise((resolve) => {
             const result = this.forEachFn(this.items.slice(this.batchStartIndex, this.batchStartIndex + this.batchSize))
@@ -46,6 +50,9 @@ export class BatchJob {
             }
             setTimeout(() => { this.run() }, this.config.sleepTime)
         })
-        
+    }
+
+    stop() {
+        this.enabled = false
     }
 }

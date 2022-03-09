@@ -60,7 +60,8 @@ export default {
     data: function () {
         return {
             filterParamsAdapter: CoffeeFilter.adapter(),
-            dataset: []
+            dataset: [],
+            datasetJob: null
         }
     },
     computed: {
@@ -99,7 +100,33 @@ export default {
             }))
         }
     },
+    watch: {
+        filter: function () {
+            this.makeDataset()
+        },
+        items: {
+            immediate: true,
+            handler: function () {
+                this.makeDataset()
+            }
+        }
+    },
     methods: {
+        makeDataset: function () {
+            if (this.datasetJob) {
+                this.datasetJob.stop()
+            }
+            this.dataset = []
+            let filtered = []
+            this.datasetJob = new BatchJob(this.items, { busyLimit: 30, sleepTime: 20 })
+            this.datasetJob.onComplete(() => {
+                this.dataset = filtered
+                this.datasetJob = null
+            }).forEach((items) => {
+                const filteredItems = this.filter.filter(items)
+                filtered.push(...filteredItems)
+            })
+        },
         setFilters: function (ids) {
             let newFilterList = []
             for (const filter of this.filtersList) {
@@ -137,19 +164,6 @@ export default {
                 params: { id }
             })
         },
-    },
-    watch: {
-        items: {
-            immediate: true,
-            handler: function (val) {
-                this.dataset = []
-                const job = new BatchJob(val, { busyLimit: 30, sleepTime: 20 })
-                job.forEach((items) => {
-                    const filtered = this.filter.filter(items)
-                    this.dataset = [...this.dataset, ...filtered]
-                })
-            }
-        }
     }
 }
 </script>

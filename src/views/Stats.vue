@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="view" v-screen-transform-origin="'50vw calc(50vh + {SCROLL_Y}px)'">
+        <div class="view" v-screen-transform-origin="'50vw calc(50vh + {SCROLL_Y}px)'" ref="view">
             <div class="view-content">
                 <header>
                     <h1>Stats</h1>
@@ -62,7 +62,8 @@ export default {
             filterParamsAdapter: CoffeeFilter.adapter(),
             dataset: [],
             datasetJob: null,
-            filter: CoffeeFilter.fromQuery({})
+            filter: CoffeeFilter.fromQuery({}),
+            scrollPosition: 0
         }
     },
     computed: {
@@ -116,7 +117,18 @@ export default {
             }
         }
     },
+    activated: function () {
+        window.scrollTo(0, this.scrollPosition)
+        window.addEventListener('scroll', this.setScrollPosition)
+    },
+    deactivated: function () {
+        window.removeEventListener('scroll', this.setScrollPosition)
+        this.$refs.view.scrollTo(0, this.scrollPosition)
+    },
     methods: {
+        setScrollPosition: function(event) {
+            this.scrollPosition = event.target.scrollingElement.scrollTop
+        },
         makeDataset: function () {
             if (this.datasetJob) {
                 this.datasetJob.stop()

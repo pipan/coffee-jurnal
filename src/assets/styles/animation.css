@@ -78,10 +78,14 @@
     transition-property: transform;
     transition-duration: var(--animation-duration-l);
     transition-timing-function: var(--animation-function);
+}
+
+.animation--slide-left-leave-active .view, .animation--slide-right-leave-active .view {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100vh - var(--navigation-height));
+    overflow-y: auto;
     box-sizing: border-box;
 }
 

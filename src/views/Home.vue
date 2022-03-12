@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="view" v-screen-transform-origin="'50vw calc(50vh + {SCROLL_Y}px)'">
+        <div class="view" v-screen-transform-origin="'50vw calc(50vh + {SCROLL_Y}px)'" ref="view">
             <div class="view-content">
                 <header>
                     <h1>Journal</h1>
@@ -60,7 +60,8 @@ export default {
         return {
             checked: [],
             perPageLimit: 30,
-            itemsPaginated: []
+            itemsPaginated: [],
+            scrollPosition: 0
         }
     },
     computed: {
@@ -112,7 +113,18 @@ export default {
             }
         }
     },
+    activated: function () {
+        window.scrollTo(0, this.scrollPosition)
+        window.addEventListener('scroll', this.setScrollPosition)
+    },
+    deactivated: function () {
+        window.removeEventListener('scroll', this.setScrollPosition)
+        this.$refs.view.scrollTo(0, this.scrollPosition)
+    },
     methods: {
+        setScrollPosition: function(event) {
+            this.scrollPosition = event.target.scrollingElement.scrollTop
+        },
         load: function () {
             const start = this.perPageLimit * (this.currentPage - 1)
             const end = start + this.perPageLimit

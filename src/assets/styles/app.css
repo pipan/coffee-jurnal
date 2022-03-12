@@ -138,6 +138,7 @@ nav {
 
 .navigation-view {
     padding-bottom: var(--navigation-height);
+    overflow-x: hidden;
 }
 
 .navigation-item {

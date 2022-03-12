@@ -1,7 +1,9 @@
 <template>
     <div>
         <transition :name="transitionName" :duration="300">
-            <router-view class="navigation-view" />
+            <KeepAlive :include="['Home', 'Stats']">
+                <router-view class="navigation-view" />
+            </KeepAlive>
         </transition>
         <nav>
             <router-link :to="{ name: 'Home' }" class="navigation-item" exact-path>Journal</router-link>

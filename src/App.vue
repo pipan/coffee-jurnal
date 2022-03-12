@@ -1,7 +1,9 @@
 <template>
     <div class="column flex-grow">
         <transition :name="transitionName">
-            <router-view />
+            <KeepAlive :include="['NavigationLayout']">
+                <router-view />
+            </KeepAlive>
         </transition>
         <transition name="animation--fade">
             <Modal v-if="isUpdating">

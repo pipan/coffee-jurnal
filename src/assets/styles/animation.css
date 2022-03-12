@@ -150,3 +150,21 @@
 .list-leave-active {
     position: absolute;
 }
+
+.reflection-animation {
+    animation-name: reflection;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+    background: linear-gradient(105deg, rgba(0,0,0,0) 40%, rgba(32,32,32,1) 50%, rgba(0,0,0,0) 85%);
+    background-size: 600%;
+}
+
+@keyframes reflection {
+    0% {
+      background-position: center left;
+    }
+    100% {
+        background-position: center right;
+    }
+}

@@ -61,7 +61,8 @@ export default {
         return {
             filterParamsAdapter: CoffeeFilter.adapter(),
             dataset: [],
-            datasetJob: null
+            datasetJob: null,
+            filter: CoffeeFilter.fromQuery({})
         }
     },
     computed: {
@@ -73,9 +74,6 @@ export default {
         },
         journalItems: function () {
             return this.dataset.slice(0, 30)
-        },
-        filter: function () {
-            return CoffeeFilter.fromQuery(this.$route.query)
         },
         filtersList: function () {
             const list = this.filterParamsAdapter.toList(this.$route.query)
@@ -101,6 +99,13 @@ export default {
         }
     },
     watch: {
+        '$route.query': function (value) {
+            const newFilter = CoffeeFilter.fromQuery(value)
+            if (JSON.stringify(this.filter) === JSON.stringify(newFilter)) {
+                return
+            }
+            this.filter = newFilter
+        },
         filter: function () {
             this.makeDataset()
         },

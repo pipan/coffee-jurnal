@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="navigation-view">
-            <transition :name="transitionName" :duration="6000">
+            <transition :name="transitionName" :duration="300">
                 <KeepAlive :include="['Home', 'Stats']">
                     <router-view />
                 </KeepAlive>

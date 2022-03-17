@@ -91,6 +91,13 @@ a {
     justify-content: center;
     flex-grow: 1;
     background-color: var(--color-bg);
+    transition-property: transform;
+    transition-duration: var(--animation-duration-l);
+    transition-timing-function: var(--animation-function);
+}
+
+.view.view--manual-transition {
+    transition: none;
 }
 
 header {

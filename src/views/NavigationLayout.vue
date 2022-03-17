@@ -1,11 +1,12 @@
 <template>
     <div>
         <div class="navigation-view">
-            <transition :name="transitionName" :duration="6000">
+            <transition :name="transitionName" :duration="300">
                 <KeepAlive :include="['Home', 'Stats']">
-                    <router-view />
+                    <SwipeRouter></SwipeRouter>
                 </KeepAlive>
             </transition>
+            <!-- <Stats v-if="styleStats !== false" :style="styleStats" style="position: absolute; width: 100%; top: 0; left: 0;"></Stats> -->
         </div>
         <nav>
             <router-link :to="{ name: 'Home' }" class="navigation-item" exact-path>Journal</router-link>
@@ -15,11 +16,17 @@
 </template>
 
 <script>
+import SwipeRouter from '../components/SwipeRouter.vue'
+
 export default {
     name: 'NavigationLayout',
+    components: { SwipeRouter },
     data: function () {
         return {
-            transitionName: ''
+            transitionName: '',
+            touchOrigin: {},
+            style: {},
+            styleStats: false
         }
     },
     watch: {

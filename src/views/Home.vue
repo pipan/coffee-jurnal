@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="view" v-screen-transform-origin="'50vw calc(50vh + {SCROLL_Y}px)'" ref="view">
+        <div class="view" :class="{'view--manual-transition': transform.transform }" v-screen-transform-origin="'50vw calc(50vh + {SCROLL_Y}px)'" ref="view" :style="transform">
             <div class="view-content">
                 <header>
                     <h1>Journal</h1>
@@ -30,7 +30,7 @@
                     </div>
             </div>
         </div>
-        <div class="fab-container">
+        <div class="fab-container" :style="transformFab">
             <router-link :to="{ name: 'Create' }" class="btn-fab" v-if="isRouteMode">
                 <img class="icon icon--l" src="/img/assets/add_icon.svg" />
             </router-link>
@@ -61,7 +61,9 @@ export default {
             checked: [],
             perPageLimit: 30,
             itemsPaginated: [],
-            scrollPosition: 0
+            scrollPosition: 0,
+            transform: {},
+            transformFab: {}
         }
     },
     computed: {
@@ -187,6 +189,39 @@ export default {
         },
         toggleDisplayMode: function () {
             this.setDisplayMode(this.isDisplayModeList ? 'grid' : 'list')
+        },
+        manualTransitionIn: function (diff) {
+            let abs = 1 - Math.abs(diff)
+            if (diff > 0) {
+                abs *= -1
+            }
+            this.transform = {
+                'position': 'fixed',
+                'top': '0',
+                'width': '100%',
+                'transform': `translateX(${abs * 100}%)`
+            }
+            this.transformFab = {
+                'opacity': Math.abs(diff),
+                'transform': `translateX(calc(-50% + ${abs * 100}px)) translateY(50%)`
+            }
+        },
+        manualTransitionInStop: function () {
+            this.transform = {}
+            this.transformFab = {}
+        },
+        manualTransitionOut: function (diff) {
+            this.transform = {
+                'transform': `translateX(${diff * 100}%)`
+            }
+            this.transformFab = {
+                'opacity': 1 - Math.abs(diff),
+                'transform': `translateX(calc(-50% + ${diff * 100}px)) translateY(50%)`
+            }
+        },
+        manualTransitionOutStop: function () {
+            this.transform = {}
+            this.transformFab = {}
         }
     }
 }

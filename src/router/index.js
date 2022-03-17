@@ -15,6 +15,7 @@ const routes = [
   {
     path: '/',
     component: NavigationLayout,
+    name: 'NavigationLayout',
     children: [
       {
         path: '',

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="view" v-screen-transform-origin="'50vw calc(50vh + {SCROLL_Y}px)'" ref="view">
+        <div class="view" :class="{'view--manual-transition': transform.transform }" v-screen-transform-origin="'50vw calc(50vh + {SCROLL_Y}px)'" ref="view" :style="transform">
             <div class="view-content">
                 <header>
                     <h1>Stats</h1>
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="fab-container">
+        <div class="fab-container" :style="transformFab">
             <router-link :to="{ name: 'Filter', query: $route.query }" class="btn-fab">
                 <img class="icon icon--l" src="/img/assets/filter_icon.svg" />
             </router-link>
@@ -63,7 +63,9 @@ export default {
             dataset: [],
             datasetJob: null,
             filter: CoffeeFilter.fromQuery({}),
-            scrollPosition: 0
+            scrollPosition: 0,
+            transform: {},
+            transformFab: {}
         }
     },
     computed: {
@@ -181,6 +183,39 @@ export default {
                 params: { id }
             })
         },
+        manualTransitionIn: function (diff) {
+            let abs = 1 - Math.abs(diff)
+            if (diff > 0) {
+                abs *= -1
+            }
+            this.transform = {
+                'position': 'fixed',
+                'top': '0px',
+                'width': '100%',
+                'transform': `translateX(${abs * 100}%)`
+            }
+            this.transformFab = {
+                'opacity': Math.abs(diff),
+                'transform': `translateX(calc(-50% + ${abs * 100}px)) translateY(50%)`
+            }
+        },
+        manualTransitionInStop: function () {
+            this.transform = {}
+            this.transformFab = {}
+        },
+        manualTransitionOut: function (diff) {
+            this.transform = {
+                'transform': `translateX(${diff * 100}%)`
+            }
+            this.transformFab = {
+                'opacity': 1 - Math.abs(diff),
+                'transform': `translateX(calc(-50% + ${diff * 100}px)) translateY(50%)`
+            }
+        },
+        manualTransitionOutStop: function () {
+            this.transform = {}
+            this.transformFab = {}
+        }
     }
 }
 </script>

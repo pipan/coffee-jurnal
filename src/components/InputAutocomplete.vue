@@ -5,11 +5,13 @@
             :key="option"
             class="autocomplete__item"
             @mousedown="select(option)"
-            @click="select(option)">{{ option | ellipsis(10) }}</button>
+            @click="select(option)">{{ applyEllipsis(option) }}</button>
     </div>
 </template>
 
 <script>
+import ellipsis from '../fn/ellipsis'
+
 export default {
     name: 'InputAutocomplete',
     props: {
@@ -22,6 +24,9 @@ export default {
     methods: {
         select: function (value) {
             this.$emit('select', value)
+        },
+        applyEllipsis: function (value) {
+            return ellipsis(value, 10)
         }
     }
 }

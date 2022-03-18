@@ -21,10 +21,10 @@
                     <RankList :dataset="dataset" @select="addFilter($event.type, $event.name)"></RankList>
                     <VisitList :dataset="dataset" @select="addFilter($event.type, $event.name)"></VisitList>
                     
-                    <Journal :items="journalItems"
+                    <CjJournal :items="journalItems"
                         :withCheckbox="false"
                         :display="displayMode"
-                        @select="selectRecord($event)"></Journal>
+                        @select="selectRecord($event)"></CjJournal>
                     <div class="py-s text-secondary text-center text-light" v-if="dataset.length > journalItems.length">Showing last {{ journalItems.length }} items out of {{ dataset.length }}</div>
                 </div>
             </div>
@@ -44,14 +44,14 @@ import RatingComposition from '../components/RatingComposition.vue'
 import IntensityComposition from '../components/IntensityComposition.vue'
 import QualityComposition from '../components/QualityComposition.vue'
 import RatingTimeline from '../components/RatingTimeline.vue'
-import Journal from '../components/Journal.vue'
+import CjJournal from '../components/Journal.vue'
 import MultiToggleSwitch from '../components/MultiToggleSwitch.vue'
 import { CoffeeFilter } from '../filters/CoffeeFilter.js'
 import { BatchJob } from '../services/BatchJob'
 
 export default {
-    name: 'Stats',
-    components: { QualityComposition, IntensityComposition, RatingComposition, RatingTimeline, RankList, VisitList, Journal, MultiToggleSwitch },
+    name: 'StatsView',
+    components: { QualityComposition, IntensityComposition, RatingComposition, RatingTimeline, RankList, VisitList, CjJournal, MultiToggleSwitch },
     metaInfo: function () {
         return {
             title: "Stats | CJ"

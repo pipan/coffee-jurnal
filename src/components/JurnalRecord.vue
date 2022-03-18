@@ -10,10 +10,10 @@
         </div>
         <div class="record__tasting">
             <div class="record__profile">
-                <Bar v-for="(bar, index) of bars"
+                <CjBar v-for="(bar, index) of bars"
                     :key="index"
                     :intensity="bar.intensity"
-                    :quality="bar.quality"></Bar>
+                    :quality="bar.quality"></CjBar>
             </div>
             <div class="record__rating">
                 <span class="record__rating-value">{{ ratingText }}</span>
@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import Bar from './Bar.vue'
+import CjBar from './Bar.vue'
 
 export default {
     name: 'JurnalRecord',
-    components: { Bar },
+    components: { CjBar },
     props: {
         item: [Object],
         checked: {

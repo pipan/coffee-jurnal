@@ -1,7 +1,7 @@
 const listenerMap = {}
 
 export default {
-    bind: function (element, binding) {
+    beforeMount: function (element, binding) {
         const hash = Math.random().toString().substring(2)
         element.dataset.ScreeTransformOriginId = hash
 
@@ -12,7 +12,7 @@ export default {
         }
         window.addEventListener('scroll', listenerMap[hash])
     },
-    unbind: function (element) {
+    unmounted: function (element) {
         const hash = element.dataset.ScreeTransformOriginId
         window.removeEventListener('scroll', listenerMap[hash])
         delete listenerMap[hash]

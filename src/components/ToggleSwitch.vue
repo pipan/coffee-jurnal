@@ -8,6 +8,7 @@ import MultiToggleSwitch from './MultiToggleSwitch.vue'
 export default {
     name: 'ToggleSwitch',
     components: { MultiToggleSwitch },
+    inheritAttrs: false,
     props: {
         nullable: {
             type: Boolean,

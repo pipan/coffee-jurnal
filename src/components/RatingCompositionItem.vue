@@ -3,7 +3,7 @@
         <div class="rating-composition__bar">
             <div class="bar bar--y bar--transition" :style="{ height: size }"></div>
         </div>
-        <div v-html="'&#x2606;'"></div>
+        <div>&#x2606;</div>
     </div>
 </template>
 

@@ -10,6 +10,7 @@
 <script>
 export default {
     name: 'StatCoffeeOrder',
+    inheritAttrs: false,
     props: {
         value: [String]
     },

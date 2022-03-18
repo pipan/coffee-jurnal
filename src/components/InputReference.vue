@@ -11,7 +11,7 @@
             <button type="button" class="btn btn--secondary btn--circle input__button" v-if="this.value" @click="change('')">
                 <img class="icon icon--m" src="/img/assets/close_icon_fg.svg" />
             </button>
-            <InputAutocomplete :options="optionsFiltered | orderAlphabetical('asc')" @select="change($event)" :visible="autocompleteVisible"></InputAutocomplete>
+            <InputAutocomplete :options="autocompleteOptions" @select="change($event)" :visible="autocompleteVisible"></InputAutocomplete>
         </div>
     </InlineInput>
 </template>
@@ -19,10 +19,12 @@
 <script>
 import InputAutocomplete from "./InputAutocomplete.vue";
 import InlineInput from "./InlineInput.vue";
+import orderAlphabetical from '../fn/orderAlphabetical'
 
 export default {
     name: 'InputReference',
     components: { InputAutocomplete, InlineInput },
+    inheritAttrs: false,
     props: {
         options: [Array],
         value: {
@@ -53,6 +55,9 @@ export default {
                 }
             }
             return result
+        },
+        autocompleteOptions: function () {
+            return orderAlphabetical(this.optionsFiltered, 'asc')
         }
     },
     methods: {
@@ -67,9 +72,6 @@ export default {
         },
         closeAutocomplete: function () {
             this.autocompleteVisible = false
-        },
-        toggleContext: function () {
-            this.$refs.contextMenu.toggle()
         }
     }
 }

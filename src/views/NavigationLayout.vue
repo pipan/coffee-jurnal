@@ -1,11 +1,13 @@
 <template>
     <div>
         <div class="navigation-view">
-            <transition :name="transitionName" :duration="300">
-                <KeepAlive :include="['Home', 'Stats']">
-                    <router-view />
-                </KeepAlive>
-            </transition>
+            <router-view v-slot="{ Component }">
+                <transition :name="transitionName" :duration="300">
+                    <KeepAlive :include="['HomeView', 'StatsView']">
+                        <component :is="Component"></component>
+                    </KeepAlive>
+                </transition>
+            </router-view>
         </div>
         <nav>
             <router-link :to="{ name: 'Home' }" class="navigation-item" exact-path>Journal</router-link>
@@ -24,6 +26,10 @@ export default {
     },
     watch: {
         '$route' (to, from) {
+            if (to.meta.transitionDepth !== from.meta.transitionDepth) {
+                this.transitionName = ''
+                return
+            }
             if (to.meta.transitionOrder > from.meta.transitionOrder) {
                 this.transitionName = 'animation--slide-left'
             } else {

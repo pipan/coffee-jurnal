@@ -3,10 +3,10 @@
 .animation--fade-leave-active, .animation--fade-enter-active {
     transition: opacity var(--animation-duration-m) var(--animation-function);
 }
-.animation--fade-enter, .animation--fade-leave-to {
+.animation--fade-enter-from, .animation--fade-leave-to {
     opacity: 0;
 }
-.animation--fade-leave, .animation--fade-enter-to {
+.animation--fade-leave-from, .animation--fade-enter-to {
     opacity: 1;
 }
 
@@ -22,22 +22,22 @@
 }
 
 .animation--slide-in-leave-active .fab-container { transform: translateX(-50%) translateY(150%); }
-.animation--slide-in-leave .fab-container { transform: translateX(-50%) translateY(50%); }
+.animation--slide-in-leave-from .fab-container { transform: translateX(-50%) translateY(50%); }
 .animation--slide-out-enter-active .fab-container { transform: translateX(-50%) translateY(50%); }
-.animation--slide-out-enter .fab-container { transform: translateX(-50%) translateY(150%); }
+.animation--slide-out-enter-from .fab-container { transform: translateX(-50%) translateY(150%); }
 
 .animation--slide-in-leave-active nav { transform: translateY(100%); }
-.animation--slide-in-leave nav { transform: translateY(0%); }
+.animation--slide-in-leave-from nav { transform: translateY(0%); }
 .animation--slide-out-enter-active nav { transform: translateY(0%); }
-.animation--slide-out-enter nav { transform: translateY(100%); }
+.animation--slide-out-enter-from nav { transform: translateY(100%); }
 
 .animation--slide-in-leave-active, .animation--slide-out-enter-active {
     transition: opacity var(--animation-duration-l) var(--animation-function);
 }
 .animation--slide-in-leave-active { opacity: 0; }
-.animation--slide-in-leave { opacity: 1; }
+.animation--slide-in-leave-from { opacity: 1; }
 .animation--slide-out-enter-active { opacity: 1; }
-.animation--slide-out-enter { opacity: 0; }
+.animation--slide-out-enter-from { opacity: 0; }
 
 
 .animation--slide-in-leave-active .view, .animation--slide-out-enter-active .view {
@@ -47,9 +47,9 @@
     transform-origin: 50vw 50vh;
 }
 .animation--slide-in-leave-active .view { transform: perspective(40cm) translateZ(-100px); }
-.animation--slide-in-leave .view { transform: perspective(40cm) translateZ(0px); }
+.animation--slide-in-leave-from .view { transform: perspective(40cm) translateZ(0px); }
 .animation--slide-out-enter-active .view { transform: perspective(40cm) translateZ(0px); }
-.animation--slide-out-enter .view { transform: perspective(40cm) translateZ(-100px); }
+.animation--slide-out-enter-from .view { transform: perspective(40cm) translateZ(-100px); }
 
 .animation--slide-in-enter-active, .animation--slide-out-leave-active {
     transition-property: transform, opacity;
@@ -60,7 +60,7 @@
     transform: translateY(0px);
     opacity: 1;
 }
-.animation--slide-in-enter {
+.animation--slide-in-enter-from {
     opacity: 0;
     transform: translateY(30vh);
 }
@@ -69,7 +69,7 @@
     opacity: 0;
     
 }
-.animation--slide-out-leave {
+.animation--slide-out-leave-from {
     opacity: 1;
     transform: translateY(0px);
 }
@@ -94,22 +94,22 @@
 }
 
 .animation--slide-left-leave-active .fab-container { transform: translateX(calc(-50% - 100px)) translateY(50%); opacity: 0; }
-.animation--slide-left-leave .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
+.animation--slide-left-leave-from .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
 .animation--slide-right-leave-active .fab-container { transform: translateX(calc(-50% + 100px)) translateY(50%); opacity: 0; }
-.animation--slide-right-leave .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
+.animation--slide-right-leave-from .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
 .animation--slide-left-enter-active .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
-.animation--slide-left-enter .fab-container { transform: translateX(calc(-50% + 100px)) translateY(50%); opacity: 0; }
+.animation--slide-left-enter-from .fab-container { transform: translateX(calc(-50% + 100px)) translateY(50%); opacity: 0; }
 .animation--slide-right-enter-active .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
-.animation--slide-right-enter .fab-container { transform: translateX(calc(-50% - 100px)) translateY(50%); opacity: 0; }
+.animation--slide-right-enter-from .fab-container { transform: translateX(calc(-50% - 100px)) translateY(50%); opacity: 0; }
 
 .animation--slide-left-leave-active .view { transform: translateX(-100%); }
-.animation--slide-left-leave .view { transform: translateX(0%); }
+.animation--slide-left-leave-from .view { transform: translateX(0%); }
 .animation--slide-left-enter-active .view { transform: translateX(0%); }
-.animation--slide-left-enter .view { transform: translateX(100%); }
+.animation--slide-left-enter-from .view { transform: translateX(100%); }
 .animation--slide-right-leave-active .view { transform: translateX(100%); }
-.animation--slide-right-leave .view { transform: translateX(0%); }
+.animation--slide-right-leave-from .view { transform: translateX(0%); }
 .animation--slide-right-enter-active .view { transform: translateX(0%); }
-.animation--slide-right-enter .view { transform: translateX(-100%); }
+.animation--slide-right-enter-from .view { transform: translateX(-100%); }
 
 
 .animation-display-mode .svg-1, .animation-display-mode .svg-2, .animation-display-mode .svg-3, .animation-display-mode .svg-4 {
@@ -146,7 +146,7 @@
     transition: all var(--animation-duration-m) var(--animation-function);
 }
 
-.list-enter, .list-leave-active{
+.list-enter-from, .list-leave-active{
     opacity: 0;
     transform: scale(0.01);
 }

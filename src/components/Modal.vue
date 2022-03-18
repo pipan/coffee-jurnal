@@ -8,7 +8,7 @@
 
 <script>
 export default {
-    name: 'Modal',
+    name: 'CjModal',
     data: function () {
         return {
             preventClosing: false

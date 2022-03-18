@@ -16,7 +16,7 @@
 import CoffeeDetailForm from "../components/CoffeeDetailForm.vue"
 
 export default {
-    name: 'Create',
+    name: 'CreateView',
     components: { CoffeeDetailForm },
     metaInfo: function () {
         return {

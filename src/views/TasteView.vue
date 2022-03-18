@@ -45,7 +45,7 @@ import RatingInput from '../components/RatingInput.vue'
 import NotFound from './NotFound.vue'
 
 export default {
-    name: 'Taste',
+    name: 'TasteView',
     components: { PropertyRatingInput, RatingInput, NotFound },
     data: function () {
         return {

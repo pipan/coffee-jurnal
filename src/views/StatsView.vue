@@ -52,10 +52,8 @@ import { BatchJob } from '../services/BatchJob'
 export default {
     name: 'StatsView',
     components: { QualityComposition, IntensityComposition, RatingComposition, RatingTimeline, RankList, VisitList, CjJournal, MultiToggleSwitch },
-    metaInfo: function () {
-        return {
-            title: "Stats | CJ"
-        }
+    title: function () {
+        return "Stats | CJ"
     },
     data: function () {
         return {

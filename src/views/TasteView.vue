@@ -61,10 +61,8 @@ export default {
             }
         }
     },
-    metaInfo: function () {
-        return {
-            title: "Tasting | CJ"
-        }
+    title: function () {
+        return "Tasting | CJ"
     },
     computed: {
         item: function () {

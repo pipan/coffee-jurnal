@@ -34,10 +34,8 @@ import { BatchJob } from '../services/BatchJob.js'
 export default {
     name: 'ImportView',
     components: { CjModal },
-    metaInfo: function () {
-        return {
-            title: "Import Cups | CJ"
-        }
+    title: function () {
+        return "Import Cups | CJ"
     },
     data: function () {
         return {

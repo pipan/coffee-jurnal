@@ -2,17 +2,16 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { createMetaManager, plugin as metaPlugin } from 'vue-meta'
 import './registerServiceWorker'
 
 import ScreenTransformOrigin from './directives/ScreenTransformOrigin.js'
+import TitlePlugin from './title/TitlePlugin'
 
 const app = createApp(App)
 
 app.use(router)
 app.use(store)
-app.use(createMetaManager())
-app.use(metaPlugin)
+app.use(TitlePlugin)
 app.directive('screen-transform-origin', ScreenTransformOrigin)
 
 app.mount('#app')

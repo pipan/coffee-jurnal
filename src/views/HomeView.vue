@@ -47,11 +47,13 @@
 <script>
 import CjJournal from '../components/Journal.vue'
 import { StaticBatchJob } from '../services/StaticBatckJob'
-import { useMeta } from 'vue-meta'
 
 export default {
     name: 'HomeView',
     components: { CjJournal },
+    title: function () {
+        return "Coffee Journal"
+    },
     data: function () {
         return {
             checked: [],
@@ -110,9 +112,6 @@ export default {
         }
     },
     activated: function () {
-        useMeta({
-            title: "Coffee Journal"
-        })
         window.scrollTo(0, this.scrollPosition)
         window.addEventListener('scroll', this.setScrollPosition)
     },

@@ -74,10 +74,8 @@ import orderAlphabetical from '../fn/orderAlphabetical'
 export default {
     name: 'FilterView',
     components: { SelectList, InlineInput, MultiToggleSwitch, RatingRange },
-    metaInfo: function () {
-        return {
-            title: "Stats Filters | CJ"
-        }
+    title: function () {
+        return "Stats Filters | CJ"
     },
     data: function () {
         return {

@@ -6,7 +6,7 @@ module.exports = {
         msTileColor: "#f0ad2b",
         manifestOptions: {
             display: "standalone",
-            background_color: "#171117",
+            background_color: "#f0ad2b",
             start_url: "/",
             shortcuts: [
                 {

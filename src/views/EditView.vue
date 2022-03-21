@@ -19,12 +19,10 @@ import CoffeeDetailForm from "../components/CoffeeDetailForm.vue"
 import NotFound from './NotFound.vue'
 
 export default {
-    name: 'Edit',
+    name: 'EditView',
     components: { CoffeeDetailForm, NotFound },
-    metaInfo: function () {
-        return {
-            title: "Update Coffee Cup | CJ"
-        }
+    title: function () {
+        return "Update Coffee Cup | CJ"
     },
     computed: {
         item: function() {

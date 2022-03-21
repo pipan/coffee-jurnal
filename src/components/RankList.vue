@@ -10,7 +10,7 @@
                 @click="select(item.name)">
                 <div class="rank-item__rank">#{{ index + 1}}</div>
                 <div class="rank-item__name">{{ item.name }}</div>
-                <div class="rank-item__value">{{ item.value | round(1) }}</div>
+                <div class="rank-item__value">{{ round(item.value) }}</div>
             </div>
         </div>
     </div>
@@ -18,6 +18,7 @@
 
 <script>
 import StatCoffeeOrder from './StatCoffeeOrder.vue'
+import round from '../fn/round'
 
 export default {
     name: 'RankList',
@@ -91,6 +92,9 @@ export default {
                 type: this.orderBy,
                 name: value
             })
+        },
+        round: function (value) {
+            return round(value, 1)
         }
     }
 }

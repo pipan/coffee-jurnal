@@ -2,7 +2,7 @@
     <div class="column gap-m">
         <div class="row row--center text-s">Rating</div>
         <div class="row row--middle row--center">
-            <span class="text-primary text-l text-bold" v-if="average">{{ average | round(1) }}</span>
+            <span class="text-primary text-l text-bold" v-if="average">{{ average }}</span>
             <span class="text-primary text-l text-bold" v-if="!average">-</span>
             <span class="text-secondary">&nbsp;/ 5</span>
         </div>
@@ -17,6 +17,7 @@
 
 <script>
 import RatingCompositionItem from './RatingCompositionItem.vue'
+import round from '../fn/round'
 
 export default {
     name: 'RatingComposition',
@@ -81,7 +82,7 @@ export default {
             for (const item of this.datasetWithRatings) {
                 sum += item.rating
             }
-            return sum / this.ratingCount
+            return round(sum / this.ratingCount, 1)
         }
     }
 }

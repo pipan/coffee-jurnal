@@ -16,12 +16,10 @@
 import CoffeeDetailForm from "../components/CoffeeDetailForm.vue"
 
 export default {
-    name: 'Create',
+    name: 'CreateView',
     components: { CoffeeDetailForm },
-    metaInfo: function () {
-        return {
-            title: "New Cup | CJ"
-        }
+    title: function () {
+        return "New Cup | CJ"
     },
     methods: {
         submit: function (data) {

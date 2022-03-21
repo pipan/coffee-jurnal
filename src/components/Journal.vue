@@ -14,7 +14,7 @@
 import JurnalDay from '../components/JurnalDay.vue'
 
 export default {
-    name: 'Journal',
+    name: 'CjJournal',
     components: { JurnalDay },
     props: {
         checked: {

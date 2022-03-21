@@ -16,28 +16,26 @@
                 </form>
             </div>
         </div>
-        <Modal v-if="importing">
+        <CjModal v-if="importing">
             <h2>Importing</h2>
             <div class="pt-l pb-m">
                 <div class="progress">
                     <div class="progress__bar" :style="{width: importProgress * 100 + '%' }"></div>
                 </div>
             </div>
-        </Modal>
+        </CjModal>
     </div>
 </template>
 
 <script>
-import Modal from '../components/Modal.vue'
+import CjModal from '../components/Modal.vue'
 import { BatchJob } from '../services/BatchJob.js'
 
 export default {
-    name: 'Import',
-    components: { Modal },
-    metaInfo: function () {
-        return {
-            title: "Import Cups | CJ"
-        }
+    name: 'ImportView',
+    components: { CjModal },
+    title: function () {
+        return "Import Cups | CJ"
     },
     data: function () {
         return {

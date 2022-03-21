@@ -45,7 +45,7 @@ import RatingInput from '../components/RatingInput.vue'
 import NotFound from './NotFound.vue'
 
 export default {
-    name: 'Taste',
+    name: 'TasteView',
     components: { PropertyRatingInput, RatingInput, NotFound },
     data: function () {
         return {
@@ -61,10 +61,8 @@ export default {
             }
         }
     },
-    metaInfo: function () {
-        return {
-            title: "Tasting | CJ"
-        }
+    title: function () {
+        return "Tasting | CJ"
     },
     computed: {
         item: function () {

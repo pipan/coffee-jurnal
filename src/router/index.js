@@ -1,15 +1,12 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Create from '../views/Create.vue'
-import Import from '../views/Import.vue'
-import Edit from '../views/Edit.vue'
-import Taste from '../views/Taste.vue'
-import Stats from '../views/Stats.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+import CreateView from '../views/CreateView.vue'
+import ImportView from '../views/ImportView.vue'
+import EditView from '../views/EditView.vue'
+import TasteView from '../views/TasteView.vue'
+import StatsView from '../views/StatsView.vue'
 import FilterView from '../views/FilterView.vue'
 import NavigationLayout from '../views/NavigationLayout.vue'
-
-Vue.use(VueRouter)
 
 const routes = [
   {
@@ -19,13 +16,13 @@ const routes = [
       {
         path: '',
         name: 'Home',
-        component: Home,
+        component: HomeView,
         meta: { transitionOrder: 1, transitionDepth: 0 }
       },
       {
         path: 'stats',
         name: 'Stats',
-        component: Stats,
+        component: StatsView,
         meta: { transitionOrder: 2, transitionDepth: 0 }
       }
     ]
@@ -33,25 +30,25 @@ const routes = [
   {
     path: '/create',
     name: 'Create',
-    component: Create,
+    component: CreateView,
     meta: { transitionDepth: 1 }
   },
   {
     path: '/import',
     name: 'Import',
-    component: Import,
+    component: ImportView,
     meta: { transitionDepth: 2 }
   },
   {
     path: '/edit/:id',
     name: 'Edit',
-    component: Edit,
+    component: EditView,
     meta: { transitionDepth: 3 }
   },
   {
     path: '/taste/:id',
     name: 'Taste',
-    component: Taste,
+    component: TasteView,
     meta: { transitionDepth: 2 }
   },
   {
@@ -62,9 +59,8 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(),
   routes
 })
 

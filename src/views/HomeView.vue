@@ -20,11 +20,11 @@
                 <div class="row row--center py-m" v-if="hasPreviousPage">
                     <button type="button" class="btn btn--secondary" @click="previousPage()">NEWER</button>
                 </div>
-                <Journal :items="itemsPaginated"
+                <CjJournal :items="itemsPaginated"
                     :checked="checked"
                     :display="displayMode"
                     @select="select($event)"
-                    @checkChange="checkChange($event)"></Journal>
+                    @checkChange="checkChange($event)"></CjJournal>
                     <div class="row row--center py-m" v-if="hasNextPage">
                         <button type="button" class="btn btn--secondary" @click="nextPage()">OLDER</button>
                     </div>
@@ -45,16 +45,14 @@
 </template>
 
 <script>
-import Journal from '../components/Journal.vue'
+import CjJournal from '../components/Journal.vue'
 import { StaticBatchJob } from '../services/StaticBatckJob'
 
 export default {
-    name: 'Home',
-    components: { Journal },
-    metaInfo: function () {
-        return {
-            title: "Coffee Journal"
-        }
+    name: 'HomeView',
+    components: { CjJournal },
+    title: function () {
+        return "Coffee Journal"
     },
     data: function () {
         return {

@@ -36,21 +36,21 @@
                         v-if="coffeePlaceOptions.length > 0"
                         label="Place"
                         placeholder="search"
-                        :options="coffeePlaceOptions | orderAlphabetical('asc')"
+                        :options="coffeePlaceOptions"
                         :value="filters.coffeePlace"
                         @change="setValue('coffeePlace', $event)"></SelectList>
                     <SelectList inputId="coffee-origin"
                         v-if="coffeeOriginOptions.length > 0"
                         label="Origin"
                         placeholder="search"
-                        :options="coffeeOriginOptions | orderAlphabetical('asc')"
+                        :options="coffeeOriginOptions"
                         :value="filters.coffeeOrigin"
                         @change="setValue('coffeeOrigin', $event)"></SelectList>
                     <SelectList inputId="coffee-roaster"
                         v-if="coffeeRoasterOptions.length > 0"
                         label="Roaster"
                         placeholder="search"
-                        :options="coffeeRoasterOptions | orderAlphabetical('asc')"
+                        :options="coffeeRoasterOptions"
                         :value="filters.coffeeRoaster"
                         @change="setValue('coffeeRoaster', $event)"></SelectList>
                     <RatingRange :value="filters.rating || []" @change="setValue('rating', $event)"></RatingRange>    
@@ -69,14 +69,13 @@ import SelectList from '../components/SelectList.vue'
 import InlineInput from '../components/InlineInput.vue'
 import MultiToggleSwitch from '../components/MultiToggleSwitch.vue'
 import RatingRange from '../components/RatingRange.vue'
+import orderAlphabetical from '../fn/orderAlphabetical'
 
 export default {
     name: 'FilterView',
     components: { SelectList, InlineInput, MultiToggleSwitch, RatingRange },
-    metaInfo: function () {
-        return {
-            title: "Stats Filters | CJ"
-        }
+    title: function () {
+        return "Stats Filters | CJ"
     },
     data: function () {
         return {
@@ -112,13 +111,13 @@ export default {
             return options
         },
         coffeePlaceOptions: function() {
-            return this.$store.getters.coffeePlaceOptions
+            return orderAlphabetical(this.$store.getters.coffeePlaceOptions, 'asc')
         },
         coffeeOriginOptions: function() {
-            return this.$store.getters.coffeeOriginOptions
+            return orderAlphabetical(this.$store.getters.coffeeOriginOptions, 'asc')
         },
         coffeeRoasterOptions: function() {
-            return this.$store.getters.coffeeRoasterOptions
+            return orderAlphabetical(this.$store.getters.coffeeRoasterOptions, 'asc')
         },
         coffeeRoastIntensityOptions: function() {
             const options = []

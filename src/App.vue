@@ -1,10 +1,12 @@
 <template>
     <div class="column flex-grow">
-        <transition :name="transitionName">
-            <KeepAlive :include="['NavigationLayout']">
-                <router-view />
-            </KeepAlive>
-        </transition>
+        <router-view v-slot="{ Component }">
+            <transition :name="transitionName">
+                <KeepAlive :include="['NavigationLayout']">
+                    <component :is="Component"></component>
+                </KeepAlive>
+            </transition>
+        </router-view>
         <transition name="animation--fade">
             <Modal v-if="isUpdating">
                 <h2>Updating application</h2>

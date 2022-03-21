@@ -1,11 +1,11 @@
 <template>
     <div class="row gap-s">
         <div class="column column--evenly text-secondary">
-            <div v-html="'&#x2606;'"></div>
-            <div v-html="'&#x2606;'"></div>
-            <div v-html="'&#x2606;'"></div>
-            <div v-html="'&#x2606;'"></div>
-            <div v-html="'&#x2606;'"></div>
+            <div>&#x2606;</div>
+            <div>&#x2606;</div>
+            <div>&#x2606;</div>
+            <div>&#x2606;</div>
+            <div>&#x2606;</div>
         </div>
         <div class="rating-timeline scroll-x hidden-y">
             <div v-for="(item, index) of items"

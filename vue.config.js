@@ -11,82 +11,89 @@ module.exports = {
             shortcuts: [
                 {
                     name: "New",
-                    url: "/create"
+                    url: "/create",
+                    icons: [
+                        {
+                            src: "/img/icons/add_x96.png?v=1",
+                            sizes: "96x96",
+                            type: "image/png"
+                        }
+                    ]
                 }
             ],
             icons: [
                 {
-                    src: "/img/icons/favicon-16x16.png",
+                    src: "/img/icons/favicon-16x16.png?v=1",
                     sizes: "16x16",
                     type: "image/png"
                 },
                 {
-                    src: "/img/icons/favicon-32x32.png",
+                    src: "/img/icons/favicon-32x32.png?v=1",
                     sizes: "32x32",
                     type: "image/png"
                 },
                 {
-                    src: "/img/icons/maskable_icon_x48.png",
+                    src: "/img/icons/maskable_icon_x48.png?v=1",
                     sizes: "48x48",
                     type: "image/png",
                     purpose: "maskable"
                 },
                 {
-                    src: "/img/icons/maskable_icon_x72.png",
+                    src: "/img/icons/maskable_icon_x72.png?v=1",
                     sizes: "72x72",
                     type: "image/png",
                     purpose: "maskable"
                 },
                 {
-                    src: "/img/icons/maskable_icon_x96.png",
+                    src: "/img/icons/maskable_icon_x96.png?v=1",
                     sizes: "96x96",
                     type: "image/png",
                     purpose: "maskable"
                 },
                 {
-                    src: "/img/icons/maskable_icon_x144.png",
+                    src: "/img/icons/maskable_icon_x144.png?v=1",
                     sizes: "144x144",
                     type: "image/png",
                     purpose: "maskable"
                 },
                 {
-                    src: "/img/icons/icon_x144.png",
+                    src: "/img/icons/icon_x144.png?v=1",
                     sizes: "144x144",
                     type: "image/png",
                     purpose: "any"
                 },
                 {
-                    src: "/img/icons/maskable_icon_x192.png",
+                    src: "/img/icons/maskable_icon_x192.png?v=1",
                     sizes: "192x192",
                     type: "image/png",
                     purpose: "maskable"
                 },
                 {
-                    src: "/img/icons/icon_x192.png",
+                    src: "/img/icons/icon_x192.png?v=1",
                     sizes: "192x192",
                     type: "image/png",
                     purpose: "any"
                 },
                 {
-                    src: "/img/icons/icon_x256.png",
+                    src: "/img/icons/icon_x256.png?v=1",
                     sizes: "256x256",
                     type: "image/png",
                     purpose: "any"
                 },
                 {
-                    src: "/img/icons/maskable_icon_x384.png",
+                    src: "/img/icons/maskable_icon_x384.png?v=1",
                     sizes: "384x384",
                     type: "image/png",
                     purpose: "maskable"
                 },
                 {
-                    src: "/img/icons/maskable_icon_x512.png",
+                    src: "/img/icons/maskable_icon_x512.png?v=1",
                     sizes: "512x512",
                     type: "image/png",
                     purpose: "maskable"
                 },
                 {
-                    src: "/img/icons/icon_x512.png",
+                    src: "/img/icons/icon_x512.png?v=1",
                     sizes: "512x512",
                     type: "image/png",
                     purpose: "any"

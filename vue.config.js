@@ -14,7 +14,7 @@ module.exports = {
                     url: "/create",
                     icons: [
                         {
-                            src: "/img/icons/add_x96.png?v=1",
+                            src: "/img/icons/add_x96.png?v=2",
                             sizes: "96x96",
                             type: "image/png"
                         }
@@ -57,22 +57,10 @@ module.exports = {
                     purpose: "maskable"
                 },
                 {
-                    src: "/img/icons/icon_x144.png?v=1",
-                    sizes: "144x144",
-                    type: "image/png",
-                    purpose: "any"
-                },
-                {
                     src: "/img/icons/maskable_icon_x192.png?v=1",
                     sizes: "192x192",
                     type: "image/png",
                     purpose: "maskable"
-                },
-                {
-                    src: "/img/icons/icon_x192.png?v=1",
-                    sizes: "192x192",
-                    type: "image/png",
-                    purpose: "any"
                 },
                 {
                     src: "/img/icons/icon_x256.png?v=1",

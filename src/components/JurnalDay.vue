@@ -66,7 +66,10 @@ export default {
                 const dayIndex = this.dayDate.getDay()
                 return this.dayNames[dayIndex]
             }
-            return this.dayDate.toLocaleDateString()
+            if (this.dayDate.getFullYear() < new Date().getFullYear()) {
+                return this.dayDate.toLocaleDateString(navigator.language, { day: '2-digit', month: 'short', year: 'numeric' })
+            }
+            return this.dayDate.toLocaleDateString(navigator.language, { day: '2-digit', month: 'short' })
         },
     },
     methods: {

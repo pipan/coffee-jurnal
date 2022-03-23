@@ -63,12 +63,6 @@ module.exports = {
                     purpose: "maskable"
                 },
                 {
-                    src: "/img/icons/icon_x256.png?v=1",
-                    sizes: "256x256",
-                    type: "image/png",
-                    purpose: "any"
-                },
-                {
                     src: "/img/icons/maskable_icon_x384.png?v=1",
                     sizes: "384x384",
                     type: "image/png",

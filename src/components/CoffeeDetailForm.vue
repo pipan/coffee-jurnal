@@ -43,6 +43,7 @@ import InlineInput from "../components/InlineInput.vue"
 export default {
     name: 'CoffeeDetailForm',
     components: { ToggleSwitch, InputReference, InlineInput },
+    inheritAttrs: false,
     props: {
         item: {
             type: Object,

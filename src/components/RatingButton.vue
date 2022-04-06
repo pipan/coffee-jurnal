@@ -1,5 +1,7 @@
 <template>
-    <button type="button" :class="classes" @click="select()" v-html="icon"></button>
+    <button type="button" :class="classes" @click="select()">
+        <i class="iconfont" :class="icon"></i>
+    </button>
 </template>
 
 <script>
@@ -13,9 +15,9 @@ export default {
     computed: {
         icon: function () {
             if (this.active) {
-                return '&#x2605';
+                return 'iconfont-star_fill';
             }
-            return '&#x2606;'
+            return 'iconfont-star_outline'
         },
         classes: function () {
             const result = ['rating']

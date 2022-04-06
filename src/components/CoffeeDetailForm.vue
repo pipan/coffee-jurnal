@@ -88,10 +88,7 @@ export default {
             if (this.coffeeRoastIntensityValue !== undefined) {
                 return this.coffeeRoastIntensityValue
             }
-            if (this.item.id) {
-                return this.item.coffeeRoastIntensity || ''
-            }
-            return this.coffeeRoastIntensities[0].id
+            return this.item.coffeeRoastIntensity || ''
         },
         coffeeRoastIntensities: function() {
             return this.$store.state.coffeeRoastIntensities

@@ -1,11 +1,21 @@
 <template>
     <div class="row gap-s">
-        <div class="column column--evenly text-secondary">
-            <div>&#x2606;</div>
-            <div>&#x2606;</div>
-            <div>&#x2606;</div>
-            <div>&#x2606;</div>
-            <div>&#x2606;</div>
+        <div class="column column--evenly text-secondary gap-s">
+            <div>
+                <i class="iconfont iconfont-star_outline"></i>
+            </div>
+            <div>
+                <i class="iconfont iconfont-star_outline"></i>
+            </div>
+            <div>
+                <i class="iconfont iconfont-star_outline"></i>
+            </div>
+            <div>
+                <i class="iconfont iconfont-star_outline"></i>
+            </div>
+            <div>
+                <i class="iconfont iconfont-star_outline"></i>
+            </div>
         </div>
         <div class="rating-timeline scroll-x hidden-y">
             <div v-for="(item, index) of items"

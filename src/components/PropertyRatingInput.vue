@@ -27,11 +27,11 @@
             <div class="row">
                 <button type="button" class="btn btn--secondary btn--circle"
                     @click.stop="decreaseQuality()">
-                    <img class="icon icon--l" src="/img/assets/down_icon.svg" />
+                    <i class="iconfont iconfont-down"></i>
                 </button>
                 <button type="button" class="btn btn--secondary btn--circle"
                     @click.stop="increaseQuality()">
-                    <img class="icon icon--l" src="/img/assets/up_icon.svg" />
+                    <i class="iconfont iconfont-up"></i>
                 </button>
             </div>
         </div>

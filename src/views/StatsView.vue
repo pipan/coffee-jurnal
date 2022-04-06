@@ -31,7 +31,7 @@
         </div>
         <div class="fab-container">
             <router-link :to="{ name: 'Filter', query: $route.query }" class="btn-fab">
-                <img class="icon icon--l" src="/img/assets/filter_icon.svg" />
+                <i class="iconfont iconfont-filter text-l"></i>
             </router-link>
         </div>
     </div>

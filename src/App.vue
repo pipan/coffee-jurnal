@@ -106,5 +106,6 @@ export default {
 @import "./assets/styles/stats.css";
 
 @import "./assets/styles/animation.css";
+@import "./assets/styles/iconfont.css";
 @import "./assets/styles/app.css";
 </style>

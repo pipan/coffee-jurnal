@@ -3,7 +3,9 @@
         <div class="rating-composition__bar">
             <div class="bar bar--y bar--transition" :style="{ height: size }"></div>
         </div>
-        <div>&#x2606;</div>
+        <div>
+            <i class="iconfont iconfont-star_outline"></i>
+        </div>
     </div>
 </template>
 

@@ -3,7 +3,7 @@
         <div class="record__checkbox" @click.stop><input type="checkbox" :checked="checked" @change="setChecked($event.target.checked)" v-if="withCheckbox" /></div>
         <div class="record__detail">
             <div class="record__title">
-                <img class="icon icon--m" :src="coffeeTypeIcon" />
+                <i class="iconfont iconfont--l text-secondary" :class="coffeeTypeIcon"></i>
                 <div class="ellipsis">{{ item.coffeePlace }}</div>
             </div>
             <div class="record__subtitle">{{ subtitle }}</div>
@@ -73,9 +73,9 @@ export default {
         },
         coffeeTypeIcon: function () {
             if (this.item.coffeeType == 'filter') {
-                return '/img/assets/coffee_type_filter_icon.svg'
+                return 'iconfont-batch'
             }
-            return '/img/assets/coffee_type_espreso_icon.svg'
+            return 'iconfont-espresso'
         }
     },
     methods: {

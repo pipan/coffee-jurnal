@@ -25,6 +25,7 @@
                             <PropertyRatingInput label="Finish"
                                 :value="finish"
                                 @change="finishValue = $event"></PropertyRatingInput>
+                            <ProfileInput :value="profile" @change="profileValue = $event"></ProfileInput>
                             <RatingInput :value="rating" @change="ratingValue = $event"></RatingInput>
                         </div>
                         <div class="text-secondary text-light py-m text-center">This rating is base on <a href="https://www.scribd.com/document/421556406/Prufrock-Coffee-Tasting-Guide" target="_blank">prufrock coffee tasting guide</a></div>
@@ -42,11 +43,12 @@
 <script>
 import PropertyRatingInput from '../components/PropertyRatingInput.vue'
 import RatingInput from '../components/RatingInput.vue'
+import ProfileInput from '../components/ProfileInput.vue'
 import NotFound from './NotFound.vue'
 
 export default {
     name: 'TasteView',
-    components: { PropertyRatingInput, RatingInput, NotFound },
+    components: { PropertyRatingInput, RatingInput, NotFound, ProfileInput },
     data: function () {
         return {
             aromaValue: {},
@@ -55,6 +57,7 @@ export default {
             bodyValue: {},
             finishValue: {},
             ratingValue: -1,
+            profileValue: undefined,
             initialValue: {
                 quality: 0.5,
                 intensity: 0.5
@@ -88,6 +91,12 @@ export default {
                 return this.ratingValue
             }
             return this.item.rating
+        },
+        profile: function () {
+            if (this.profileValue !== undefined) {
+                return this.profileValue
+            }
+            return this.item.profile || []
         }
     },
     methods: {
@@ -101,6 +110,7 @@ export default {
                     body: this.body,
                     finish: this.finish
                 },
+                profile: this.profile,
                 rating: this.rating
             })
             this.$router.replace({

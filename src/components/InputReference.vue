@@ -9,7 +9,7 @@
                 @focus="openAutocomplete()"
                 @blur="closeAutocomplete()"/>
             <button type="button" class="btn btn--secondary btn--circle input__button" v-if="this.value" @click="change('')">
-                <img class="icon icon--m" src="/img/assets/close_icon_fg.svg" />
+                <i class="iconfont iconfont-cross"></i>
             </button>
             <InputAutocomplete :options="autocompleteOptions" @select="change($event)" :visible="autocompleteVisible"></InputAutocomplete>
         </div>

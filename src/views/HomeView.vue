@@ -25,20 +25,20 @@
                     :display="displayMode"
                     @select="select($event)"
                     @checkChange="checkChange($event)"></CjJournal>
-                    <div class="row row--center py-m" v-if="hasNextPage">
-                        <button type="button" class="btn btn--secondary" @click="nextPage()">OLDER</button>
-                    </div>
+                <div class="row row--center py-m" v-if="hasNextPage">
+                    <button type="button" class="btn btn--secondary" @click="nextPage()">OLDER</button>
+                </div>
             </div>
         </div>
         <div class="fab-container">
             <router-link :to="{ name: 'Create' }" class="btn-fab" v-if="isRouteMode">
-                <img class="icon icon--l" src="/img/assets/add_icon.svg" />
+                <i class="iconfont iconfont-plus text-l"></i>
             </router-link>
             <button type="button" class="btn-fab" v-if="isCheckMode" @click="uncheckAll()">
-                <img class="icon icon--l" src="/img/assets/close_icon.svg" />
+                <i class="iconfont iconfont-cross text-l"></i>
             </button>
             <button type="button" class="btn-fab btn-fab--danger" v-if="isCheckMode" @click="deleteSelected()">
-                <img class="icon icon--l" src="/img/assets/delete_icon.svg" />
+                <i class="iconfont iconfont-bin text-l"></i>
             </button>
         </div>
     </div>

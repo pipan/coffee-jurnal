@@ -13,6 +13,10 @@
     gap: var(--grid-gap)
 }
 
+.jurnal__day-title {
+    color: var(--color-fg-secondary);
+}
+
 .record {
     box-sizing: border-box;
     display: flex;

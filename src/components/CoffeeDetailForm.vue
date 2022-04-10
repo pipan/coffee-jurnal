@@ -5,7 +5,10 @@
                 <ToggleSwitch :options="coffeeTypes" :value="coffeeType" @change="coffeeTypeValue = $event"></ToggleSwitch>
             </InlineInput>
             <InlineInput label="Intensity">
-                <ToggleSwitch :options="coffeeRoastIntensities" :value="coffeeRoastIntensity" @change="coffeeRoastIntensityValue = $event"></ToggleSwitch>
+                <ToggleSwitch :options="coffeeRoastIntensities" :value="coffeeRoastIntensity" @change="coffeeRoastIntensityValue = $event" :nullable="true"></ToggleSwitch>
+            </InlineInput>
+            <InlineInput label="Processing">
+                <ToggleSwitch :options="coffeeProcessings" :value="coffeeProcessing" @change="coffeeProcessingValue = $event" :nullable="true"></ToggleSwitch>
             </InlineInput>
             
             <InputReference inputId="coffee-place"
@@ -56,7 +59,8 @@ export default {
             coffeePlaceValue: undefined,
             coffeeOriginValue: undefined,
             coffeeRoasterValue: undefined,
-            coffeeRoastIntensityValue: undefined
+            coffeeRoastIntensityValue: undefined,
+            coffeeProcessingValue: undefined
         }
     },
     computed: {
@@ -90,6 +94,12 @@ export default {
             }
             return this.item.coffeeRoastIntensity || ''
         },
+        coffeeProcessing: function () {
+            if (this.coffeeProcessingValue !== undefined) {
+                return this.coffeeProcessingValue
+            }
+            return this.item.coffeeProcessing || ''
+        },
         coffeeRoastIntensities: function() {
             return this.$store.state.coffeeRoastIntensities
         },
@@ -104,6 +114,9 @@ export default {
         },
         coffeeRoasterOptions: function() {
             return this.$store.getters.coffeeRoasterOptions
+        },
+        coffeeProcessings: function() {
+            return this.$store.state.coffeeProcessings
         }
     },
     methods: {
@@ -116,7 +129,8 @@ export default {
                 coffeeOrigin: this.coffeeOrigin,
                 coffeeRoaster: this.coffeeRoaster,
                 coffeeType: this.coffeeType,
-                coffeeRoastIntensity: this.coffeeRoastIntensity
+                coffeeRoastIntensity: this.coffeeRoastIntensity,
+                coffeeProcessing: this.coffeeProcessing
             })
         },
         back: function () {

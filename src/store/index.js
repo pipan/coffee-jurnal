@@ -35,6 +35,24 @@ export default createStore({
         name: 'mix'
       }
     ],
+    coffeeProcessings: [
+      {
+        id: 'natural',
+        name: 'natural'
+      },
+      {
+        id: 'wet',
+        name: 'wet'
+      },
+      {
+        id: 'honey',
+        name: 'honey'
+      },
+      {
+        id: 'anaerobic',
+        name: 'anaerobic'
+      }
+    ],
     displayMode: 'grid'
   },
   getters: {

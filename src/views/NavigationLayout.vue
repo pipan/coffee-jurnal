@@ -10,7 +10,7 @@
             </router-view>
         </div>
         <nav>
-            <router-link :to="{ name: 'Home' }" class="navigation-item" exact-path>Journal</router-link>
+            <router-link :to="{ name: 'Home', query: $route.query }" class="navigation-item" exact-path>Journal</router-link>
             <router-link :to="{ name: 'Stats', query: $route.query }" class="navigation-item" exact-path>Stats</router-link>
         </nav>
     </div>

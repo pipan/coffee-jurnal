@@ -98,12 +98,15 @@ export default {
         }
     },
     watch: {
-        '$route.query': function (value) {
-            const newFilter = CoffeeFilter.fromQuery(value)
-            if (JSON.stringify(this.filter) === JSON.stringify(newFilter)) {
-                return
+        '$route.query': {
+            immediate: true,
+            handler: function (value) {
+                const newFilter = CoffeeFilter.fromQuery(value)
+                if (JSON.stringify(this.filter) === JSON.stringify(newFilter)) {
+                    return
+                }
+                this.filter = newFilter
             }
-            this.filter = newFilter
         },
         filter: function () {
             this.makeDataset()

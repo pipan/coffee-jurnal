@@ -32,6 +32,12 @@
                             :value="filters.coffeeRoastIntensity || []"
                             @change="setValue('coffeeRoastIntensity', $event)"></MultiToggleSwitch>
                     </InlineInput>
+                    <InlineInput label="Processing">
+                        <MultiToggleSwitch :nullable="true"
+                            :options="coffeeProcessingOptions"
+                            :value="filters.coffeeProcessing || []"
+                            @change="setValue('coffeeProcessing', $event)"></MultiToggleSwitch>
+                    </InlineInput>
                     <SelectList inputId="coffee-place"
                         v-if="coffeePlaceOptions.length > 0"
                         label="Place"
@@ -125,6 +131,9 @@ export default {
                 options.push(item.id)
             }
             return options
+        },
+        coffeeProcessingOptions: function () {
+            return this.$store.state.coffeeProcessings
         }
     },
     methods: {

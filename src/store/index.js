@@ -41,8 +41,8 @@ export default createStore({
         name: 'natural'
       },
       {
-        id: 'wet',
-        name: 'wet'
+        id: 'washed',
+        name: 'washed'
       },
       {
         id: 'honey',

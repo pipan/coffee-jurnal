@@ -5,9 +5,17 @@
     background-color: transparent;
     color: var(--color-fg);
     white-space: nowrap;
+    text-align: center;
 }
 
 .toggle--active {
     color: var(--color-primary);
     border-color: var(--color-primary) !important;
+}
+
+.toggle.toggle--dual-line {
+    display: flex;
+    flex-direction: column;
+    gap: var(--unit-s);
+    border-radius: 32px;
 }

@@ -82,6 +82,8 @@
 .gap-l { gap: var(--unit-l); }
 
 .flex-grow { flex-grow: 1; }
+.flex-shrink { flex-shrink: 1; }
+.flex-no-shrink { flex-shrink: 0; }
 
 .pos-r { position: relative; }
 

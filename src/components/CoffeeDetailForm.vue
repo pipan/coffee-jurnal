@@ -123,21 +123,31 @@ export default {
         setCoffeeType: function (type) {
             this.coffeeType = type
         },
-        submit: function () {
-            this.$emit('submit', {
+        getValue: function() {
+            return {
                 coffeePlace: this.coffeePlace,
                 coffeeOrigin: this.coffeeOrigin,
                 coffeeRoaster: this.coffeeRoaster,
                 coffeeType: this.coffeeType,
                 coffeeRoastIntensity: this.coffeeRoastIntensity,
                 coffeeProcessing: this.coffeeProcessing
-            })
+            }
+        },
+        submit: function () {
+            this.$emit('submit', this.getValue())
         },
         back: function () {
             if (window.history.length <= 1) {
                 return this.$router.push({ name: 'Home' })
             }
             this.$router.go(-1)
+        },
+        patch: function (data) {
+            this.coffeeTypeValue = data.coffeeType || this.coffeeTypeValue
+            this.coffeeOriginValue = data.coffeeOrigin || this.coffeeOriginValue
+            this.coffeeRoasterValue = data.coffeeRoaster || this.coffeeRoasterValue
+            this.coffeeRoastIntensityValue = data.coffeeRoastIntensity || this.coffeeRoastIntensityValue
+            this.coffeeProcessingValue = data.coffeeProcessing || this.coffeeProcessingValue
         }
     }
 }

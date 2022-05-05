@@ -7,6 +7,7 @@ export default createStore({
     },
     repository: {},
     lastId: 0,
+    bags: [],
     coffeeTypes: [
       {
         id: 'filter',
@@ -117,6 +118,8 @@ export default createStore({
 
       const displayMode = localStorage.getItem('displayMode') || "grid"
       state.displayMode = displayMode
+
+      state.bags = JSON.parse(localStorage.getItem('bags') || "[]")
     },
     updateItem: function(state, item) {
       if (!item.id || !state.repository[item.id]) {
@@ -153,7 +156,26 @@ export default createStore({
     setDisplayMode: function(state, value) {
       state.displayMode = value
       localStorage.setItem('displayMode', value)
-    }
+    },
+    insertBag: function(state, item) {
+      let newBags = [...state.bags]
+      newBags.push(item)
+      state.bags = newBags
+      localStorage.setItem('bags', JSON.stringify(state.bags))
+      return state.bags
+    },
+    removeBags: function(state, indexes) {
+      let newBags = []
+      for (let i = 0; i < state.bags.length; i++) {
+        if (indexes.indexOf(i) > -1) {
+          continue
+        }
+        newBags.push(state.bags[i])
+      }
+      state.bags = newBags
+      localStorage.setItem('bags', JSON.stringify(state.bags))
+      return state.bags
+    },
   },
   actions: {
     createNewCup: function (context, data) {
@@ -186,7 +208,13 @@ export default createStore({
         item.created_at = new Date(item.created_at)
         context.commit("insertItem", item)
       }
-    }
+    },
+    createBag: function (context, data) {
+      context.commit("insertBag", data)
+    },
+    removeBags: function (context, indexes) {
+      context.commit("removeBags", indexes)
+    },
   },
   modules: {
   }

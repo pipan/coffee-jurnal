@@ -79,7 +79,7 @@ export default {
             return this.mode === 'route'
         },
         currentPage: function () {
-            return this.$route.query.page || 1
+            return parseInt(this.$route.query.page || "1")
         },
         hasNextPage: function () {
             return this.items.length > this.perPageLimit * this.currentPage

@@ -5,7 +5,7 @@
                 <header>
                     <h1>Journal</h1>
                     <div class="action action--no-padding">
-                        <button type="button" class="btn btn--sircle animation-display-mode" :class="gridIconClass" @click="toggleDisplayMode()">
+                        <button type="button" class="btn btn--circle animation-display-mode" :class="gridIconClass" @click="toggleDisplayMode()">
                             <svg class="icon icon--m" xmlns="http://www.w3.org/2000/svg">
                                 <g>
                                     <rect fill="#fff" x="0" y="0" width="30%" height="30%" class="svg-1" />
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="fab-container">
-            <router-link :to="{ name: 'Create' }" class="btn-fab" v-if="isRouteMode">
+            <router-link :to="{ name: 'Create' }" class="btn-fab" v-if="isRouteMode" @contextmenu.prevent="openImport()">
                 <i class="iconfont iconfont-plus text-l"></i>
             </router-link>
             <button type="button" class="btn-fab" v-if="isCheckMode" @click="uncheckAll()">
@@ -120,6 +120,9 @@ export default {
         this.$refs.view.scrollTo(0, this.scrollPosition)
     },
     methods: {
+        openImport: function () {
+            this.$router.push({ name: 'Import' })
+        },
         setScrollPosition: function(event) {
             this.scrollPosition = event.target.scrollingElement.scrollTop
         },

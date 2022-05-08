@@ -11,12 +11,6 @@
                 <div class="text-s text-secondary ellipsis">{{ item.coffeeOrigin }}</div>
             </div>
         </div>
-        <button type="button" class="btn btn--secondary btn--circle flex-no-shrink" @click="create()" v-if="!hasChecked">
-            <i class="iconfont iconfont-plus"></i>
-        </button>
-        <button type="button" class="btn btn--secondary btn--circle flex-no-shrink" @click="remove()" v-if="hasChecked">
-            <i class="iconfont iconfont-bin text-l"></i>
-        </button>
     </div>
 </template>
 
@@ -30,11 +24,10 @@ export default {
         bags: {
             type: Array,
             default: () => []
-        }
-    },
-    data: function () {
-        return {
-            checked: []
+        },
+        checked: {
+            type: Array,
+            default: () => []
         }
     },
     computed: {
@@ -48,27 +41,24 @@ export default {
             if (index > -1) {
                 return
             }
-            this.checked.push(value)
+            let newChecked = [...this.checked]
+            newChecked.push(value)
+            this.$emit('checkedChange', newChecked)
         },
         select: function (value) {
             if (!this.hasChecked) {
                 this.$emit('select', this.bags[value])
                 return
             }
+            let newChecked = [...this.checked]
             let index = this.checked.indexOf(value)
             if (index > -1) {
-                this.checked.splice(index, 1)
+                newChecked.splice(index, 1)
             } else {
-                this.checked.push(value)
+                newChecked.push(value)
             }
-        },
-        create: function () {
-            this.$emit('create')
-        },
-        remove: function () {
-            this.$emit('remove', this.checked)
-            this.checked = []
-        },
+            this.$emit('checkedChange', newChecked)
+        }
     }
 }
 </script>

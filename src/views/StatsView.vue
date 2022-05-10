@@ -179,7 +179,8 @@ export default {
         selectRecord: function (id) {
             this.$router.push({
                 name: 'Taste',
-                params: { id }
+                params: { id },
+                query: this.$route.query
             })
         },
     }

@@ -9,6 +9,10 @@
     white-space: nowrap;
 }
 
+a.btn {
+    cursor: default;
+}
+
 .btn:active {
     transition-duration: 0ms;
 }

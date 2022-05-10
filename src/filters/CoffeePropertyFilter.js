@@ -4,7 +4,7 @@ export class CoffeePropertyFilter {
 
     constructor(property, anyWhitelist) {
         this.property = property
-        this.anyWhitelist = anyWhitelist
+        this.anyWhitelist = anyWhitelist || []
         if (this.anyWhitelist && !Array.isArray(this.anyWhitelist)) {
             this.anyWhitelist = [this.anyWhitelist]
         }

@@ -6,7 +6,9 @@
                 <div class="column flex-grow gap-m" v-if="item">
                     <header>
                         <h1>Tasting</h1>
-                        <router-link :to="{ name: 'Edit', params: { id: item.id }, query: $route.query }" class="action btn btn--primary">DETAIL</router-link>
+                        <router-link :to="{ name: 'Edit', params: { id: item.id }, query: $route.query }" class="action btn btn--secondary btn--circle">
+                            <i class="iconfont iconfont-pencil text-l"></i>
+                        </router-link>
                     </header>
                     <form class="column flex-grow" @submit.prevent="submit()">
                         <div class="form flex-grow">

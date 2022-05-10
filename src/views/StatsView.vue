@@ -4,7 +4,9 @@
             <div class="view-content">
                 <header>
                     <h1>Stats</h1>
-                    <a :href="exportUrlData" download="coffeejournal_export.json" class="action btn btn--primary">EXPORT</a>
+                    <a :href="exportUrlData" download="coffeejournal_export.json" class="action btn btn--secondary btn--circle">
+                        <i class="iconfont iconfont-download text-l"></i>
+                    </a>
                 </header>
                 <MultiToggleSwitch v-if="filtersValueList.length > 0"
                     :nullable="true"

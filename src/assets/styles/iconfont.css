@@ -28,6 +28,12 @@
   display: block;
 }
 
+.iconfont-download:before {
+  content: "\e917";
+}
+.iconfont-pencil:before {
+  content: "\e918";
+}
 .iconfont-heart:before {
   content: "\e916";
 }

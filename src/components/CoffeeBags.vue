@@ -1,7 +1,7 @@
 <template>
     <div class="row row--between row--middle gap-s">
         <div class="row gap-s scroll-x">
-            <button type="button" class="toggle toggle--dual-line" style="width: 128px;"
+            <button type="button" class="toggle toggle--dual-line user-select-disable" style="width: 128px;"
                 :class="{'toggle--active': checked.indexOf(index) > -1}"
                 v-for="(item, index) of bags"
                 :key="index"

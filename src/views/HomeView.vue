@@ -37,20 +37,31 @@
             <button type="button" class="btn-fab" v-if="isCheckMode" @click="uncheckAll()">
                 <i class="iconfont iconfont-cross text-l"></i>
             </button>
-            <button type="button" class="btn-fab btn-fab--danger" v-if="isCheckMode" @click="deleteSelected()">
+            <button type="button" class="btn-fab btn-fab--danger" v-if="isCheckMode" @click="openDeletePrompt()">
                 <i class="iconfont iconfont-bin text-l"></i>
             </button>
         </div>
+        <CjModal v-if="deletePromptVisible" @close="closeDeletePrompt()">
+            <h2>Delete</h2>
+            <div class="pt-l pb-m">
+                Do you really want to permanently delete selected journal entries?
+            </div>
+            <div class="row row--right gap-m">
+                <button type="button" class="btn btn--secondary" @click="closeDeletePrompt()">NO</button>
+                <button type="button" class="btn btn--primary" @click="deleteSelected()">YES</button>
+            </div>
+        </CjModal>
     </div>
 </template>
 
 <script>
 import CjJournal from '../components/Journal.vue'
+import CjModal from '../components/Modal.vue'
 import { StaticBatchJob } from '../services/StaticBatckJob'
 
 export default {
     name: 'HomeView',
-    components: { CjJournal },
+    components: { CjJournal, CjModal },
     title: function () {
         return "Coffee Journal"
     },
@@ -59,7 +70,8 @@ export default {
             checked: [],
             perPageLimit: 30,
             itemsPaginated: [],
-            scrollPosition: 0
+            scrollPosition: 0,
+            deletePromptVisible: false
         }
     },
     computed: {
@@ -168,6 +180,7 @@ export default {
         deleteSelected: function() {
             this.$store.dispatch('deleteByIds', this.checked)
             this.checked = []
+            this.closeDeletePrompt()
         },
         goToPage: function (page) {
             this.$router.push({
@@ -188,6 +201,12 @@ export default {
         },
         toggleDisplayMode: function () {
             this.setDisplayMode(this.isDisplayModeList ? 'grid' : 'list')
+        },
+        closeDeletePrompt: function () {
+            this.deletePromptVisible = false
+        },
+        openDeletePrompt: function () {
+            this.deletePromptVisible = true
         }
     }
 }

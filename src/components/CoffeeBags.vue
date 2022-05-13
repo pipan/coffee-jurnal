@@ -1,15 +1,15 @@
 <template>
     <div class="row row--between row--middle gap-s">
         <div class="row gap-s scroll-x">
-            <div class="toggle toggle--dual-line" style="width: 128px; box-sizing: border-box;"
+            <button type="button" class="toggle toggle--dual-line" style="width: 128px;"
                 :class="{'toggle--active': checked.indexOf(index) > -1}"
                 v-for="(item, index) of bags"
                 :key="index"
                 @contextmenu.prevent="setChecked(index)"
                 @click="select(index)">
-                <div class="ellipsis">{{ item.coffeeRoaster }}</div>
+                <div class="ellipsis text-m">{{ item.coffeeRoaster }}</div>
                 <div class="text-s text-secondary ellipsis">{{ item.coffeeOrigin }}</div>
-            </div>
+            </button>
         </div>
     </div>
 </template>

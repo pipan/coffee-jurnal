@@ -24,6 +24,7 @@
     --color-active: rgba(255, 255, 255, 0.08);
 
     --font-l: 1.35rem;
+    --font-m: 1rem;
     --font-s: 0.85rem;
 
     --navigation-height: 60px;
@@ -153,4 +154,8 @@ nav {
 }
 .navigation-item.router-link-exact-active {
     background-color: var(--color-active);
+}
+
+.user-select-disable {
+    user-select: none;
 }

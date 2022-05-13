@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="fab-container">
-            <router-link :to="{ name: 'Create' }" class="btn-fab" v-if="isRouteMode" @contextmenu.prevent="openImport()">
+            <router-link :to="{ name: 'Create' }" class="btn-fab user-select-disable" v-if="isRouteMode" @contextmenu.prevent="openImport()">
                 <i class="iconfont iconfont-plus text-l"></i>
             </router-link>
             <button type="button" class="btn-fab" v-if="isCheckMode" @click="uncheckAll()">

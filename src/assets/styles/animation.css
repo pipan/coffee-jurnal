@@ -45,7 +45,10 @@
     transition-duration: var(--animation-duration-l);
     transition-timing-function: var(--animation-function);
     transform-origin: 50vw 50vh;
-    scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    scrollbar-color: transparent transparent;
+}
+.animation--slide-in-leave-active .view::-webkit-scrollbar, .animation--slide-out-enter-active .view::-webkit-scrollbar {
+    display: none;
 }
 .animation--slide-in-leave-active .view { transform: perspective(40cm) translateZ(-100px); }
 .animation--slide-in-leave-from .view { transform: perspective(40cm) translateZ(0px); }
@@ -79,7 +82,10 @@
     transition-property: transform;
     transition-duration: var(--animation-duration-l);
     transition-timing-function: var(--animation-function);
-    scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    scrollbar-color: transparent transparent;
+}
+.animation--slide-left-enter-active .view::-webkit-scrollbar, .animation--slide-left-leave-active .view::-webkit-scrollbar, .animation--slide-right-leave-active .view::-webkit-scrollbar, .animation--slide-right-enter-active .view::-webkit-scrollbar {
+    display: none;
 }
 
 .animation--slide-left-leave-active .view, .animation--slide-right-leave-active .view {

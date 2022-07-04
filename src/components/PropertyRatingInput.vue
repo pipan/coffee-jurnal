@@ -63,7 +63,9 @@ export default {
                 '0.5': 'bar--intensity-3',
                 '0.75': 'bar--intensity-4',
                 '1': 'bar--intensity-5'
-            }
+            },
+            extraTreshold: 5,
+            extraCount: 0
         }
     },
     computed: {
@@ -87,6 +89,9 @@ export default {
             if (this.barIntensity) {
                 classes.push(this.barIntensity)
             }
+            if (this.value.extra) {
+                classes.push('wiggle-animation')
+            }
             return classes
         },
         barStyle: function () {
@@ -100,22 +105,25 @@ export default {
 
     },
     methods: {
-        changeQuality: function (value) {
-            if (value === this.quality) {
+        changeQuality: function (value, extra) {
+            if (value === this.quality && extra == this.value.extra) {
                 return
             }
             this.$emit('change', {
                 quality: value,
-                intensity: this.intensity
+                intensity: this.intensity,
+                extra: extra
             })
         },
         increaseQuality: function () {
             const newQuality = Math.min(1.0, this.quality + 0.25)
-            this.changeQuality(newQuality)
+            this.extraCount = newQuality === this.quality ? this.extraCount + 1 : 0
+            this.changeQuality(newQuality, this.extraCount >= this.extraTreshold)
         },
         decreaseQuality: function () {
             const newQuality = Math.max(0.0, this.quality - 0.25)
-            this.changeQuality(newQuality)
+            this.extraCount = newQuality === this.quality ? this.extraCount + 1 : 0
+            this.changeQuality(newQuality, this.extraCount >= this.extraTreshold)
         },
         changeIntensity: function (value) {
             if (value === this.intensity) {
@@ -123,7 +131,8 @@ export default {
             }
             this.$emit('change', {
                 quality: this.quality,
-                intensity: value
+                intensity: value,
+                extra: this.value.extra === true
             })
         },
         increaseIntensity: function () {
@@ -144,6 +153,14 @@ export default {
             const ratioNormalize = 1 - Math.min(1, Math.max(0, ratio))
             this.changeIntensity(ratioNormalize)
         },
+    },
+    watch: {
+        value: {
+            handler: function (newValue) {
+                this.extraCount = newValue.extra ? this.extraTreshold : 0
+            },
+            immediate: true
+        }
     }
 }
 </script>

@@ -172,11 +172,43 @@
     background-size: 600%;
 }
 
+.wiggle-animation {
+    animation-name: wiggle;
+    animation-duration: 0.7s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+    transform-origin: right;
+}
+
 @keyframes reflection {
     0% {
       background-position: center left;
     }
     100% {
         background-position: center right;
+    }
+}
+
+@keyframes wiggle {
+    0% {
+      transform: rotate(0deg) translateY(0px);
+    }
+    10% {
+        transform: rotate(2deg) translateY(3px);
+    }
+    23% {
+        transform: rotate(-1deg) translateY(-2px);
+    }
+    55% {
+        transform: rotate(1deg) translateY(2px);
+    }
+    61% {
+        transform: rotate(-3deg) translateY(-3px);
+    }
+    87% {
+        transform: rotate(1deg) translateY(3px);
+    }
+    100% {
+        transform: rotate(0deg) translateY(0px);
     }
 }

@@ -89,6 +89,7 @@
 
 .scroll-x { overflow-x: auto; }
 .hidden-y { overflow-y: hidden; }
+.scroll-x--transparent { scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); }
 
 .fab-container {
     position: fixed;

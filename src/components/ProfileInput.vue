@@ -52,6 +52,10 @@ export default {
                     icon: 'iconfont-apple'
                 },
                 {
+                    value: 'berry-fruit',
+                    icon: 'iconfont-berry'
+                },
+                {
                     value: 'citrus-fruit',
                     icon: 'iconfont-citrus'
                 },

@@ -23,6 +23,13 @@
                 :options="coffeeOriginOptions"
                 :value="coffeeOrigin"
                 @change="coffeeOriginValue = $event"></InputReference>
+            <InlineInput label="Region">
+                <input class="input-simple" :class="{'input-simple--active': coffeeRegion}" type="text"
+                    autocomplete="off"
+                    :value="coffeeRegion"
+                    placeholder="region"
+                    @input="coffeeRegionValue = $event.target.value" />
+            </InlineInput>
             <InputReference inputId="coffee-roaster"
                 label="Roaster"
                 placeholder="roaster"
@@ -58,6 +65,7 @@ export default {
             coffeeTypeValue: undefined,
             coffeePlaceValue: undefined,
             coffeeOriginValue: undefined,
+            coffeeRegionValue: undefined,
             coffeeRoasterValue: undefined,
             coffeeRoastIntensityValue: undefined,
             coffeeProcessingValue: undefined
@@ -81,6 +89,12 @@ export default {
                 return this.coffeeOriginValue
             }
             return this.item.coffeeOrigin || ''
+        },
+        coffeeRegion: function () {
+            if (this.coffeeRegionValue !== undefined) {
+                return this.coffeeRegionValue
+            }
+            return this.item.coffeeRegion || ''
         },
         coffeeRoaster: function () {
             if (this.coffeeRoasterValue !== undefined) {
@@ -127,6 +141,7 @@ export default {
             return {
                 coffeePlace: this.coffeePlace,
                 coffeeOrigin: this.coffeeOrigin,
+                coffeeRegion: this.coffeeRegion,
                 coffeeRoaster: this.coffeeRoaster,
                 coffeeType: this.coffeeType,
                 coffeeRoastIntensity: this.coffeeRoastIntensity,
@@ -145,6 +160,7 @@ export default {
         patch: function (data) {
             this.coffeeTypeValue = data.coffeeType || this.coffeeTypeValue
             this.coffeeOriginValue = data.coffeeOrigin || this.coffeeOriginValue
+            this.coffeeRegionValue = data.coffeeRegion || this.coffeeRegionValue
             this.coffeeRoasterValue = data.coffeeRoaster || this.coffeeRoasterValue
             this.coffeeRoastIntensityValue = data.coffeeRoastIntensity || this.coffeeRoastIntensityValue
             this.coffeeProcessingValue = data.coffeeProcessing || this.coffeeProcessingValue

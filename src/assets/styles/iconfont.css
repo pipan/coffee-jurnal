@@ -28,6 +28,9 @@
   display: block;
 }
 
+.iconfont-icon-check:before {
+  content: "\e91a";
+}
 .iconfont-berry:before {
   content: "\e900";
 }

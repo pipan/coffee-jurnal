@@ -37,6 +37,12 @@
                 :value="coffeeRoaster"
                 @change="coffeeRoasterValue = $event"></InputReference>
             
+            <InlineInput label="Limited">
+                <button type="button" class="toggle" :class="{'toggle--active': limited}" @click="limitedValue = !limited">
+                    <i class="iconfont iconfont-icon-check"></i>
+                </button>
+            </InlineInput>
+            
         </div>
         <div class="pt-m row row--center gap-m">
             <button type="button" class="btn btn--secondary" @click="back()">CANCEL</button>
@@ -68,7 +74,8 @@ export default {
             coffeeRegionValue: undefined,
             coffeeRoasterValue: undefined,
             coffeeRoastIntensityValue: undefined,
-            coffeeProcessingValue: undefined
+            coffeeProcessingValue: undefined,
+            limitedValue: undefined
         }
     },
     computed: {
@@ -114,6 +121,12 @@ export default {
             }
             return this.item.coffeeProcessing || ''
         },
+        limited: function () {
+            if (this.limitedValue !== undefined) {
+                return this.limitedValue
+            }
+            return this.item.limited || false
+        },
         coffeeRoastIntensities: function() {
             return this.$store.state.coffeeRoastIntensities
         },
@@ -145,7 +158,8 @@ export default {
                 coffeeRoaster: this.coffeeRoaster,
                 coffeeType: this.coffeeType,
                 coffeeRoastIntensity: this.coffeeRoastIntensity,
-                coffeeProcessing: this.coffeeProcessing
+                coffeeProcessing: this.coffeeProcessing,
+                limited: this.limited
             }
         },
         submit: function () {
@@ -164,6 +178,7 @@ export default {
             this.coffeeRoasterValue = data.coffeeRoaster || this.coffeeRoasterValue
             this.coffeeRoastIntensityValue = data.coffeeRoastIntensity || this.coffeeRoastIntensityValue
             this.coffeeProcessingValue = data.coffeeProcessing || this.coffeeProcessingValue
+            this.limitedValue = data.limited || this.limitedValue
         }
     }
 }

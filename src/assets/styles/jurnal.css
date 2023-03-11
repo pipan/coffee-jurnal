@@ -152,3 +152,20 @@
 .jurnal.journal--list .record__rating-value {
     font-size: 1.2rem;
 }
+
+.record__limited {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 1.3rem;
+    color: var(--color-border);
+    padding: 0.5rem;
+    background-color: var(--color-bg);
+    border-radius: 100%;
+    transition: color 140ms ease-out;
+}
+
+.record--checked .record__limited {
+    color: var(--color-primary);
+}

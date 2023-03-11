@@ -1,5 +1,6 @@
 <template>
     <div @click="select(item.id)" class="record user-select-disable" :class="{'record--checked': checked}" @contextmenu.prevent="setChecked(true)">
+        <i class="iconfont iconfont-star_fill record__limited" v-if="item.limited"></i>
         <div class="record__checkbox" @click.stop><input type="checkbox" :checked="checked" @change="setChecked($event.target.checked)" v-if="withCheckbox" /></div>
         <div class="record__detail">
             <div class="record__title">

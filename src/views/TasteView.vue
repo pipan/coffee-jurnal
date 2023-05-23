@@ -3,39 +3,22 @@
         <div class="view">
             <div class="view-content">
                 <NotFound v-if="!item"></NotFound>
-                <div class="column flex-grow gap-m" v-if="item">
-                    <header>
-                        <h1>Tasting</h1>
-                        <router-link :to="{ name: 'Edit', params: { id: item.id }, query: $route.query }" class="action btn btn--secondary btn--circle">
-                            <i class="iconfont iconfont-pencil text-l"></i>
-                        </router-link>
-                    </header>
-                    <form class="column flex-grow" @submit.prevent="submit()">
-                        <div class="form flex-grow">
-                            <PropertyRatingInput label="Aroma"
-                                :value="aroma"
-                                @change="aromaValue = $event"></PropertyRatingInput>
-                            <PropertyRatingInput label="Acidity"
-                                :value="acidity"
-                                @change="acidityValue = $event"></PropertyRatingInput>
-                            <PropertyRatingInput label="Sweetness"
-                                :value="sweetness"
-                                @change="sweetnessValue = $event"></PropertyRatingInput>
-                            <PropertyRatingInput label="Body"
-                                :value="body"
-                                @change="bodyValue = $event"></PropertyRatingInput>
-                            <PropertyRatingInput label="Finish"
-                                :value="finish"
-                                @change="finishValue = $event"></PropertyRatingInput>
-                            <ProfileInput :value="profile" @change="profileValue = $event"></ProfileInput>
-                            <RatingInput :value="rating" @change="ratingValue = $event"></RatingInput>
+                <div class="column flex-grow gap-m pos-r" v-if="item">
+                    <CoffeeDetail class="pt-s" :coffee="item" @edit="openEdit()"></CoffeeDetail>
+                    <ProfileGraph class="py-l" :propertyRatings="this.item.propertyRatings" @change="changeProperties($event)"></ProfileGraph>
+                    <div class="flex-grow">
+                        <div class="text-center text-l">{{ item.rating === -1 ? '-' : item.rating }}<span class="text-secondary"> / 5</span></div>
+                        <RatingInput :value="item.rating" @change="changeRating($event)"></RatingInput>
+                    </div>
+                    <div class="text-secondary text-light py-m text-center px-l text-s">This rating is base on <a href="https://www.scribd.com/document/421556406/Prufrock-Coffee-Tasting-Guide" target="_blank">prufrock coffee tasting guide</a></div>
+                    <div class="profiles">
+                        <ProfileInput :value="item.profile" @change="changeProfile($event)"></ProfileInput>
+                    </div>
+                    <div class="row row--center">
+                        <div class="btn-thumb" @click="back()">
+                            <i class="iconfont iconfont-cross text-l"></i>
                         </div>
-                        <div class="text-secondary text-light py-m text-center">This rating is base on <a href="https://www.scribd.com/document/421556406/Prufrock-Coffee-Tasting-Guide" target="_blank">prufrock coffee tasting guide</a></div>
-                        <div class="pt-m row row--center gap-m">
-                            <button type="button" class="btn btn--secondary" @click="back()">CANCEL</button>
-                            <button type="submit" class="btn btn--primary">SAVE</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,22 +26,17 @@
 </template>
 
 <script>
-import PropertyRatingInput from '../components/PropertyRatingInput.vue'
 import RatingInput from '../components/RatingInput.vue'
 import ProfileInput from '../components/ProfileInput.vue'
 import NotFound from './NotFound.vue'
+import CoffeeDetail from '../components/CoffeeDetail.vue'
+import ProfileGraph from '../components/ProfileGraph.vue'
 
 export default {
     name: 'TasteView',
-    components: { PropertyRatingInput, RatingInput, NotFound, ProfileInput },
+    components: { RatingInput, NotFound, CoffeeDetail, ProfileGraph, ProfileInput },
     data: function () {
         return {
-            aromaValue: {},
-            acidityValue: {},
-            sweetnessValue: {},
-            bodyValue: {},
-            finishValue: {},
-            ratingValue: -1,
             profileValue: undefined,
             initialValue: {
                 quality: 0.5,
@@ -73,27 +51,6 @@ export default {
         item: function () {
             return this.$store.getters.item(this.$route.params.id)
         },
-        aroma: function () {
-            return Object.assign({}, this.initialValue, this.item.propertyRatings.aroma, this.aromaValue)
-        },
-        acidity: function () {
-            return Object.assign({}, this.initialValue, this.item.propertyRatings.acidity, this.acidityValue)
-        },
-        sweetness: function () {
-            return Object.assign({}, this.initialValue, this.item.propertyRatings.sweetness, this.sweetnessValue)
-        },
-        body: function () {
-            return Object.assign({}, this.initialValue, this.item.propertyRatings.body, this.bodyValue)
-        },
-        finish: function () {
-            return Object.assign({}, this.initialValue, this.item.propertyRatings.finish, this.finishValue)
-        },
-        rating: function () {
-            if (this.ratingValue > -1) {
-                return this.ratingValue
-            }
-            return this.item.rating
-        },
         profile: function () {
             if (this.profileValue !== undefined) {
                 return this.profileValue
@@ -102,21 +59,35 @@ export default {
         }
     },
     methods: {
-        submit: function () {
+        changeProperties: function (properties) {
             this.$store.dispatch('cupTasting', {
                 id: this.item.id,
-                propertyRatings: {
-                    aroma: this.aroma,
-                    acidity: this.acidity,
-                    sweetness: this.sweetness,
-                    body: this.body,
-                    finish: this.finish
-                },
-                profile: this.profile,
-                rating: this.rating
+                propertyRatings: properties,
+                profile: this.item.profile,
+                rating: this.item.rating
             })
-            this.$router.replace({
-                name: 'Home'
+        },
+        changeRating: function (value) {
+            this.$store.dispatch('cupTasting', {
+                id: this.item.id,
+                propertyRatings: this.item.propertyRatings,
+                profile: this.item.profile,
+                rating: value
+            })
+        },
+        changeProfile: function (value) {
+            this.$store.dispatch('cupTasting', {
+                id: this.item.id,
+                propertyRatings: this.item.propertyRatings,
+                profile: value,
+                rating: this.item.rating
+            })
+        },
+        openEdit: function () {
+            this.$router.push({
+                name: 'Edit',
+                params: { id: this.item.id },
+                query: this.$route.query 
             })
         },
         back: function () {
@@ -128,3 +99,11 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.profiles {
+    position: absolute;
+    right: 0px;
+    top: 80px;
+}
+</style>

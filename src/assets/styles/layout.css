@@ -72,6 +72,10 @@
     align-items: center;
 }
 
+.row--bottom {
+    align-items: flex-end;
+}
+
 .column {
     display: flex;
     flex-direction: column;
@@ -81,6 +85,7 @@
 .gap-m { gap: var(--unit-m); }
 .gap-l { gap: var(--unit-l); }
 
+.flex { flex: 1; }
 .flex-grow { flex-grow: 1; }
 .flex-shrink { flex-shrink: 1; }
 .flex-no-shrink { flex-shrink: 0; }

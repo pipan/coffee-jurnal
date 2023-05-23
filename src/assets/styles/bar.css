@@ -3,30 +3,48 @@
     background-color: var(--color-border);
 }
 
-.bar.bar--transition {
-    transition: width ease 120ms, height ease 120ms, background-color ease 120ms;
+.bar.bar--transition, .point.point--transition {
+    transition: width ease 180ms, height ease 180ms, background-color ease 180ms;
 }
 
-.bar.bar--y { width: var(--unit-s); }
+.bar.bar--y { width: var(--unit-s); min-height: 4%; }
 .bar--y.bar--intensity-1 { height: 4%; }
 .bar--y.bar--intensity-2 { height: 25%; }
 .bar--y.bar--intensity-3 { height: 50%; }
 .bar--y.bar--intensity-4 { height: 75%; }
 .bar--y.bar--intensity-5 { height: 100%; }
 
-.bar.bar--x { height: var(--unit-s); }
+.bar.bar--x { height: var(--unit-s); min-width: 4%; }
 .bar--x.bar--intensity-1 { width: 4%; }
 .bar--x.bar--intensity-2 { width: 25%; }
 .bar--x.bar--intensity-3 { width: 50%; }
 .bar--x.bar--intensity-4 { width: 75%; }
 .bar--x.bar--intensity-5 { width: 100%;}
 
-.bar--quality-1 { background-color: var(--color-hate); }
-.bar--quality-2 { background-color: var(--color-dislike); }
-.bar--quality-3 { background-color: var(--color-ok); }
-.bar--quality-4 { background-color: var(--color-like); }
-.bar--quality-5 { background-color: var(--color-love); }
+.bar--quality-1, .point--quality-1, .point--quality-1::before { background-color: var(--color-hate); }
+.bar--quality-2, .point--quality-2, .point--quality-2::before { background-color: var(--color-dislike); }
+.bar--quality-3, .point--quality-3, .point--quality-3::before { background-color: var(--color-ok); }
+.bar--quality-4, .point--quality-4, .point--quality-4::before { background-color: var(--color-like); }
+.bar--quality-5, .point--quality-5, .point--quality-5::before { background-color: var(--color-love); }
 .bar--active { background-color: var(--color-primary); }
+.bar.bar--disabled { background-color: var(--color-border); }
+
+.point.point--y {
+    width: 2px;
+    position: relative;
+    transition: background-color ease 180ms;
+}
+.point.point--y::before {
+    content: '';
+    width: var(--unit-m);
+    height: var(--unit-m);
+    border-radius: 100%;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    transition: background-color ease 180ms;
+}
 
 .scale {
     position: absolute;

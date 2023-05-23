@@ -181,7 +181,13 @@ export default createStore({
     createNewCup: function (context, data) {
       data = Object.assign({
         created_at: new Date(),
-        propertyRatings: {},
+        propertyRatings: {
+          aroma: { intensity: 0.5, quality: 0.5 },
+          acidity: { intensity: 0.5, quality: 0.5 },
+          sweetness: { intensity: 0.5, quality: 0.5 },
+          body: { intensity: 0.5, quality: 0.5 },
+          finish: { intensity: 0.5, quality: 0.5 }
+        },
         rating: -1
       }, data)
       data.id = context.state.lastId + 1

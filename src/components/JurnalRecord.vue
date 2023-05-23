@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { formatCoffeeSecondaryInfo } from '../fn/coffeeFormater'
 import CjBar from './Bar.vue'
 
 export default {
@@ -63,14 +64,7 @@ export default {
             return this.item.rating
         },
         subtitle: function() {
-            const parts = []
-            if (this.item.coffeeOrigin) {
-                parts.push(this.item.coffeeOrigin)
-            }
-            if (this.item.coffeeRoaster) {
-                parts.push(this.item.coffeeRoaster) 
-            }
-            return parts.join(', ')
+            return formatCoffeeSecondaryInfo(this.item)
         },
         coffeeTypeIcon: function () {
             if (this.item.coffeeType == 'filter') {

@@ -163,6 +163,32 @@
     position: absolute;
 }
 
+.animation--graph-point-leave-active .point--y, .animation--graph-point-enter-active .point--y {
+    transition: transform var(--animation-duration-l) var(--animation-function), opacity var(--animation-duration-l) var(--animation-function);
+    transform-origin: 50% 100%;
+}
+.animation--graph-point-enter-from .point--y, .animation--graph-point-leave-to .point--y {
+    transform: scale(0.5, 0);
+    opacity: 0.5;
+}
+
+.animation--graph-bar-leave-active, .animation--graph-bar-enter-active {
+    transition: transform var(--animation-duration-l) var(--animation-function) 150ms, opacity var(--animation-duration-l) var(--animation-function) 150ms;
+    transform-origin: 50% 100%;
+}
+.animation--graph-bar-enter-from, .animation--graph-bar-leave-to {
+    transform: scale(0.5, 0);
+    opacity: 0.5;
+}
+
+.animation--top-slide-leave-active, .animation--top-slide-enter-active {
+    transition: transform var(--animation-duration-l) var(--animation-function) var(--animation-duration-l), opacity var(--animation-duration-l) var(--animation-function) var(--animation-duration-l);
+}
+.animation--top-slide-enter-from, .animation--top-slide-leave-to {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
 .reflection-animation {
     animation-name: reflection;
     animation-duration: 1.5s;

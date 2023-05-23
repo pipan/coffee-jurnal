@@ -1,16 +1,15 @@
 <template>
-    <InlineInput label="Rating">
+    <div class="row">
         <RatingStars :active="selectedStars" @select="change($event)"></RatingStars>
-    </InlineInput>
+    </div>
 </template>
 
 <script>
 import RatingStars from './RatingStars.vue'
-import InlineInput from './InlineInput.vue'
 
 export default {
     name: 'RatingInput',
-    components: { RatingStars, InlineInput },
+    components: { RatingStars },
     props: {
         value: [Number],
         limit: {

@@ -10,6 +10,7 @@
                 <div class="graph-grid__line"></div>
                 <div class="graph-grid__line"></div>
                 <div class="graph-grid__line"></div>
+                <div class="graph-grid__line graph-grid__line--primary" v-if="moveValue > -1" :style="{ 'bottom': moveValue * 100 + '%' }"></div>
             </div>
             <div class="graph-bars row">
                 <transition-group name="animation--graph-bar" appear>
@@ -17,14 +18,16 @@
                         :disabled="activePropertyType !== 'intensity'"
                         :value="propertyRatings[item.key] ? propertyRatings[item.key]?.intensity : undefined"
                         :quality="propertyRatings[item.key] ? propertyRatings[item.key]?.quality : undefined"
-                        @change="setIntensity(item.key, $event)"></ProfileGraphBar>
+                        @change="setIntensity(item.key, $event)"
+                        @move="move($event)"></ProfileGraphBar>
                 </transition-group>
             </div>
             <transition name="animation--graph-point" :duration="300">
                 <div class="graph-points row" v-if="activePropertyType === 'feeling'">
                     <ProfileGraphPoint class="flex" v-for="item of properties" :key="item.key"
                         :value="propertyRatings[item.key] ? propertyRatings[item.key]?.quality : undefined"
-                        @change="setQuality(item.key, $event)"></ProfileGraphPoint>
+                        @change="setQuality(item.key, $event)"
+                        @move="move($event)"></ProfileGraphPoint>
                 </div>
             </transition>
         </div>
@@ -50,6 +53,7 @@ export default {
     data: function () {
         return {
             activePropertyType: 'intensity',
+            moveValue: -1,
             properties: [
                 { key: 'aroma', label: 'aro' },
                 { key: 'acidity', label: 'aci' },
@@ -71,6 +75,7 @@ export default {
             this.set(property, 'quality', value)
         },
         set: function (property, type, value) {
+            this.move(-1)
             let override = {}
             override[type] = value
             let propertyClone = Object.assign({}, this.propertyRatings[property], override)
@@ -78,6 +83,9 @@ export default {
             clone[property] = propertyClone
             this.$emit('change', clone)
         },
+        move: function(value) {
+            this.moveValue = value
+        }
     }
 }
 </script>
@@ -117,6 +125,8 @@ export default {
         height: 1px;
         border-bottom: dashed 1px var(--color-border);
     }
+
+    .graph-grid__line.graph-grid__line--primary { border-color: var(--color-primary); }
 
     .graph-bars {
         position: relative;

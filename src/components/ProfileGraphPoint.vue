@@ -61,6 +61,7 @@ export default {
             const ratio = position / boundBox.height
             const ratioNormalize = Math.min(1, Math.max(0, ratio))
             this.internalValue = ratioNormalize
+            this.$emit('move', this.internalValue)
         },
     },
     mounted: function () {

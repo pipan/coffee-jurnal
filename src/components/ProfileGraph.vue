@@ -19,7 +19,8 @@
                         :value="propertyRatings[item.key] ? propertyRatings[item.key]?.intensity : undefined"
                         :quality="propertyRatings[item.key] ? propertyRatings[item.key]?.quality : undefined"
                         @change="setIntensity(item.key, $event)"
-                        @move="move($event)"></ProfileGraphBar>
+                        @move="move($event)"
+                        @moveStop="move(-1)"></ProfileGraphBar>
                 </transition-group>
             </div>
             <transition name="animation--graph-point" :duration="300">
@@ -27,7 +28,8 @@
                     <ProfileGraphPoint class="flex" v-for="item of properties" :key="item.key"
                         :value="propertyRatings[item.key] ? propertyRatings[item.key]?.quality : undefined"
                         @change="setQuality(item.key, $event)"
-                        @move="move($event)"></ProfileGraphPoint>
+                        @move="move($event)"
+                        @moveStop="move(-1)"></ProfileGraphPoint>
                 </div>
             </transition>
         </div>
@@ -75,7 +77,6 @@ export default {
             this.set(property, 'quality', value)
         },
         set: function (property, type, value) {
-            this.move(-1)
             let override = {}
             override[type] = value
             let propertyClone = Object.assign({}, this.propertyRatings[property], override)

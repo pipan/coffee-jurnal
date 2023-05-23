@@ -46,6 +46,7 @@ export default {
             this.$emit('change', newValue)
         },
         snap: function () {
+            this.$emit('moveStop')
             const snapedValue = this.getSnapValue(this.internalValue)
             this.updating = false
             this.change(snapedValue)

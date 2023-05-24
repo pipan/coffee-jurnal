@@ -3,10 +3,8 @@
         <JurnalDay v-for="agenda of timeline"
             :key="agenda.day"
             :agenda="agenda"
-            :checked="checked"
-            :withCheckbox="withCheckbox"
             @select="select($event)"
-            @checkChange="checkChange($event)"></JurnalDay>
+            @delete="$emit('delete', $event)"></JurnalDay>
     </div>
 </template>
 
@@ -17,17 +15,9 @@ export default {
     name: 'CjJournal',
     components: { JurnalDay },
     props: {
-        checked: {
-            type: Array,
-            default: () => []
-        },
         items: {
             type: Array,
             default: () => []
-        },
-        withCheckbox: {
-            type: Boolean,
-            default: true
         },
         display: {
             type: String,
@@ -68,9 +58,6 @@ export default {
         }
     },
     methods: {
-        checkChange: function (event) {
-            this.$emit('checkChange', event)
-        },
         select: function (id) {
             this.$emit('select', id)
         }

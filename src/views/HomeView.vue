@@ -21,30 +21,23 @@
                     <button type="button" class="btn btn--secondary" @click="previousPage()">NEWER</button>
                 </div>
                 <CjJournal :items="itemsPaginated"
-                    :checked="checked"
                     :display="displayMode"
                     @select="select($event)"
-                    @checkChange="checkChange($event)"></CjJournal>
+                    @delete="openDeletePrompt($event)"></CjJournal>
                 <div class="row row--center py-m" v-if="hasNextPage">
                     <button type="button" class="btn btn--secondary" @click="nextPage()">OLDER</button>
                 </div>
             </div>
         </div>
         <div class="fab-container">
-            <router-link :to="{ name: 'Create' }" class="btn-fab user-select-disable" v-if="isRouteMode" @contextmenu.prevent="openImport()">
+            <router-link :to="{ name: 'Create' }" class="btn-fab user-select-disable" @contextmenu.prevent="openImport()">
                 <i class="iconfont iconfont-plus text-l"></i>
             </router-link>
-            <button type="button" class="btn-fab" v-if="isCheckMode" @click="uncheckAll()">
-                <i class="iconfont iconfont-cross text-l"></i>
-            </button>
-            <button type="button" class="btn-fab btn-fab--danger" v-if="isCheckMode" @click="openDeletePrompt()">
-                <i class="iconfont iconfont-bin text-l"></i>
-            </button>
         </div>
-        <CjModal v-if="deletePromptVisible" @close="closeDeletePrompt()">
+        <CjModal v-if="toDeleteId > 0" @close="closeDeletePrompt()">
             <h2>Delete</h2>
             <div class="pt-l pb-m">
-                Do you really want to permanently delete selected journal entries?
+                Do you really want to permanently delete this journal entry?
             </div>
             <div class="row row--right gap-m">
                 <button type="button" class="btn btn--secondary" @click="closeDeletePrompt()">NO</button>
@@ -67,28 +60,15 @@ export default {
     },
     data: function () {
         return {
-            checked: [],
             perPageLimit: 30,
             itemsPaginated: [],
             scrollPosition: 0,
-            deletePromptVisible: false
+            toDeleteId: 0
         }
     },
     computed: {
         items: function () {
             return this.$store.getters.chronologicalItems
-        },
-        mode: function () {
-            if (this.checked.length > 0) {
-                return 'check'
-            }
-            return 'route'
-        },
-        isCheckMode: function() {
-            return this.mode === 'check'
-        },
-        isRouteMode: function() {
-            return this.mode === 'route'
         },
         currentPage: function () {
             return parseInt(this.$route.query.page || "1")
@@ -147,39 +127,14 @@ export default {
                 this.itemsPaginated = [...this.itemsPaginated, ...batch]
             })
         },
-        checkChange: function (event) {
-            let newValue = [...this.checked]
-            if (event.value) {
-                newValue.push(event.id)
-            } else {
-                const index = newValue.indexOf(event.id)
-                if (index < 0) {
-                    return
-                }
-                newValue.splice(index, 1)
-            }
-            this.checked = newValue
-        },
-        uncheckAll: function () {
-            this.checked = []
-        },
         select: function (id) {
-            if (this.isCheckMode) {
-                const value = this.checked.indexOf(id) === -1
-                this.checkChange({ id, value })
-                return
-            }
-            if (this.isRouteMode) {
-                this.$router.push({
-                    name: 'Taste',
-                    params: { id }
-                })
-                return
-            }
+            this.$router.push({
+                name: 'Taste',
+                params: { id }
+            })
         },
-        deleteSelected: function() {
-            this.$store.dispatch('deleteByIds', this.checked)
-            this.checked = []
+        delete: function() {
+            this.$store.dispatch('deleteByIds', [this.toDeleteId])
             this.closeDeletePrompt()
         },
         goToPage: function (page) {
@@ -203,10 +158,10 @@ export default {
             this.setDisplayMode(this.isDisplayModeList ? 'grid' : 'list')
         },
         closeDeletePrompt: function () {
-            this.deletePromptVisible = false
+            this.toDeleteId = 0
         },
-        openDeletePrompt: function () {
-            this.deletePromptVisible = true
+        openDeletePrompt: function (item) {
+            this.toDeleteId = item.id
         }
     }
 }

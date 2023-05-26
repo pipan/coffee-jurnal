@@ -201,6 +201,7 @@ export default createStore({
       context.commit("updateItem", data)
     },
     deleteByIds: function(context, data) {
+      console.log("deleteByIds", data)
       context.commit("deleteIds", data)
     },
     updateStart: function(context) {

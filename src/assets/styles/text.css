@@ -6,6 +6,7 @@
 
 .text-secondary { color: var(--color-fg-secondary); }
 .text-primary { color: var(--color-primary); }
+.text-danger { color: var(--color-danger); }
 
 .text-s { font-size: var(--font-s); }
 .text-m { font-size: var(--font-m); }

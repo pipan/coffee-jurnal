@@ -189,6 +189,42 @@
     opacity: 0;
 }
 
+.animation--modal-enter-from, .animation--modal-leave-to {
+    opacity: 0.3;
+}
+.animation--modal-enter-active, .animation--modal-leave-active {
+    transition: opacity var(--animation-duration-m) var(--animation-function);
+}
+.animation--modal-leave-active {
+    transition-delay: var(--animation-duration-s);
+}
+.animation--modal-enter-to, .animation--modal-leave-from {
+    opacity: 1;
+}
+
+.animation--modal-enter-active .modal {
+    animation: modalDisplay var(--animation-duration-l);
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+.animation--modal-leave-active .modal {
+    animation: modalDisplay var(--animation-duration-l) reverse;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes modalDisplay {
+    0% {
+      transform: scale(0.0078125);
+    }
+    50% {
+      transform: scaleX(0.0078125) scaleY(1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
 .reflection-animation {
     animation-name: reflection;
     animation-duration: 1.5s;

@@ -34,16 +34,18 @@
                 <i class="iconfont iconfont-plus text-l"></i>
             </router-link>
         </div>
-        <CjModal v-if="toDeleteId > 0" @close="closeDeletePrompt()">
-            <h2>Delete</h2>
-            <div class="pt-l pb-m">
-                Do you really want to permanently delete this journal entry?
-            </div>
-            <div class="row row--right gap-m">
-                <button type="button" class="btn btn--secondary" @click="closeDeletePrompt()">NO</button>
-                <button type="button" class="btn btn--primary" @click="deleteSelected()">YES</button>
-            </div>
-        </CjModal>
+        <transition name="animation--modal" :duration="300">
+            <CjModal v-if="toDeleteId > 0" @close="closeDeletePrompt()">
+                <h2 class="text-center text-danger">Delete</h2>
+                <div class="pt-l pb-m">
+                    Do you really want to permanently delete this journal entry?
+                </div>
+                <div class="row row--right gap-m">
+                    <button type="button" class="btn btn--secondary" @click="closeDeletePrompt()">NO</button>
+                    <button type="button" class="btn btn--primary" @click="deleteItem(toDeleteId)">YES</button>
+                </div>
+            </CjModal>
+        </transition>
     </div>
 </template>
 
@@ -133,8 +135,8 @@ export default {
                 params: { id }
             })
         },
-        delete: function() {
-            this.$store.dispatch('deleteByIds', [this.toDeleteId])
+        deleteItem: function(id) {
+            this.$store.dispatch('deleteByIds', [id])
             this.closeDeletePrompt()
         },
         goToPage: function (page) {

@@ -1,7 +1,9 @@
 <template>
     <div class="modal-view" @click="outsideClick()">
         <div class="modal" @click="preventClosing = true">
-            <slot></slot>
+            <div class="modal__inner">
+                <slot></slot>
+            </div>
         </div>
     </div>
 </template>

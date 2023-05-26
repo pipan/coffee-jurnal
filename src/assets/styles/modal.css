@@ -14,11 +14,21 @@
 }
 
 .modal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
     box-sizing: border-box;
     background-color: var(--color-bg-secondary);
     border-radius: 8px;
     width: 100%;
     max-width: 400px;
-    padding: var(--unit-m);
     border: 1px solid var(--color-border);
+    overflow: hidden;
+}
+
+.modal__inner {
+    flex-shrink: 0;
+    padding: var(--unit-m);
+    max-width: 400px;
+    box-sizing: border-box;
 }

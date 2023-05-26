@@ -202,28 +202,29 @@
     opacity: 1;
 }
 
-.animation--modal-enter-active .modal {
-    animation: modalDisplay var(--animation-duration-l);
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-}
-.animation--modal-leave-active .modal {
-    animation: modalDisplay var(--animation-duration-l) reverse;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+.animation--modal-leave-to .modal, .animation--modal-enter-from .modal {
+    width: 2%;
 }
 
-@keyframes modalDisplay {
+.animation--modal-enter-active .modal, .animation--modal-leave-active .modal {
+    transition: width var(--animation-duration-l) var(--animation-function);
+}
+
+.animation--modal-enter-to .modal, .animation--modal-leave-from .modal {
+    width: 100%;
+}
+
+@keyframes modalInnerDisplay {
     0% {
-      transform: scale(0.0078125);
+      transform: scale(32);
     }
     50% {
-      transform: scaleX(0.0078125) scaleY(1);
+      transform: scaleX(32) scaleY(1);
     }
     100% {
       transform: scale(1);
     }
-  }
+}
 
 .reflection-animation {
     animation-name: reflection;

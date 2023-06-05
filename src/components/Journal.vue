@@ -1,10 +1,12 @@
 <template>
     <div class="jurnal" :class="displayClass">
-        <JurnalDay v-for="agenda of timeline"
-            :key="agenda.day"
-            :agenda="agenda"
-            @select="select($event)"
-            @delete="$emit('delete', $event)"></JurnalDay>
+        <transition-group name="animation--record">
+            <JurnalDay v-for="agenda of timeline"
+                :key="agenda.day"
+                :agenda="agenda"
+                @select="select($event)"
+                @delete="$emit('delete', $event)"></JurnalDay>
+        </transition-group>
     </div>
 </template>
 

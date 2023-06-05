@@ -2,11 +2,13 @@
     <div class="jurnal__day">
         <h2 class="jurnal__day-title pb-m">{{ title }}</h2>
         <div class="jurnal__day-records">
-            <JurnalRecord v-for="item of agenda.items"
-                :key="item.id"
-                :item="item"
-                @select="select($event)"
-                @delete="$emit('delete', $event)"></JurnalRecord>
+            <transition-group name="animation--record">
+                <JurnalRecord v-for="item of agenda.items"
+                    :key="item.id"
+                    :item="item"
+                    @select="select($event)"
+                    @delete="$emit('delete', $event)"></JurnalRecord>
+            </transition-group>
         </div>
     </div>
 </template>

@@ -203,7 +203,7 @@
 }
 
 .animation--modal-leave-to .modal, .animation--modal-enter-from .modal {
-    width: 2%;
+    width: 2px;
 }
 
 .animation--modal-enter-active .modal, .animation--modal-leave-active .modal {
@@ -212,6 +212,20 @@
 
 .animation--modal-enter-to .modal, .animation--modal-leave-from .modal {
     width: 100%;
+}
+
+.animation--record-leave-active {
+    transition: transform ease 450ms, opacity cubic-bezier(0.05, 0.7, 0.1, 1.0) 450ms;
+}
+
+.animation--record-leave-from {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.animation--record-leave-to {
+    transform: scale(1.22);
+    opacity: 0;
 }
 
 @keyframes modalInnerDisplay {

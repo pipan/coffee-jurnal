@@ -52,7 +52,6 @@
 <script>
 import CjJournal from '../components/Journal.vue'
 import CjModal from '../components/Modal.vue'
-import { StaticBatchJob } from '../services/StaticBatckJob'
 
 export default {
     name: 'HomeView',
@@ -123,11 +122,7 @@ export default {
         load: function () {
             const start = this.perPageLimit * (this.currentPage - 1)
             const end = start + this.perPageLimit
-            this.itemsPaginated = []
-            const job = new StaticBatchJob(this.items.slice(start, end), { size: 3 })
-            job.forEach((batch) => {
-                this.itemsPaginated = [...this.itemsPaginated, ...batch]
-            })
+            this.itemsPaginated = this.items.slice(start, end)
         },
         select: function (id) {
             this.$router.push({

@@ -17,45 +17,30 @@
                         </button>
                     </div>
                 </header>
-                <div class="row row--center py-m" v-if="hasPreviousPage">
-                    <button type="button" class="btn btn--secondary" @click="previousPage()">NEWER</button>
-                </div>
                 <CjJournal :items="itemsPaginated"
                     :display="displayMode"
-                    @select="select($event)"
-                    @delete="openDeletePrompt($event)"></CjJournal>
-                <div class="row row--center py-m" v-if="hasNextPage">
-                    <button type="button" class="btn btn--secondary" @click="nextPage()">OLDER</button>
+                    :page="currentPage"
+                    @select="select($event)"></CjJournal>
+                <div class="row row--center gap-l py-m" v-if="hasNextPage || hasPreviousPage">
+                    <button type="button" class="btn btn--secondary" v-if="hasPreviousPage" @click="previousPage()">NEWER</button>
+                    <button type="button" class="btn btn--secondary" v-if="hasNextPage" @click="nextPage()">OLDER</button>
                 </div>
             </div>
         </div>
         <div class="fab-container">
-            <router-link :to="{ name: 'Create' }" class="btn-fab user-select-disable" @contextmenu.prevent="openImport()">
+            <router-link :to="{ name: 'Create', query: $route.query }" class="btn-fab user-select-disable" @contextmenu.prevent="openImport()">
                 <i class="iconfont iconfont-plus text-l"></i>
             </router-link>
         </div>
-        <transition name="animation--modal" :duration="300">
-            <CjModal v-if="toDeleteId > 0" @close="closeDeletePrompt()">
-                <h2 class="text-center text-danger">Delete</h2>
-                <div class="pt-l pb-m">
-                    Do you really want to permanently delete this journal entry?
-                </div>
-                <div class="row row--right gap-m">
-                    <button type="button" class="btn btn--secondary" @click="closeDeletePrompt()">NO</button>
-                    <button type="button" class="btn btn--primary" @click="deleteItem(toDeleteId)">YES</button>
-                </div>
-            </CjModal>
-        </transition>
     </div>
 </template>
 
 <script>
 import CjJournal from '../components/Journal.vue'
-import CjModal from '../components/Modal.vue'
 
 export default {
     name: 'HomeView',
-    components: { CjJournal, CjModal },
+    components: { CjJournal },
     title: function () {
         return "Coffee Journal"
     },
@@ -63,8 +48,7 @@ export default {
         return {
             perPageLimit: 30,
             itemsPaginated: [],
-            scrollPosition: 0,
-            toDeleteId: 0
+            scrollPosition: 0
         }
     },
     computed: {
@@ -114,7 +98,7 @@ export default {
     },
     methods: {
         openImport: function () {
-            this.$router.push({ name: 'Import' })
+            this.$router.push({ name: 'Import', query: this.$route.query })
         },
         setScrollPosition: function(event) {
             this.scrollPosition = event.target.scrollingElement.scrollTop
@@ -127,12 +111,9 @@ export default {
         select: function (id) {
             this.$router.push({
                 name: 'Taste',
-                params: { id }
+                params: { id },
+                query: this.$route.query
             })
-        },
-        deleteItem: function(id) {
-            this.$store.dispatch('deleteByIds', [id])
-            this.closeDeletePrompt()
         },
         goToPage: function (page) {
             this.$router.push({
@@ -153,12 +134,6 @@ export default {
         },
         toggleDisplayMode: function () {
             this.setDisplayMode(this.isDisplayModeList ? 'grid' : 'list')
-        },
-        closeDeletePrompt: function () {
-            this.toDeleteId = 0
-        },
-        openDeletePrompt: function (item) {
-            this.toDeleteId = item.id
         }
     }
 }

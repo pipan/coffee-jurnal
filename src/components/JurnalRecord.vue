@@ -1,7 +1,7 @@
 <template>
-    <div class="record">
+    <div class="record" :class="isDeleting ? 'record--deleting' : ''">
         <div class="actions">
-            <div class="action__delete" @click="$emit('delete', item)">
+            <div class="action__delete" @click="emitDelete()">
                 <i class="iconfont iconfont-bin text-l"></i>
             </div>
         </div>
@@ -48,7 +48,8 @@ export default {
     },
     data: function () {
         return {
-            translateX: 0
+            translateX: 0,
+            isDeleting: false
         }
     },
     computed: {
@@ -100,6 +101,13 @@ export default {
         },
         onGestureEnd: function () {
             this.translateX = this.translateX <= -30 ? -60 : 0
+        },
+        emitDelete: function () {
+            this.isDeleting = true
+            this.$emit('delete', this.item)
+            setTimeout(() => {
+                this.$store.dispatch('deleteByIds', [this.item.id])
+            })   
         }
     }
 }
@@ -112,6 +120,8 @@ export default {
     padding: var(--unit-m);
     border-radius: calc(var(--border-radius) - 1px);
     transition: transform ease-out 140ms, background 140ms ease-out;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 @media (hover: hover) {

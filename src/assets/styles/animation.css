@@ -214,19 +214,15 @@
     width: 100%;
 }
 
-.animation--record-leave-active {
-    transition: transform ease 450ms, opacity cubic-bezier(0.05, 0.7, 0.1, 1.0) 450ms;
-}
+.animation--record-leave-active.record, .animation--day-records-leave-active .record.record--deleting { transition: opacity ease 500ms, transform ease 500ms; }
+.animation--record-leave-to.record, .animation--day-records-leave-to .record.record--deleting { opacity: 0; transform: translateX(-100%); }
+.jurnal.journal--grid .animation--record-leave-to.record:nth-child(2n), .jurnal.journal--grid .animation--day-records-leave-to .record:nth-child(2n).record--deleting { opacity: 0; transform: translateX(100%); }
+.animation--record-leave-from.record, .animation--day-records-leave-from .record.record--deleting { opacity: 1; transform: translateX(0); }
 
-.animation--record-leave-from {
-    transform: scale(1);
-    opacity: 1;
-}
-
-.animation--record-leave-to {
-    transform: scale(1.22);
-    opacity: 0;
-}
+.animation--day-records-enter-active, .animation--day-records-leave-active { transition: opacity ease var(--animation-duration-l); }
+.animation--day-records-enter-active { transition-delay: var(--animation-duration-l); }
+.animation--day-records-enter-from, .animation--day-records-leave-to { opacity: 0; }
+.animation--day-records-enter-to, .animation--day-records-leave-from { opacity: 1; }
 
 @keyframes modalInnerDisplay {
     0% {

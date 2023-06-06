@@ -1,8 +1,8 @@
 <template>
     <div class="jurnal" :class="displayClass">
-        <transition-group name="animation--record">
+        <transition-group name="animation--day-records" :duration="{enter: 600, leave: 300}">
             <JurnalDay v-for="agenda of timeline"
-                :key="agenda.day"
+                :key="agenda.id"
                 :agenda="agenda"
                 @select="select($event)"
                 @delete="$emit('delete', $event)"></JurnalDay>
@@ -24,6 +24,10 @@ export default {
         display: {
             type: String,
             default: 'list'
+        },
+        page: {
+            type: Number,
+            default: 1
         }
     },
     computed: {
@@ -36,6 +40,7 @@ export default {
                 let dayIndex = day.join('-')
                 if (dayIndex != previousDayIndex && dayItems.length > 0) {
                     result.push({
+                        id: `${this.page}-${previousDayIndex}`,
                         day: previousDayIndex,
                         items: dayItems
                     })
@@ -46,6 +51,7 @@ export default {
             }
             if (dayItems.length > 0) {
                 result.push({
+                    id: `${this.page}-${previousDayIndex}`,
                     day: previousDayIndex,
                     items: dayItems
                 })

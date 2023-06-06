@@ -1,6 +1,6 @@
 <template>
     <div class="jurnal" :class="displayClass">
-        <transition-group name="animation--day-records" :duration="{enter: 600, leave: 300}">
+        <transition-group name="animation--day-records" :duration="{enter: 400, leave: 200}">
             <JurnalDay v-for="agenda of timeline"
                 :key="agenda.id"
                 :agenda="agenda"

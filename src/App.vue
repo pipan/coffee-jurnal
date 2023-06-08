@@ -7,7 +7,7 @@
                 </KeepAlive>
             </transition>
         </router-view>
-        <transition name="animation--fade">
+        <transition name="animation--modal">
             <Modal v-if="isUpdating">
                 <h2>Updating application</h2>
                 <div class="pt-l pb-m">

@@ -89,14 +89,14 @@
     transition: transform var(--animation-duration-l) var(--animation-function), opacity var(--animation-duration-l) var(--animation-function);
 }
 
-.animation--slide-left-leave-active .fab-container { transform: translateX(calc(-50% - 100px)) translateY(50%); opacity: 0; }
-.animation--slide-left-leave-from .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
-.animation--slide-right-leave-active .fab-container { transform: translateX(calc(-50% + 100px)) translateY(50%); opacity: 0; }
-.animation--slide-right-leave-from .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
+.animation--slide-left-leave-active .fab-container { transform: translateX(calc(-100vw - 50%)) translateY(50%) scale(0.8, 1); opacity: 0; }
+.animation--slide-left-leave-from .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
+.animation--slide-right-leave-active .fab-container { transform: translateX(calc(100vw - 50%)) translateY(50%) scale(0.8, 1); opacity: 0; }
+.animation--slide-right-leave-from .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
 .animation--slide-left-enter-active .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
-.animation--slide-left-enter-from .fab-container { transform: translateX(calc(-50% + 100px)) translateY(50%); opacity: 0; }
+.animation--slide-left-enter-from .fab-container { transform: translateX(calc(100vw - 50%)) translateY(50%) scale(0.8, 1); opacity: 0; }
 .animation--slide-right-enter-active .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
-.animation--slide-right-enter-from .fab-container { transform: translateX(calc(-50% - 100px)) translateY(50%); opacity: 0; }
+.animation--slide-right-enter-from .fab-container { transform: translateX(calc(-100vw - 50%)) translateY(50%) scale(0.8, 1); opacity: 0; }
 
 .animation--slide-left-leave-active .view { transform: translateX(-100%) scaleX(0.8); opacity: 0.4; }
 .animation--slide-left-leave-from .view { transform: translateX(0%) scaleX(1); }

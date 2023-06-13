@@ -84,6 +84,10 @@ export default createStore({
         }
         options.push(item.coffeePlace)
       }
+      options.sort((a, b) => {
+        if (a === b) { return 0 }
+        return a < b ? -1 : 1
+      })
       return options
     },
     coffeeOriginOptions: function(_, getters) {
@@ -94,6 +98,10 @@ export default createStore({
         }
         options.push(item.coffeeOrigin)
       }
+      options.sort((a, b) => {
+        if (a === b) { return 0 }
+        return a < b ? -1 : 1
+      })
       return options
     },
     coffeeRoasterOptions: function(_, getters) {
@@ -104,6 +112,24 @@ export default createStore({
         }
         options.push(item.coffeeRoaster)
       }
+      options.sort((a, b) => {
+        if (a === b) { return 0 }
+        return a < b ? -1 : 1
+      })
+      return options
+    },
+    coffeeRegionOptions: function(_, getters) {
+      const options = []
+      for (const item of getters.chronologicalItems) {
+        if (!item.coffeeRegion || options.indexOf(item.coffeeRegion) > -1) {
+          continue
+        }
+        options.push(item.coffeeRegion)
+      }
+      options.sort((a, b) => {
+        if (a === b) { return 0 }
+        return a < b ? -1 : 1
+      })
       return options
     }
   },
@@ -159,6 +185,7 @@ export default createStore({
     },
     insertBag: function(state, item) {
       let newBags = [...state.bags]
+      item.id = new Date().getTime()
       newBags.push(item)
       state.bags = newBags
       localStorage.setItem('bags', JSON.stringify(state.bags))

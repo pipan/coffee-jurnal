@@ -202,10 +202,10 @@
     width: 100%;
 }
 
-.animation--record-leave-active.record, .animation--day-records-leave-active .record.record--deleting { transition: opacity ease 400ms, transform ease 400ms; }
-.animation--record-leave-to.record, .animation--day-records-leave-to .record.record--deleting { opacity: 0; transform: translateX(-100%); }
+.animation--list-delete-leave-active, .animation--record-leave-active.record, .animation--day-records-leave-active .record.record--deleting { transition: opacity ease 400ms, transform ease 400ms; }
+.animation--list-delete-leave-to, .animation--record-leave-to.record, .animation--day-records-leave-to .record.record--deleting { opacity: 0; transform: translateX(-100%); }
 .jurnal.journal--grid .animation--record-leave-to.record:nth-child(2n), .jurnal.journal--grid .animation--day-records-leave-to .record:nth-child(2n).record--deleting { opacity: 0; transform: translateX(100%); }
-.animation--record-leave-from.record, .animation--day-records-leave-from .record.record--deleting { opacity: 1; transform: translateX(0); }
+.animation--list-delete-leave-from, .animation--record-leave-from.record, .animation--day-records-leave-from .record.record--deleting { opacity: 1; transform: translateX(0); }
 
 .animation--day-records-enter-active, .animation--day-records-leave-active { transition: opacity ease var(--animation-duration-m); }
 .animation--day-records-enter-active { transition-delay: var(--animation-duration-m); }

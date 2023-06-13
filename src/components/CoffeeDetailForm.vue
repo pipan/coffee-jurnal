@@ -1,64 +1,133 @@
 <template>
-    <form class="column flex-grow" @submit.prevent="submit()">
-        <div class="form flex-grow">
-            <InlineInput label="Method">
-                <ToggleSwitch :options="coffeeTypes" :value="coffeeType" @change="coffeeTypeValue = $event"></ToggleSwitch>
-            </InlineInput>
-            <InlineInput label="Intensity">
-                <ToggleSwitch :options="coffeeRoastIntensities" :value="coffeeRoastIntensity" @change="coffeeRoastIntensityValue = $event" :nullable="true"></ToggleSwitch>
-            </InlineInput>
-            <InlineInput label="Processing">
-                <ToggleSwitch :options="coffeeProcessings" :value="coffeeProcessing" @change="coffeeProcessingValue = $event" :nullable="true"></ToggleSwitch>
-            </InlineInput>
-            
-            <InputReference inputId="coffee-place"
-                label="Place"
-                placeholder="place"
-                :options="coffeePlaceOptions"
-                :value="coffeePlace"
-                @change="coffeePlaceValue = $event"></InputReference>
-            <InputReference inputId="coffee-origin"
-                label="Origin"
-                placeholder="origin"
-                :options="coffeeOriginOptions"
-                :value="coffeeOrigin"
-                @change="coffeeOriginValue = $event"></InputReference>
-            <InlineInput label="Region">
-                <input class="input-simple" :class="{'input-simple--active': coffeeRegion}" type="text"
-                    autocomplete="off"
-                    :value="coffeeRegion"
-                    placeholder="region"
-                    @input="coffeeRegionValue = $event.target.value" />
-            </InlineInput>
-            <InputReference inputId="coffee-roaster"
-                label="Roaster"
-                placeholder="roaster"
-                :options="coffeeRoasterOptions"
-                :value="coffeeRoaster"
-                @change="coffeeRoasterValue = $event"></InputReference>
-            
-            <InlineInput label="Limited">
-                <button type="button" class="toggle" :class="{'toggle--active': limited}" @click="limitedValue = !limited">
-                    <i class="iconfont iconfont-icon-check"></i>
-                </button>
-            </InlineInput>
-            
+    <div class="column gap-m">
+        <div class="row row--center gap-s">
+            <div class="carousel__bar" v-for="(key, index) of cards" :key="key"
+                :class="{'carousel__bar--active': index == activeIndex, 'carousel__bar--filled': coffeeValue[key]}" ></div>
         </div>
-        <div class="pt-m row row--center gap-m">
-            <button type="button" class="btn btn--secondary" @click="back()">CANCEL</button>
-            <button type="submit" class="btn btn--primary">SAVE</button>
+        <div class="carousel scroll-x--transparent" ref="carousel"
+            :style="{'--carousel-scroll': scrollPosition + 'px'}"
+            @scroll="onScroll($event)">
+            <CjCard>
+                <div class="card__inner">
+                    <h2 class="text-center">Bags</h2>
+                    <div class="column column--devider px-l flex-grow">
+                        <transition-group name="animation--list-delete">
+                            <SwipeActions class="pos-r" v-for="(item, index) of bags" :key="item.id || index">
+                                <template v-slot:actions>
+                                    <div class="action__delete" @click="deleteBag(index)">
+                                        <i class="iconfont iconfont-bin text-l"></i>
+                                    </div>
+                                </template>
+                                <div class="bag__item row row--center py-s">
+                                    <button type="button" class="btn btn--secondary row gap-m row--middle row--center flex"
+                                        @click="setBatch(item)">
+                                        <span class="ellipsis" v-if="item.coffeeRoaster">{{ item.coffeeRoaster }}</span>
+                                        <span class="text-s text-secondary ellipsis" v-if="item.coffeeOrigin">{{ item.coffeeOrigin }}</span>
+                                    </button>
+                                </div>
+                            </SwipeActions>
+                        </transition-group>
+                    </div>
+                </div>
+            </CjCard>
+            <CjCard>
+                <div class="card__inner">
+                    <h2 class="text-center">Drink type</h2>
+                    <div class="row row--middle flex">
+                        <div class="row row--center gap-m flex row--devider">
+                            <div class="px-s" v-for="item of coffeeTypes" :key="item.id">
+                                <button type="button" class="btn column gap-s flex"
+                                    :class="coffeeValue.coffeeType == item.id ? 'btn--primary' : 'btn--secondary'"
+                                    @click="setAndNext('coffeeType', item.id)">
+                                    <CoffeeTypeIcon class="icon-button-l" :coffeeType="item.id"></CoffeeTypeIcon>
+                                    <div>{{ item.name }}</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </CjCard>
+            <CjCard>
+                <div class="card__inner">
+                    <h2 class="text-center">Intensity</h2>
+                    <div class="column column--devider px-l">
+                        <div class="row row--center py-s" v-for="item of coffeeRoastIntensities" :key="item.id">
+                            <button type="button" class="btn flex-grow"
+                                :class="coffeeValue.coffeeRoastIntensity == item.id ? 'btn--primary' : 'btn--secondary'"
+                                @click="setAndNext('coffeeRoastIntensity', item.id)">
+                                {{  item.name  }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </CjCard>
+            <CjCard>
+                <div class="card__inner">
+                    <h2 class="text-center">Processing</h2>
+                    <div class="column column--devider px-l">
+                        <div class="row row--center py-s" v-for="item of coffeeProcessings" :key="item.id">
+                            <button type="button" class="btn flex-grow"
+                                :class="coffeeValue.coffeeProcessing == item.id ? 'btn--primary' : 'btn--secondary'"
+                                @click="setAndNext('coffeeProcessing', item.id)">
+                                {{  item.name  }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </CjCard>
+            <CjCard>
+                <div class="card__inner">
+                    <h2 class="text-center">Place</h2>
+                    <SearchableList :options="coffeePlaces" :value="coffeeValue.coffeePlace" @select="setAndNext('coffeePlace', $event)"></SearchableList>
+                </div>
+            </CjCard>
+            <CjCard>
+                <div class="card__inner">
+                    <h2 class="text-center">Roaster</h2>
+                    <SearchableList :options="coffeeRoasters" :value="coffeeValue.coffeeRoaster" @select="setAndNext('coffeeRoaster', $event)"></SearchableList>
+                </div>
+            </CjCard>
+            <CjCard>
+                <div class="card__inner">
+                    <h2 class="text-center">Origin</h2>
+                    <SearchableList :options="coffeeOrigins" :value="coffeeValue.coffeeOrigin" @select="setAndNext('coffeeOrigin', $event)"></SearchableList>
+                </div>
+            </CjCard>
+            <CjCard>
+                <div class="card__inner">
+                    <h2 class="text-center">Region</h2>
+                    <SearchableList :options="coffeeRegions" :value="coffeeValue.coffeeRegion" @select="setAndNext('coffeeRegion', $event)"></SearchableList>
+                </div>
+            </CjCard>
+            <CjCard>
+                <div class="card__inner">
+                    <h2 class="text-center">Limited</h2>
+                    <button type="button" class="btn column gap-s flex column--middle"
+                        :class="coffeeValue.limited ? 'btn--primary' : 'btn--secondary'"
+                        @click="setValue('limited', !coffeeValue.limited)">
+                        <i class="iconfont iconfont-star_outline icon-button-l"></i>
+                        <div>limited</div>
+                    </button>
+                </div>
+            </CjCard>
         </div>
-    </form>
+        <div class="row row--center gap-s">
+            <button type="button" class="btn row row--middle gap-m" :class="saveToBags ? 'btn--primary' : 'btn--secondary text-secondary'" @click="toggleSageToBags()">
+                Save to bags<span class="iconfont text-m checkbox" :class="saveToBags ? 'iconfont-icon-check' : ''"></span>
+            </button>
+        </div>
+    </div>
 </template>
 
 <script>
-import ToggleSwitch from "../components/ToggleSwitch.vue"
-import InputReference from "../components/InputReference.vue"
-import InlineInput from "../components/InlineInput.vue"
+import CjCard from './Card.vue'
+import CoffeeTypeIcon from './CoffeeTypeIcon.vue'
+import SearchableList from './SearchableList.vue'
+import SwipeActions from './SwipeActions.vue'
 
 export default {
     name: 'CoffeeDetailForm',
-    components: { ToggleSwitch, InputReference, InlineInput },
+    components: { CjCard, CoffeeTypeIcon, SearchableList, SwipeActions },
     inheritAttrs: false,
     props: {
         item: {
@@ -68,64 +137,20 @@ export default {
     },
     data: function () {
         return {
-            coffeeTypeValue: undefined,
-            coffeePlaceValue: undefined,
-            coffeeOriginValue: undefined,
-            coffeeRegionValue: undefined,
-            coffeeRoasterValue: undefined,
-            coffeeRoastIntensityValue: undefined,
-            coffeeProcessingValue: undefined,
-            limitedValue: undefined
+            cards: ['bags', 'coffeeType', 'coffeeRoastIntensity', 'coffeeProcessing', 'coffeePlace', 'coffeeRoaster', 'coffeeOrigin', 'coffeeRegion', 'limited'],
+            coffee: {},
+            limitedValue: undefined,
+            scrollPosition: 0,
+            activeIndex: 0,
+            saveToBags: false
         }
     },
     computed: {
-        coffeeType: function () {
-            if (this.coffeeTypeValue !== undefined) {
-                return this.coffeeTypeValue
-            }
-            return this.item.coffeeType || this.coffeeTypes[0].id
+        coffeeValue: function () {
+            return Object.assign({}, this.item, this.coffee)
         },
-        coffeePlace: function () {
-            if  (this.coffeePlaceValue !== undefined) {
-                return this.coffeePlaceValue
-            }
-            return this.item.coffeePlace || ''
-        },
-        coffeeOrigin: function () {
-            if (this.coffeeOriginValue !== undefined) {
-                return this.coffeeOriginValue
-            }
-            return this.item.coffeeOrigin || ''
-        },
-        coffeeRegion: function () {
-            if (this.coffeeRegionValue !== undefined) {
-                return this.coffeeRegionValue
-            }
-            return this.item.coffeeRegion || ''
-        },
-        coffeeRoaster: function () {
-            if (this.coffeeRoasterValue !== undefined) {
-                return this.coffeeRoasterValue
-            }
-            return this.item.coffeeRoaster || ''
-        },
-        coffeeRoastIntensity: function () {
-            if (this.coffeeRoastIntensityValue !== undefined) {
-                return this.coffeeRoastIntensityValue
-            }
-            return this.item.coffeeRoastIntensity || ''
-        },
-        coffeeProcessing: function () {
-            if (this.coffeeProcessingValue !== undefined) {
-                return this.coffeeProcessingValue
-            }
-            return this.item.coffeeProcessing || ''
-        },
-        limited: function () {
-            if (this.limitedValue !== undefined) {
-                return this.limitedValue
-            }
-            return this.item.limited || false
+        bags: function () {
+            return this.$store.state.bags
         },
         coffeeRoastIntensities: function() {
             return this.$store.state.coffeeRoastIntensities
@@ -133,53 +158,169 @@ export default {
         coffeeTypes: function() {
             return this.$store.state.coffeeTypes
         },
-        coffeePlaceOptions: function() {
+        coffeePlaces: function() {
             return this.$store.getters.coffeePlaceOptions
         },
-        coffeeOriginOptions: function() {
+        coffeeOrigins: function() {
             return this.$store.getters.coffeeOriginOptions
         },
-        coffeeRoasterOptions: function() {
+        coffeeRoasters: function() {
             return this.$store.getters.coffeeRoasterOptions
+        },
+        coffeeRegions: function() {
+            return this.$store.getters.coffeeRegionOptions
         },
         coffeeProcessings: function() {
             return this.$store.state.coffeeProcessings
         }
     },
     methods: {
-        setCoffeeType: function (type) {
-            this.coffeeType = type
-        },
-        getValue: function() {
-            return {
-                coffeePlace: this.coffeePlace,
-                coffeeOrigin: this.coffeeOrigin,
-                coffeeRegion: this.coffeeRegion,
-                coffeeRoaster: this.coffeeRoaster,
-                coffeeType: this.coffeeType,
-                coffeeRoastIntensity: this.coffeeRoastIntensity,
-                coffeeProcessing: this.coffeeProcessing,
-                limited: this.limited
+        setBatch: function (bag) {
+            for (let key in bag) {
+                this.coffee[key] = bag[key]
             }
+            this.$emit('change', this.coffee)
+            this.moveCarousel(4, 'smooth')
         },
-        submit: function () {
-            this.$emit('submit', this.getValue())
-        },
-        back: function () {
-            if (window.history.length <= 1) {
-                return this.$router.push({ name: 'Home' })
+        setValue: function (key, value) {
+            if (this.coffee[key] === value) {
+                return
             }
-            this.$router.go(-1)
+            this.coffee[key] = value
+            this.$emit('change', this.coffee)
         },
-        patch: function (data) {
-            this.coffeeTypeValue = data.coffeeType || this.coffeeTypeValue
-            this.coffeeOriginValue = data.coffeeOrigin || this.coffeeOriginValue
-            this.coffeeRegionValue = data.coffeeRegion || this.coffeeRegionValue
-            this.coffeeRoasterValue = data.coffeeRoaster || this.coffeeRoasterValue
-            this.coffeeRoastIntensityValue = data.coffeeRoastIntensity || this.coffeeRoastIntensityValue
-            this.coffeeProcessingValue = data.coffeeProcessing || this.coffeeProcessingValue
-            this.limitedValue = data.limited || this.limitedValue
+        setAndNext: function (key, value) {
+            this.setValue(key, value)
+            this.next()
+        },
+        next: function () {
+            this.moveCarousel(this.activeIndex + 1, 'smooth')
+        },
+        moveCarousel: function (index, behavior) {
+            const cardWidth = this.$refs.carousel.offsetWidth - 64
+            this.$refs.carousel.scrollTo({
+                top: 0,
+                left: (cardWidth + 16) * (index),
+                behavior: behavior
+            })
+        },
+        toggleSageToBags: function () {
+            this.saveToBags = !this.saveToBags
+            this.$emit('changeSaveBag', this.saveToBags)
+        },
+        deleteBag: function (index) {
+            this.$store.dispatch('removeBags', [index])
+        },
+        onScroll: function (event) {
+            if (!this.$refs.carousel) {
+                return
+            }
+            this.scrollPosition = event.target.scrollLeft
+            const cardWidth = this.$refs.carousel.offsetWidth - 64
+            this.activeIndex = Math.round(this.scrollPosition / (cardWidth + 16))
         }
+    },
+    mounted: function () {
+        this.moveCarousel(1, 'instant')
     }
 }
 </script>
+
+<style scoped>
+.carousel {
+    display: flex;
+    flex-direction: row;
+    gap: var(--unit-m);
+    padding: 0px var(--unit-l);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+}
+
+.carousel__bar {
+    width: var(--unit-s);
+    height: var(--unit-s);
+    border-radius: 100%;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-secondary);
+    transition: border ease 300ms, background-color ease 200ms;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel__bar::before {
+    content: '';
+    width: 2px;
+    height: 2px;
+    background-color: transparent;
+    display: block;
+    transition: background-color ease 200ms;
+}
+
+.carousel__bar.carousel__bar--filled::before {
+    background-color: var(--color-primary);
+}
+
+.carousel__bar--active {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+}
+
+.card__inner {
+    box-sizing: border-box;
+    padding: var(--unit-m);
+    transform: translateX(calc(var(--carousel-scroll, 0px) - var(--offset) * (100% + 18px)));
+    display: flex;
+    flex-direction: column;
+    gap: var(--unit-m);
+    flex-grow: 1;
+}
+
+.carousel > *:nth-child(1) .card__inner { --offset: 0; }
+.carousel > *:nth-child(2) .card__inner { --offset: 1; }
+.carousel > *:nth-child(3) .card__inner { --offset: 2; }
+.carousel > *:nth-child(4) .card__inner { --offset: 3; }
+.carousel > *:nth-child(5) .card__inner { --offset: 4; }
+.carousel > *:nth-child(6) .card__inner { --offset: 5; }
+.carousel > *:nth-child(7) .card__inner { --offset: 6; }
+.carousel > *:nth-child(8) .card__inner { --offset: 7; }
+.carousel > *:nth-child(9) .card__inner { --offset: 8; }
+
+.devider {
+    width: 1px;
+    background-color: var(--color-border);
+}
+
+.card__inner .icon-button-l {
+    font-size: 3em;
+}
+
+.checkbox {
+    border: 1px solid;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.action__delete {
+    height: 100%;
+    width: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-danger);
+    color: var(--color-bg);
+}
+
+.bag__item {
+    position: relative;
+    background-color: var(--color-bg-secondary);
+    border-radius: 7px;
+}
+</style>

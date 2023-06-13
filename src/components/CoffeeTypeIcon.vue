@@ -8,9 +8,17 @@ export default {
     props: {
         coffeeType: [String]
     },
+    data: function () {
+        return {
+            iconMap: {
+                filter: 'iconfont-batch',
+                espresso: 'iconfont-espresso'
+            }
+        }
+    },
     computed: {
         iconClass: function () {
-            return this.coffeeType == 'filter' ? 'iconfont-batch' : 'iconfont-espresso'
+            return this.iconMap[this.coffeeType] || ''
         }
     }
 }

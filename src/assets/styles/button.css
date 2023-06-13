@@ -85,6 +85,11 @@ a.btn {
     transition: border 120ms ease, color 120ms ease;
 }
 
+.btn-thumb--primary {
+    border-width: 2px;
+    border-color: var(--color-fg);
+}
+
 .btn-thumb::before {
     content: '';
     position: absolute;

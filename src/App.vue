@@ -104,6 +104,7 @@ export default {
 @import "./assets/styles/bar.css";
 @import "./assets/styles/context.css";
 @import "./assets/styles/stats.css";
+@import "./assets/styles/carousel.css";
 
 @import "./assets/styles/animation.css";
 @import "./assets/styles/iconfont.css";

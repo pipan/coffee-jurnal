@@ -1,26 +1,13 @@
 <template>
-    <div class="column flex-grow">
-        <div class="view">
-            <div class="view-content">
-                <NotFound v-if="!item"></NotFound>
-                <template v-if="item">
-                    <header>
-                        <h1>Update Coffee Cup</h1>
-                    </header>
-                    <CoffeeDetailForm :item="item" @submit="submit($event)"></CoffeeDetailForm>
-                </template>
-            </div>
-        </div>
-    </div>
+    <CoffeeUpsert :coffee="item" @submit="submit($event)"></CoffeeUpsert>
 </template>
 
 <script>
-import CoffeeDetailForm from "../components/CoffeeDetailForm.vue"
-import NotFound from './NotFound.vue'
+import CoffeeUpsert from "../components/CoffeeUpsert.vue"
 
 export default {
     name: 'EditView',
-    components: { CoffeeDetailForm, NotFound },
+    components: { CoffeeUpsert },
     title: function () {
         return "Update Coffee Cup | CJ"
     },

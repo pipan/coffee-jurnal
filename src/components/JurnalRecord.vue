@@ -1,15 +1,12 @@
 <template>
-    <div class="record" :class="isDeleting ? 'record--deleting' : ''">
-        <div class="actions">
+    <SwipeActions class="record" :class="isDeleting ? 'record--deleting' : ''">
+        <template v-slot:actions>
             <div class="action__delete" @click="emitDelete()">
                 <i class="iconfont iconfont-bin text-l"></i>
             </div>
-        </div>
-        <div class="record-body user-select-disable" v-gesture-swipe-horizontal
-            :style="customStyle"
-            @click="select(item.id)"
-            @gestureSwipeHorizontal="onGesture($event)"
-            @gestureSwipeHorizontalEnd="onGestureEnd()">
+        </template>
+        <div class="record-body user-select-disable"
+            @click="select(item.id)">
             <div class="record__detail">
                 <div class="record__title">
                     <div :class="item.limited ? 'text-primary' : 'text-secondary'">
@@ -32,23 +29,22 @@
                 </div>
             </div>
         </div>
-    </div>
-    
+    </SwipeActions>
 </template>
 
 <script>
 import { formatCoffeeSecondaryInfo } from '../fn/coffeeFormater'
 import CjBar from './Bar.vue'
+import SwipeActions from './SwipeActions.vue'
 
 export default {
     name: 'JurnalRecord',
-    components: { CjBar },
+    components: { CjBar, SwipeActions },
     props: {
         item: [Object]
     },
     data: function () {
         return {
-            translateX: 0,
             isDeleting: false
         }
     },
@@ -81,26 +77,12 @@ export default {
                 return 'iconfont-batch'
             }
             return 'iconfont-espresso'
-        },
-        customStyle: function () {
-            return {
-                'transform': `translateX(${this.translateX}px)`
-            }
         }
     },
     methods: {
         select: function (id) {
             this.translateX = 0
             this.$emit('select', id)
-        },
-        onGesture: function (event) {
-            if (Math.abs(event.detail.deltaX) <= Math.abs(event.detail.deltaY)) {
-                return
-            }
-            this.translateX = Math.min(0, Math.max(-60, this.translateX + event.detail.deltaX / 2))
-        },
-        onGestureEnd: function () {
-            this.translateX = this.translateX <= -30 ? -60 : 0
         },
         emitDelete: function () {
             this.isDeleting = true
@@ -135,28 +117,12 @@ export default {
     transition-duration: 0ms;
 }
 
-.record-body.gesture--active {
-    transition-duration: 0ms;
-}
-
 .jurnal.journal--grid .record-body {
     flex-direction: column;
 }
 
 .jurnal.journal--list .record-body {
     flex-direction: row;
-}
-
-.actions {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    height: 100%;
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row-reverse;
 }
 
 .action__delete {

@@ -17,7 +17,7 @@
             </div>
         </div>
         <div>
-            <input type="text" class="input-simple text-center" placeholder="search  ||  create" v-model="search" />
+            <input type="text" class="input-simple text-center" placeholder="search  ||  create" :value="search" @input="search = $event.target.value" />
         </div>
     </div>
 </template>

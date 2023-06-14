@@ -6,7 +6,7 @@
         </div>
         <div class="carousel scroll-x--transparent" ref="carousel"
             :style="{'--carousel-scroll': scrollPosition + 'px'}"
-            @scroll="onScroll($event)">
+            @scroll.passive="onScroll($event)">
             <CjCard>
                 <div class="card__inner">
                     <h2 class="text-center">Bags</h2>
@@ -34,9 +34,9 @@
                 <div class="card__inner">
                     <h2 class="text-center">Drink type</h2>
                     <div class="row row--middle flex">
-                        <div class="row row--center gap-m flex row--devider">
-                            <div class="px-s" v-for="item of coffeeTypes" :key="item.id">
-                                <button type="button" class="btn column gap-s flex"
+                        <div class="row row--center flex row--devider">
+                            <div class="row row--center flex px-s" v-for="item of coffeeTypes" :key="item.id">
+                                <button type="button" class="btn column column--center gap-s flex"
                                     :class="coffeeValue.coffeeType == item.id ? 'btn--primary' : 'btn--secondary'"
                                     @click="setAndNext('coffeeType', item.id)">
                                     <CoffeeTypeIcon class="icon-button-l" :coffeeType="item.id"></CoffeeTypeIcon>
@@ -102,7 +102,7 @@
             <CjCard>
                 <div class="card__inner">
                     <h2 class="text-center">Limited</h2>
-                    <button type="button" class="btn column gap-s flex column--middle"
+                    <button type="button" class="btn column gap-s flex column--middle column--center"
                         :class="coffeeValue.limited ? 'btn--primary' : 'btn--secondary'"
                         @click="setValue('limited', !coffeeValue.limited)">
                         <i class="iconfont iconfont-star_outline icon-button-l"></i>
@@ -271,22 +271,11 @@ export default {
 .card__inner {
     box-sizing: border-box;
     padding: var(--unit-m);
-    transform: translateX(calc(var(--carousel-scroll, 0px) - var(--offset) * (100% + 18px)));
     display: flex;
     flex-direction: column;
     gap: var(--unit-m);
     flex-grow: 1;
 }
-
-.carousel > *:nth-child(1) .card__inner { --offset: 0; }
-.carousel > *:nth-child(2) .card__inner { --offset: 1; }
-.carousel > *:nth-child(3) .card__inner { --offset: 2; }
-.carousel > *:nth-child(4) .card__inner { --offset: 3; }
-.carousel > *:nth-child(5) .card__inner { --offset: 4; }
-.carousel > *:nth-child(6) .card__inner { --offset: 5; }
-.carousel > *:nth-child(7) .card__inner { --offset: 6; }
-.carousel > *:nth-child(8) .card__inner { --offset: 7; }
-.carousel > *:nth-child(9) .card__inner { --offset: 8; }
 
 .devider {
     width: 1px;

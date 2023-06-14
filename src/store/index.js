@@ -85,8 +85,10 @@ export default createStore({
         options.push(item.coffeePlace)
       }
       options.sort((a, b) => {
-        if (a === b) { return 0 }
-        return a < b ? -1 : 1
+        const aLower = a.toLowerCase()
+        const bLower = b.toLowerCase()
+        if (aLower === bLower) { return 0 }
+        return aLower < bLower ? -1 : 1
       })
       return options
     },
@@ -99,8 +101,10 @@ export default createStore({
         options.push(item.coffeeOrigin)
       }
       options.sort((a, b) => {
-        if (a === b) { return 0 }
-        return a < b ? -1 : 1
+        const aLower = a.toLowerCase()
+        const bLower = b.toLowerCase()
+        if (aLower === bLower) { return 0 }
+        return aLower < bLower ? -1 : 1
       })
       return options
     },
@@ -113,8 +117,10 @@ export default createStore({
         options.push(item.coffeeRoaster)
       }
       options.sort((a, b) => {
-        if (a === b) { return 0 }
-        return a < b ? -1 : 1
+        const aLower = a.toLowerCase()
+        const bLower = b.toLowerCase()
+        if (aLower === bLower) { return 0 }
+        return aLower < bLower ? -1 : 1
       })
       return options
     },

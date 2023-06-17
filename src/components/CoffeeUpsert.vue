@@ -13,7 +13,7 @@
                         <CoffeeDetailForm :item="coffeeValue" @change="innerCoffee = $event" @changeSaveBag="saveBagFlag = $event" ref="form"></CoffeeDetailForm>    
                     </div>
                 </div>
-                <div class="row row--center pb-m gap-l">
+                <div class="row row--center pb-m gap-m row--evenly">
                     <div class="btn-thumb" @click="back()">
                         <i class="iconfont iconfont-cross text-l"></i>
                     </div>

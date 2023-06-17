@@ -86,8 +86,8 @@ a.btn {
 }
 
 .btn-thumb--primary {
-    border-width: 2px;
-    border-color: var(--color-fg);
+    border-color: var(--color-like);
+    color: var(--color-love);
 }
 
 .btn-thumb::before {

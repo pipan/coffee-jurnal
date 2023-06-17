@@ -8,7 +8,7 @@
     --color-primary-lighter: #F4C360;
     --color-border: #383838;
     --color-bg: #171117;
-    --color-bg-secondary: #2F1533;
+    --color-bg-secondary: #0a050a;
     --color-fg: #F1F1F1;
     --color-fg-secondary: #7A7A7A;
 
@@ -21,7 +21,7 @@
     --color-love: #35D115;
 
     --color-hover: rgba(255, 255, 255, 0.03);
-    --color-active: rgba(255, 255, 255, 0.08);
+    --color-active: #201720;
 
     --font-l: 1.35rem;
     --font-m: 1rem;
@@ -31,11 +31,13 @@
 
     --animation-duration-l: 0.3s;
     --animation-duration-m: 0.2s;
+    --animation-duration-s: 0.1s;
     --animation-function: cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 body, html {
-    height: 100%
+    height: 100%;
+    overscroll-behavior-y: contain;
 }
 
 body {
@@ -134,7 +136,7 @@ nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #0a050a;
+    background-color: var(--color-bg-secondary);
 }
 
 .navigation-view {
@@ -159,3 +161,5 @@ nav {
 .user-select-disable {
     user-select: none;
 }
+
+.opacity-05 { opacity: 0.5; }

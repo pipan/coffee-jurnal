@@ -31,6 +31,7 @@
 .animation--slide-out-enter-active nav { transform: translateY(0%); }
 .animation--slide-out-enter-from nav { transform: translateY(100%); }
 
+.animation--slide-out-enter-active, .animation--slide-out-enter-active .view, .animation--slide-in-enter-active, .animation--slide-in-enter-active .view, .animation--slide-out-enter-active nav, .animation--slide-out-enter-active .fab-container { transition-delay: var(--animation-duration-s); }
 .animation--slide-in-leave-active, .animation--slide-out-enter-active {
     transition: opacity var(--animation-duration-l) var(--animation-function);
 }
@@ -60,26 +61,13 @@
     transition-duration: var(--animation-duration-l);
     transition-timing-function: var(--animation-function);
 }
-.animation--slide-in-enter-active {
-    transform: translateY(0px);
-    opacity: 1;
-}
-.animation--slide-in-enter-from {
-    opacity: 0;
-    transform: translateY(30vh);
-}
-.animation--slide-out-leave-active {
-    transform: translateY(30vh);
-    opacity: 0;
-    
-}
-.animation--slide-out-leave-from {
-    opacity: 1;
-    transform: translateY(0px);
-}
+.animation--slide-in-enter-active { transform: translateY(0px); opacity: 1; }
+.animation--slide-in-enter-from { opacity: 0; transform: translateY(30vh); }
+.animation--slide-out-leave-active { transform: translateY(30vh); opacity: 0; }
+.animation--slide-out-leave-from { opacity: 1; transform: translateY(0px); }
 
 .animation--slide-left-enter-active .view, .animation--slide-left-leave-active .view, .animation--slide-right-leave-active .view, .animation--slide-right-enter-active .view {
-    transition-property: transform;
+    transition-property: transform, opacity;
     transition-duration: var(--animation-duration-l);
     transition-timing-function: var(--animation-function);
     scrollbar-color: transparent transparent;
@@ -101,23 +89,23 @@
     transition: transform var(--animation-duration-l) var(--animation-function), opacity var(--animation-duration-l) var(--animation-function);
 }
 
-.animation--slide-left-leave-active .fab-container { transform: translateX(calc(-50% - 100px)) translateY(50%); opacity: 0; }
-.animation--slide-left-leave-from .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
-.animation--slide-right-leave-active .fab-container { transform: translateX(calc(-50% + 100px)) translateY(50%); opacity: 0; }
-.animation--slide-right-leave-from .fab-container { transform: translateX(-50%) translateY(50%); opacity: 1; }
+.animation--slide-left-leave-active .fab-container { transform: translateX(calc(-100vw - 50%)) translateY(50%) scale(0.8, 1); opacity: 0; }
+.animation--slide-left-leave-from .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
+.animation--slide-right-leave-active .fab-container { transform: translateX(calc(100vw - 50%)) translateY(50%) scale(0.8, 1); opacity: 0; }
+.animation--slide-right-leave-from .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
 .animation--slide-left-enter-active .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
-.animation--slide-left-enter-from .fab-container { transform: translateX(calc(-50% + 100px)) translateY(50%); opacity: 0; }
+.animation--slide-left-enter-from .fab-container { transform: translateX(calc(100vw - 50%)) translateY(50%) scale(0.8, 1); opacity: 0; }
 .animation--slide-right-enter-active .fab-container { transform: translateX(-50%) translateY(50%) scale(1); opacity: 1; }
-.animation--slide-right-enter-from .fab-container { transform: translateX(calc(-50% - 100px)) translateY(50%); opacity: 0; }
+.animation--slide-right-enter-from .fab-container { transform: translateX(calc(-100vw - 50%)) translateY(50%) scale(0.8, 1); opacity: 0; }
 
-.animation--slide-left-leave-active .view { transform: translateX(-100%); }
-.animation--slide-left-leave-from .view { transform: translateX(0%); }
-.animation--slide-left-enter-active .view { transform: translateX(0%); }
-.animation--slide-left-enter-from .view { transform: translateX(100%); }
-.animation--slide-right-leave-active .view { transform: translateX(100%); }
-.animation--slide-right-leave-from .view { transform: translateX(0%); }
-.animation--slide-right-enter-active .view { transform: translateX(0%); }
-.animation--slide-right-enter-from .view { transform: translateX(-100%); }
+.animation--slide-left-leave-active .view { transform: translateX(-100%) scaleX(0.8); opacity: 0.4; }
+.animation--slide-left-leave-from .view { transform: translateX(0%) scaleX(1); }
+.animation--slide-left-enter-active .view { transform: translateX(0%) scaleX(1); }
+.animation--slide-left-enter-from .view { transform: translateX(100%) scaleX(0.8); opacity: 0.4; }
+.animation--slide-right-leave-active .view { transform: translateX(100%) scaleX(0.8); opacity: 0.4; }
+.animation--slide-right-leave-from .view { transform: translateX(0%) scaleX(1); }
+.animation--slide-right-enter-active .view { transform: translateX(0%) scaleX(1); }
+.animation--slide-right-enter-from .view { transform: translateX(-100%) scaleX(0.8); opacity: 0.4; }
 
 
 .animation-display-mode .svg-1, .animation-display-mode .svg-2, .animation-display-mode .svg-3, .animation-display-mode .svg-4 {
@@ -161,6 +149,79 @@
 
 .list-leave-active {
     position: absolute;
+}
+
+.animation--graph-point-leave-active .point--y, .animation--graph-point-enter-active .point--y {
+    transition: transform var(--animation-duration-l) var(--animation-function), opacity var(--animation-duration-l) var(--animation-function);
+    transform-origin: 50% 100%;
+}
+.animation--graph-point-enter-from .point--y, .animation--graph-point-leave-to .point--y {
+    transform: scale(0.5, 0);
+    opacity: 0.5;
+}
+
+.animation--graph-bar-leave-active, .animation--graph-bar-enter-active {
+    transition: transform var(--animation-duration-l) var(--animation-function) 250ms, opacity var(--animation-duration-l) var(--animation-function) 250ms;
+    transform-origin: 50% 100%;
+}
+.animation--graph-bar-enter-from, .animation--graph-bar-leave-to {
+    transform: scale(0.5, 0);
+    opacity: 0.5;
+}
+
+.animation--top-slide-leave-active, .animation--top-slide-enter-active {
+    transition: transform var(--animation-duration-l) var(--animation-function) var(--animation-duration-l), opacity var(--animation-duration-l) var(--animation-function) var(--animation-duration-l);
+}
+.animation--top-slide-enter-from, .animation--top-slide-leave-to {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.animation--modal-enter-from, .animation--modal-leave-to {
+    opacity: 0.3;
+}
+.animation--modal-enter-active, .animation--modal-leave-active {
+    transition: opacity var(--animation-duration-m) var(--animation-function);
+}
+.animation--modal-leave-active {
+    transition-delay: var(--animation-duration-s);
+}
+.animation--modal-enter-to, .animation--modal-leave-from {
+    opacity: 1;
+}
+
+.animation--modal-leave-to .modal, .animation--modal-enter-from .modal {
+    width: 2px;
+}
+
+.animation--modal-enter-active .modal, .animation--modal-leave-active .modal {
+    transition: width var(--animation-duration-l) var(--animation-function);
+}
+
+.animation--modal-enter-to .modal, .animation--modal-leave-from .modal {
+    width: 100%;
+}
+
+.animation--list-delete-leave-active, .animation--record-leave-active.record, .animation--day-records-leave-active .record.record--deleting { transition: opacity ease 400ms, transform ease 400ms; }
+.animation--list-delete-leave-to, .animation--record-leave-to.record, .animation--day-records-leave-to .record.record--deleting { opacity: 0; transform: translateX(-100%); }
+.jurnal.journal--grid .animation--record-leave-to.record:nth-child(2n), .jurnal.journal--grid .animation--day-records-leave-to .record:nth-child(2n).record--deleting { opacity: 0; transform: translateX(100%); }
+.animation--list-delete-leave-from, .animation--record-leave-from.record, .animation--day-records-leave-from .record.record--deleting { opacity: 1; transform: translateX(0); }
+
+.animation--day-records-enter-active, .animation--day-records-leave-active { transition: opacity ease var(--animation-duration-m); }
+.animation--day-records-enter-active { transition-delay: var(--animation-duration-m); }
+.animation--day-records-enter-from, .animation--day-records-leave-to { opacity: 0; }
+.animation--day-records-enter-to, .animation--day-records-leave-from { opacity: 1; }
+
+@keyframes modalInnerDisplay {
+    0% {
+      transform: scale(32);
+    }
+    50% {
+      transform: scaleX(32) scaleY(1);
+    }
+    100% {
+      transform: scale(1);
+    }
 }
 
 .reflection-animation {

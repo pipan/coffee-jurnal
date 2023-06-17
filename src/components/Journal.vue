@@ -1,12 +1,12 @@
 <template>
     <div class="jurnal" :class="displayClass">
-        <JurnalDay v-for="agenda of timeline"
-            :key="agenda.day"
-            :agenda="agenda"
-            :checked="checked"
-            :withCheckbox="withCheckbox"
-            @select="select($event)"
-            @checkChange="checkChange($event)"></JurnalDay>
+        <transition-group name="animation--day-records" :duration="{enter: 400, leave: 200}">
+            <JurnalDay v-for="agenda of timeline"
+                :key="agenda.id"
+                :agenda="agenda"
+                @select="select($event)"
+                @delete="$emit('delete', $event)"></JurnalDay>
+        </transition-group>
     </div>
 </template>
 
@@ -17,21 +17,17 @@ export default {
     name: 'CjJournal',
     components: { JurnalDay },
     props: {
-        checked: {
-            type: Array,
-            default: () => []
-        },
         items: {
             type: Array,
             default: () => []
         },
-        withCheckbox: {
-            type: Boolean,
-            default: true
-        },
         display: {
             type: String,
             default: 'list'
+        },
+        page: {
+            type: Number,
+            default: 1
         }
     },
     computed: {
@@ -44,6 +40,7 @@ export default {
                 let dayIndex = day.join('-')
                 if (dayIndex != previousDayIndex && dayItems.length > 0) {
                     result.push({
+                        id: `${this.page}-${previousDayIndex}`,
                         day: previousDayIndex,
                         items: dayItems
                     })
@@ -54,6 +51,7 @@ export default {
             }
             if (dayItems.length > 0) {
                 result.push({
+                    id: `${this.page}-${previousDayIndex}`,
                     day: previousDayIndex,
                     items: dayItems
                 })
@@ -68,9 +66,6 @@ export default {
         }
     },
     methods: {
-        checkChange: function (event) {
-            this.$emit('checkChange', event)
-        },
         select: function (id) {
             this.$emit('select', id)
         }

@@ -17,78 +17,43 @@
                         </button>
                     </div>
                 </header>
-                <div class="row row--center py-m" v-if="hasPreviousPage">
-                    <button type="button" class="btn btn--secondary" @click="previousPage()">NEWER</button>
-                </div>
                 <CjJournal :items="itemsPaginated"
-                    :checked="checked"
                     :display="displayMode"
-                    @select="select($event)"
-                    @checkChange="checkChange($event)"></CjJournal>
-                <div class="row row--center py-m" v-if="hasNextPage">
-                    <button type="button" class="btn btn--secondary" @click="nextPage()">OLDER</button>
+                    :page="currentPage"
+                    @select="select($event)"></CjJournal>
+                <div class="row row--center gap-l py-m" v-if="hasNextPage || hasPreviousPage">
+                    <button type="button" class="btn btn--secondary" v-if="hasPreviousPage" @click="previousPage()">NEWER</button>
+                    <button type="button" class="btn btn--secondary" v-if="hasNextPage" @click="nextPage()">OLDER</button>
                 </div>
             </div>
         </div>
         <div class="fab-container">
-            <router-link :to="{ name: 'Create' }" class="btn-fab user-select-disable" v-if="isRouteMode" @contextmenu.prevent="openImport()">
+            <router-link :to="{ name: 'Create', query: $route.query }" class="btn-fab user-select-disable" @contextmenu.prevent="openImport()">
                 <i class="iconfont iconfont-plus text-l"></i>
             </router-link>
-            <button type="button" class="btn-fab" v-if="isCheckMode" @click="uncheckAll()">
-                <i class="iconfont iconfont-cross text-l"></i>
-            </button>
-            <button type="button" class="btn-fab btn-fab--danger" v-if="isCheckMode" @click="openDeletePrompt()">
-                <i class="iconfont iconfont-bin text-l"></i>
-            </button>
         </div>
-        <CjModal v-if="deletePromptVisible" @close="closeDeletePrompt()">
-            <h2>Delete</h2>
-            <div class="pt-l pb-m">
-                Do you really want to permanently delete selected journal entries?
-            </div>
-            <div class="row row--right gap-m">
-                <button type="button" class="btn btn--secondary" @click="closeDeletePrompt()">NO</button>
-                <button type="button" class="btn btn--primary" @click="deleteSelected()">YES</button>
-            </div>
-        </CjModal>
     </div>
 </template>
 
 <script>
 import CjJournal from '../components/Journal.vue'
-import CjModal from '../components/Modal.vue'
-import { StaticBatchJob } from '../services/StaticBatckJob'
 
 export default {
     name: 'HomeView',
-    components: { CjJournal, CjModal },
+    components: { CjJournal },
     title: function () {
         return "Coffee Journal"
     },
     data: function () {
         return {
-            checked: [],
             perPageLimit: 30,
             itemsPaginated: [],
-            scrollPosition: 0,
-            deletePromptVisible: false
+            scrollPosition: 0
         }
     },
     computed: {
         items: function () {
             return this.$store.getters.chronologicalItems
-        },
-        mode: function () {
-            if (this.checked.length > 0) {
-                return 'check'
-            }
-            return 'route'
-        },
-        isCheckMode: function() {
-            return this.mode === 'check'
-        },
-        isRouteMode: function() {
-            return this.mode === 'route'
         },
         currentPage: function () {
             return parseInt(this.$route.query.page || "1")
@@ -133,7 +98,7 @@ export default {
     },
     methods: {
         openImport: function () {
-            this.$router.push({ name: 'Import' })
+            this.$router.push({ name: 'Import', query: this.$route.query })
         },
         setScrollPosition: function(event) {
             this.scrollPosition = event.target.scrollingElement.scrollTop
@@ -141,46 +106,14 @@ export default {
         load: function () {
             const start = this.perPageLimit * (this.currentPage - 1)
             const end = start + this.perPageLimit
-            this.itemsPaginated = []
-            const job = new StaticBatchJob(this.items.slice(start, end), { size: 3 })
-            job.forEach((batch) => {
-                this.itemsPaginated = [...this.itemsPaginated, ...batch]
-            })
-        },
-        checkChange: function (event) {
-            let newValue = [...this.checked]
-            if (event.value) {
-                newValue.push(event.id)
-            } else {
-                const index = newValue.indexOf(event.id)
-                if (index < 0) {
-                    return
-                }
-                newValue.splice(index, 1)
-            }
-            this.checked = newValue
-        },
-        uncheckAll: function () {
-            this.checked = []
+            this.itemsPaginated = this.items.slice(start, end)
         },
         select: function (id) {
-            if (this.isCheckMode) {
-                const value = this.checked.indexOf(id) === -1
-                this.checkChange({ id, value })
-                return
-            }
-            if (this.isRouteMode) {
-                this.$router.push({
-                    name: 'Taste',
-                    params: { id }
-                })
-                return
-            }
-        },
-        deleteSelected: function() {
-            this.$store.dispatch('deleteByIds', this.checked)
-            this.checked = []
-            this.closeDeletePrompt()
+            this.$router.push({
+                name: 'Taste',
+                params: { id },
+                query: this.$route.query
+            })
         },
         goToPage: function (page) {
             this.$router.push({
@@ -201,12 +134,6 @@ export default {
         },
         toggleDisplayMode: function () {
             this.setDisplayMode(this.isDisplayModeList ? 'grid' : 'list')
-        },
-        closeDeletePrompt: function () {
-            this.deletePromptVisible = false
-        },
-        openDeletePrompt: function () {
-            this.deletePromptVisible = true
         }
     }
 }

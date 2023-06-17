@@ -7,7 +7,7 @@
                 </KeepAlive>
             </transition>
         </router-view>
-        <transition name="animation--fade">
+        <transition name="animation--modal">
             <Modal v-if="isUpdating">
                 <h2>Updating application</h2>
                 <div class="pt-l pb-m">
@@ -104,6 +104,7 @@ export default {
 @import "./assets/styles/bar.css";
 @import "./assets/styles/context.css";
 @import "./assets/styles/stats.css";
+@import "./assets/styles/carousel.css";
 
 @import "./assets/styles/animation.css";
 @import "./assets/styles/iconfont.css";

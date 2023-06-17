@@ -2,13 +2,13 @@
     <div class="jurnal__day">
         <h2 class="jurnal__day-title pb-m">{{ title }}</h2>
         <div class="jurnal__day-records">
-            <JurnalRecord v-for="item of agenda.items"
-                :key="item.id"
-                :item="item"
-                :checked="checkedMap[item.id]"
-                :withCheckbox="withCheckbox"
-                @select="select($event)"
-                @checkChange="checkChange(item.id, $event)"></JurnalRecord>
+            <transition-group name="animation--record">
+                <JurnalRecord v-for="item of agenda.items"
+                    :key="item.id"
+                    :item="item"
+                    @select="select($event)"
+                    @delete="$emit('delete', $event)"></JurnalRecord>
+            </transition-group>
         </div>
     </div>
 </template>
@@ -20,15 +20,7 @@ export default {
     name: 'JurnalDay',
     components: { JurnalRecord },
     props: {
-        agenda: [Object],
-        checked: {
-            type: Array,
-            default: () => []
-        },
-        withCheckbox: {
-            type: Boolean,
-            default: true
-        }
+        agenda: [Object]
     },
     data: function () {
         return {
@@ -47,13 +39,6 @@ export default {
             now.setSeconds(59)
             now.setMilliseconds(0)
             return now.getTime() - this.dayDate.getTime()
-        },
-        checkedMap: function () {
-            let result = {}
-            for (const id of this.checked) {
-                result[id] = true
-            }
-            return result
         },
         title: function() {
             if (this.isToday()) {
@@ -81,9 +66,6 @@ export default {
         },
         isMaxWeekAgo: function () {
             return this.millisecondsDiff < 7 * this.millisecondsPerDay
-        },
-        checkChange: function (id, value) {
-            this.$emit('checkChange', { id, value })
         },
         select: function (id) {
             this.$emit('select', id)

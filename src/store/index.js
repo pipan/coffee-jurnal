@@ -84,6 +84,12 @@ export default createStore({
         }
         options.push(item.coffeePlace)
       }
+      options.sort((a, b) => {
+        const aLower = a.toLowerCase()
+        const bLower = b.toLowerCase()
+        if (aLower === bLower) { return 0 }
+        return aLower < bLower ? -1 : 1
+      })
       return options
     },
     coffeeOriginOptions: function(_, getters) {
@@ -94,6 +100,12 @@ export default createStore({
         }
         options.push(item.coffeeOrigin)
       }
+      options.sort((a, b) => {
+        const aLower = a.toLowerCase()
+        const bLower = b.toLowerCase()
+        if (aLower === bLower) { return 0 }
+        return aLower < bLower ? -1 : 1
+      })
       return options
     },
     coffeeRoasterOptions: function(_, getters) {
@@ -104,6 +116,26 @@ export default createStore({
         }
         options.push(item.coffeeRoaster)
       }
+      options.sort((a, b) => {
+        const aLower = a.toLowerCase()
+        const bLower = b.toLowerCase()
+        if (aLower === bLower) { return 0 }
+        return aLower < bLower ? -1 : 1
+      })
+      return options
+    },
+    coffeeRegionOptions: function(_, getters) {
+      const options = []
+      for (const item of getters.chronologicalItems) {
+        if (!item.coffeeRegion || options.indexOf(item.coffeeRegion) > -1) {
+          continue
+        }
+        options.push(item.coffeeRegion)
+      }
+      options.sort((a, b) => {
+        if (a === b) { return 0 }
+        return a < b ? -1 : 1
+      })
       return options
     }
   },
@@ -159,6 +191,7 @@ export default createStore({
     },
     insertBag: function(state, item) {
       let newBags = [...state.bags]
+      item.id = new Date().getTime()
       newBags.push(item)
       state.bags = newBags
       localStorage.setItem('bags', JSON.stringify(state.bags))
@@ -181,7 +214,13 @@ export default createStore({
     createNewCup: function (context, data) {
       data = Object.assign({
         created_at: new Date(),
-        propertyRatings: {},
+        propertyRatings: {
+          aroma: { intensity: 0.5, quality: 0.5 },
+          acidity: { intensity: 0.5, quality: 0.5 },
+          sweetness: { intensity: 0.5, quality: 0.5 },
+          body: { intensity: 0.5, quality: 0.5 },
+          finish: { intensity: 0.5, quality: 0.5 }
+        },
         rating: -1
       }, data)
       data.id = context.state.lastId + 1

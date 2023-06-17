@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--grid-gap)
+    gap: var(--grid-gap);
 }
 
 .jurnal__day-title {
@@ -19,35 +19,18 @@
 
 .record {
     box-sizing: border-box;
-    display: flex;
+    overflow: hidden;
     --border-radius: 8px;
     position: relative;
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
-    padding: var(--unit-m);
-    transition: border ease-out 140ms, background 140ms ease-out;
     width: 100%;
     gap: var(--unit-m);
-}
-
-.jurnal.journal--grid .record {
-    flex-direction: column;
+    background-color: var(--color-bg);
 }
 
 .jurnal.journal--list .record {
-    flex-direction: row;
     width: 100%;
-}
-
-.record__checkbox {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    transform: scale(1.4);
-    display: none;
-}
-.record__checkbox input {
-    border: none;
 }
 
 @media (min-width: 410px) {
@@ -60,25 +43,6 @@
     .record {
         width: calc(33.33% - 2 * var(--grid-gap) / 3);
     }
-}
-
-@media (any-pointer: fine) {
-    .record:hover .record__checkbox, .record--checked .record__checkbox {
-        display: initial;
-    }
-}
-
-.record:hover {
-    background-color: rgba(255, 255, 255, 0.01);
-}
-
-.record:active {
-    background-color: rgba(255, 255, 255, 0.03);
-    transition-duration: 0ms;
-}
-
-.record--checked {
-    border-color: var(--color-primary);
 }
 
 .record__detail {
@@ -151,21 +115,4 @@
 
 .jurnal.journal--list .record__rating-value {
     font-size: 1.2rem;
-}
-
-.record__limited {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    font-size: 1.3rem;
-    color: var(--color-border);
-    padding: 0.5rem;
-    background-color: var(--color-bg);
-    border-radius: 100%;
-    transition: color 140ms ease-out;
-}
-
-.record--checked .record__limited {
-    color: var(--color-primary);
 }

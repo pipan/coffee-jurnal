@@ -1,44 +1,51 @@
 <template>
-    <div @click="select(item.id)" class="record user-select-disable" :class="{'record--checked': checked}" @contextmenu.prevent="setChecked(true)">
-        <i class="iconfont iconfont-star_fill record__limited" v-if="item.limited"></i>
-        <div class="record__checkbox" @click.stop><input type="checkbox" :checked="checked" @change="setChecked($event.target.checked)" v-if="withCheckbox" /></div>
-        <div class="record__detail">
-            <div class="record__title">
-                <i class="iconfont iconfont--l text-secondary" :class="coffeeTypeIcon"></i>
-                <div class="ellipsis">{{ item.coffeePlace }}</div>
+    <SwipeActions class="record" :class="isDeleting ? 'record--deleting' : ''">
+        <template v-slot:actions>
+            <div class="action__delete" @click="emitDelete()">
+                <i class="iconfont iconfont-bin text-l"></i>
             </div>
-            <div class="record__subtitle">{{ subtitle }}</div>
+        </template>
+        <div class="record-body user-select-disable"
+            @click="select(item.id)">
+            <div class="record__detail">
+                <div class="record__title">
+                    <div :class="item.limited ? 'text-primary' : 'text-secondary'">
+                        <i class="iconfont iconfont--l" :class="coffeeTypeIcon"></i>
+                    </div>
+                    <div class="ellipsis">{{ item.coffeePlace }}</div>
+                </div>
+                <div class="record__subtitle">{{ subtitle }}</div>
+            </div>
+            <div class="record__tasting">
+                <div class="record__profile">
+                    <CjBar v-for="(bar, index) of bars"
+                        :key="index"
+                        :intensity="bar.intensity"
+                        :quality="bar.quality"></CjBar>
+                </div>
+                <div class="record__rating">
+                    <span class="record__rating-value">{{ ratingText }}</span>
+                    <span class="record__rating-maximum">&nbsp;/&nbsp;5</span>
+                </div>
+            </div>
         </div>
-        <div class="record__tasting">
-            <div class="record__profile">
-                <CjBar v-for="(bar, index) of bars"
-                    :key="index"
-                    :intensity="bar.intensity"
-                    :quality="bar.quality"></CjBar>
-            </div>
-            <div class="record__rating">
-                <span class="record__rating-value">{{ ratingText }}</span>
-                <span class="record__rating-maximum">&nbsp;/&nbsp;5</span>
-            </div>
-        </div>
-    </div>
+    </SwipeActions>
 </template>
 
 <script>
+import { formatCoffeeSecondaryInfo } from '../fn/coffeeFormater'
 import CjBar from './Bar.vue'
+import SwipeActions from './SwipeActions.vue'
 
 export default {
     name: 'JurnalRecord',
-    components: { CjBar },
+    components: { CjBar, SwipeActions },
     props: {
-        item: [Object],
-        checked: {
-            type: Boolean,
-            default: false
-        },
-        withCheckbox: {
-            type: Boolean,
-            default: true
+        item: [Object]
+    },
+    data: function () {
+        return {
+            isDeleting: false
         }
     },
     computed: {
@@ -63,14 +70,7 @@ export default {
             return this.item.rating
         },
         subtitle: function() {
-            const parts = []
-            if (this.item.coffeeOrigin) {
-                parts.push(this.item.coffeeOrigin)
-            }
-            if (this.item.coffeeRoaster) {
-                parts.push(this.item.coffeeRoaster) 
-            }
-            return parts.join(', ')
+            return formatCoffeeSecondaryInfo(this.item)
         },
         coffeeTypeIcon: function () {
             if (this.item.coffeeType == 'filter') {
@@ -81,14 +81,57 @@ export default {
     },
     methods: {
         select: function (id) {
+            this.translateX = 0
             this.$emit('select', id)
         },
-        setChecked: function (value) {
-            if (value === this.checked) {
-                return
-            }
-            this.$emit('checkChange', value)
+        emitDelete: function () {
+            this.isDeleting = true
+            this.$emit('delete', this.item)
+            setTimeout(() => {
+                this.$store.dispatch('deleteByIds', [this.item.id])
+            })   
         }
     }
 }
 </script>
+
+<style scoped>
+.record-body {
+    display: flex;
+    background-color: var(--color-bg);
+    padding: var(--unit-m);
+    border-radius: calc(var(--border-radius) - 1px);
+    transition: transform ease-out 140ms, background 140ms ease-out;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+@media (hover: hover) {
+    .record-body:hover {
+        background-color: var(--color-active);
+    }
+}
+
+.record-body:active {
+    background-color: var(--color-active);
+    transition-duration: 0ms;
+}
+
+.jurnal.journal--grid .record-body {
+    flex-direction: column;
+}
+
+.jurnal.journal--list .record-body {
+    flex-direction: row;
+}
+
+.action__delete {
+    height: 100%;
+    width: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-danger);
+    color: var(--color-bg);
+}
+</style>

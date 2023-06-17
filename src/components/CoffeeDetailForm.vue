@@ -112,7 +112,7 @@
             </CjCard>
         </div>
         <div class="row row--center gap-s">
-            <button type="button" class="btn row row--middle gap-m" :class="saveToBags ? 'btn--primary' : 'btn--secondary text-secondary'" @click="toggleSageToBags()">
+            <button type="button" class="btn row row--middle gap-m" :class="saveToBags ? 'btn--primary' : 'btn--secondary text-secondary'" @click="toggleSaveToBags()">
                 Save to bags<span class="iconfont text-m checkbox" :class="saveToBags ? 'iconfont-icon-check' : ''"></span>
             </button>
         </div>
@@ -196,6 +196,21 @@ export default {
         next: function () {
             this.moveCarousel(this.activeIndex + 1, 'smooth')
         },
+        selectCard: function (key) {
+            const index = this.getCardIndexByKey(key)
+            if (index < 0) {
+                return
+            }
+            this.moveCarousel(index, 'smooth')
+        },
+        getCardIndexByKey: function (key) {
+            for (let i = 0; i < this.cards.length; i++) {
+                if (this.cards[i] === key) {
+                    return i
+                }
+            }
+            return -1
+        },
         moveCarousel: function (index, behavior) {
             const cardWidth = this.$refs.carousel.offsetWidth - 64
             this.$refs.carousel.scrollTo({
@@ -204,7 +219,7 @@ export default {
                 behavior: behavior
             })
         },
-        toggleSageToBags: function () {
+        toggleSaveToBags: function () {
             this.saveToBags = !this.saveToBags
             this.$emit('changeSaveBag', this.saveToBags)
         },

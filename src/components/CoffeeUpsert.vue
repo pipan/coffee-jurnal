@@ -3,14 +3,17 @@
         <div class="view">
             <div class="column gap-m w-100">
                 <div class="detail">
-                    <CoffeeDetail class="p-s" :coffee="coffeeValue" :enableEdit="false"></CoffeeDetail>
+                    <CoffeeDetail class="p-s"
+                        :coffee="coffeeValue"
+                        :enableEdit="false"
+                        @select="selectCard($event)"></CoffeeDetail>
                 </div>
                 <div class="row flex row--middle w-100">
                     <div class="column gap-m w-100">
-                        <CoffeeDetailForm :item="coffeeValue" @change="innerCoffee = $event" @changeSaveBag="saveBagFlag = $event"></CoffeeDetailForm>    
+                        <CoffeeDetailForm :item="coffeeValue" @change="innerCoffee = $event" @changeSaveBag="saveBagFlag = $event" ref="form"></CoffeeDetailForm>    
                     </div>
                 </div>
-                <div class="row row--center pb-m gap-m">
+                <div class="row row--center pb-m gap-l">
                     <div class="btn-thumb" @click="back()">
                         <i class="iconfont iconfont-cross text-l"></i>
                     </div>
@@ -62,6 +65,12 @@ export default {
             }
             this.$router.go(-1)
         },
+        selectCard: function (key) {
+            if (!this.$refs.form) {
+                return
+            }
+            this.$refs.form.selectCard(key)
+        }
     }
 }
 </script>

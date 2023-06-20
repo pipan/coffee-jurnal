@@ -94,6 +94,7 @@
                         :searchValue="filterValue.coffeeRoaster"
                         @select="setAndNext('coffeeRoaster', $event)"
                         @changeSearch="filters.coffeeRoaster = $event"></SearchableList>
+                    <AlphabetFilter class="alphabet-filter" :value="filterInitials.coffeeRoaster" @change="filters.coffeeRoaster = $event"></AlphabetFilter>
                 </div>
             </CjCard>
             <CjCard>
@@ -104,6 +105,7 @@
                         :searchValue="filterValue.coffeeOrigin"
                         @select="setAndNext('coffeeOrigin', $event)"
                         @changeSearch="filters.coffeeOrigin = $event"></SearchableList>
+                    <AlphabetFilter class="alphabet-filter" :value="filterInitials.coffeeOrigin" @change="filters.coffeeOrigin = $event"></AlphabetFilter>
                 </div>
             </CjCard>
             <CjCard>
@@ -114,6 +116,7 @@
                         :searchValue="filterValue.coffeeRegion"
                         @select="setAndNext('coffeeRegion', $event)"
                         @changeSearch="filters.coffeeRegion = $event"></SearchableList>
+                    <AlphabetFilter class="alphabet-filter" :value="filterInitials.coffeeRegion" @change="filters.coffeeRegion = $event"></AlphabetFilter>
                 </div>
             </CjCard>
             <CjCard>

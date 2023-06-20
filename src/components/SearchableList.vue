@@ -1,13 +1,6 @@
 <template>
     <div class="column column--bottom gap-s flex-grow px-l">
         <div class="column column--devider carousel-list">
-            <div class="row row--center py-s" v-if="canCreate">
-                <button type="button" class="btn flex-grow row gap-m row--middle row--center" 
-                    :class="value == searchValue ? 'btn--primary' : 'btn--secondary'"
-                    @click="select(searchValue)">
-                    <i class="iconfont iconfont-plus"></i> {{ searchValue }}
-                </button>
-            </div>
             <div class="row row--center py-s" v-for="item of filteredOptions" :key="item">
                 <button type="button" class="btn flex-grow"
                     :class="value == item ? 'btn--primary' : 'btn--secondary'"
@@ -16,8 +9,13 @@
                 </button>
             </div>
         </div>
-        <div>
+        <div class="pos-r">
             <input type="text" class="input-simple text-center" placeholder="search  ||  create" :value="searchValue" @input="search($event.target.value)" />
+            <button type="button" class="btn btn--circle create-button" v-if="canCreate"
+                :class="value == searchValue ? 'btn--primary' : 'btn--secondary'"
+                @click="select(searchValue)">
+                <i class="iconfont iconfont-plus"></i>
+            </button>
         </div>
     </div>
 </template>
@@ -74,3 +72,11 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.create-button {
+    position: absolute;
+    right: var(--unit-s);
+    top: 0;
+}
+</style>

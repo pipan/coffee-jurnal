@@ -4,7 +4,7 @@
             <div class="carousel__bar" v-for="(key, index) of cards" :key="key"
                 :class="{'carousel__bar--active': index == activeIndex, 'carousel__bar--filled': coffeeValue[key]}" ></div>
         </div>
-        <div class="carousel scroll-x--transparent" ref="carousel"
+        <div class="carousel scroll--transparent" ref="carousel"
             :style="{'--carousel-scroll': scrollPosition + 'px'}"
             @scroll.passive="onScroll($event)">
             <CjCard>
@@ -78,25 +78,42 @@
             <CjCard>
                 <div class="card__inner">
                     <h2 class="text-center">Place</h2>
-                    <SearchableList :options="coffeePlaces" :value="coffeeValue.coffeePlace" @select="setAndNext('coffeePlace', $event)"></SearchableList>
+                    <SearchableList :options="coffeePlaces"
+                        :value="coffeeValue.coffeePlace"
+                        :searchValue="filterValue.coffeePlace"
+                        @select="setAndNext('coffeePlace', $event)"
+                        @changeSearch="filters.coffeePlace = $event"></SearchableList>
+                    <AlphabetFilter class="alphabet-filter" :value="filterInitials.coffeePlace" @change="filters.coffeePlace = $event"></AlphabetFilter>
                 </div>
             </CjCard>
             <CjCard>
                 <div class="card__inner">
                     <h2 class="text-center">Roaster</h2>
-                    <SearchableList :options="coffeeRoasters" :value="coffeeValue.coffeeRoaster" @select="setAndNext('coffeeRoaster', $event)"></SearchableList>
+                    <SearchableList :options="coffeeRoasters"
+                        :value="coffeeValue.coffeeRoaster"
+                        :searchValue="filterValue.coffeeRoaster"
+                        @select="setAndNext('coffeeRoaster', $event)"
+                        @changeSearch="filters.coffeeRoaster = $event"></SearchableList>
                 </div>
             </CjCard>
             <CjCard>
                 <div class="card__inner">
                     <h2 class="text-center">Origin</h2>
-                    <SearchableList :options="coffeeOrigins" :value="coffeeValue.coffeeOrigin" @select="setAndNext('coffeeOrigin', $event)"></SearchableList>
+                    <SearchableList :options="coffeeOrigins"
+                        :value="coffeeValue.coffeeOrigin"
+                        :searchValue="filterValue.coffeeOrigin"
+                        @select="setAndNext('coffeeOrigin', $event)"
+                        @changeSearch="filters.coffeeOrigin = $event"></SearchableList>
                 </div>
             </CjCard>
             <CjCard>
                 <div class="card__inner">
                     <h2 class="text-center">Region</h2>
-                    <SearchableList :options="coffeeRegions" :value="coffeeValue.coffeeRegion" @select="setAndNext('coffeeRegion', $event)"></SearchableList>
+                    <SearchableList :options="coffeeRegions"
+                        :value="coffeeValue.coffeeRegion"
+                        :searchValue="filterValue.coffeeRegion"
+                        @select="setAndNext('coffeeRegion', $event)"
+                        @changeSearch="filters.coffeeRegion = $event"></SearchableList>
                 </div>
             </CjCard>
             <CjCard>
@@ -124,10 +141,11 @@ import CjCard from './Card.vue'
 import CoffeeTypeIcon from './CoffeeTypeIcon.vue'
 import SearchableList from './SearchableList.vue'
 import SwipeActions from './SwipeActions.vue'
+import AlphabetFilter from './AlphabetFilter.vue'
 
 export default {
     name: 'CoffeeDetailForm',
-    components: { CjCard, CoffeeTypeIcon, SearchableList, SwipeActions },
+    components: { CjCard, CoffeeTypeIcon, SearchableList, SwipeActions, AlphabetFilter },
     inheritAttrs: false,
     props: {
         item: {
@@ -139,6 +157,7 @@ export default {
         return {
             cards: ['bags', 'coffeeType', 'coffeeRoastIntensity', 'coffeeProcessing', 'coffeePlace', 'coffeeRoaster', 'coffeeOrigin', 'coffeeRegion', 'limited'],
             coffee: {},
+            filters: {},
             limitedValue: undefined,
             scrollPosition: 0,
             activeIndex: 0,
@@ -148,6 +167,9 @@ export default {
     computed: {
         coffeeValue: function () {
             return Object.assign({}, this.item, this.coffee)
+        },
+        filterValue: function () {
+            return Object.assign({}, this.item, this.filters)
         },
         bags: function () {
             return this.$store.state.bags
@@ -172,6 +194,16 @@ export default {
         },
         coffeeProcessings: function() {
             return this.$store.state.coffeeProcessings
+        },
+        filterInitials: function () {
+            let initials = {}
+            for (let key in this.filterValue) {
+                if (!this.filterValue[key].substr) {
+                    continue
+                }
+                initials[key] = this.filterValue[key].substr(0, 1).toUpperCase()
+            }
+            return initials
         }
     },
     methods: {
@@ -326,5 +358,12 @@ export default {
     position: relative;
     background-color: var(--color-bg-secondary);
     border-radius: 7px;
+}
+
+.alphabet-filter {
+    position: absolute;
+    right: calc(var(--unit-s) + 1px);
+    top: var(--unit-m);
+    height: calc(100% - 2 * var(--unit-m));
 }
 </style>

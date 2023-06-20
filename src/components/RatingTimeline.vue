@@ -17,7 +17,7 @@
                 <i class="iconfont iconfont-star_outline"></i>
             </div>
         </div>
-        <div class="rating-timeline scroll-x hidden-y scroll-x--transparent">
+        <div class="rating-timeline scroll-x hidden-y scroll--transparent">
             <div v-for="(item, index) of items"
                 :key="index"
                 class="rating-timeline__item"

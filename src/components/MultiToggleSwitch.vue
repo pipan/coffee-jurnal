@@ -1,5 +1,5 @@
 <template>
-    <transition-group tag="div" class="row gap-s scroll-x scroll-x--transparent" name="list" @before-leave="onBeforeLeave($event)">
+    <transition-group tag="div" class="row gap-s scroll-x scroll--transparent" name="list" @before-leave="onBeforeLeave($event)">
         <button v-for="item of normOptions"
             :key="item.id"
             class="toggle"

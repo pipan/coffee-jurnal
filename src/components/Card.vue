@@ -22,5 +22,6 @@ export default {
     scroll-snap-align: center;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 </style>

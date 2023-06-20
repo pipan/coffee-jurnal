@@ -112,9 +112,10 @@
 .w-100 { width: 100%; }
 
 .scroll-x { overflow-x: auto; }
+.scroll-y { overflow-y: auto; }
 .hidden-y { overflow-y: hidden; }
-.scroll-x--transparent { scrollbar-color: transparent transparent; }
-.scroll-x--transparent::-webkit-scrollbar { display: none; }
+.scroll--transparent { scrollbar-color: transparent transparent; }
+.scroll--transparent::-webkit-scrollbar { display: none; }
 
 .fab-container {
     position: fixed;

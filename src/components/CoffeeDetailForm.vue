@@ -164,7 +164,8 @@ export default {
             limitedValue: undefined,
             scrollPosition: 0,
             activeIndex: 0,
-            saveToBags: false
+            saveToBags: false,
+            bagPropertyWhitelist: ['coffeeType', 'coffeeRoastIntensity', 'coffeeProcessing', 'coffeeRoaster', 'coffeeOrigin', 'coffeeRegion', 'limited']
         }
     },
     computed: {
@@ -212,6 +213,9 @@ export default {
     methods: {
         setBatch: function (bag) {
             for (let key in bag) {
+                if (this.bagPropertyWhitelist.indexOf(key) === -1) {
+                    continue
+                }
                 this.coffee[key] = bag[key]
             }
             this.$emit('change', this.coffee)

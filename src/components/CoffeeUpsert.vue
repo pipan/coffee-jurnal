@@ -42,7 +42,8 @@ export default {
     data: function () {
         return {
             innerCoffee: {},
-            saveBagFlag: false
+            saveBagFlag: false,
+            bagPropertyWhitelist: ['coffeeType', 'coffeeRoastIntensity', 'coffeeProcessing', 'coffeeRoaster', 'coffeeOrigin', 'coffeeRegion', 'limited']
         }
     },
     computed: {
@@ -53,8 +54,13 @@ export default {
     methods: {
         submit: function () {
             if (this.saveBagFlag) {
-                let bag = Object.assign({}, this.coffeeValue)
-                delete bag.coffeePlace
+                let bag = {}
+                for (const key of this.bagPropertyWhitelist) {
+                    if (this.coffeeValue[key] === undefined) {
+                        continue
+                    }
+                    bag[key] = this.coffeeValue[key]
+                }
                 this.$store.dispatch('createBag', bag)
             }
             this.$emit('submit', this.coffeeValue)

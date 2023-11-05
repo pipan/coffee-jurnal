@@ -43,7 +43,7 @@ export default {
         return {
             innerCoffee: {},
             saveBagFlag: false,
-            bagPropertyWhitelist: ['coffeeType', 'coffeeRoastIntensity', 'coffeeProcessing', 'coffeeRoaster', 'coffeeOrigin', 'coffeeRegion', 'limited']
+            bagPropertyWhitelist: ['coffeeType', 'coffeeRoastIntensity', 'coffeeProcessing', 'coffeeRoaster', 'coffeeOrigin', 'coffeeRegion', 'limited', 'decaf']
         }
     },
     computed: {

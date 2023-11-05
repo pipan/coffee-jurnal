@@ -32,9 +32,9 @@
             </button>
         </div>
         
-        <div class="row gap-m" v-if="tags.length > 0">
+        <div class="row gap-s" v-if="tags.length > 0">
             <transition-group name="animation--fade" appear>
-                <div class="toggle text-s" v-for="tag of tags" :key="tag.key" @click="select(tag.key)">{{ tag.text }}</div>
+                <div class="tag" v-for="tag of tags" :key="tag.key" @click="select(tag.key)">{{ tag.text }}</div>
             </transition-group>
         </div>
     </div>
@@ -61,6 +61,9 @@ export default {
             }
             if (this.coffee.coffeeProcessing) {
                 result.push({ key: 'coffeeProcessing', text: this.coffee.coffeeProcessing })
+            }
+            if (this.coffee.decaf) {
+                result.push({ key: 'decaf', text: 'decaf' })
             }
             return result
         }

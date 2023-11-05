@@ -121,13 +121,24 @@
             </CjCard>
             <CjCard>
                 <div class="card__inner">
-                    <h2 class="text-center">Limited</h2>
-                    <button type="button" class="btn column gap-s flex column--middle column--center"
-                        :class="coffeeValue.limited ? 'btn--primary' : 'btn--secondary'"
-                        @click="setValue('limited', !coffeeValue.limited)">
-                        <i class="iconfont iconfont-star_outline icon-button-l"></i>
-                        <div>limited</div>
-                    </button>
+                    <div class="column column--devider column--middle px-l flex-grow">
+                        <div class="row row--middle row--center py-s">
+                            <button type="button" class="btn row gap-s row--middle flex"
+                                :class="coffeeValue.limited ? 'btn--primary' : 'btn--secondary'"
+                                @click="setValue('limited', !coffeeValue.limited)">
+                                <div class="text-left flex">limited</div>
+                                <span class="iconfont text-m checkbox" :class="coffeeValue.limited ? 'iconfont-icon-check' : ''"></span>
+                            </button>
+                        </div>
+                        <div class="row row--middle row--center py-s">
+                            <button type="button" class="btn row gap-s row--middle flex"
+                                :class="coffeeValue.decaf ? 'btn--primary' : 'btn--secondary'"
+                                @click="setValue('decaf', !coffeeValue.decaf)">
+                                <div class="text-left flex">decaf</div>
+                                <span class="iconfont text-m checkbox" :class="coffeeValue.decaf ? 'iconfont-icon-check' : ''"></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </CjCard>
         </div>

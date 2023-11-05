@@ -3,6 +3,7 @@
 .text-light { font-weight: lighter; }
 
 .text-center { text-align: center; }
+.text-left { text-align: left; }
 
 .text-secondary { color: var(--color-fg-secondary); }
 .text-primary { color: var(--color-primary); }

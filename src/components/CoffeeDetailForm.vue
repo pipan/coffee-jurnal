@@ -176,7 +176,7 @@ export default {
             scrollPosition: 0,
             activeIndex: 0,
             saveToBags: false,
-            bagPropertyWhitelist: ['coffeeType', 'coffeeRoastIntensity', 'coffeeProcessing', 'coffeeRoaster', 'coffeeOrigin', 'coffeeRegion', 'limited']
+            bagPropertyWhitelist: ['coffeeType', 'coffeeRoastIntensity', 'coffeeProcessing', 'coffeeRoaster', 'coffeeOrigin', 'coffeeRegion', 'limited', 'decaf']
         }
     },
     computed: {

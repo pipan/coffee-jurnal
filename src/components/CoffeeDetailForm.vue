@@ -2,7 +2,7 @@
     <div class="column gap-m">
         <div class="row row--center gap-s">
             <div class="carousel__bar" v-for="(key, index) of cards" :key="key"
-                :class="{'carousel__bar--active': index == activeIndex, 'carousel__bar--filled': coffeeValue[key]}" ></div>
+                :class="{'carousel__bar--active': index == activeIndex, 'carousel__bar--filled': isCardFilled(key)}" ></div>
         </div>
         <div class="carousel scroll--transparent" ref="carousel"
             :style="{'--carousel-scroll': scrollPosition + 'px'}"
@@ -169,10 +169,9 @@ export default {
     },
     data: function () {
         return {
-            cards: ['bags', 'coffeeType', 'coffeeRoastIntensity', 'coffeeProcessing', 'coffeePlace', 'coffeeRoaster', 'coffeeOrigin', 'coffeeRegion', 'limited'],
+            cards: ['bags', 'coffeeType', 'coffeeRoastIntensity', 'coffeeProcessing', 'coffeePlace', 'coffeeRoaster', 'coffeeOrigin', 'coffeeRegion', 'options'],
             coffee: {},
             filters: {},
-            limitedValue: undefined,
             scrollPosition: 0,
             activeIndex: 0,
             saveToBags: false,
@@ -252,6 +251,12 @@ export default {
                 return
             }
             this.moveCarousel(index, 'smooth')
+        },
+        isCardFilled: function(key) {
+            if (key === 'options') {
+                return this.coffeeValue.limited || this.coffeeValue.decaf
+            }
+            return this.coffeeValue[key]
         },
         getCardIndexByKey: function (key) {
             for (let i = 0; i < this.cards.length; i++) {
